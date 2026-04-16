@@ -1,4 +1,6 @@
 ---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import VideoHero from '../components/VideoHero.astro';
 import Hero from '../components/Hero.astro';
 import ActivitiesSlider from '../components/ActivitiesSlider.astro';
@@ -25,6 +27,7 @@ import BookingCTA from '../components/BookingCTA.astro';
 	</head>
 	<body>
 		<div class="bp-page">
+			<Header />
 			<VideoHero />
 			<Hero />
 			<ActivitiesSlider />
@@ -36,6 +39,7 @@ import BookingCTA from '../components/BookingCTA.astro';
 			<QuoteBanner />
 			<Testimonials />
 			<BookingCTA />
+			<Footer />
 		</div>
 
 		<script is:inline>
@@ -57,6 +61,8 @@ import BookingCTA from '../components/BookingCTA.astro';
 
 <style is:global>
 	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+	html, body { margin: 0; padding: 0; }
 
 	.bp-page {
 		--primary: #3d5a6e;

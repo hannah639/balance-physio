@@ -1,0 +1,49 @@
+<header class="bp-header">
+	<div class="header-inner">
+		<a href="/" class="logo">Balance Physio</a>
+		<nav>
+			<ul>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Conditions</a></li>
+				<li><a href="#">FAQs</a></li>
+				<li><a href="#">Clapham Clinic</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul>
+		</nav>
+		<div class="header-cta">
+			<a href="#" class="btn-primary">Book Now</a>
+		</div>
+	</div>
+</header>
+
+<style>
+	.bp-header {
+		position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+		background: transparent;
+		border-bottom: 1px solid rgba(255,255,255,0.15);
+	}
+	.header-inner {
+		display: flex; align-items: center; justify-content: space-between;
+		padding: 16px 24px; max-width: 1200px; margin: 0 auto;
+	}
+	.logo {
+		display: inline-block; color: #ffffff;
+		font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+		text-decoration: none;
+	}
+	nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
+	nav a { font-weight: 500; font-size: 15px; color: rgba(255,255,255,0.85); transition: color .2s; text-decoration: none; }
+	nav a:hover { color: #ffffff; }
+	.header-cta { display: flex; gap: 12px; align-items: center; }
+	.header-cta .btn-primary {
+		padding: 10px 24px; border-radius: 50px; font-weight: 600; font-size: 14px;
+		color: #ffffff; background: #3EBEDF; border: none;
+		cursor: pointer; transition: all .2s; text-decoration: none;
+		display: inline-block;
+	}
+	.header-cta .btn-primary:hover { background: #32a8c6; }
+	@media (max-width: 768px) {
+		nav ul { display: none; }
+	}
+</style>
