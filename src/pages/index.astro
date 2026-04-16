@@ -1,4 +1,5 @@
 ---
+import { sanityClient, urlFor } from '../lib/sanity.js';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import VideoHero from '../components/VideoHero.astro';
@@ -12,6 +13,16 @@ import Team from '../components/Team.astro';
 import QuoteBanner from '../components/QuoteBanner.astro';
 import Testimonials from '../components/Testimonials.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+
+const settings = await sanityClient.fetch(
+	`*[_type == "siteSettings"][0]{ title, description, ogImage, gaId, gtmId }`
+) || {};
+
+const pageTitle = settings.title || 'Balance Performance Physiotherapy';
+const pageDescription = settings.description || '';
+const ogImageUrl = settings.ogImage ? urlFor(settings.ogImage).width(1200).height(630).url() : null;
+const gaId = settings.gaId || '';
+const gtmId = settings.gtmId || '';
 ---
 
 <html lang="en">
@@ -21,11 +32,34 @@ import BookingCTA from '../components/BookingCTA.astro';
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Balance Performance Physiotherapy</title>
+		<title>{pageTitle}</title>
+		{pageDescription && <meta name="description" content={pageDescription} />}
+		<meta property="og:title" content={pageTitle} />
+		{pageDescription && <meta property="og:description" content={pageDescription} />}
+		{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		{pageDescription && <meta name="twitter:description" content={pageDescription} />}
+		{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+		{gtmId && (
+			<script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`} />
+		)}
+
+		{gaId && (
+			<>
+				<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+				<script is:inline set:html={`window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${gaId}');`} />
+			</>
+		)}
 	</head>
 	<body>
+		{gtmId && (
+			<noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />
+		)}
 		<div class="bp-page">
 			<Header />
 			<VideoHero />
