@@ -15,7 +15,12 @@ import Testimonials from '../components/Testimonials.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 
 const settings = await sanityClient.fetch(
-	`*[_type == "siteSettings"][0]{ title, description, ogImage, gaId, gtmId }`
+	`*[_type == "siteSettings"][0]{
+		title, description, ogImage, gaId, gtmId,
+		businessType, businessName, phone, email,
+		streetAddress, city, region, postalCode, country,
+		latitude, longitude, priceRange, openingHours, sameAs
+	}`
 ) || {};
 
 const pageTitle = settings.title || 'Balance Performance Physiotherapy';
@@ -23,6 +28,48 @@ const pageDescription = settings.description || '';
 const ogImageUrl = settings.ogImage ? urlFor(settings.ogImage).width(1200).height(630).url() : null;
 const gaId = settings.gaId || '';
 const gtmId = settings.gtmId || '';
+const siteUrl = Astro.site?.toString() || 'https://balance-physio.hannah-9e0.workers.dev';
+
+// Build JSON-LD structured data for Google
+const jsonLd = settings.businessName ? {
+	'@context': 'https://schema.org',
+	'@type': settings.businessType || 'LocalBusiness',
+	name: settings.businessName,
+	...(pageDescription && { description: pageDescription }),
+	url: siteUrl,
+	...(ogImageUrl && { image: ogImageUrl }),
+	...(settings.phone && { telephone: settings.phone }),
+	...(settings.email && { email: settings.email }),
+	...(settings.priceRange && { priceRange: settings.priceRange }),
+	...((settings.streetAddress || settings.city) && {
+		address: {
+			'@type': 'PostalAddress',
+			...(settings.streetAddress && { streetAddress: settings.streetAddress }),
+			...(settings.city && { addressLocality: settings.city }),
+			...(settings.region && { addressRegion: settings.region }),
+			...(settings.postalCode && { postalCode: settings.postalCode }),
+			...(settings.country && { addressCountry: settings.country }),
+		},
+	}),
+	...(settings.latitude && settings.longitude && {
+		geo: {
+			'@type': 'GeoCoordinates',
+			latitude: settings.latitude,
+			longitude: settings.longitude,
+		},
+	}),
+	...(settings.openingHours?.length && {
+		openingHoursSpecification: settings.openingHours
+			.filter((h) => h.days && h.opens && h.closes)
+			.map((h) => ({
+				'@type': 'OpeningHoursSpecification',
+				dayOfWeek: h.days,
+				opens: h.opens,
+				closes: h.closes,
+			})),
+	}),
+	...(settings.sameAs?.length && { sameAs: settings.sameAs }),
+} : null;
 ---
 
 <html lang="en">
@@ -44,6 +91,10 @@ const gtmId = settings.gtmId || '';
 		{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+		{jsonLd && (
+			<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		)}
 
 		{gtmId && (
 			<script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`} />
