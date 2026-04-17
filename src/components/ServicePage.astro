@@ -13,23 +13,29 @@ const {
 	seoDescription,
 	intro,          // array of paragraphs for intro block
 	introYoutubeId, // optional YouTube video ID for lightbox on intro block
+	introImage,     // optional image URL for intro block
 	whenHeading = 'When to consider',
 	whenHighlight = 'this service',
 	whenIntro,      // string
 	whenList,       // array
+	whenImage,      // optional image URL
 	howHeading = 'How we',
 	howHighlight = 'treat',
 	howIntro,
 	howList,
+	howImage,       // optional image URL
 	whoHeading = 'Who we',
 	whoHighlight = 'help',
 	whoIntro,
 	whoList,
+	whoImage,       // optional image URL
 	faqs = [],
 } = Astro.props;
 ---
 <Layout title={seoTitle} description={seoDescription}>
 	<PageHero title={title} highlight={highlight} subtitle={heroSubtitle} breadcrumb={breadcrumb} />
+
+	<slot name="after-hero" />
 
 	{intro && intro.length > 0 && (
 		<ImageText
@@ -38,6 +44,7 @@ const {
 			highlight="care"
 			placeholderLabel="Treatment in progress"
 			youtubeId={introYoutubeId}
+			image={introImage}
 		>
 			{intro.map((p) => <p>{p}</p>)}
 		</ImageText>
@@ -51,6 +58,7 @@ const {
 			reverse
 			altBg
 			placeholderLabel="Assessment"
+			image={whenImage}
 		>
 			{whenIntro && <p>{whenIntro}</p>}
 			<ul>
@@ -65,6 +73,7 @@ const {
 			heading={howHeading}
 			highlight={howHighlight}
 			placeholderLabel="Treatment session"
+			image={howImage}
 		>
 			{howIntro && <p>{howIntro}</p>}
 			<ul>
@@ -81,6 +90,7 @@ const {
 			reverse
 			altBg
 			placeholderLabel="Our patients"
+			image={whoImage}
 		>
 			{whoIntro && <p>{whoIntro}</p>}
 			<ul>

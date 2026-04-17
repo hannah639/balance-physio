@@ -1,0 +1,62 @@
+---
+const { images = [], heightPx = 140, gapPx = 16, speedSeconds = 45 } = Astro.props;
+// Duplicate the list so the marquee can loop seamlessly
+const loop = [...images, ...images];
+---
+<section class="photo-marquee" aria-label="Photo gallery">
+	<div class="photo-marquee-track" style={`--marquee-duration: ${speedSeconds}s; --marquee-height: ${heightPx}px; --marquee-gap: ${gapPx}px;`}>
+		{loop.map((img, i) => (
+			<div class="photo-marquee-item">
+				<img src={img.src} alt={img.alt || ''} loading="lazy" />
+			</div>
+		))}
+	</div>
+</section>
+
+<style>
+	.photo-marquee {
+		width: 100%;
+		overflow: hidden;
+		padding: 32px 0;
+		background: #ffffff;
+		position: relative;
+	}
+	.photo-marquee::before,
+	.photo-marquee::after {
+		content: '';
+		position: absolute;
+		top: 0; bottom: 0;
+		width: 60px;
+		z-index: 2;
+		pointer-events: none;
+	}
+	.photo-marquee::before { left: 0; background: linear-gradient(to right, #ffffff, transparent); }
+	.photo-marquee::after { right: 0; background: linear-gradient(to left, #ffffff, transparent); }
+
+	.photo-marquee-track {
+		display: flex;
+		gap: var(--marquee-gap, 16px);
+		width: max-content;
+		animation: photo-marquee-scroll var(--marquee-duration, 45s) linear infinite;
+	}
+	.photo-marquee:hover .photo-marquee-track { animation-play-state: paused; }
+
+	.photo-marquee-item {
+		height: var(--marquee-height, 140px);
+		flex-shrink: 0;
+		border-radius: 10px;
+		overflow: hidden;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+	}
+	.photo-marquee-item img {
+		height: 100%;
+		width: auto;
+		display: block;
+		object-fit: cover;
+	}
+
+	@keyframes photo-marquee-scroll {
+		from { transform: translateX(0); }
+		to { transform: translateX(calc(-50% - var(--marquee-gap, 16px) / 2)); }
+	}
+</style>

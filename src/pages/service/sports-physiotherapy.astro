@@ -1,5 +1,17 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+
+const sportsPhotos = [
+	{ src: '/sports-physio/01.jpg', alt: 'Athlete training' },
+	{ src: '/sports-physio/02.jpg', alt: 'Judo group' },
+	{ src: '/sports-physio/03.jpg', alt: 'Skiing group' },
+	{ src: '/sports-physio/04.jpg', alt: 'Beach volleyball team' },
+	{ src: '/sports-physio/05.jpg', alt: 'Skiing on the slope' },
+	{ src: '/sports-physio/06.jpg', alt: 'Badminton session' },
+	{ src: '/sports-physio/07.jpg', alt: 'Tennis player serving' },
+	{ src: '/sports-physio/08.jpg', alt: 'Tennis backhand' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -13,6 +25,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"We take a clinical, evidence-led approach to every case. From your first session, we assess how you move under load, how your body responds to training, and where the breakdown has occurred.",
 		"We then build a structured plan around your goals, your sport, and your starting point.",
 	]}
+	introImage="/sports-physio/hero-running.jpg"
 	whenHeading="When to consider"
 	whenHighlight="sports physio"
 	whenList={[
@@ -24,6 +37,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Recovery following surgery or time away from sport",
 		"Movement limitations affecting strength, speed or control",
 	]}
+	whenImage="/sports-physio/hero-swimming.jpg"
 	howList={[
 		"Hands-on therapy to reduce pain and restore movement",
 		"Targeted exercise to rebuild strength, control and coordination",
@@ -31,6 +45,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Movement analysis to identify inefficiencies and reduce injury risk",
 		"Clear education so you understand your condition and recovery",
 	]}
+	howImage="/sports-physio/hero-cricket.jpg"
 	whoList={[
 		"Adults returning to sport after injury or time away",
 		"Athletes looking to stay consistent and pain-free",
@@ -39,6 +54,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Parents seeking safe and structured support for their child's development",
 		"Individuals wanting to build strength, resilience and confidence",
 	]}
+	whoImage="/sports-physio/hero-skiing.jpg"
 	faqs={[
 		{ q: "Do I need a GP referral?", a: "No. You can book directly with us." },
 		{ q: "Can children have sports physiotherapy?", a: "Yes. We regularly work with young athletes, focusing on safe development, injury management and long-term progression." },
@@ -46,4 +62,6 @@ import ServicePage from '../../components/ServicePage.astro';
 		{ q: "How many sessions will I need?", a: "This depends on your injury and goals. After your first session, we'll give you a clear plan." },
 		{ q: "When can I return to sport?", a: "We use clear criteria based on strength, movement and performance to guide your return safely." },
 	]}
-/>
+>
+	<PhotoMarquee slot="after-hero" images={sportsPhotos} heightPx={140} speedSeconds={40} />
+</ServicePage>
