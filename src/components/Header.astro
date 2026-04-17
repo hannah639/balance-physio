@@ -92,9 +92,17 @@ const about = [
 
 <style>
 	.bp-header {
-		position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+		position: fixed; top: 0; left: 0; right: 0; z-index: 100;
 		background: transparent;
 		border-bottom: 1px solid rgba(255,255,255,0.15);
+		transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+	}
+	.bp-header.is-scrolled {
+		background: rgba(44, 67, 86, 0.96);
+		border-bottom: 1px solid rgba(255,255,255,0.08);
+		box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 	}
 	.header-inner {
 		display: flex; align-items: center; justify-content: space-between;
@@ -161,3 +169,16 @@ const about = [
 		nav ul { display: none; }
 	}
 </style>
+
+<script is:inline>
+	(function () {
+		var header = document.querySelector('.bp-header');
+		if (!header) return;
+		function onScroll() {
+			if (window.scrollY > 20) header.classList.add('is-scrolled');
+			else header.classList.remove('is-scrolled');
+		}
+		onScroll();
+		window.addEventListener('scroll', onScroll, { passive: true });
+	})();
+</script>
