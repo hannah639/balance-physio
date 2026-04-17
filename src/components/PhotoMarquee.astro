@@ -59,4 +59,10 @@ const loop = [...images, ...images];
 		from { transform: translateX(0); }
 		to { transform: translateX(calc(-50% - var(--marquee-gap, 16px) / 2)); }
 	}
+
+	@media (max-width: 768px) {
+		.photo-marquee { padding: 20px 0; }
+		.photo-marquee-item { height: calc(var(--marquee-height, 140px) * 0.75); border-radius: 8px; }
+		.photo-marquee::before, .photo-marquee::after { width: 30px; }
+	}
 </style>

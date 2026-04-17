@@ -167,7 +167,9 @@
 	.footer-bottom-links { display: flex; gap: 24px; }
 	.footer-bottom span { color: rgba(255,255,255,0.4); }
 	@media (max-width: 768px) {
-		.footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-		.hours-grid { gap: 24px; }
+		.footer-grid { grid-template-columns: 1fr; gap: 32px; }
+		.hours-grid { gap: 24px; flex-direction: column; }
+		.footer-bottom-inner { flex-direction: column; text-align: center; gap: 16px; }
+		.footer-bottom-links { justify-content: center; }
 	}
 </style>
