@@ -58,7 +58,9 @@ const about = [
 ---
 <header class="bp-header">
 	<div class="header-inner">
-		<a href="/" class="logo">Balance Physio</a>
+		<a href="/" class="logo" aria-label="Balance Performance Physiotherapy home">
+			<img src="/logo.svg" alt="Balance Performance Physiotherapy" />
+		</a>
 		<nav>
 			<ul>
 				<li class="has-dropdown">
@@ -110,9 +112,11 @@ const about = [
 		padding: 16px 24px; max-width: 1200px; margin: 0 auto;
 	}
 	.logo {
-		display: inline-block; color: #ffffff;
-		font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+		display: inline-flex; align-items: center;
 		text-decoration: none;
+	}
+	.logo img {
+		height: 52px; width: auto; display: block;
 	}
 	nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; align-items: center; }
 	nav > ul > li { position: relative; }
