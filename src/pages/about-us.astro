@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import ImageText from '../components/ImageText.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 import QuoteBanner from '../components/QuoteBanner.astro';
 ---
@@ -14,14 +15,28 @@ import QuoteBanner from '../components/QuoteBanner.astro';
 		breadcrumb="About Us"
 	/>
 
-	<section class="rich-content">
-		<div class="container">
-			<h2>The Balance approach</h2>
-			<p>The Balance approach encourages you to improve, remove pain and obstacles preventing you from being the best version of you. The majority of your treatment takes place outside the treatment room, in our studios, gym and movement spaces. We make you better, fitter, restore your energy and drive for life.</p>
-			<p>A lot of our clients see us weekly but may be in one of our movement studios or the gym free of charge daily completing their programme. We began with the mantra that two heads are better than one, and we have 25 professionals under one roof waiting to impart their knowledge to improve your wellness.</p>
-			<p>We are London's largest rehabilitation centre. We make things clear and simple. We don't simply treat and rehabilitate: we want you to regain your strength and recover your energy for life, we empower you to take care of yourself. We look after the armchair athlete with the same knowledge and skills as the professional athlete.</p>
-		</div>
-	</section>
+	<ImageText
+		eyebrow="The Balance approach"
+		heading="We don't simply"
+		highlight="treat and rehabilitate"
+		placeholderLabel="The Balance clinic"
+	>
+		<p>The Balance approach encourages you to improve, remove pain and obstacles preventing you from being the best version of you. The majority of your treatment takes place outside the treatment room — in our studios, gym and movement spaces.</p>
+		<p>We make you better, fitter, restore your energy and drive for life. A lot of our clients see us weekly but may be in one of our movement studios or the gym free of charge daily completing their programme.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="25 specialists, one roof"
+		heading="Two heads are better"
+		highlight="than one"
+		reverse
+		altBg
+		placeholderLabel="The Balance team"
+	>
+		<p>We began with the mantra that two heads are better than one, and we have 25 professionals under one roof waiting to impart their knowledge to improve your wellness.</p>
+		<p>We are London's largest rehabilitation centre. We make things clear and simple. We don't simply treat and rehabilitate: we want you to regain your strength and recover your energy for life. We empower you to take care of yourself.</p>
+		<p>We look after the armchair athlete with the same knowledge and skills as the professional athlete.</p>
+	</ImageText>
 
 	<section class="stats-bar">
 		<div class="container">

@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 ---
 <Layout
@@ -14,55 +15,85 @@ import BookingCTA from '../../components/BookingCTA.astro';
 		breadcrumb="Back Pain"
 	/>
 
-	<section class="rich-content">
-		<div class="container">
-			<p>Lower back and neck pain can be very painful and debilitating. That is why you need to find someone you trust to help you through it and get you back on track. Our Spinal Team are all exceptionally experienced, so put yourself in a safe pair of hands.</p>
-			<p><strong>We can help you:</strong></p>
-			<ul>
-				<li>Get pain free</li>
-				<li>Stay pain free</li>
-				<li>Increase your health, wellbeing and performance</li>
-			</ul>
-			<p>Back pain is common — but that doesn't make it something you should just put up with.</p>
-			<p>Our spinal rehabilitation focuses on two components: understanding why your back pain has developed and getting rid of it, and then sorting out the muscular inhibitions that the pain has caused.</p>
+	<ImageText
+		eyebrow="Our approach"
+		heading="Back pain is common — but you shouldn't"
+		highlight="put up with it"
+		placeholderLabel="Spinal assessment"
+	>
+		<p>Lower back and neck pain can be very painful and debilitating. That is why you need to find someone you trust to help you through it and get you back on track. Our Spinal Team are all exceptionally experienced, so put yourself in a safe pair of hands.</p>
+		<p>Our spinal rehabilitation focuses on two components: understanding <strong>why</strong> your back pain has developed and getting rid of it, then sorting out the muscular inhibitions that the pain has caused.</p>
+		<ul>
+			<li>Get pain free</li>
+			<li>Stay pain free</li>
+			<li>Increase your health, wellbeing and performance</li>
+		</ul>
+	</ImageText>
 
-			<h2>When to Get Your Back Checked</h2>
-			<ul>
-				<li>Ongoing lower back pain or stiffness</li>
-				<li>Pain spreading into the hips, glutes or legs (sciatica)</li>
-				<li>Difficulty bending, sitting or standing for long periods</li>
-				<li>Morning stiffness that takes time to ease</li>
-				<li>Tingling, numbness, cramping or weakness in the legs</li>
-			</ul>
+	<ImageText
+		eyebrow="Symptoms"
+		heading="When to get your back"
+		highlight="checked"
+		reverse
+		altBg
+		placeholderLabel="Consultation"
+	>
+		<p>It's worth coming in for an assessment if you're experiencing any of the following:</p>
+		<ul>
+			<li>Ongoing lower back pain or stiffness</li>
+			<li>Pain spreading into the hips, glutes or legs (sciatica)</li>
+			<li>Difficulty bending, sitting or standing for long periods</li>
+			<li>Morning stiffness that takes time to ease</li>
+			<li>Tingling, numbness, cramping or weakness in the legs</li>
+		</ul>
+	</ImageText>
 
-			<h2>How We Treat Back Pain</h2>
-			<p>Treatment may include:</p>
-			<ul>
-				<li>Physiotherapy to improve movement and strength</li>
-				<li>Manual therapy to reduce stiffness and pain</li>
-				<li>Rehab exercises tailored to you, looking at restoring your body's natural protective musculature</li>
-				<li>Advice on posture, ergonomics, training and daily habits</li>
-			</ul>
+	<ImageText
+		eyebrow="Treatment"
+		heading="How we treat"
+		highlight="back pain"
+		placeholderLabel="Manual therapy"
+	>
+		<p>Your treatment plan is built around your specific presentation and may include:</p>
+		<ul>
+			<li>Physiotherapy to improve movement and strength</li>
+			<li>Manual therapy to reduce stiffness and pain</li>
+			<li>Rehab exercises to restore your body's natural protective musculature</li>
+			<li>Advice on posture, ergonomics, training and daily habits</li>
+		</ul>
+	</ImageText>
 
-			<h2>Who We Help</h2>
-			<ul>
-				<li>Long-term back pain sufferers looking for a clear plan forward</li>
-				<li>Patients with slipped discs, sciatica and sacro-iliac dysfunction</li>
-				<li>Post-surgery rehab</li>
-				<li>Office workers dealing with postural aches and desk-related pain</li>
-				<li>Active individuals and athletes managing injury or overload of tissues including tendons, ligament and bone</li>
-				<li>Seniors with stenotic, facet joint or osteoporotic related back pain</li>
-			</ul>
+	<ImageText
+		eyebrow="Who we help"
+		heading="From office workers to"
+		highlight="athletes"
+		reverse
+		altBg
+		placeholderLabel="Group of patients"
+	>
+		<ul>
+			<li>Long-term back pain sufferers looking for a clear plan forward</li>
+			<li>Patients with slipped discs, sciatica and sacro-iliac dysfunction</li>
+			<li>Post-surgery rehabilitation</li>
+			<li>Office workers with postural aches and desk-related pain</li>
+			<li>Active individuals and athletes managing overload injuries</li>
+			<li>Seniors with stenotic, facet joint or osteoporotic back pain</li>
+		</ul>
+	</ImageText>
 
-			<h2>How We Measure Your Progress</h2>
-			<p>From your first session, we establish a clear baseline of how your back is moving, how it's affecting you, and what you can and can't do comfortably.</p>
-			<ul>
-				<li>Clear evidence that your back is improving</li>
-				<li>A plan that adapts as your movement and tolerance change</li>
-				<li>Confidence in returning to work, exercise, and normal life</li>
-			</ul>
-		</div>
-	</section>
+	<ImageText
+		eyebrow="Measurable progress"
+		heading="How we measure"
+		highlight="your progress"
+		placeholderLabel="Progress tracking"
+	>
+		<p>From your first session, we establish a clear baseline of how your back is moving, how it's affecting you, and what you can and can't do comfortably.</p>
+		<ul>
+			<li>Clear evidence that your back is improving</li>
+			<li>A plan that adapts as your movement and tolerance change</li>
+			<li>Confidence in returning to work, exercise, and normal life</li>
+		</ul>
+	</ImageText>
 
 	<section class="faq-section">
 		<div class="container">
