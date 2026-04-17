@@ -1,60 +1,123 @@
 ---
-import { team, initials } from '../data/team.js';
+import { team, initials, gradientFor } from '../data/team.js';
 
 const {
 	featured = false,
+	sliderRow = false,
 	heading = 'Meet Our Team',
 	subheading = 'We have 25+ professionals under one roof waiting to help you move, recover and perform.',
 } = Astro.props;
 
-// Homepage shows a featured subset; full team page shows everyone
+// Homepage "featured" shows first 8 members; team page shows all
 const members = featured ? team.slice(0, 8) : team;
-
-// Deterministic gradient per name so every card feels unique
-function gradientFor(name) {
-	var hash = 0;
-	for (var i = 0; i < name.length; i++) hash = (hash << 5) - hash + name.charCodeAt(i);
-	var hue = Math.abs(hash) % 360;
-	return `linear-gradient(135deg, hsl(${hue}, 45%, 42%) 0%, hsl(${(hue + 40) % 360}, 40%, 28%) 100%)`;
-}
 ---
 
-<section class="team">
+<section class={`team ${sliderRow ? 'team-slider-mode' : ''}`}>
 	<div class="container">
 		<div class="section-header">
 			<h2>{heading}</h2>
 			<p>{subheading}</p>
 		</div>
-		<div class="team-grid">
-			{members.map((member) => (
-				<div class="team-card">
-					<div class="team-photo-wrap" style={`background: ${gradientFor(member.name)};`}>
-						<span class="team-initials">{initials(member.name)}</span>
-					</div>
-					<a href={member.profileUrl || '#'} class="team-link-btn" target="_blank" rel="noopener" aria-label={`View ${member.name}'s bio`}>&#8599;</a>
-					<div class="info">
-						<h3>{member.name}</h3>
-						<span class="role">{member.role}</span>
-					</div>
+		{sliderRow ? (
+			<div class="team-slider-wrap">
+				<div class="team-slider">
+					{members.map((member) => (
+						<a href={`/team/${member.slug}`} class="team-card team-card-slide">
+							<div class="team-photo-wrap" style={`background: ${gradientFor(member.name)};`}>
+								<span class="team-initials">{initials(member.name)}</span>
+							</div>
+							<div class="info">
+								<h3>{member.name}</h3>
+								<span class="role">{member.role}</span>
+							</div>
+						</a>
+					))}
 				</div>
-			))}
-		</div>
+				<div class="team-slider-nav">
+					<button class="team-slider-btn" data-dir="-1" aria-label="Previous">&larr;</button>
+					<button class="team-slider-btn" data-dir="1" aria-label="Next">&rarr;</button>
+				</div>
+			</div>
+		) : (
+			<div class="team-grid">
+				{members.map((member) => (
+					<a href={`/team/${member.slug}`} class="team-card">
+						<div class="team-photo-wrap" style={`background: ${gradientFor(member.name)};`}>
+							<span class="team-initials">{initials(member.name)}</span>
+						</div>
+						<div class="info">
+							<h3>{member.name}</h3>
+							<span class="role">{member.role}</span>
+						</div>
+					</a>
+				))}
+			</div>
+		)}
 	</div>
 </section>
 
 <style>
+	.bp-page .team-card { display: block; cursor: pointer; }
 	.team-photo-wrap {
 		width: 100%;
-		height: 300px;
+		height: 280px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 	.team-initials {
 		color: #ffffff;
-		font-size: 72px;
+		font-size: 64px;
 		font-weight: 800;
 		letter-spacing: -2px;
 		font-family: 'Inter', sans-serif;
 	}
+
+	/* Horizontal slider for homepage */
+	.team-slider-wrap { position: relative; }
+	.team-slider {
+		display: flex; gap: 20px;
+		overflow-x: auto;
+		padding-bottom: 24px;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+	}
+	.team-slider::-webkit-scrollbar { height: 4px; }
+	.team-slider::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 4px; }
+	.team-slider::-webkit-scrollbar-thumb { background: #e87722; border-radius: 4px; }
+	.team-card-slide {
+		flex: 0 0 240px;
+		scroll-snap-align: start;
+	}
+	.team-card-slide .team-photo-wrap { height: 240px; }
+	.team-card-slide .team-initials { font-size: 54px; }
+	.team-slider-nav { display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px; }
+	.team-slider-btn {
+		width: 44px; height: 44px; border-radius: 50%;
+		border: 2px solid rgba(0,0,0,0.15); background: transparent;
+		color: #1a1a1a; font-size: 18px; cursor: pointer;
+		display: flex; align-items: center; justify-content: center;
+		transition: all .2s;
+	}
+	.team-slider-btn:hover { border-color: #e87722; background: #e87722; color: #fff; }
+	@media (max-width: 768px) {
+		.team-card-slide { flex: 0 0 180px; }
+		.team-card-slide .team-photo-wrap { height: 200px; }
+		.team-card-slide .team-initials { font-size: 44px; }
+	}
 </style>
+
+<script is:inline>
+	(function () {
+		document.querySelectorAll('.team-slider-wrap').forEach(function (wrap) {
+			var slider = wrap.querySelector('.team-slider');
+			wrap.querySelectorAll('.team-slider-btn').forEach(function (btn) {
+				btn.addEventListener('click', function () {
+					var dir = parseInt(btn.getAttribute('data-dir'), 10) || 1;
+					slider.scrollBy({ left: dir * 260, behavior: 'smooth' });
+				});
+			});
+		});
+	})();
+</script>

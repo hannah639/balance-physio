@@ -1,34 +1,34 @@
-// Team roster — placeholder photos use CSS initials until real headshots are added.
-// Each member can optionally have a `photo` URL when real images are available.
+// Team roster. Each member has a slug which generates their bio page URL at /team/<slug>.
+// Add a `bio` field (array of paragraphs) when real bio content is available.
 
 export const team = [
-	{ name: 'Dr. Lucy Goldby', role: 'Consultant Spinal Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/dr-lucy-goldby/' },
-	{ name: 'Caroline Curtis', role: 'Consultant Spinal Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/caroline-curtis/' },
-	{ name: 'Sophia Busfield', role: 'Consultant Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/sophia-busfield/' },
-	{ name: 'Graham Anderson', role: 'Consultant Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/graham-anderson/' },
-	{ name: 'Jonathan Zulueta', role: 'Consultant Neurological & Vestibular Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/jonathan-zulueta/' },
-	{ name: 'Jo Fordyce', role: "Consultant Women's & Men's Health Physiotherapist", profileUrl: 'https://balancephysio.wpenginepowered.com/team/jo-fordyce/' },
-	{ name: 'Dr. Jose Sanz Mengibar', role: 'Consultant Neurological Physiotherapist, Vojta Therapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/dr-jose-sanz-mengibar/' },
-	{ name: 'Dan Elias', role: 'Consultant Youth & Sports Injury Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/dan-elias/' },
-	{ name: 'Jonathan Lewis', role: 'Physiotherapist, Soft Tissue & S&C Coach', profileUrl: 'https://balancephysio.wpenginepowered.com/team/jonathan-lewis/' },
-	{ name: 'Joanne Coates', role: 'Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/joanne-coates/' },
-	{ name: 'Anthony Adesanmi', role: 'Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/anthony-adesanmi/' },
-	{ name: 'Jarryd Ferreira', role: 'Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/jarryd-ferreira/' },
-	{ name: 'Joanne Sullivan', role: 'Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/joanne-sullivan/' },
-	{ name: 'Sam Stringer', role: 'Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/sam-stringer/' },
-	{ name: 'Portia Morey', role: 'Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/portia-morey/' },
-	{ name: 'Claire Speer', role: 'Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/claire-speer/' },
-	{ name: 'Maxine Baillie-Harland', role: 'Neurological Physiotherapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/maxine-baillie-harland/' },
-	{ name: 'Steven Connor', role: 'Podiatrist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/steven-connor/' },
-	{ name: 'Eli Ferracci', role: 'Nutritional Therapist & Osteopath', profileUrl: 'https://balancephysio.wpenginepowered.com/team/eli-ferracci/' },
-	{ name: 'Deri Wilson', role: 'Soft Tissue Massage Therapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/deri-wilson/' },
-	{ name: 'Kellie Collar', role: 'Soft Tissue Massage Therapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/kellie-collar/' },
-	{ name: 'Claire Benson', role: 'Soft Tissue Massage Therapist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/claire-benson/' },
-	{ name: 'Alex Deif', role: 'Strength & Conditioning Coach', profileUrl: 'https://balancephysio.wpenginepowered.com/team/alex-deif/' },
-	{ name: 'Ron Burnett', role: 'Strength & Conditioning Coach', profileUrl: 'https://balancephysio.wpenginepowered.com/team/ron-burnett/' },
-	{ name: 'Pat Leahy', role: 'Bike Fitting Specialist', profileUrl: 'https://balancephysio.wpenginepowered.com/team/pat-leahy/' },
-	{ name: 'Alice Croucher', role: 'Pilates Teacher', profileUrl: 'https://balancephysio.wpenginepowered.com/team/alice-croucher/' },
-	{ name: 'Agur Arrien', role: 'Pilates Teacher', profileUrl: 'https://balancephysio.wpenginepowered.com/team/agur-arrien/' },
+	{ slug: 'dr-lucy-goldby', name: 'Dr. Lucy Goldby', role: 'Consultant Spinal Physiotherapist' },
+	{ slug: 'caroline-curtis', name: 'Caroline Curtis', role: 'Consultant Spinal Physiotherapist' },
+	{ slug: 'sophia-busfield', name: 'Sophia Busfield', role: 'Consultant Physiotherapist' },
+	{ slug: 'graham-anderson', name: 'Graham Anderson', role: 'Consultant Physiotherapist' },
+	{ slug: 'jonathan-zulueta', name: 'Jonathan Zulueta', role: 'Consultant Neurological & Vestibular Physiotherapist' },
+	{ slug: 'jo-fordyce', name: 'Jo Fordyce', role: "Consultant Women's & Men's Health Physiotherapist" },
+	{ slug: 'dr-jose-sanz-mengibar', name: 'Dr. Jose Sanz Mengibar', role: 'Consultant Neurological Physiotherapist, Vojta Therapist' },
+	{ slug: 'dan-elias', name: 'Dan Elias', role: 'Consultant Youth & Sports Injury Physiotherapist' },
+	{ slug: 'jonathan-lewis', name: 'Jonathan Lewis', role: 'Physiotherapist, Soft Tissue & S&C Coach' },
+	{ slug: 'joanne-coates', name: 'Joanne Coates', role: 'Physiotherapist' },
+	{ slug: 'anthony-adesanmi', name: 'Anthony Adesanmi', role: 'Physiotherapist' },
+	{ slug: 'jarryd-ferreira', name: 'Jarryd Ferreira', role: 'Physiotherapist' },
+	{ slug: 'joanne-sullivan', name: 'Joanne Sullivan', role: 'Physiotherapist' },
+	{ slug: 'sam-stringer', name: 'Sam Stringer', role: 'Physiotherapist' },
+	{ slug: 'portia-morey', name: 'Portia Morey', role: 'Physiotherapist' },
+	{ slug: 'claire-speer', name: 'Claire Speer', role: 'Physiotherapist' },
+	{ slug: 'maxine-baillie-harland', name: 'Maxine Baillie-Harland', role: 'Neurological Physiotherapist' },
+	{ slug: 'steven-connor', name: 'Steven Connor', role: 'Podiatrist' },
+	{ slug: 'eli-ferracci', name: 'Eli Ferracci', role: 'Nutritional Therapist & Osteopath' },
+	{ slug: 'deri-wilson', name: 'Deri Wilson', role: 'Soft Tissue Massage Therapist' },
+	{ slug: 'kellie-collar', name: 'Kellie Collar', role: 'Soft Tissue Massage Therapist' },
+	{ slug: 'claire-benson', name: 'Claire Benson', role: 'Soft Tissue Massage Therapist' },
+	{ slug: 'alex-deif', name: 'Alex Deif', role: 'Strength & Conditioning Coach' },
+	{ slug: 'ron-burnett', name: 'Ron Burnett', role: 'Strength & Conditioning Coach' },
+	{ slug: 'pat-leahy', name: 'Pat Leahy', role: 'Bike Fitting Specialist' },
+	{ slug: 'alice-croucher', name: 'Alice Croucher', role: 'Pilates Teacher' },
+	{ slug: 'agur-arrien', name: 'Agur Arrien', role: 'Pilates Teacher' },
 ];
 
 // Initials helper for placeholder avatars
@@ -41,4 +41,12 @@ export function initials(name) {
 		.join('')
 		.slice(0, 2)
 		.toUpperCase();
+}
+
+// Deterministic gradient per name so avatar cards feel unique
+export function gradientFor(name) {
+	var hash = 0;
+	for (var i = 0; i < name.length; i++) hash = (hash << 5) - hash + name.charCodeAt(i);
+	var hue = Math.abs(hash) % 360;
+	return `linear-gradient(135deg, hsl(${hue}, 45%, 42%) 0%, hsl(${(hue + 40) % 360}, 40%, 28%) 100%)`;
 }
