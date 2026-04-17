@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+import QuoteBanner from '../components/QuoteBanner.astro';
+---
+<Layout
+	title="About Us"
+	description="Balance Performance Physiotherapy is London's largest rehabilitation centre with 25 professionals under one roof. Discover our approach to recovery and performance."
+>
+	<PageHero
+		title="About Us"
+		subtitle="London's largest rehabilitation centre — 25 professionals under one roof, united by one mission."
+		breadcrumb="About Us"
+	/>
+
+	<section class="rich-content">
+		<div class="container">
+			<h2>The Balance approach</h2>
+			<p>The Balance approach encourages you to improve, remove pain and obstacles preventing you from being the best version of you. The majority of your treatment takes place outside the treatment room, in our studios, gym and movement spaces. We make you better, fitter, restore your energy and drive for life.</p>
+			<p>A lot of our clients see us weekly but may be in one of our movement studios or the gym free of charge daily completing their programme. We began with the mantra that two heads are better than one, and we have 25 professionals under one roof waiting to impart their knowledge to improve your wellness.</p>
+			<p>We are London's largest rehabilitation centre. We make things clear and simple. We don't simply treat and rehabilitate: we want you to regain your strength and recover your energy for life, we empower you to take care of yourself. We look after the armchair athlete with the same knowledge and skills as the professional athlete.</p>
+		</div>
+	</section>
+
+	<section class="stats-bar">
+		<div class="container">
+			<div class="stats-grid">
+				<div class="stat">
+					<div class="number">9/10</div>
+					<div class="label">Patients improved in 3 months</div>
+				</div>
+				<div class="stat">
+					<div class="number">35%</div>
+					<div class="label">Decrease in pain in 6 weeks</div>
+				</div>
+				<div class="stat">
+					<div class="number">40%</div>
+					<div class="label">Increase in function in 6 weeks</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<QuoteBanner />
+	<BookingCTA />
+</Layout>
