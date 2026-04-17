@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from './PageHero.astro';
+import ImageText from './ImageText.astro';
+import BookingCTA from './BookingCTA.astro';
+
+const {
+	title,
+	highlight,
+	heroSubtitle,
+	breadcrumb,
+	seoTitle,
+	seoDescription,
+	intro,          // array of paragraphs for intro block
+	whenHeading = 'When to consider',
+	whenHighlight = 'this service',
+	whenIntro,      // string
+	whenList,       // array
+	howHeading = 'How we',
+	howHighlight = 'treat',
+	howIntro,
+	howList,
+	whoHeading = 'Who we',
+	whoHighlight = 'help',
+	whoIntro,
+	whoList,
+	faqs = [],
+} = Astro.props;
+---
+<Layout title={seoTitle} description={seoDescription}>
+	<PageHero title={title} highlight={highlight} subtitle={heroSubtitle} breadcrumb={breadcrumb} />
+
+	{intro && intro.length > 0 && (
+		<ImageText
+			eyebrow="Our approach"
+			heading="Evidence-led"
+			highlight="care"
+			placeholderLabel="Treatment in progress"
+		>
+			{intro.map((p) => <p>{p}</p>)}
+		</ImageText>
+	)}
+
+	{whenList && whenList.length > 0 && (
+		<ImageText
+			eyebrow="Symptoms"
+			heading={whenHeading}
+			highlight={whenHighlight}
+			reverse
+			altBg
+			placeholderLabel="Assessment"
+		>
+			{whenIntro && <p>{whenIntro}</p>}
+			<ul>
+				{whenList.map((item) => <li>{item}</li>)}
+			</ul>
+		</ImageText>
+	)}
+
+	{howList && howList.length > 0 && (
+		<ImageText
+			eyebrow="Treatment"
+			heading={howHeading}
+			highlight={howHighlight}
+			placeholderLabel="Treatment session"
+		>
+			{howIntro && <p>{howIntro}</p>}
+			<ul>
+				{howList.map((item) => <li>{item}</li>)}
+			</ul>
+		</ImageText>
+	)}
+
+	{whoList && whoList.length > 0 && (
+		<ImageText
+			eyebrow="Who we help"
+			heading={whoHeading}
+			highlight={whoHighlight}
+			reverse
+			altBg
+			placeholderLabel="Our patients"
+		>
+			{whoIntro && <p>{whoIntro}</p>}
+			<ul>
+				{whoList.map((item) => <li>{item}</li>)}
+			</ul>
+		</ImageText>
+	)}
+
+	{faqs.length > 0 && (
+		<section class="faq-section">
+			<div class="container">
+				<div class="section-header">
+					<h2>Frequently Asked Questions</h2>
+				</div>
+				<div class="faq-list">
+					{faqs.map((item) => (
+						<details class="faq-item">
+							<summary>{item.q}</summary>
+							<div class="answer">{item.a}</div>
+						</details>
+					))}
+				</div>
+			</div>
+		</section>
+	)}
+
+	<BookingCTA />
+</Layout>

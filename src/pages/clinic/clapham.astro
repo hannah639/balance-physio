@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="Clapham Clinic"
+	description="Visit Balance Performance Physiotherapy at 113 Gauden Rd, London SW4 6LE — London's largest rehabilitation centre in the heart of Clapham."
+>
+	<PageHero
+		title="Clinic"
+		highlight="Clapham"
+		subtitle="113 Gauden Rd, London SW4 6LE — London's largest rehabilitation centre, a short walk from Clapham High Street."
+		breadcrumb="Clapham Clinic"
+	/>
+
+	<ImageText
+		eyebrow="Location"
+		heading="Right in the heart of"
+		highlight="Clapham"
+		placeholderLabel="Clinic exterior"
+	>
+		<p>You'll find us at <strong>113 Gauden Rd, London SW4 6LE</strong> — a short walk from Clapham Common, Clapham North and Clapham High Street.</p>
+		<ul>
+			<li>Closest Tube: Clapham North (Northern line)</li>
+			<li>Closest Rail: Clapham High Street (Overground)</li>
+			<li>Buses: 50, 88, 155, 322, 345</li>
+			<li>Bike rack at reception</li>
+			<li>Wheelchair ramp at the front door (buzzer controlled)</li>
+		</ul>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Opening hours"
+		heading="Open from early"
+		highlight="until late"
+		reverse
+		altBg
+		placeholderLabel="Reception open sign"
+	>
+		<ul>
+			<li>Monday, Tuesday, Wednesday — 7:30am to 8:00pm</li>
+			<li>Thursday — 8:00am to 7:00pm</li>
+			<li>Friday — 7:30am to 6:00pm</li>
+			<li>Saturday — 8:00am to 4:00pm</li>
+			<li>Sunday — Studio hire events only</li>
+		</ul>
+		<p>Book online, call us on <strong>020 7627 2308</strong> or email <a href="mailto:enquiries@balancephysio.com" class="inline-link">enquiries@balancephysio.com</a>.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="What's here"
+		heading="Everything under"
+		highlight="one roof"
+		placeholderLabel="Facilities overview"
+	>
+		<ul>
+			<li>9 treatment rooms (4 downstairs, 5 on the first floor)</li>
+			<li>Dedicated medical room for ultrasound &amp; injections</li>
+			<li>Class &amp; Movement Studio for end-stage rehab and training</li>
+			<li>Early Rehab Studio connected to four treatment rooms</li>
+			<li>Reception shop for protection, recovery &amp; performance</li>
+			<li>WorkSpace showroom for ergonomic products</li>
+			<li>Free Wi-Fi and comfortable waiting area</li>
+		</ul>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

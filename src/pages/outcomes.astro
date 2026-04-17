@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ImageText from '../components/ImageText.astro';
+import Testimonials from '../components/Testimonials.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+---
+<Layout
+	title="Outcomes"
+	description="We track outcomes so you can see your progress. Our patients typically see measurable improvement in pain, function and strength within 6 weeks to 3 months."
+>
+	<PageHero
+		title="Outcomes"
+		subtitle="Discharged between 6 weeks and 3 months — with long-term results that continue beyond 12 months."
+		breadcrumb="Outcomes"
+	/>
+
+	<section class="stats-bar">
+		<div class="container">
+			<div class="stats-grid">
+				<div class="stat">
+					<div class="number">9/10</div>
+					<div class="label">Patients improved in 3 months</div>
+				</div>
+				<div class="stat">
+					<div class="number">35%</div>
+					<div class="label">Decrease in pain in 6 weeks</div>
+				</div>
+				<div class="stat">
+					<div class="number">40%</div>
+					<div class="label">Increase in function in 6 weeks</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<ImageText
+		eyebrow="How we measure"
+		heading="No guessing — just"
+		highlight="real evidence"
+		placeholderLabel="Outcome measurement"
+	>
+		<p>From your first session we establish a clear baseline of how you move, function and feel. As you progress, we regularly reassess — looking at strength, mobility, pain, and what you can actually do day-to-day.</p>
+		<p>We track patient pain levels across four timeframes: baseline, 6 weeks, 3 months and 12 months.</p>
+		<ul>
+			<li>Clear evidence that you're improving</li>
+			<li>A plan that adapts as you progress</li>
+			<li>Confidence in your return to sport, work and daily life</li>
+		</ul>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Tracked by condition"
+		heading="Outcomes across"
+		highlight="specialisms"
+		reverse
+		altBg
+		placeholderLabel="Outcome reporting"
+	>
+		<p>We publish outcomes across five key areas so you know what to expect when you see us:</p>
+		<ul>
+			<li>General outcomes (overall patient journey)</li>
+			<li>Shoulder pain recovery data</li>
+			<li>Knee injury and pain recovery metrics</li>
+			<li>Lower back pain improvement tracking</li>
+			<li>Foot &amp; ankle pain resolution data</li>
+		</ul>
+	</ImageText>
+
+	<Testimonials />
+	<BookingCTA />
+</Layout>

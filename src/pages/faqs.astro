@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+
+const faqs = [
+	{ q: 'Do I need a referral?', a: 'No — you can book directly with us. You don\'t need a GP or consultant referral to access any of our services.' },
+	{ q: 'Do you accept insurance?', a: 'Yes. We\'re recognised by all major insurance providers, including Bupa and AXA PPP Health. We recommend checking directly with your insurer about the exact cover they provide.' },
+	{ q: 'What is the difference between Chiropodists and Podiatrists?', a: 'Both treat the feet, but podiatrists generally have broader training in musculoskeletal assessment, biomechanics and surgical referrals. Chiropody is the more traditional name used for nail and skin-focused foot care.' },
+	{ q: 'What should I wear at my first appointment?', a: 'Comfortable clothing that allows us to assess the area being treated — loose shorts for lower-limb assessments, or a vest/t-shirt for upper-body and spinal work.' },
+	{ q: 'How do I book?', a: 'Contact our Clinic Administration team and they\'ll email you a registration form. Once that\'s completed and returned, our admin team will contact you to arrange your first appointment.' },
+	{ q: 'How many sessions will I need?', a: 'It varies by condition. After your initial assessment we\'ll give you a clear plan with expected number of sessions and review points.' },
+	{ q: 'Can I use the gym and studios between sessions?', a: 'Yes — our clients can use our movement studios and gym free of charge daily while they\'re on an active treatment programme.' },
+	{ q: 'Do you see children?', a: 'Yes. We have consultant physiotherapists who specialise in children\'s developmental and sports-related concerns.' },
+];
+---
+<Layout
+	title="FAQs"
+	description="Frequently asked questions about physiotherapy, bookings, insurance and what to expect at Balance Performance Physiotherapy in Clapham."
+>
+	<PageHero
+		title="Asked Questions"
+		highlight="Frequently"
+		subtitle="Can't find the answer to your question? Send us a message and we'll get back to you as soon as possible."
+		breadcrumb="FAQs"
+	/>
+
+	<section class="faq-section">
+		<div class="container">
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

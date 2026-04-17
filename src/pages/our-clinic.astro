@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ImageText from '../components/ImageText.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+---
+<Layout
+	title="Our Clinic"
+	description="Explore Balance Performance Physiotherapy — 9 treatment rooms, two studios, reception shop and ergonomic showroom in Clapham, London."
+>
+	<PageHero
+		title="Clinic"
+		highlight="Our"
+		subtitle="9 treatment rooms, a reception shop, and two full movement studios — everything you need under one roof."
+		breadcrumb="Our Clinic"
+	/>
+
+	<ImageText
+		eyebrow="Reception"
+		heading="A warm welcome at"
+		highlight="reception"
+		placeholderLabel="Reception area"
+	>
+		<p>We have a large comfortable reception and waiting area for you if you don't want to go into the gym or studio to move and warm yourself before your session.</p>
+		<ul>
+			<li>Bike rack and buggy space</li>
+			<li>Wheelchair ramp at front door (buzzer controlled)</li>
+			<li>Dynamic reception chairs and a standing desk for emails</li>
+			<li>Free Wi-Fi</li>
+			<li>Healthy snacks, coconut water, organic juices</li>
+			<li>A shop stocked for protection, performance, recovery and rehab</li>
+		</ul>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Treatment rooms"
+		heading="9 rooms,"
+		highlight="purpose-built"
+		reverse
+		altBg
+		placeholderLabel="Treatment room"
+	>
+		<p>We have 9 treatment rooms — 4 downstairs and 5 on the first floor. Our massage services take place in the Early Rehab Studio quiet rooms and a dedicated medical room is available for ultrasound examinations.</p>
+		<p>All rooms have adequate heating and ventilation, with clean towels and frequently changed bed and pillow covers.</p>
+		<p>Our philosophy is not to spend too much time in treatment rooms — the real work happens in the studios and gym.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Home working"
+		heading="Painful, tight and tense"
+		highlight="at home?"
+		placeholderLabel="Home working assessment"
+	>
+		<p>Since the era of COVID-19, working from home has increased massively and we have seen the consequences at Balance.</p>
+		<p>Our physiotherapists, osteopaths, soft tissue therapists and movement and breathwork coaches offer workplace assessments at Balance, at your office, or in your home. A video analysis service is also available with recommendations supplied on memory stick for HR or a workplace assessor to review.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="WorkSpace"
+		heading="A showroom for"
+		highlight="smarter work"
+		reverse
+		altBg
+		placeholderLabel="WorkSpace showroom"
+	>
+		<p>We have sourced a wealth of products that will refine every difficult working situation — seating and desk solutions, keyboards, mice, laptop stands, monitor arms and bespoke office furniture. Come and try before you buy.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

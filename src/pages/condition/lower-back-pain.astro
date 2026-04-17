@@ -1,129 +1,49 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHero from '../../components/PageHero.astro';
-import ImageText from '../../components/ImageText.astro';
-import BookingCTA from '../../components/BookingCTA.astro';
+import ConditionPage from '../../components/ConditionPage.astro';
 ---
-<Layout
-	title="Back Pain Treatment in Clapham"
-	description="Expert back pain treatment in Clapham, London. Our spinal team are exceptionally experienced at helping you become pain free, stay pain free, and rebuild strength."
->
-	<PageHero
-		title="Treatment in Clapham"
-		highlight="Back Pain"
-		subtitle="Get pain free. Stay pain free. Put yourself in a safe pair of hands with our experienced spinal team."
-		breadcrumb="Back Pain"
-	/>
-
-	<ImageText
-		eyebrow="Our approach"
-		heading="Back pain is common — but you shouldn't"
-		highlight="put up with it"
-		placeholderLabel="Spinal assessment"
-	>
-		<p>Lower back and neck pain can be very painful and debilitating. That is why you need to find someone you trust to help you through it and get you back on track. Our Spinal Team are all exceptionally experienced, so put yourself in a safe pair of hands.</p>
-		<p>Our spinal rehabilitation focuses on two components: understanding <strong>why</strong> your back pain has developed and getting rid of it, then sorting out the muscular inhibitions that the pain has caused.</p>
-		<ul>
-			<li>Get pain free</li>
-			<li>Stay pain free</li>
-			<li>Increase your health, wellbeing and performance</li>
-		</ul>
-	</ImageText>
-
-	<ImageText
-		eyebrow="Symptoms"
-		heading="When to get your back"
-		highlight="checked"
-		reverse
-		altBg
-		placeholderLabel="Consultation"
-	>
-		<p>It's worth coming in for an assessment if you're experiencing any of the following:</p>
-		<ul>
-			<li>Ongoing lower back pain or stiffness</li>
-			<li>Pain spreading into the hips, glutes or legs (sciatica)</li>
-			<li>Difficulty bending, sitting or standing for long periods</li>
-			<li>Morning stiffness that takes time to ease</li>
-			<li>Tingling, numbness, cramping or weakness in the legs</li>
-		</ul>
-	</ImageText>
-
-	<ImageText
-		eyebrow="Treatment"
-		heading="How we treat"
-		highlight="back pain"
-		placeholderLabel="Manual therapy"
-	>
-		<p>Your treatment plan is built around your specific presentation and may include:</p>
-		<ul>
-			<li>Physiotherapy to improve movement and strength</li>
-			<li>Manual therapy to reduce stiffness and pain</li>
-			<li>Rehab exercises to restore your body's natural protective musculature</li>
-			<li>Advice on posture, ergonomics, training and daily habits</li>
-		</ul>
-	</ImageText>
-
-	<ImageText
-		eyebrow="Who we help"
-		heading="From office workers to"
-		highlight="athletes"
-		reverse
-		altBg
-		placeholderLabel="Group of patients"
-	>
-		<ul>
-			<li>Long-term back pain sufferers looking for a clear plan forward</li>
-			<li>Patients with slipped discs, sciatica and sacro-iliac dysfunction</li>
-			<li>Post-surgery rehabilitation</li>
-			<li>Office workers with postural aches and desk-related pain</li>
-			<li>Active individuals and athletes managing overload injuries</li>
-			<li>Seniors with stenotic, facet joint or osteoporotic back pain</li>
-		</ul>
-	</ImageText>
-
-	<ImageText
-		eyebrow="Measurable progress"
-		heading="How we measure"
-		highlight="your progress"
-		placeholderLabel="Progress tracking"
-	>
-		<p>From your first session, we establish a clear baseline of how your back is moving, how it's affecting you, and what you can and can't do comfortably.</p>
-		<ul>
-			<li>Clear evidence that your back is improving</li>
-			<li>A plan that adapts as your movement and tolerance change</li>
-			<li>Confidence in returning to work, exercise, and normal life</li>
-		</ul>
-	</ImageText>
-
-	<section class="faq-section">
-		<div class="container">
-			<div class="section-header">
-				<h2>Frequently Asked Questions</h2>
-			</div>
-			<div class="faq-list">
-				<details class="faq-item">
-					<summary>Should I rest or keep moving?</summary>
-					<div class="answer">In most cases, staying active helps recovery. We'll guide you on what's safe and what to avoid.</div>
-				</details>
-				<details class="faq-item">
-					<summary>Do I need a scan before treatment?</summary>
-					<div class="answer">Usually not. We can assess your back thoroughly in clinic and refer for scans if we need to.</div>
-				</details>
-				<details class="faq-item">
-					<summary>Can osteopathy help?</summary>
-					<div class="answer">Yes — particularly for stiffness, posture and mechanical back pain.</div>
-				</details>
-				<details class="faq-item">
-					<summary>What is sciatica?</summary>
-					<div class="answer">It's irritation of a nerve from your lower back into the leg, often causing pain, tingling or numbness.</div>
-				</details>
-				<details class="faq-item">
-					<summary>Will I get exercises to do at home?</summary>
-					<div class="answer">Absolutely. Everyone has their own individual programme. Your rehab is a key part of getting lasting results.</div>
-				</details>
-			</div>
-		</div>
-	</section>
-
-	<BookingCTA />
-</Layout>
+<ConditionPage
+	title="Treatment in Clapham"
+	highlight="Back Pain"
+	heroSubtitle="Get pain free. Stay pain free. Put yourself in a safe pair of hands with our experienced spinal team."
+	breadcrumb="Back Pain"
+	seoTitle="Back Pain Treatment in Clapham"
+	seoDescription="Expert back pain treatment in Clapham, London. Our spinal team are exceptionally experienced at helping you become pain free, stay pain free, and rebuild strength."
+	intro={[
+		"Lower back and neck pain can be very painful and debilitating. That is why you need to find someone you trust to help you through it and get you back on track. Our Spinal Team are all exceptionally experienced, so put yourself in a safe pair of hands.",
+		"Our spinal rehabilitation focuses on two components: understanding <strong>why</strong> your back pain has developed and getting rid of it, then sorting out the muscular inhibitions that the pain has caused.",
+	]}
+	symptomsIntro="It's worth coming in for an assessment if you're experiencing any of the following:"
+	symptomsList={[
+		"Ongoing lower back pain or stiffness",
+		"Pain spreading into the hips, glutes or legs (sciatica)",
+		"Difficulty bending, sitting or standing for long periods",
+		"Morning stiffness that takes time to ease",
+		"Tingling, numbness, cramping or weakness in the legs",
+	]}
+	treatmentHeading="How we treat"
+	treatmentHighlight="back pain"
+	treatmentIntro="Your treatment plan is built around your specific presentation and may include:"
+	treatmentList={[
+		"Physiotherapy to improve movement and strength",
+		"Manual therapy to reduce stiffness and pain",
+		"Rehab exercises to restore your body's natural protective musculature",
+		"Advice on posture, ergonomics, training and daily habits",
+	]}
+	whoHeading="From office workers to"
+	whoHighlight="athletes"
+	whoList={[
+		"Long-term back pain sufferers looking for a clear plan forward",
+		"Patients with slipped discs, sciatica and sacro-iliac dysfunction",
+		"Post-surgery rehabilitation",
+		"Office workers with postural aches and desk-related pain",
+		"Active individuals and athletes managing overload injuries",
+		"Seniors with stenotic, facet joint or osteoporotic back pain",
+	]}
+	faqs={[
+		{ q: "Should I rest or keep moving?", a: "In most cases, staying active helps recovery. We'll guide you on what's safe and what to avoid." },
+		{ q: "Do I need a scan before treatment?", a: "Usually not. We can assess your back thoroughly in clinic and refer for scans if we need to." },
+		{ q: "Can osteopathy help?", a: "Yes — particularly for stiffness, posture and mechanical back pain." },
+		{ q: "What is sciatica?", a: "It's irritation of a nerve from your lower back into the leg, often causing pain, tingling or numbness." },
+		{ q: "Will I get exercises to do at home?", a: "Absolutely. Everyone has their own individual programme. Your rehab is a key part of getting lasting results." },
+	]}
+/>

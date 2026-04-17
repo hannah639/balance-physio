@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+
+const pricingCategories = [
+	{
+		title: 'Sports Physiotherapy',
+		items: [
+			{ name: 'Initial Assessment', price: '£110', note: '45 min' },
+			{ name: 'Follow Up', price: '£100', note: '30 min' },
+			{ name: 'Longer Follow Up', price: '£168', note: '60 min' },
+			{ name: 'Virtual Initial Assessment', price: '£95', note: '45 min · Zoom' },
+			{ name: 'Virtual Follow Up', price: '£85', note: '30 min · Zoom' },
+		],
+	},
+	{
+		title: 'Consultant Physiotherapy',
+		items: [
+			{ name: 'Initial Assessment', price: '£155', note: '45 min' },
+			{ name: 'Follow Up', price: '£120', note: '30 min' },
+			{ name: 'Longer Follow Up', price: '£240', note: '60 min' },
+			{ name: 'Virtual Initial Assessment', price: '£120', note: '45 min · Zoom' },
+			{ name: 'Virtual Follow Up', price: '£110', note: '30 min' },
+		],
+	},
+	{
+		title: 'Consultant Pelvic Health Physiotherapy',
+		items: [
+			{ name: 'Initial Assessment', price: '£155', note: '60 min' },
+			{ name: 'Follow Up', price: '£120', note: '30 min' },
+			{ name: 'Mummy MOT Initial', price: '£120', note: '60 min' },
+			{ name: 'Mummy MOT Follow Up', price: '£98', note: '30 min' },
+			{ name: 'Mummy MOT Virtual Initial', price: '£99', note: '60 min · Zoom' },
+			{ name: 'Mummy MOT Virtual Follow Up', price: '£85', note: '30 min · Zoom' },
+		],
+	},
+	{
+		title: 'Consultant Youth Physiotherapy',
+		items: [
+			{ name: 'Initial Assessment', price: '£155', note: '60 min' },
+			{ name: 'Follow Up', price: '£120', note: '30 min' },
+		],
+	},
+	{
+		title: 'Consultant Neuro, Vestibular & Vojta',
+		items: [
+			{ name: 'Neuro Initial', price: '£155', note: '60 min' },
+			{ name: 'Neuro Follow Up', price: '£120', note: '30 min' },
+			{ name: 'Vestibular Initial', price: '£155', note: '60 min' },
+			{ name: 'Vestibular Follow Up', price: '£120', note: '45 min' },
+			{ name: 'Vojta Initial', price: '£157.50', note: '60 min' },
+			{ name: 'Vojta Follow Up', price: '£120', note: '60 min' },
+		],
+	},
+	{
+		title: 'Hydrotherapy',
+		items: [
+			{ name: 'Initial Consultation', price: '£155', note: '60 min' },
+			{ name: 'Follow Up', price: '£135', note: '30 min' },
+			{ name: 'Longer Follow Up', price: '£155', note: '45 min' },
+		],
+	},
+	{
+		title: 'Additional Physio Services',
+		items: [
+			{ name: 'Dry Needling Add-On', price: '£6', note: 'Limited availability' },
+			{ name: 'Shockwave Initial', price: '£150', note: '' },
+			{ name: 'Shockwave Follow Up', price: '£95', note: '' },
+			{ name: 'Running Analysis Initial', price: '£175', note: '60 min' },
+			{ name: 'Running Analysis Follow Up', price: '£105', note: '30 min' },
+			{ name: 'Ergonomics Assessment Only', price: '£125', note: '60 min' },
+			{ name: 'Ergonomics Full Report', price: '£175', note: '60 min' },
+		],
+	},
+	{
+		title: 'Osteopathy',
+		items: [
+			{ name: 'Initial Assessment', price: '£155', note: '60 min' },
+			{ name: 'Follow Up', price: '£120', note: '30 min' },
+			{ name: 'Vestibular Initial', price: '£155', note: '60 min' },
+		],
+	},
+	{
+		title: 'Podiatry & Ultrasound Scans',
+		items: [
+			{ name: 'Musculoskeletal Initial', price: '£125', note: '60 min' },
+			{ name: 'Musculoskeletal Follow Up', price: '£75', note: '30 min' },
+			{ name: 'Chiropody Assessment', price: '£75', note: '30 min' },
+			{ name: 'Monthly MSK Follow Up', price: '£100', note: '45 min' },
+			{ name: 'Podiatry + Ultrasound', price: '£175', note: '30 min · Includes scan report' },
+			{ name: 'Add-On Ultrasound (Foot/Ankle)', price: '£80', note: '' },
+		],
+	},
+	{
+		title: 'Soft Tissue Therapy',
+		items: [
+			{ name: '30 Minutes', price: '£55', note: '' },
+			{ name: '45 Minutes', price: '£73', note: '' },
+			{ name: '60 Minutes', price: '£90', note: '' },
+			{ name: '90 Minutes', price: '£130', note: '' },
+			{ name: '45-Minute Package', price: '£511', note: '8 for the price of 7' },
+			{ name: '60-Minute Package', price: '£630', note: '8 for the price of 7' },
+			{ name: 'Lymphatic Drainage', price: '£100', note: '60 min' },
+			{ name: 'Lymphatic Drainage Package', price: '£280', note: '3 sessions' },
+		],
+	},
+	{
+		title: 'Strength & Conditioning',
+		items: [
+			{ name: '30 Minutes', price: '£60', note: '' },
+			{ name: '45 Minutes', price: '£75', note: '' },
+			{ name: '60 Minutes', price: '£100', note: '' },
+			{ name: '30-Minute Package', price: '£300', note: '6 for the price of 5' },
+			{ name: '45-Minute Package', price: '£390', note: '6 for the price of 5' },
+			{ name: '60-Minute Package', price: '£500', note: '6 for the price of 5' },
+		],
+	},
+	{
+		title: 'Alter G Anti-Gravity Treadmill',
+		items: [
+			{ name: 'Induction', price: '£50', note: '' },
+			{ name: '30-Minute Single', price: '£30', note: '' },
+			{ name: '60-Minute Single', price: '£51', note: '' },
+			{ name: '4 × 30-Minute Package', price: '£90', note: '' },
+			{ name: '8 × 30-Minute Package', price: '£150', note: '' },
+			{ name: '20 × 30-Minute Package', price: '£250', note: '' },
+		],
+	},
+	{
+		title: 'Report Writing',
+		items: [
+			{ name: 'Per 15 Minutes', price: '£40', note: 'For employers, schools or insurers' },
+		],
+	},
+];
+---
+<Layout
+	title="Pricing"
+	description="Transparent pricing for physiotherapy, osteopathy, sports massage, strength & conditioning, podiatry and more at Balance Performance Physiotherapy in Clapham."
+>
+	<PageHero
+		title="&amp; Insurance"
+		highlight="Pricing"
+		subtitle="Transparent fees that reflect our clinical expertise. Recognised by all major insurance providers including Bupa and AXA PPP."
+		breadcrumb="Pricing"
+	/>
+
+	<section class="pricing-section">
+		<div class="container">
+			{pricingCategories.map((cat) => (
+				<div style="margin-bottom: 60px;">
+					<h2 style="font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 24px;">{cat.title}</h2>
+					<div class="pricing-grid">
+						{cat.items.map((item) => (
+							<div class="pricing-card">
+								<h3>{item.name}</h3>
+								<div class="price">{item.price}</div>
+								{item.note && <p>{item.note}</p>}
+							</div>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

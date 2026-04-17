@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ImageText from '../components/ImageText.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+---
+<Layout
+	title="Our Studios"
+	description="Our two studios — a large Class & Movement Studio and a quieter Early Rehab Studio — are where the real rehab and training happens."
+>
+	<PageHero
+		title="Studios"
+		highlight="Our"
+		subtitle="Two dedicated spaces for rehab, movement, classes and training — the majority of your recovery happens here."
+		breadcrumb="Our Studios"
+	/>
+
+	<ImageText
+		eyebrow="Studio 1"
+		heading="Class &amp; Movement"
+		highlight="Studio"
+		placeholderLabel="Class & Movement Studio"
+	>
+		<p>Our large open studio hosts end-stage rehab, speed and agility training, classes, movement sessions, lectures and workshops. Judo mats and exercise matting cover the floor, with equipment positioned around the perimeter.</p>
+		<ul>
+			<li>Bungees fixed to pillars and LifeLine USA train station</li>
+			<li>CrossCore 180 Rotational Bodyweight Training kit</li>
+			<li>Jungle Gym Suspension training and dips bars</li>
+			<li>Heavy boxing and Thai boxing bags</li>
+			<li>Olympic bar and plates, Iron Mind sand bags</li>
+			<li>Extensive kettlebell range (Competition Steel and Cast Iron)</li>
+			<li>Medicine balls, heavy ropes, mobility and myofascial release tools</li>
+		</ul>
+		<p>Access is available to clients and those who have completed induction, with instruction available from our strength &amp; conditioning coaches.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Studio 2"
+		heading="Early Rehab"
+		highlight="Studio"
+		reverse
+		altBg
+		placeholderLabel="Early Rehab Studio"
+	>
+		<p>Our smaller first-floor studio is primarily for early rehab drills treating sports injuries, back pain and neck pain. It's quieter, music-free, and perfect for movement coaching, mobility and flexibility practice.</p>
+		<p>It's connected to four treatment rooms and includes a medical room for injections, ultrasound assessments, and visiting practitioners.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Home Office &amp; Study"
+		heading="Workplace stations"
+		highlight="and assessments"
+		placeholderLabel="Workstation assessment"
+	>
+		<p>We offer on-site assessments at our clinic, your office or your home. For remote support, we can also evaluate your set-up from photos or video recorded at the clinic (delivered on memory stick), with recommendations for HR or workplace assessors.</p>
+		<p>For professional guidance, contact Lucy Goldby or Caroline Curtis, or call <strong>020 7627 2308</strong> to book.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

@@ -1,14 +1,87 @@
+---
+const services = [
+	{ label: 'Physiotherapy', href: '/service/physiotherapy' },
+	{ label: 'Sports Physiotherapy', href: '/service/sports-physiotherapy' },
+	{ label: 'Osteopathy', href: '/service/osteopathy' },
+	{ label: 'Sports Massage', href: '/service/sports-massage' },
+	{ label: 'Shockwave Therapy', href: '/service/shockwave-therapy' },
+	{ label: 'Prehab Class', href: '/service/prehab-class' },
+	{ label: 'Neurological Rehabilitation', href: '/service/neurological-rehabilitation' },
+	{ label: 'Vojta Therapy', href: '/service/vojta-therapy' },
+	{ label: "Women's Health", href: '/service/womens-health' },
+	{ label: "Men's Health", href: '/service/mens-health' },
+	{ label: 'Podiatry', href: '/service/podiatry' },
+	{ label: 'Strength & Conditioning', href: '/service/strength-conditioning' },
+	{ label: 'LIFT — Weight Training Club', href: '/service/lift-weight-training-club' },
+	{ label: 'Bike Fitting & Running Analysis', href: '/service/bike-fitting-running-analysis' },
+	{ label: 'Hydrotherapy', href: '/service/hydrotherapy' },
+	{ label: 'Psychological Wellness', href: '/service/psychological-wellness' },
+	{ label: 'Anti-Gravity Treadmill', href: '/service/anti-gravity-treadmill' },
+	{ label: 'Ergonomics', href: '/service/ergonomics' },
+	{ label: 'TMJ & Jaw Pain', href: '/service/tmj-and-jaw-pain' },
+	{ label: 'Physiotherapy Prescribing', href: '/service/physiotherapy-prescribing' },
+	{ label: 'Outcome Measures', href: '/service/outcome-measures' },
+];
+
+const conditions = [
+	{ label: 'Lower Back Pain', href: '/condition/lower-back-pain' },
+	{ label: 'Neck Pain', href: '/condition/neck-pain' },
+	{ label: 'Shoulder Pain', href: '/condition/shoulder-pain' },
+	{ label: 'Elbow Pain', href: '/condition/elbow-pain' },
+	{ label: 'Hip Pain', href: '/condition/hip-pain' },
+	{ label: 'Knee Injuries', href: '/condition/knee-injuries' },
+	{ label: 'Foot Pain', href: '/condition/foot-pain' },
+	{ label: 'Ankle Pain', href: '/condition/ankle-pain' },
+	{ label: 'Cycling Injuries', href: '/condition/cycling-injuries' },
+	{ label: 'Running Injuries', href: '/condition/running-injuries' },
+	{ label: "Women's Pelvic Health", href: '/condition/womens-pelvic-health' },
+	{ label: "Men's Pelvic Health", href: '/condition/mens-pelvic-health' },
+	{ label: 'Verrucas', href: '/condition/verrucas' },
+	{ label: 'Ingrown Toenails', href: '/condition/ingrown-toenails' },
+	{ label: 'Multiple Sclerosis', href: '/condition/multiple-sclerosis' },
+	{ label: 'Stroke', href: '/condition/stroke' },
+	{ label: "Parkinson's", href: '/condition/parkinsons' },
+	{ label: 'Balance & Dizziness', href: '/condition/balance-and-dizziness' },
+	{ label: "Children's Neurological & Developmental", href: '/condition/childrens-neurological-developmental' },
+];
+
+const about = [
+	{ label: 'About Us', href: '/about-us' },
+	{ label: 'Meet The Team', href: '/meet-the-team' },
+	{ label: 'Our Clinic', href: '/our-clinic' },
+	{ label: 'Our Studios', href: '/our-studios' },
+	{ label: 'Outcomes', href: '/outcomes' },
+	{ label: 'Pricing', href: '/pricing' },
+	{ label: 'Work For Us', href: '/work-for-us' },
+	{ label: 'Testimonials', href: '/testimonials' },
+];
+---
 <header class="bp-header">
 	<div class="header-inner">
 		<a href="/" class="logo">Balance Physio</a>
 		<nav>
 			<ul>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Conditions</a></li>
-				<li><a href="#">FAQs</a></li>
-				<li><a href="#">Clapham Clinic</a></li>
-				<li><a href="#">Contact Us</a></li>
+				<li class="has-dropdown">
+					<a href="/about-us">About <span class="chev">▾</span></a>
+					<div class="dropdown">
+						{about.map((item) => <a href={item.href}>{item.label}</a>)}
+					</div>
+				</li>
+				<li class="has-dropdown has-dropdown-wide">
+					<a href="#services">Services <span class="chev">▾</span></a>
+					<div class="dropdown dropdown-wide">
+						{services.map((item) => <a href={item.href}>{item.label}</a>)}
+					</div>
+				</li>
+				<li class="has-dropdown has-dropdown-wide">
+					<a href="#conditions">Conditions <span class="chev">▾</span></a>
+					<div class="dropdown dropdown-wide">
+						{conditions.map((item) => <a href={item.href}>{item.label}</a>)}
+					</div>
+				</li>
+				<li><a href="/faqs">FAQs</a></li>
+				<li><a href="/clinic/clapham">Clapham Clinic</a></li>
+				<li><a href="/contact-us">Contact Us</a></li>
 			</ul>
 		</nav>
 		<div class="header-cta">
@@ -32,9 +105,49 @@
 		font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
 		text-decoration: none;
 	}
-	nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
-	nav a { font-weight: 500; font-size: 15px; color: rgba(255,255,255,0.85); transition: color .2s; text-decoration: none; }
+	nav ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; align-items: center; }
+	nav > ul > li { position: relative; }
+	nav a { font-weight: 500; font-size: 15px; color: rgba(255,255,255,0.85); transition: color .2s; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
 	nav a:hover { color: #ffffff; }
+	.chev { font-size: 10px; opacity: 0.7; }
+
+	.has-dropdown .dropdown {
+		position: absolute; top: 100%; left: 0;
+		background: #ffffff;
+		border-radius: 12px;
+		box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+		min-width: 220px;
+		padding: 12px;
+		opacity: 0; visibility: hidden;
+		transform: translateY(8px);
+		transition: opacity .2s, transform .2s, visibility .2s;
+		z-index: 200;
+		display: flex; flex-direction: column; gap: 2px;
+	}
+	.has-dropdown .dropdown.dropdown-wide {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(180px, 1fr));
+		min-width: 600px;
+		padding: 16px;
+		gap: 4px 20px;
+	}
+	.has-dropdown .dropdown a {
+		color: #1a1a1a;
+		padding: 8px 12px;
+		border-radius: 8px;
+		font-size: 14px;
+		font-weight: 500;
+		transition: background .15s, color .15s;
+	}
+	.has-dropdown .dropdown a:hover {
+		background: #f4f6f7;
+		color: #e87722;
+	}
+	.has-dropdown:hover .dropdown,
+	.has-dropdown:focus-within .dropdown {
+		opacity: 1; visibility: visible; transform: translateY(0);
+	}
+
 	.header-cta { display: flex; gap: 12px; align-items: center; }
 	.header-cta .btn-primary {
 		padding: 10px 24px; border-radius: 50px; font-weight: 600; font-size: 14px;
@@ -43,7 +156,8 @@
 		display: inline-block;
 	}
 	.header-cta .btn-primary:hover { background: #32a8c6; }
-	@media (max-width: 768px) {
+
+	@media (max-width: 900px) {
 		nav ul { display: none; }
 	}
 </style>
