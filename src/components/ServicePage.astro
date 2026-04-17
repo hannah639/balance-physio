@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from './PageHero.astro';
 import ImageText from './ImageText.astro';
+import PhotoMarquee from './PhotoMarquee.astro';
 import BookingCTA from './BookingCTA.astro';
 
 const {
@@ -30,10 +31,27 @@ const {
 	whoList,
 	whoImage,       // optional image URL
 	faqs = [],
+	marqueeImages, // optional array of {src, alt} — defaults to placeholder set
+	marqueeSpeed = 45,
 } = Astro.props;
+
+// Default placeholder image set used when a page doesn't supply its own photos
+const defaultPlaceholders = [
+	{ src: '/placeholders/01.jpg', alt: '' },
+	{ src: '/placeholders/02.jpg', alt: '' },
+	{ src: '/placeholders/03.jpg', alt: '' },
+	{ src: '/placeholders/04.jpg', alt: '' },
+	{ src: '/placeholders/05.jpg', alt: '' },
+	{ src: '/placeholders/06.jpg', alt: '' },
+	{ src: '/placeholders/07.jpg', alt: '' },
+	{ src: '/placeholders/08.jpg', alt: '' },
+];
+const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defaultPlaceholders;
 ---
 <Layout title={seoTitle} description={seoDescription}>
 	<PageHero title={title} highlight={highlight} subtitle={heroSubtitle} breadcrumb={breadcrumb} />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={marqueeSpeed} />
 
 	<slot name="after-hero" />
 

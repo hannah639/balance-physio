@@ -1,5 +1,14 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const liftPhotos = [
+	{ src: '/lift/01.jpg', alt: 'Kettlebell deadlift coaching' },
+	{ src: '/lift/02.jpg', alt: 'Barbell curl coaching' },
+	{ src: '/lift/03.jpg', alt: 'Overhead press' },
+	{ src: '/lift/04.jpg', alt: 'Kettlebells' },
+	{ src: '/lift/05.jpg', alt: 'Weightlifting in the gym' },
+	{ src: '/lift/06.jpg', alt: 'Barbell workout' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,6 +17,7 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Lift (Weight Training) Club"
 	seoTitle="Lift (Weight Training) Club in Clapham"
 	seoDescription="Coached weight training in Clapham. Small-group strength sessions that bridge rehabilitation and independent training, progressive and tailored to you."
+	marqueeImages={liftPhotos}
 	intro={[
 		"Our Weight Training Club provides a supportive, coached environment to learn and develop strength safely. It is designed to bridge the gap between rehabilitation and independent training, helping you build the foundations for long-term health and performance.",
 		"Whether you are completely new to lifting or looking to refine your technique, sessions are structured, progressive, and tailored within a small group setting.",

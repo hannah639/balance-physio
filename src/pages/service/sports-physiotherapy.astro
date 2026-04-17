@@ -1,6 +1,5 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
-import PhotoMarquee from '../../components/PhotoMarquee.astro';
 
 const sportsPhotos = [
 	{ src: '/sports-physio/01.jpg', alt: 'Athlete training' },
@@ -20,6 +19,8 @@ const sportsPhotos = [
 	breadcrumb="Sports Physiotherapy"
 	seoTitle="Sports Physiotherapy in Clapham"
 	seoDescription="Specialist sports physiotherapy in Clapham, London. From amateur to elite, we assess how you move under load, rebuild strength, and get you safely back to sport."
+	marqueeImages={sportsPhotos}
+	marqueeSpeed={40}
 	intro={[
 		"Sport places specific individual demands on the body. Whether you are training, competing, or simply trying to stay active, injury or pain can quickly affect your confidence and performance.",
 		"We take a clinical, evidence-led approach to every case. From your first session, we assess how you move under load, how your body responds to training, and where the breakdown has occurred.",
@@ -62,6 +63,4 @@ const sportsPhotos = [
 		{ q: "How many sessions will I need?", a: "This depends on your injury and goals. After your first session, we'll give you a clear plan." },
 		{ q: "When can I return to sport?", a: "We use clear criteria based on strength, movement and performance to guide your return safely." },
 	]}
->
-	<PhotoMarquee slot="after-hero" images={sportsPhotos} heightPx={140} speedSeconds={40} />
-</ServicePage>
+/>
