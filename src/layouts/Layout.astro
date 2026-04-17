@@ -107,6 +107,43 @@ const jsonLd = settings.businessName ? {
 			<slot />
 			<Footer />
 		</div>
+
+		<div id="video-lightbox" class="video-lightbox" aria-hidden="true" role="dialog">
+			<button class="video-lightbox-close" aria-label="Close video">&times;</button>
+			<div class="video-lightbox-frame">
+				<iframe id="video-lightbox-iframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0"></iframe>
+			</div>
+		</div>
+
+		<script is:inline>
+			(function () {
+				var modal = document.getElementById('video-lightbox');
+				var iframe = document.getElementById('video-lightbox-iframe');
+				if (!modal || !iframe) return;
+				var closeBtn = modal.querySelector('.video-lightbox-close');
+
+				function open(id) {
+					iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+					modal.classList.add('is-open');
+					modal.setAttribute('aria-hidden', 'false');
+					document.body.style.overflow = 'hidden';
+				}
+				function close() {
+					iframe.src = '';
+					modal.classList.remove('is-open');
+					modal.setAttribute('aria-hidden', 'true');
+					document.body.style.overflow = '';
+				}
+
+				document.addEventListener('click', function (e) {
+					var trigger = e.target.closest ? e.target.closest('[data-youtube]') : null;
+					if (trigger) { e.preventDefault(); open(trigger.getAttribute('data-youtube')); }
+				});
+				closeBtn.addEventListener('click', close);
+				modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+				document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+			})();
+		</script>
 	</body>
 </html>
 
@@ -173,6 +210,23 @@ const jsonLd = settings.businessName ? {
 	.bp-page .rich-content strong { color: var(--text); font-weight: 700; }
 	.bp-page .rich-content a { color: var(--cta); font-weight: 600; }
 	.bp-page .rich-content a:hover { text-decoration: underline; }
+
+	/* Video lightbox */
+	.video-lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 40px; }
+	.video-lightbox.is-open { display: flex; }
+	.video-lightbox-frame { position: relative; width: 100%; max-width: 1100px; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+	.video-lightbox-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+	.video-lightbox-close { position: absolute; top: 20px; right: 24px; background: transparent; border: 0; color: #fff; font-size: 48px; line-height: 1; cursor: pointer; padding: 0 12px; z-index: 1; transition: opacity .2s; }
+	.video-lightbox-close:hover { opacity: 0.7; }
+
+	/* Video trigger (button wrapping thumbnail) */
+	.bp-page .image-text-media .video-trigger { position: relative; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; overflow: hidden; border-radius: var(--radius); display: block; }
+	.bp-page .image-text-media .video-trigger img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+	.bp-page .image-text-media .video-trigger:hover img { transform: scale(1.04); }
+	.bp-page .image-text-media .video-trigger .play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%); transition: background .2s; }
+	.bp-page .image-text-media .video-trigger:hover .play-btn { background: rgba(0,0,0,0.2); }
+	.bp-page .image-text-media .video-trigger .play-icon { width: 84px; height: 84px; border-radius: 50%; background: var(--accent); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 26px; padding-left: 6px; box-shadow: 0 12px 40px rgba(0,0,0,0.4); transition: transform .2s, background .2s; }
+	.bp-page .image-text-media .video-trigger:hover .play-icon { background: var(--accent-hover); transform: scale(1.08); }
 
 	/* Image + text alternating blocks */
 	.bp-page .image-text { padding: 90px 0; background: var(--white); }

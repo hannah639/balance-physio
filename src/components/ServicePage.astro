@@ -12,6 +12,7 @@ const {
 	seoTitle,
 	seoDescription,
 	intro,          // array of paragraphs for intro block
+	introYoutubeId, // optional YouTube video ID for lightbox on intro block
 	whenHeading = 'When to consider',
 	whenHighlight = 'this service',
 	whenIntro,      // string
@@ -36,6 +37,7 @@ const {
 			heading="Evidence-led"
 			highlight="care"
 			placeholderLabel="Treatment in progress"
+			youtubeId={introYoutubeId}
 		>
 			{intro.map((p) => <p>{p}</p>)}
 		</ImageText>

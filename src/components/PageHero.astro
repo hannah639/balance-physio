@@ -7,7 +7,7 @@ const { title, highlight, subtitle, breadcrumb, ctaText = 'Book an appointment',
 			<div class="breadcrumb"><a href="/">Home</a> &raquo; {breadcrumb}</div>
 		)}
 		<h1>
-			{highlight ? <><span class="highlight">{highlight}</span> {title}</> : title}
+			{highlight ? <><span class="highlight">{highlight}</span>{' '}{title}</> : title}
 		</h1>
 		{subtitle && <p class="subtitle">{subtitle}</p>}
 		<a href={ctaHref} class="btn-book">{ctaText}</a>

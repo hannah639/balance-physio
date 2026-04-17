@@ -1,3 +1,37 @@
+---
+const services = [
+	{ title: 'Physiotherapy', href: '/service/physiotherapy', bg: '/archery.jpg' },
+	{ title: 'Sports Physiotherapy', href: '/service/sports-physiotherapy', bg: '/hockey.jpg' },
+	{ title: 'Osteopathy', href: '/service/osteopathy' },
+	{ title: 'Sports Massage', href: '/service/sports-massage', bg: '/massage.jpg' },
+	{ title: 'Shockwave Therapy', href: '/service/shockwave-therapy' },
+	{ title: 'Prehab Class', href: '/service/prehab-class' },
+	{ title: 'Neurological Rehabilitation', href: '/service/neurological-rehabilitation' },
+	{ title: 'Vojta Therapy', href: '/service/vojta-therapy' },
+	{ title: "Women's Health", href: '/service/womens-health', bg: '/womens-health.jpg' },
+	{ title: "Men's Health", href: '/service/mens-health' },
+	{ title: 'Podiatry', href: '/service/podiatry' },
+	{ title: 'Strength & Conditioning', href: '/service/strength-conditioning' },
+	{ title: 'LIFT — Weight Training Club', href: '/service/lift-weight-training-club' },
+	{ title: 'Bike Fitting', href: '/service/bike-fitting-running-analysis', bg: '/cycling.jpg' },
+	{ title: 'Running Analysis', href: '/service/bike-fitting-running-analysis', bg: '/running.jpg' },
+	{ title: 'Hydrotherapy', href: '/service/hydrotherapy' },
+	{ title: 'Psychological Wellness', href: '/service/psychological-wellness' },
+	{ title: 'Anti-Gravity Treadmill', href: '/service/anti-gravity-treadmill' },
+	{ title: 'Ergonomics', href: '/service/ergonomics' },
+	{ title: 'TMJ & Jaw Pain', href: '/service/tmj-and-jaw-pain' },
+	{ title: 'Physiotherapy Prescribing', href: '/service/physiotherapy-prescribing' },
+	{ title: 'Outcome Measures', href: '/service/outcome-measures' },
+];
+
+function gradientFor(title) {
+	var hash = 0;
+	for (var i = 0; i < title.length; i++) hash = (hash << 5) - hash + title.charCodeAt(i);
+	var hue = Math.abs(hash) % 360;
+	return `linear-gradient(135deg, hsl(${hue}, 55%, 35%) 0%, hsl(${(hue + 50) % 360}, 60%, 22%) 100%)`;
+}
+---
+
 <section class="features">
 	<div class="container">
 		<div class="section-header">
@@ -6,54 +40,20 @@
 			<p>Relieving pain, restoring function, exploring movement, enhancing health & performance</p>
 		</div>
 		<div class="feature-list">
-			<div class="feature-card">
-				<div class="feature-card-bg" style="background-image: url('/archery.jpg');"></div>
-				<div class="feature-card-overlay"></div>
-				<div class="feature-card-content">
-					<div class="service-label">Service</div>
-					<h3>Physiotherapy</h3>
-				</div>
-			</div>
-			<div class="feature-card">
-				<div class="feature-card-bg" style="background-image: url('/hockey.jpg');"></div>
-				<div class="feature-card-overlay"></div>
-				<div class="feature-card-content">
-					<div class="service-label">Service</div>
-					<h3>Sports Physiotherapy</h3>
-				</div>
-			</div>
-			<div class="feature-card">
-				<div class="feature-card-bg" style="background-image: url('/cycling.jpg');"></div>
-				<div class="feature-card-overlay"></div>
-				<div class="feature-card-content">
-					<div class="service-label">Service</div>
-					<h3>Bike fitting</h3>
-				</div>
-			</div>
-			<div class="feature-card">
-				<div class="feature-card-bg" style="background-image: url('/running.jpg');"></div>
-				<div class="feature-card-overlay"></div>
-				<div class="feature-card-content">
-					<div class="service-label">Service</div>
-					<h3>Running analysis</h3>
-				</div>
-			</div>
-			<div class="feature-card">
-				<div class="feature-card-bg" style="background-image: url('/massage.jpg');"></div>
-				<div class="feature-card-overlay"></div>
-				<div class="feature-card-content">
-					<div class="service-label">Service</div>
-					<h3>Sports massage</h3>
-				</div>
-			</div>
-			<div class="feature-card">
-				<div class="feature-card-bg" style="background-image: url('/womens-health.jpg');"></div>
-				<div class="feature-card-overlay"></div>
-				<div class="feature-card-content">
-					<div class="service-label">Service</div>
-					<h3>Women's Health</h3>
-				</div>
-			</div>
+			{services.map((s) => (
+				<a
+					href={s.href}
+					class="feature-card"
+					style={s.bg ? `` : `background: ${gradientFor(s.title)};`}
+				>
+					{s.bg && <div class="feature-card-bg" style={`background-image: url('${s.bg}');`} />}
+					<div class="feature-card-overlay"></div>
+					<div class="feature-card-content">
+						<div class="service-label">Service</div>
+						<h3>{s.title}</h3>
+					</div>
+				</a>
+			))}
 		</div>
 		<div class="feature-nav">
 			<button class="feature-nav-btn" onclick="document.querySelector('.bp-page .feature-list').scrollBy({left:-344,behavior:'smooth'})">&larr;</button>
