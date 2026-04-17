@@ -88,9 +88,51 @@ const about = [
 		</nav>
 		<div class="header-cta">
 			<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-primary">Book Now</a>
+			<button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
 		</div>
 	</div>
 </header>
+
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+	<div class="mobile-menu-inner">
+		<ul class="mobile-nav">
+			<li>
+				<details>
+					<summary>About</summary>
+					<ul class="mobile-sublist">
+						{about.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+					</ul>
+				</details>
+			</li>
+			<li>
+				<details>
+					<summary>Services</summary>
+					<ul class="mobile-sublist">
+						<li><a href="/services">All services</a></li>
+						{services.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+					</ul>
+				</details>
+			</li>
+			<li>
+				<details>
+					<summary>Conditions</summary>
+					<ul class="mobile-sublist">
+						<li><a href="/conditions">All conditions</a></li>
+						{conditions.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+					</ul>
+				</details>
+			</li>
+			<li><a href="/faqs" class="mobile-direct">FAQs</a></li>
+			<li><a href="/clinic/clapham" class="mobile-direct">Clapham Clinic</a></li>
+			<li><a href="/contact-us" class="mobile-direct">Contact Us</a></li>
+		</ul>
+		<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="mobile-menu-book">Book Now</a>
+	</div>
+</div>
 
 <style>
 	.bp-header {
@@ -170,10 +212,131 @@ const about = [
 	}
 	.header-cta .btn-primary:hover { background: #32a8c6; }
 
+	/* Hamburger button — hidden on desktop */
+	.hamburger {
+		display: none;
+		background: transparent;
+		border: 0;
+		padding: 8px;
+		cursor: pointer;
+		width: 40px; height: 40px;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 5px;
+	}
+	.hamburger span {
+		display: block;
+		width: 22px; height: 2px;
+		background: #ffffff;
+		border-radius: 2px;
+		transition: transform .25s, opacity .2s;
+	}
+	.hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+	.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+	.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 	@media (max-width: 900px) {
 		nav ul { display: none; }
+		.hamburger { display: inline-flex; }
+		.header-cta .btn-primary { display: none; }
 	}
 </style>
+
+<style is:global>
+	/* Mobile full-screen menu panel (outside Header scope, so global) */
+	.mobile-menu {
+		position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+		background: #2c4356;
+		z-index: 99;
+		padding-top: 90px;
+		overflow-y: auto;
+		opacity: 0; visibility: hidden;
+		transition: opacity .25s ease, visibility .25s ease;
+		font-family: 'Inter', sans-serif;
+	}
+	.mobile-menu.is-open { opacity: 1; visibility: visible; }
+	.mobile-menu-inner { padding: 16px 24px 48px; max-width: 640px; margin: 0 auto; }
+	.mobile-nav { list-style: none; margin: 0; padding: 0; }
+	.mobile-nav > li {
+		border-bottom: 1px solid rgba(255,255,255,0.1);
+	}
+	.mobile-nav details > summary {
+		list-style: none;
+		padding: 16px 0;
+		font-size: 18px;
+		font-weight: 600;
+		color: #ffffff;
+		cursor: pointer;
+		display: flex; justify-content: space-between; align-items: center;
+	}
+	.mobile-nav details > summary::-webkit-details-marker { display: none; }
+	.mobile-nav details > summary::after {
+		content: '+';
+		font-size: 26px; font-weight: 400;
+		color: #e87722;
+		transition: transform .2s;
+	}
+	.mobile-nav details[open] > summary::after { transform: rotate(45deg); }
+	.mobile-sublist {
+		list-style: none; margin: 0; padding: 0 0 16px 12px;
+	}
+	.mobile-sublist li { padding: 0; }
+	.mobile-sublist a {
+		display: block;
+		padding: 10px 0;
+		font-size: 15px;
+		color: rgba(255,255,255,0.8);
+		text-decoration: none;
+	}
+	.mobile-sublist a:hover, .mobile-sublist a:active { color: #e87722; }
+	.mobile-direct {
+		display: block;
+		padding: 16px 0;
+		font-size: 18px; font-weight: 600;
+		color: #ffffff;
+		text-decoration: none;
+	}
+	.mobile-menu-book {
+		display: block;
+		margin-top: 28px;
+		padding: 16px 24px;
+		background: #e87722;
+		color: #ffffff;
+		text-align: center;
+		font-size: 16px; font-weight: 700;
+		border-radius: 50px;
+		text-decoration: none;
+	}
+	.mobile-menu-book:hover { background: #d06618; }
+</style>
+
+<script is:inline>
+	(function () {
+		var btn = document.querySelector('.hamburger');
+		var menu = document.getElementById('mobile-menu');
+		if (!btn || !menu) return;
+		function setOpen(open) {
+			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+			menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+			menu.classList.toggle('is-open', open);
+			document.body.style.overflow = open ? 'hidden' : '';
+		}
+		btn.addEventListener('click', function () {
+			var isOpen = btn.getAttribute('aria-expanded') === 'true';
+			setOpen(!isOpen);
+		});
+		// Close menu when a sub-link is clicked
+		menu.addEventListener('click', function (e) {
+			var a = e.target.closest('a');
+			if (a) setOpen(false);
+		});
+		// Close on Escape
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape') setOpen(false);
+		});
+	})();
+</script>
 
 <script is:inline>
 	(function () {

@@ -1,16 +1,77 @@
-<section class="image-quote-section">
-	<div class="image-banner" style="height: auto;">
-		<img src="/booking-cyclist.png" alt="Cyclist on mountain road" style="position: relative; height: auto;">
-		<div class="image-banner-overlay">
-			<div class="image-banner-content">
-				<div class="hero-badge" style="display: inline-flex; margin-bottom: 24px;"><span class="dot"></span> Booking</div>
-				<h2>Ready To Book?</h2>
-				<p>If you're ready to start your rehabilitation journey then we're here to help! You can book online straight away or alternatively please get in touch if you have any questions.</p>
-				<div style="display: flex; gap: 16px; flex-wrap: wrap;">
-					<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-book">Book Now</a>
-					<a href="/contact-us" class="btn-outline-white">Contact Us</a>
-				</div>
-			</div>
+<section class="booking-cta">
+	<div class="booking-cta-bg" style="background-image: url('/booking-cyclist.png');"></div>
+	<div class="booking-cta-overlay"></div>
+	<div class="booking-cta-inner">
+		<div class="hero-badge"><span class="dot"></span> Booking</div>
+		<h2>Ready To Book?</h2>
+		<p>If you're ready to start your rehabilitation journey then we're here to help! You can book online straight away or alternatively please get in touch if you have any questions.</p>
+		<div class="booking-cta-actions">
+			<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-book">Book Now</a>
+			<a href="/contact-us" class="btn-outline-white">Contact Us</a>
 		</div>
 	</div>
 </section>
+
+<style>
+	.booking-cta {
+		position: relative;
+		overflow: hidden;
+		background: #1a1a1a;
+		color: #ffffff;
+		padding: 96px 24px;
+	}
+	.booking-cta-bg {
+		position: absolute; inset: 0;
+		background-size: cover;
+		background-position: center;
+		z-index: 0;
+	}
+	.booking-cta-overlay {
+		position: absolute; inset: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 1;
+	}
+	.booking-cta-inner {
+		position: relative; z-index: 2;
+		max-width: 700px;
+		margin: 0 auto;
+		text-align: left;
+	}
+	.booking-cta-inner .hero-badge {
+		display: inline-flex; align-items: center; gap: 8px;
+		background: rgba(255,255,255,0.1);
+		border: 1px solid rgba(255,255,255,0.2);
+		border-radius: 50px;
+		padding: 6px 16px;
+		font-size: 13px; font-weight: 500;
+		margin-bottom: 24px;
+		color: rgba(255,255,255,0.85);
+	}
+	.booking-cta-inner .hero-badge .dot {
+		width: 8px; height: 8px; border-radius: 50%;
+		background: #3EBEDF;
+	}
+	.booking-cta-inner h2 {
+		font-size: 42px; font-weight: 800;
+		letter-spacing: -1px;
+		line-height: 1.15;
+		margin-bottom: 20px;
+		color: #ffffff;
+	}
+	.booking-cta-inner p {
+		font-size: 17px;
+		line-height: 1.7;
+		color: rgba(255,255,255,0.85);
+		margin-bottom: 32px;
+	}
+	.booking-cta-actions {
+		display: flex; gap: 16px; flex-wrap: wrap;
+	}
+	@media (max-width: 768px) {
+		.booking-cta { padding: 64px 20px; }
+		.booking-cta-inner h2 { font-size: 30px; }
+		.booking-cta-inner p { font-size: 16px; margin-bottom: 24px; }
+		.booking-cta-actions .btn-book,
+		.booking-cta-actions .btn-outline-white { flex: 1; min-width: 140px; text-align: center; padding: 14px 20px; }
+	}
+</style>
