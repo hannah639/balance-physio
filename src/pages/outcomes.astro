@@ -2,16 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import ImageText from '../components/ImageText.astro';
-import Testimonials from '../components/Testimonials.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 ---
 <Layout
 	title="Outcomes"
-	description="We track outcomes so you can see your progress. Our patients typically see measurable improvement in pain, function and strength within 6 weeks to 3 months."
+	description="Our Incredible Outcomes — patients typically discharged between 6 weeks and 3 months, with long-term results continuing beyond 12 months."
 >
 	<PageHero
 		title="Outcomes"
-		subtitle="Discharged between 6 weeks and 3 months — with long-term results that continue beyond 12 months."
+		highlight="Our Incredible"
+		subtitle="Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond."
 		breadcrumb="Outcomes"
 	/>
 
@@ -34,39 +34,80 @@ import BookingCTA from '../components/BookingCTA.astro';
 		</div>
 	</section>
 
+	<section class="rich-content">
+		<div class="container">
+			<p style="text-align: center; font-size: 18px; max-width: 700px; margin: 0 auto;">We track pain and function at baseline, 6 weeks, 3 months, 6 months and 12 months across our five key specialisms. The charts below show how our patients progress over time — <strong>green is no or minimal pain</strong>.</p>
+		</div>
+	</section>
+
 	<ImageText
-		eyebrow="How we measure"
-		heading="No guessing — just"
-		highlight="real evidence"
-		placeholderLabel="Outcome measurement"
+		eyebrow="The Shoulder"
+		heading="How quickly can we"
+		highlight="make you better?"
+		image="/outcomes/shoulder.jpg"
+		imageAlt="Shoulder outcomes chart — pain levels over time"
 	>
-		<p>From your first session we establish a clear baseline of how you move, function and feel. As you progress, we regularly reassess — looking at strength, mobility, pain, and what you can actually do day-to-day.</p>
-		<p>We track patient pain levels across four timeframes: baseline, 6 weeks, 3 months and 12 months.</p>
-		<ul>
-			<li>Clear evidence that you're improving</li>
-			<li>A plan that adapts as you progress</li>
-			<li>Confidence in your return to sport, work and daily life</li>
-		</ul>
+		<p>Our shoulder patients told us how bad their pain was before they started treatment (Baseline) and then at 6 weeks after starting, three, six and twelve months. Green is no or minimal pain.</p>
+		<p>Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond.</p>
+		<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
+		<p><em>Some quotes from our shoulder patients:</em></p>
+		<p>"The pain got much better in the initial two weeks after treatment."</p>
+		<p>"I think these are great physios my shoulder is definitely improved as a result of their interventions."</p>
+		<p>"My first treatment at Balance was for my shoulder and I would highly recommend to anyone."</p>
 	</ImageText>
 
 	<ImageText
-		eyebrow="Tracked by condition"
-		heading="Outcomes across"
-		highlight="specialisms"
+		eyebrow="The Knee"
+		heading="How quickly can we"
+		highlight="make you better?"
 		reverse
 		altBg
-		placeholderLabel="Outcome reporting"
+		image="/outcomes/knee.jpg"
+		imageAlt="Knee outcomes chart — pain levels over time"
 	>
-		<p>We publish outcomes across five key areas so you know what to expect when you see us:</p>
-		<ul>
-			<li>General outcomes (overall patient journey)</li>
-			<li>Shoulder pain recovery data</li>
-			<li>Knee injury and pain recovery metrics</li>
-			<li>Lower back pain improvement tracking</li>
-			<li>Foot &amp; ankle pain resolution data</li>
-		</ul>
+		<p>Our Knee patients told us how bad their pain was before they started treatment (Baseline) and then at 6 weeks after starting, three, six and twelve months. Green is no or minimal pain.</p>
+		<p>Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond.</p>
+		<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
+		<p><em>Some quotes from our Knee patients:</em></p>
+		<p>"Jo did a magnificent job on my knee – the best possible. Any problems now are, I believe, due to the severity of the problem and the surgery."</p>
+		<p>"Sam was excellent and my knee improved dramatically after a visit to him."</p>
+		<p>"Now it is as though I had not injured my knee."</p>
+		<p>"Following separate treatment for my neck and knee I am now fully able to run and little or no pain in my neck. Thank you to Balance once again for sorting me out."</p>
 	</ImageText>
 
-	<Testimonials />
+	<ImageText
+		eyebrow="The Back"
+		heading="How quickly can we"
+		highlight="make you better?"
+		image="/outcomes/back.jpg"
+		imageAlt="Back pain outcomes chart — pain levels over time"
+	>
+		<p>Our back pain patients told us how bad their pain was before they started treatment (Baseline) and then at 6 weeks after starting, three, six and twelve months. Green is no or minimal pain.</p>
+		<p>Our patients are typically discharged before 3 months, but continue to see long-term results from 12 months and beyond.</p>
+		<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
+		<p><em>Some quotes from our Back patients:</em></p>
+		<p>"I have had a few issues over the years going back to 2009 and Balance has always helped fantastically so always recommend them since then."</p>
+		<p>"Have followed medical advice and rehab exercises and now fully back to running."</p>
+		<p>"The treatment has worked and my back continues to improve with the right exercises."</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="The Foot and Ankle"
+		heading="How quickly can we"
+		highlight="make you better?"
+		reverse
+		altBg
+		image="/outcomes/foot-ankle.jpg"
+		imageAlt="Foot & Ankle outcomes chart — pain levels over time"
+	>
+		<p>Our Foot and Ankle patients told us how bad their pain was before they started treatment (Baseline) and then at 6 weeks after starting, three, six and twelve months. Green is no or minimal pain.</p>
+		<p>Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond.</p>
+		<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
+		<p><em>Some quotes from our Foot and Ankle patients:</em></p>
+		<p>"Have recovered from back, knee and foot problems thanks to great advice and treatment. Now use the AlterG interspersed with outdoor running to keep the load on my knee (patellofemoral osteoarthritis) within manageable limits."</p>
+		<p>"I am back to full health and pain free. Back in the gym and have normal foot function."</p>
+		<p>"The treatments I received have reduced my pain to low level just above the ankle in the left leg. It lasts for perhaps 10-15 minutes on getting up, or rising to begin walking. This is a great improvement."</p>
+	</ImageText>
+
 	<BookingCTA />
 </Layout>

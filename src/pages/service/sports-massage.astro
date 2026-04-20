@@ -1,21 +1,28 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+import ImageText from '../../components/ImageText.astro';
+
+// All 8 supplied images are used next to text below — slider uses default
+// placeholder set so nothing is duplicated.
 ---
 <ServicePage
 	title="in Clapham"
 	highlight="Sports Massage"
 	introYoutubeId="GSoTKgE7IQE"
-	heroSubtitle="Targeted soft tissue therapy to improve muscle function, reduce tension, and support recovery from training, work, and daily life."
+	heroSubtitle="Sports massage and soft tissue therapy focus on improving muscle function, reducing tension, and supporting recovery from training, work, and daily life."
 	breadcrumb="Sports Massage"
 	seoTitle="Sports Massage in Clapham"
 	seoDescription="Sports massage and soft tissue therapy in Clapham. Reduce muscle tension, support recovery, and improve movement with structured, clinician-led sessions."
+	marqueeImages={sliderPhotos}
 	intro={[
 		"Sports massage and soft tissue therapy focus on improving muscle function, reducing tension, and supporting recovery from training, work, and daily life.",
-		"We take a structured approach where sessions address specific muscle and fascia restrictions developed through training loads, work, and posture.",
-		"Our aim is to help you manage symptoms independently between appointments with clear self-care guidance alongside hands-on treatment.",
+		"At Balance, we take a structured approach to massage. Rather than purely passive treatment, sessions are used to address specific restrictions in muscle and fascia, particularly those that develop through regular or high training loads, while helping you understand how to manage your own symptoms between appointments.",
+		"This allows massage to become part of a wider strategy for maintaining movement quality, supporting performance, and managing the ongoing demands of consistent training.",
 	]}
+	introImage="/sports-massage/01.jpg"
 	whenHeading="When to consider"
 	whenHighlight="sports massage"
+	whenIntro="Sports massage isn't just for when something feels wrong — it's a key part of managing training load, improving recovery, and maintaining performance. You may benefit if you're experiencing:"
 	whenList={[
 		"Muscle soreness or fatigue after training",
 		"Persistent tightness affecting movement or performance",
@@ -25,30 +32,100 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Neck, shoulder, or back tension related to work or posture",
 		"General physical stress and tension build-up",
 	]}
+	whenImage="/sports-massage/03.jpg"
 	howHeading="How we"
-	howHighlight="treat"
-	howIntro="Techniques include a blend of hands-on work tailored to your needs, alongside practical guidance you can use between sessions."
+	howHighlight="work"
+	howIntro="We focus on identifying areas of restriction and applying the appropriate techniques to improve tissue quality and movement, particularly in the context of your training demands. Your treatment may include:"
 	howList={[
 		"Deep tissue massage",
 		"Myofascial release and fascial work",
 		"Trigger point therapy",
 		"Soft tissue release techniques (STR)",
 		"Assisted stretching",
-		"Guidance on self-massage, mobility strategies, and load management",
 	]}
+	howImage="/sports-massage/04.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
+	whoIntro="We work with a wide range of clients, with a particular focus on those placing regular physical demands on their bodies:"
 	whoList={[
-		"Active individuals and athletes",
-		"Post-injury or post-surgical clients",
-		"Parents managing physical strain",
-		"Local population seeking movement maintenance",
+		"Active individuals and athletes: Supporting training consistency, recovery, and performance",
+		"Post-injury or post-surgical clients: Addressing residual tightness and restriction",
+		"Parents: Managing physical strain from lifting and daily demands",
+		"Our local population: Looking to maintain movement and reduce physical stress",
 	]}
+	whoImage="/sports-massage/05.jpg"
 	faqs={[
-		{ q: "Is sports massage only for athletes?", a: "No. It is suitable for anyone with muscle tension, stiffness, or recovery needs." },
-		{ q: "Will it be painful?", a: "Some techniques are uncomfortable, but treatment should always remain manageable and controlled." },
-		{ q: "How often should I have a massage?", a: "Frequency depends on activity levels; regular training benefits from consistent sessions." },
-		{ q: "Can massage help with tight hips or back pain?", a: "Yes, combined with self-management strategies to address the underlying drivers." },
-		{ q: "Can I do anything between sessions?", a: "Yes, we provide guidance on massage balls and simple exercises to maintain progress." },
+		{ q: "Is sports massage only for athletes?", a: "No. It is suitable for anyone with muscle tension, stiffness, or recovery needs, though it is particularly beneficial for those training regularly." },
+		{ q: "Will it be painful?", a: "Some techniques can be uncomfortable, but treatment should always remain manageable and controlled." },
+		{ q: "How often should I have a massage?", a: "This depends on your activity levels, but people who train frequently often benefit from regular sessions to support recovery and manage load." },
+		{ q: "Can massage help with tight hips or back pain?", a: "Yes. We often combine treatment with simple self-management strategies to maintain improvements." },
+		{ q: "Can I do anything between sessions?", a: "Yes. We will guide you on using tools such as massage balls and simple exercises to manage symptoms independently." },
 	]}
-/>
+>
+	<Fragment slot="before-faq">
+		<ImageText
+			eyebrow="Self-management"
+			heading="You are not reliant"
+			highlight="on treatment alone"
+			reverse
+			altBg
+			image="/sports-massage/08.jpg"
+			imageAlt="Calf compression and kneading"
+		>
+			<p>We also guide you on:</p>
+			<ul>
+				<li>Self-massage techniques (e.g. using a ball, roller or massage tools)</li>
+				<li>Simple mobility and recovery strategies between sessions</li>
+				<li>Load management alongside training or work demands</li>
+			</ul>
+			<p>This ensures you are not reliant on treatment alone and can actively support your own recovery, especially if you are training frequently.</p>
+		</ImageText>
+
+		<ImageText
+			eyebrow="Pricing & insurance"
+			heading="A transparent fee"
+			highlight="structure"
+			image="/sports-massage/06.jpg"
+			imageAlt="Oiled calf massage"
+		>
+			<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa and AXA Health.</p>
+		</ImageText>
+
+		<ImageText
+			eyebrow="How we measure your progress"
+			heading="Changes that are clear"
+			highlight="and sustained"
+			reverse
+			altBg
+			image="/sports-massage/07.jpg"
+			imageAlt="Shoulder blade sports massage"
+		>
+			<p>We track changes to ensure treatment is having a meaningful effect, particularly in relation to your ability to train and recover.</p>
+			<p>This may include:</p>
+			<ul>
+				<li>Reduction in pain and muscle tension</li>
+				<li>Improvements in flexibility and range of motion</li>
+				<li>Changes in the quality of movements and muscle tension</li>
+				<li>Improved recovery between training sessions</li>
+				<li>Ability to maintain or progress training without setbacks</li>
+			</ul>
+			<p>Massage is most effective when these changes are clear and sustained over time.</p>
+		</ImageText>
+
+		<ImageText
+			eyebrow="Our specialist team"
+			heading="Decades of"
+			highlight="combined expertise"
+			reverse
+			altBg
+			image="/sports-massage/02.jpg"
+			imageAlt="Soft tissue therapy on the calf"
+		>
+			<p>Our soft tissue team brings together highly experienced therapists with decades of combined expertise.</p>
+			<p><strong>Deri Wilson</strong> specialises in soft tissue therapy and women's health, with over 18 years of experience supporting recovery and performance.</p>
+			<p><strong>Jonathan Lewis</strong> combines over 30 years of experience in sports massage with breathwork and movement coaching to support long-term change.</p>
+			<p><strong>Kellie Collar</strong> has over 25 years of experience and works extensively with athletes. She also provides practical guidance on stretching and self-management, including the use of tools such as massage devices and lacrosse balls.</p>
+			<p><strong>Claire Benson</strong> provides specialist soft tissue and remedial therapy at our Audley Nightingale Place location.</p>
+		</ImageText>
+	</Fragment>
+</ServicePage>
