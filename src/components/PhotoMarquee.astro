@@ -1,7 +1,15 @@
 ---
 const { images = [], heightPx = 140, gapPx = 16, speedSeconds = 45 } = Astro.props;
-// Duplicate the list so the marquee can loop seamlessly
-const loop = [...images, ...images];
+// For a seamless loop we translate the track by -50% at the end of the
+// animation. That only looks continuous if the unique list is wider than
+// the viewport (so something is always visible on the right). If the list
+// is short, repeat the images until we have enough, then duplicate to
+// enable the seamless loop.
+let unique = [...images];
+while (unique.length > 0 && unique.length < 8) {
+	unique = [...unique, ...images];
+}
+const loop = [...unique, ...unique];
 ---
 <section class="photo-marquee" aria-label="Photo gallery">
 	<div class="photo-marquee-track" style={`--marquee-duration: ${speedSeconds}s; --marquee-height: ${heightPx}px; --marquee-gap: ${gapPx}px;`}>
@@ -43,18 +51,21 @@ const loop = [...images, ...images];
 
 	.photo-marquee-item {
 		height: var(--marquee-height, 140px);
+		width: calc(var(--marquee-height, 140px) * 4 / 3);
 		flex-shrink: 0;
 		border-radius: 10px;
 		overflow: hidden;
 		box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 	}
 	.photo-marquee-item img {
+		width: 100%;
 		height: 100%;
-		width: auto;
 		display: block;
 		object-fit: cover;
 	}
 
+	/* Translate by exactly half of the doubled track (accounting for the trailing gap)
+	   so the second copy lands perfectly over the first copy = seamless loop. */
 	@keyframes photo-marquee-scroll {
 		from { transform: translateX(0); }
 		to { transform: translateX(calc(-50% - var(--marquee-gap, 16px) / 2)); }
