@@ -18,23 +18,26 @@
 		overflow: hidden;
 		background: #1a1a1a;
 		color: #ffffff;
-		padding: 96px 24px;
+		padding: 120px 48px;
+		min-height: 70vh;
+		display: flex;
+		align-items: center;
 	}
 	.booking-cta-bg {
 		position: absolute; inset: 0;
 		background-size: cover;
-		background-position: center;
+		background-position: center top;
 		z-index: 0;
 	}
 	.booking-cta-overlay {
 		position: absolute; inset: 0;
-		background: rgba(0, 0, 0, 0.6);
+		background: rgba(0, 0, 0, 0.55);
 		z-index: 1;
 	}
 	.booking-cta-inner {
 		position: relative; z-index: 2;
 		max-width: 700px;
-		margin: 0 auto;
+		margin: 0;
 		text-align: left;
 	}
 	.booking-cta-inner .hero-badge {
@@ -68,7 +71,7 @@
 		display: flex; gap: 16px; flex-wrap: wrap;
 	}
 	@media (max-width: 768px) {
-		.booking-cta { padding: 64px 20px; }
+		.booking-cta { padding: 64px 20px; min-height: 0; }
 		.booking-cta-inner h2 { font-size: 30px; }
 		.booking-cta-inner p { font-size: 16px; margin-bottom: 24px; }
 		.booking-cta-actions .btn-book,
