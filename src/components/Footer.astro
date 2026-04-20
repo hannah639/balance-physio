@@ -11,7 +11,21 @@
 						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2592.43136852671!2d-0.130667!3d51.465002999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604505fa09de1%3A0x4826f10ca0a3e7b1!2sBalance%20Physio!5e1!3m2!1sen!2suk!4v1776443487865!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 					</div>
 					<div class="social-links">
-						<a href="#" class="social-link">f</a>
+						<a href="https://www.facebook.com/BalancePerformanceLondon" class="social-link" target="_blank" rel="noopener" aria-label="Balance Performance Physiotherapy on Facebook">
+							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path d="M13.5 21v-8.4h2.82l.42-3.27H13.5V7.24c0-.95.26-1.6 1.62-1.6h1.73V2.71c-.3-.04-1.33-.13-2.52-.13-2.49 0-4.2 1.52-4.2 4.32v2.43H7.3v3.27h2.83V21h3.37z"/>
+							</svg>
+						</a>
+						<a href="https://www.instagram.com/balanceperformancephysio/" class="social-link" target="_blank" rel="noopener" aria-label="Balance Performance Physiotherapy on Instagram">
+							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 2.15c-3.15 0-3.5.01-4.73.07-1.07.05-1.65.23-2.04.38-.51.2-.88.44-1.26.82-.38.38-.62.75-.82 1.26-.15.39-.33.97-.38 2.04-.06 1.23-.07 1.58-.07 4.73s.01 3.5.07 4.73c.05 1.07.23 1.65.38 2.04.2.51.44.88.82 1.26.38.38.75.62 1.26.82.39.15.97.33 2.04.38 1.23.06 1.58.07 4.73.07s3.5-.01 4.73-.07c1.07-.05 1.65-.23 2.04-.38.51-.2.88-.44 1.26-.82.38-.38.62-.75.82-1.26.15-.39.33-.97.38-2.04.06-1.23.07-1.58.07-4.73s-.01-3.5-.07-4.73c-.05-1.07-.23-1.65-.38-2.04a3.4 3.4 0 00-.82-1.26 3.4 3.4 0 00-1.26-.82c-.39-.15-.97-.33-2.04-.38-1.23-.06-1.58-.07-4.73-.07zm0 3.66a4 4 0 110 8 4 4 0 010-8zm0 6.6a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2zm5.1-6.76a.93.93 0 11-1.87 0 .93.93 0 011.87 0z"/>
+							</svg>
+						</a>
+						<a href="https://x.com/balancePhysio" class="social-link" target="_blank" rel="noopener" aria-label="Balance Performance Physiotherapy on X">
+							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path d="M17.53 3H20.5l-6.5 7.43L21.75 21h-6l-4.69-6.14L5.69 21H2.72l6.95-7.94L2.25 3h6.15l4.24 5.6L17.53 3zm-1.05 16.2h1.64L7.6 4.7H5.84L16.48 19.2z"/>
+							</svg>
+						</a>
 					</div>
 				</div>
 				<div>
@@ -125,10 +139,11 @@
 	.social-link {
 		width: 40px; height: 40px; border-radius: 8px;
 		background: rgba(255,255,255,0.1); color: #ffffff;
-		display: flex; align-items: center; justify-content: center;
-		font-size: 14px; transition: background .2s; text-decoration: none;
+		display: inline-flex; align-items: center; justify-content: center;
+		transition: background .2s, transform .2s; text-decoration: none;
 	}
-	.social-link:hover { background: #3EBEDF; }
+	.social-link svg { width: 18px; height: 18px; display: block; }
+	.social-link:hover { background: #3EBEDF; transform: translateY(-2px); }
 	.bp-footer h4 { color: #ffffff; font-size: 14px; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
 	.bp-footer ul { list-style: none; margin: 0; padding: 0; }
 	.bp-footer li { margin-bottom: 6px; }
