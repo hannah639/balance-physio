@@ -117,6 +117,8 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 		</ImageText>
 	)}
 
+	<slot name="before-faq" />
+
 	{faqs.length > 0 && (
 		<section class="faq-section">
 			<div class="container">
