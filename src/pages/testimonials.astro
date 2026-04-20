@@ -2,32 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import { testimonials } from '../data/testimonials.js';
 
-const testimonials = [
-	{ quote: "The knee seems stable and the arching exercises for the foot have helped loads!", name: "Jamie N" },
-	{ quote: "They say you sometimes come back from injury stronger, and I want to thank you", name: "Sharon Templeman" },
-	{ quote: "I don't quite know where I would be right now without all your help", name: "Tal H" },
-	{ quote: "If you exercise, go visit these guys as they're completely brilliant", name: "Owen Carmen" },
-	{ quote: "I can't thank you enough for your incredibly helpful intervention.", name: "Sheila W" },
-	{ quote: "Balance has educated me in how to stay fit and protect against injury", name: "Ian Brown" },
-	{ quote: "Thanks to Caroline and the brilliant team at Balance for helping me rehab", name: "Shafik S" },
-	{ quote: "Balance is a great asset and an excellent team to work with", name: "Winston Gordon", role: "Team GB Judo Triple Olympian" },
-	{ quote: "@BalancePrfmance really pleased with the taping it helped a lot!", name: "Simon Buckden" },
-	{ quote: "The Balance team gave us valuable advice and preparation for our cycle", name: "Matt & Andy", role: "The Cycle Diaries" },
-	{ quote: "I've worked with the Balance Team for the last 6 years now", name: "Leoni Munslow" },
-	{ quote: "The superb technical knowledge of physiotherapy is a given at Balance", name: "Louise Ward", role: "Round the World Yachtswomen" },
-	{ quote: "They are passionate about what they do, utterly professional", name: "Claire Bennett", role: "Team GB Fencer" },
-	{ quote: "I found them extremely effective for pain relief and muscle strength", name: "Amanda H." },
-	{ quote: "I have found Balance Performance Physiotherapy to be an inspiration!", name: "Miriam Bremer", role: "Pilates teacher" },
-	{ quote: "I'm absolutely over the moon to have just run a marathon PB", name: "Al Riley" },
-	{ quote: "The pain went away following your advice and exercises", name: "Kate Hudson" },
-	{ quote: "My son has actively enjoyed going to see Dan Elias for physio", name: "Samantha O." },
-	{ quote: "Thank you Caroline and Balance Physio so much for guiding my journey", name: "George C" },
-	{ quote: "I felt a million times better going into the race after seeing them", name: "Bryony M." },
-	{ quote: "I cannot recommend Balance highly enough", name: "Tom Holland", role: "Amateur cricket" },
-	{ quote: "I am happy to report I am back to being fully functional", name: "Patient G" },
-	{ quote: "Their ability and determination to get one back playing is great", name: "John Hunt" },
-];
+// Any testimonial longer than this character count gets a "Read more" toggle.
+const READ_MORE_THRESHOLD = 450;
 ---
 <Layout
 	title="Testimonials"
@@ -39,26 +17,164 @@ const testimonials = [
 		breadcrumb="Testimonials"
 	/>
 
-	<section class="testimonials">
+	<section class="testimonials-page">
 		<div class="container">
 			<div class="section-header">
 				<h2>Kind words from our happy clients</h2>
 			</div>
-			<div class="testimonial-grid">
-				{testimonials.map((t) => (
-					<div class="testimonial-card">
-						<p>{t.quote}</p>
-						<div class="testimonial-author">
-							<div>
+			<div class="testimonial-masonry">
+				{testimonials.map((t) => {
+					const isLong = t.quote.length > READ_MORE_THRESHOLD;
+					const paras = t.quote.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+					return (
+						<article class={`tm-card${isLong ? ' is-long' : ''}`}>
+							<div class="tm-quote-mark">&ldquo;</div>
+							<div class="tm-body">
+								{paras.map((p) => <p>{p}</p>)}
+							</div>
+							{isLong && <button type="button" class="tm-toggle" aria-expanded="false">Read more</button>}
+							<div class="tm-author">
 								<h4>{t.name}</h4>
 								{t.role && <span>{t.role}</span>}
 							</div>
-						</div>
-					</div>
-				))}
+						</article>
+					);
+				})}
 			</div>
 		</div>
 	</section>
 
 	<BookingCTA />
 </Layout>
+
+<style>
+	.testimonials-page {
+		padding: 80px 0;
+		background: #f4f6f7;
+	}
+	.testimonials-page .section-header {
+		text-align: center;
+		max-width: 700px;
+		margin: 0 auto 56px;
+	}
+	.testimonials-page .section-header h2 {
+		font-size: 42px;
+		font-weight: 800;
+		line-height: 1.2;
+		margin-bottom: 16px;
+		letter-spacing: -1px;
+	}
+
+	/* Masonry via CSS columns — lets cards size to content regardless of length */
+	.testimonial-masonry {
+		column-count: 3;
+		column-gap: 28px;
+	}
+	.tm-card {
+		display: block;
+		break-inside: avoid;
+		background: #ffffff;
+		border: 1px solid #e5e9ec;
+		border-radius: 15px;
+		padding: 32px 28px 28px;
+		margin: 0 0 28px;
+		position: relative;
+		transition: transform .25s, box-shadow .25s, border-color .25s;
+	}
+	.tm-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+		border-color: #e87722;
+	}
+	.tm-quote-mark {
+		position: absolute;
+		top: 12px;
+		right: 22px;
+		font-family: Georgia, serif;
+		font-size: 64px;
+		line-height: 1;
+		color: #e87722;
+		opacity: 0.22;
+		pointer-events: none;
+	}
+	.tm-body {
+		font-size: 15px;
+		line-height: 1.75;
+		color: #3a4149;
+		margin-bottom: 20px;
+	}
+	.tm-body p {
+		margin: 0 0 14px;
+	}
+	.tm-body p:last-child { margin-bottom: 0; }
+
+	/* Long testimonial truncation */
+	.tm-card.is-long .tm-body {
+		max-height: 320px;
+		overflow: hidden;
+		position: relative;
+		mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+		-webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+	}
+	.tm-card.is-long.is-expanded .tm-body {
+		max-height: none;
+		mask-image: none;
+		-webkit-mask-image: none;
+	}
+	.tm-toggle {
+		background: transparent;
+		border: 0;
+		padding: 0;
+		margin: -4px 0 20px;
+		color: #3EBEDF;
+		font-family: inherit;
+		font-size: 14px;
+		font-weight: 600;
+		cursor: pointer;
+	}
+	.tm-toggle:hover { text-decoration: underline; }
+
+	.tm-author {
+		border-top: 1px solid #eef1f3;
+		padding-top: 18px;
+	}
+	.tm-author h4 {
+		font-size: 15px;
+		font-weight: 800;
+		margin: 0;
+		letter-spacing: -0.2px;
+		color: #1a1a1a;
+	}
+	.tm-author span {
+		display: block;
+		margin-top: 3px;
+		font-size: 12px;
+		color: #7a828a;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	@media (max-width: 1100px) {
+		.testimonial-masonry { column-count: 2; }
+	}
+	@media (max-width: 700px) {
+		.testimonials-page { padding: 56px 0; }
+		.testimonial-masonry { column-count: 1; }
+		.testimonials-page .section-header h2 { font-size: 32px; }
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		document.querySelectorAll('.tm-toggle').forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				var card = btn.closest('.tm-card');
+				if (!card) return;
+				var expanded = card.classList.toggle('is-expanded');
+				btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+				btn.textContent = expanded ? 'Read less' : 'Read more';
+			});
+		});
+	})();
+</script>
