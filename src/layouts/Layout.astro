@@ -251,6 +251,16 @@ const jsonLd = settings.businessName ? {
 	.bp-page .image-text-content .btn-primary-lg { margin-top: 12px; }
 	.bp-page .image-text-content a.inline-link { color: var(--cta); font-weight: 600; }
 	.bp-page .image-text-content a.inline-link:hover { text-decoration: underline; }
+
+	/* 2x2 text-only body grid used by pages that opt into textGrid on ServicePage */
+	.bp-page .text-grid { padding: 90px 0; background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
+	.bp-page .text-grid-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px 80px; max-width: 1200px; margin: 0 auto; padding: 0 24px; align-items: start; }
+	.bp-page .text-grid-cell h2 { font-size: 34px; }
+	@media (max-width: 900px) {
+		.bp-page .text-grid { padding: 60px 0; }
+		.bp-page .text-grid-inner { grid-template-columns: 1fr; gap: 48px; }
+		.bp-page .text-grid-cell h2 { font-size: 28px; }
+	}
 	@media (max-width: 900px) {
 		.bp-page .image-text { padding: 60px 0; }
 		.bp-page .image-text-inner { grid-template-columns: 1fr; gap: 40px; }

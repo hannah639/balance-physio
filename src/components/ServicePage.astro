@@ -34,6 +34,8 @@ const {
 	faqs = [],
 	marqueeImages, // optional array of {src, alt} — defaults to placeholder set
 	marqueeSpeed = 45,
+	hideMarquee = false, // pages that are text-only can set this true to drop the photo strip
+	textGrid = false,    // render the 4 body sections as a 2x2 text-only grid instead of ImageText blocks
 } = Astro.props;
 
 // Default placeholder image set used when a page doesn't supply its own photos
@@ -52,10 +54,56 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 <Layout title={seoTitle} description={seoDescription}>
 	<PageHero title={title} highlight={highlight} subtitle={heroSubtitle} breadcrumb={breadcrumb} />
 
-	<PhotoMarquee images={photos} heightPx={140} speedSeconds={marqueeSpeed} />
+	{!hideMarquee && (
+		<PhotoMarquee images={photos} heightPx={140} speedSeconds={marqueeSpeed} />
+	)}
 
 	<slot name="after-hero" />
 
+	{textGrid ? (
+		<section class="text-grid">
+			<div class="text-grid-inner">
+				{intro && intro.length > 0 && (
+					<div class="image-text-content text-grid-cell">
+						<div class="eyebrow">Our approach</div>
+						<h2>Evidence-led <span class="highlight">care</span></h2>
+						{intro.map((p) => <p>{p}</p>)}
+					</div>
+				)}
+				{whenList && whenList.length > 0 && (
+					<div class="image-text-content text-grid-cell">
+						<div class="eyebrow">Symptoms</div>
+						<h2>{whenHeading} <span class="highlight">{whenHighlight}</span></h2>
+						{whenIntro && <p>{whenIntro}</p>}
+						<ul>
+							{whenList.map((item) => <li>{item}</li>)}
+						</ul>
+						{whenOutro && <p>{whenOutro}</p>}
+					</div>
+				)}
+				{howList && howList.length > 0 && (
+					<div class="image-text-content text-grid-cell">
+						<div class="eyebrow">Treatment</div>
+						<h2>{howHeading} <span class="highlight">{howHighlight}</span></h2>
+						{howIntro && <p>{howIntro}</p>}
+						<ul>
+							{howList.map((item) => <li>{item}</li>)}
+						</ul>
+					</div>
+				)}
+				{whoList && whoList.length > 0 && (
+					<div class="image-text-content text-grid-cell">
+						<div class="eyebrow">Who we help</div>
+						<h2>{whoHeading} <span class="highlight">{whoHighlight}</span></h2>
+						{whoIntro && <p>{whoIntro}</p>}
+						<ul>
+							{whoList.map((item) => <li>{item}</li>)}
+						</ul>
+					</div>
+				)}
+			</div>
+		</section>
+	) : (<>
 	{intro && intro.length > 0 && (
 		<ImageText
 			eyebrow="Our approach"
@@ -118,6 +166,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			</ul>
 		</ImageText>
 	)}
+	</>)}
 
 	<slot name="before-faq" />
 
