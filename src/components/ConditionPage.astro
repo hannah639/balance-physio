@@ -41,34 +41,31 @@ const {
 		</ImageText>
 	)}
 
-	{symptomsList && symptomsList.length > 0 && (
-		<ImageText
-			eyebrow="Symptoms"
-			heading={symptomsHeading}
-			highlight={symptomsHighlight}
-			reverse
-			altBg
-			placeholderLabel="Symptom assessment"
-		>
-			{symptomsIntro && <p>{symptomsIntro}</p>}
-			<ul>
-				{symptomsList.map((item) => <li>{item}</li>)}
-			</ul>
-		</ImageText>
-	)}
-
-	{treatmentList && treatmentList.length > 0 && (
-		<ImageText
-			eyebrow="Treatment"
-			heading={treatmentHeading}
-			highlight={treatmentHighlight}
-			placeholderLabel="Treatment approach"
-		>
-			{treatmentIntro && <p>{treatmentIntro}</p>}
-			<ul>
-				{treatmentList.map((item) => <li>{item}</li>)}
-			</ul>
-		</ImageText>
+	{((symptomsList && symptomsList.length > 0) || (treatmentList && treatmentList.length > 0)) && (
+		<section class="text-grid text-grid--light">
+			<div class="text-grid-inner">
+				{symptomsList && symptomsList.length > 0 && (
+					<div class="image-text-content text-grid-cell">
+						<div class="eyebrow">Symptoms</div>
+						<h2>{symptomsHeading} <span class="highlight">{symptomsHighlight}</span></h2>
+						{symptomsIntro && <p>{symptomsIntro}</p>}
+						<ul>
+							{symptomsList.map((item) => <li>{item}</li>)}
+						</ul>
+					</div>
+				)}
+				{treatmentList && treatmentList.length > 0 && (
+					<div class="image-text-content text-grid-cell">
+						<div class="eyebrow">Treatment</div>
+						<h2>{treatmentHeading} <span class="highlight">{treatmentHighlight}</span></h2>
+						{treatmentIntro && <p>{treatmentIntro}</p>}
+						<ul>
+							{treatmentList.map((item) => <li>{item}</li>)}
+						</ul>
+					</div>
+				)}
+			</div>
+		</section>
 	)}
 
 	{whoList && whoList.length > 0 && (
