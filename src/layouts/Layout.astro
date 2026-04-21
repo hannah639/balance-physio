@@ -279,6 +279,10 @@ const jsonLd = settings.businessName ? {
 	.bp-page .testimonial { background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); border-radius: var(--radius); padding: 32px 32px 32px 56px; position: relative; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
 	.bp-page .testimonial::before { content: '\201C'; position: absolute; top: 8px; left: 20px; font-size: 64px; line-height: 1; color: var(--accent); font-family: Georgia, serif; }
 	.bp-page .testimonial p { font-size: 16px; line-height: 1.7; color: var(--text); margin: 0; font-style: italic; }
+	.bp-page .testimonial-single { max-width: 860px; margin: 0 auto; padding: 48px 48px 48px 72px; }
+	.bp-page .testimonial-single::before { font-size: 80px; top: 16px; left: 28px; }
+	.bp-page .testimonial-single p { font-size: 17px; line-height: 1.8; margin-bottom: 18px; }
+	.bp-page .testimonial-single p:last-child { margin-bottom: 0; }
 	@media (max-width: 900px) {
 		.bp-page .testimonials { padding: 60px 0; }
 		.bp-page .testimonials .section-header h2 { font-size: 28px; }
