@@ -19,6 +19,7 @@ const {
 	whenHighlight = 'this service',
 	whenIntro,      // string
 	whenList,       // array
+	whenOutro,      // optional closing paragraph rendered below the list
 	whenImage,      // optional image URL
 	howHeading = 'How we',
 	howHighlight = 'treat',
@@ -82,6 +83,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			<ul>
 				{whenList.map((item) => <li>{item}</li>)}
 			</ul>
+			{whenOutro && <p>{whenOutro}</p>}
 		</ImageText>
 	)}
 
