@@ -1,14 +1,26 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/hydrotherapy/hydro-equipment.jpg', alt: 'Hydrotherapy pool with equipment' },
+	{ src: '/hydrotherapy/elderly-water-therapy.jpg', alt: 'Older adults in a hydrotherapy session' },
+	{ src: '/hydrotherapy/swim-coach-boy.jpg', alt: 'Guided session in the pool' },
+	{ src: '/hydrotherapy/athlete-in-pool.jpg', alt: 'Athlete recovering after a pool session' },
+	{ src: '/hydrotherapy/goggles-towel.jpg', alt: 'Swimming goggles and towel' },
+	{ src: '/hydrotherapy/water-texture.jpg', alt: 'Pool water surface' },
+	{ src: '/hydrotherapy/water-surface.webp', alt: 'Calm water surface' },
+];
 ---
 <ServicePage
 	title="in Clapham"
 	highlight="Hydrotherapy"
 	introYoutubeId="kJ9Ny2lFDzk"
+	introImage="/hydrotherapy/hydro-equipment.jpg"
 	heroSubtitle="Physiotherapy delivered in water to facilitate movement and resistance exercises whilst reducing load on joints and tissues."
 	breadcrumb="Hydrotherapy"
 	seoTitle="Hydrotherapy in Clapham"
 	seoDescription="Guided hydrotherapy in Clapham South. Water-based rehabilitation using buoyancy, resistance and warmth to help you move, rebuild strength and recover."
+	marqueeImages={sliderImages}
 	intro={[
 		"Hydrotherapy is a form of physiotherapy delivered in water, facilitating movement and resistance exercises whilst reducing load on joints and tissues.",
 		"At Balance, hydrotherapy is used as part of a structured rehabilitation plan. The properties of water — buoyancy, resistance, and warmth — allow you to move more freely, build strength, and regain confidence where land-based exercise may be limited.",
@@ -25,6 +37,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Multiple areas of weakness and limitation",
 		"Balance or coordination difficulties",
 	]}
+	whenImage="/hydrotherapy/elderly-water-therapy.jpg"
 	howHeading="How we"
 	howHighlight="work"
 	howIntro="Sessions may include:"
@@ -34,6 +47,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Balance and control exercises in a supported environment",
 		"Gait re-education and functional movement practice",
 	]}
+	howImage="/hydrotherapy/swim-coach-boy.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -43,6 +57,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Neurological patients working on coordination and mobility",
 		"Active individuals maintaining conditioning during injury recovery",
 	]}
+	whoImage="/hydrotherapy/athlete-in-pool.jpg"
 	faqs={[
 		{ q: "What should I bring?", a: "Swimming kit, towel, toiletries, and water for hydration." },
 		{ q: "Do I need to be a swimmer?", a: "No. Most exercises are performed in a standing or supported position where your feet remain on the floor." },
