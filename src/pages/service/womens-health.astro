@@ -1,5 +1,14 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/womens-health/slider-physiotherapy.webp', alt: 'Women\\'s health physiotherapy at Balance Physio Clapham' },
+	{ src: '/womens-health/slider-clinic-2017.jpg', alt: 'Clapham clinic treatment session' },
+	{ src: '/womens-health/slider-img8036.webp', alt: 'Women\\'s health assessment at Balance Physio Clapham' },
+	{ src: '/womens-health/slider-img7976.webp', alt: 'Pelvic health physiotherapy session' },
+	{ src: '/womens-health/slider-mg1993.webp', alt: 'Treatment room at Balance Physio Clapham' },
+	{ src: '/womens-health/slider-mg2336.webp', alt: 'Women\\'s health treatment at Balance Physio Clapham' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,11 +17,13 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Women\'s Health"
 	seoTitle="Women\'s Health in Clapham"
 	seoDescription="Women\'s health physiotherapy in Clapham. Pelvic floor, pregnancy, postnatal recovery, Mummy MOT, and menopause support from experienced clinicians."
+	marqueeImages={sliderImages}
 	intro={[
 		"Women\'s health physiotherapy addresses the physical changes that occur across different stages of life — from adolescence through pregnancy, postnatal recovery, and menopause.",
 		"We take a clinical and structured approach to pelvic health, assessing how symptoms affect movement, strength, and daily function.",
 		"From this we build a clear plan to help you regain control, confidence, and resilience.",
 	]}
+	introImage="/womens-health/gynaecology.webp"
 	whenHeading="When to consider"
 	whenHighlight="an assessment"
 	whenIntro="You may benefit from assessment if experiencing:"
@@ -24,6 +35,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Pain during intimacy or scar-related discomfort",
 		"Ongoing symptoms following gynaecological surgery",
 	]}
+	whenImage="/womens-health/pregnant-woman.jpg"
 	howHeading="How we"
 	howHighlight="treat"
 	howIntro="Treatment may include:"
@@ -34,6 +46,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Postural and movement retraining",
 		"Education around lifestyle, load management, and recovery",
 	]}
+	howImage="/womens-health/sports-woman.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoIntro="We support women across all life stages:"
@@ -44,6 +57,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Perimenopause and menopause: addressing pelvic floor changes",
 		"Post-surgical recovery: following gynaecological procedures",
 	]}
+	whoImage="/womens-health/women-huddle.jpg"
 	faqs={[
 		{ q: "What is a Mummy MOT?", a: "A specialist postnatal assessment from 6 weeks onwards, including pelvic floor, abdominal, and postural checks." },
 		{ q: "Do I need to be pregnant to see you?", a: "No. We treat women of all ages for pelvic health concerns." },
