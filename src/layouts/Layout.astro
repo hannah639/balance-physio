@@ -254,12 +254,34 @@ const jsonLd = settings.businessName ? {
 
 	/* 2x2 text-only body grid used by pages that opt into textGrid on ServicePage */
 	.bp-page .text-grid { padding: 90px 0; background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
+	.bp-page .text-grid--light { background: var(--white); }
+	.bp-page .text-grid--split-top { padding: 90px 0 45px; }
+	.bp-page .text-grid--split-bottom { padding: 45px 0 90px; }
 	.bp-page .text-grid-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px 80px; max-width: 1200px; margin: 0 auto; padding: 0 24px; align-items: start; }
 	.bp-page .text-grid-cell h2 { font-size: 34px; }
 	@media (max-width: 900px) {
 		.bp-page .text-grid { padding: 60px 0; }
+		.bp-page .text-grid--split-top { padding: 60px 0 30px; }
+		.bp-page .text-grid--split-bottom { padding: 30px 0 60px; }
 		.bp-page .text-grid-inner { grid-template-columns: 1fr; gap: 48px; }
 		.bp-page .text-grid-cell h2 { font-size: 28px; }
+	}
+
+	/* Testimonials section used by pages that render quotes in the before-faq slot */
+	.bp-page .testimonials { padding: 90px 0; background: var(--white); }
+	.bp-page .testimonials .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+	.bp-page .testimonials .section-header { text-align: center; margin-bottom: 48px; }
+	.bp-page .testimonials .section-header h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+	.bp-page .testimonials .section-header h2 .highlight { color: var(--accent); }
+	.bp-page .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+	.bp-page .testimonial { background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); border-radius: var(--radius); padding: 32px 32px 32px 56px; position: relative; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+	.bp-page .testimonial::before { content: '\201C'; position: absolute; top: 8px; left: 20px; font-size: 64px; line-height: 1; color: var(--accent); font-family: Georgia, serif; }
+	.bp-page .testimonial p { font-size: 16px; line-height: 1.7; color: var(--text); margin: 0; font-style: italic; }
+	@media (max-width: 900px) {
+		.bp-page .testimonials { padding: 60px 0; }
+		.bp-page .testimonials .section-header h2 { font-size: 28px; }
+		.bp-page .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
+		.bp-page .testimonial { padding: 28px 24px 28px 48px; }
 	}
 	@media (max-width: 900px) {
 		.bp-page .image-text { padding: 60px 0; }

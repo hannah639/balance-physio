@@ -60,8 +60,8 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 
 	<slot name="after-hero" />
 
-	{textGrid ? (
-		<section class="text-grid">
+	{textGrid ? (<>
+		<section class="text-grid text-grid--light text-grid--split-top">
 			<div class="text-grid-inner">
 				{intro && intro.length > 0 && (
 					<div class="image-text-content text-grid-cell">
@@ -81,6 +81,10 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 						{whenOutro && <p>{whenOutro}</p>}
 					</div>
 				)}
+			</div>
+		</section>
+		<section class="text-grid text-grid--split-bottom">
+			<div class="text-grid-inner">
 				{howList && howList.length > 0 && (
 					<div class="image-text-content text-grid-cell">
 						<div class="eyebrow">Treatment</div>
@@ -103,7 +107,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 				)}
 			</div>
 		</section>
-	) : (<>
+	</>) : (<>
 	{intro && intro.length > 0 && (
 		<ImageText
 			eyebrow="Our approach"

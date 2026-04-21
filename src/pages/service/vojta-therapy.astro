@@ -1,5 +1,16 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const testimonials = [
+	"I am so grateful for Jose\u2019s support over the years. His understanding and application of Vojta therapy is outstanding, and I can see the advantages of long-term daily therapy for the wellbeing of my daughter. Besides therapy I also appreciate Jose\u2019s gentle input on behaviour, and skilfully managing everyone\u2019s emotions in therapy \u2013 it\u2019s a bit of a minefield and without it I probably would have quit a long time ago. And finally, where Jose stands out is his commitment to his work and the children he cares for. I have been seeing a physio long enough to understand this is far from common, Jose goes far above and beyond of what is expected of him.",
+	"Without Jose\u2019s therapy, input and expertise, my daughter would not have the mobility she has today. Jose has guided us as a family in the best interest for our daughter. My daughter has been seeing Jose for over 14 years and we would not trust anyone else regarding our daughter\u2019s therapy and well-being. His empathy towards us as a family is beyond amazing.",
+	"Jose is an excellent physiotherapist, very positive and calm. Encouraging people to do what they have to do. We\u2019ve been to other therapists who were very negative and put great pressure about Vojta and overall.",
+	"I would recommend Jose without hesitation.",
+	"Jose helped us a lot. Great approach to the child, super friendly and I find Jose the best therapist so far.",
+	"We are very thankful to have met Jose. He is a kind person, empathetic with his patients. Thanks to him we have so many improvements. We thank him for his patience and involvement.",
+	"Jose has an uncanny ability to understand how one\u2019s body works (or does not) and knows how to motivate you to go through the (occasionally painful) steps required to sort out the injury related issues that life brings. He is also a lovely chap, who builds a very deep sense of trust.",
+	"Jose is a very knowledgeable professional and very patient with children. He is always finding the way to engage the children in the therapy.",
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,6 +19,8 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Vojta Therapy"
 	seoTitle="Vojta Therapy in Clapham"
 	seoDescription="Vojta Therapy in Clapham for infants, children, and adults. A reflex-based neurological treatment supporting posture, coordination, and mobility."
+	hideMarquee
+	textGrid
 	intro={[
 		"Movement problems linked to the nervous system can affect how the body develops, adapts, and functions day to day. Vojta Therapy is a specialised neurological treatment that works by activating innate movement patterns within the central nervous system.",
 		"Rather than relying on voluntary effort alone, it stimulates automatic responses that underpin posture, coordination, and mobility.",
@@ -47,4 +60,19 @@ import ServicePage from '../../components/ServicePage.astro';
 		{ q: "How many sessions will we need?", a: "This varies individually; a structured plan is provided after the initial assessment." },
 		{ q: "Do I need a referral?", a: "No direct referral is required." },
 	]}
-/>
+>
+	<section slot="before-faq" class="testimonials">
+		<div class="container">
+			<div class="section-header">
+				<h2>What families <span class="highlight">are saying</span></h2>
+			</div>
+			<div class="testimonials-grid">
+				{testimonials.map((quote) => (
+					<blockquote class="testimonial">
+						<p>{quote}</p>
+					</blockquote>
+				))}
+			</div>
+		</div>
+	</section>
+</ServicePage>
