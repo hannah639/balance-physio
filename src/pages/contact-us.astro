@@ -15,19 +15,43 @@ import BookingCTA from '../components/BookingCTA.astro';
 		breadcrumb="Contact Us"
 	/>
 
-	<ImageText
-		eyebrow="Say hello"
-		heading="How to"
-		highlight="reach us"
-		placeholderLabel="Reception desk"
-	>
-		<ul>
-			<li><strong>Phone:</strong> <a href="tel:02076272308" class="inline-link">020 7627 2308</a></li>
-			<li><strong>Email:</strong> <a href="mailto:enquiries@balancephysio.com" class="inline-link">enquiries@balancephysio.com</a></li>
-			<li><strong>Address:</strong> 113 Gauden Rd, London SW4 6LE, United Kingdom</li>
-		</ul>
-		<p>For new patients, our admin team will send you a quick registration form by email. Once that's back with us, we'll book you in with the right clinician.</p>
-	</ImageText>
+	<section class="contact-intro">
+		<div class="contact-intro-inner">
+			<div class="contact-intro-copy">
+				<div class="eyebrow"><span class="eyebrow-dot"></span>Say hello</div>
+				<h2>How to <span class="highlight">reach us</span></h2>
+				<ul class="check-list">
+					<li><strong>Phone:</strong> <a href="tel:02076272308" class="inline-link">020 7627 2308</a></li>
+					<li><strong>Email:</strong> <a href="mailto:enquiries@balancephysio.com" class="inline-link">enquiries@balancephysio.com</a></li>
+					<li><strong>Address:</strong> 113 Gauden Rd, London SW4 6LE, United Kingdom</li>
+				</ul>
+				<p>For new patients, our admin team will send you a quick registration form by email. Once that's back with us, we'll book you in with the right clinician.</p>
+				<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-book">Book Now</a>
+			</div>
+
+			<form class="contact-form" action="https://formsubmit.co/enquiries@balancephysio.com" method="POST">
+				<div class="eyebrow eyebrow-orange">Send us a message</div>
+
+				<!-- Formsubmit.co config — no signup needed; first submission triggers an activation email to enquiries@balancephysio.com -->
+				<input type="hidden" name="_subject" value="New enquiry from Balance Physio website" />
+				<input type="hidden" name="_template" value="table" />
+				<input type="hidden" name="_captcha" value="true" />
+				<input type="hidden" name="_next" value="https://balance-physio.hannah-9e0.workers.dev/contact-us/?sent=1" />
+
+				<div class="form-row">
+					<input type="text" name="First Name" placeholder="First Name" required aria-label="First Name" />
+					<input type="text" name="Last Name" placeholder="Last Name" required aria-label="Last Name" />
+				</div>
+				<div class="form-row">
+					<input type="tel" name="Phone Number" placeholder="Phone Number" aria-label="Phone Number" />
+					<input type="email" name="Email Address" placeholder="Email Address" required aria-label="Email Address" />
+				</div>
+				<textarea name="Message" placeholder="Write your message here" rows="5" required aria-label="Message"></textarea>
+				<button type="submit" class="form-submit">Send Message</button>
+				<p class="form-note">We'll reply within one working day.</p>
+			</form>
+		</div>
+	</section>
 
 	<ImageText
 		eyebrow="Opening hours"
@@ -35,7 +59,8 @@ import BookingCTA from '../components/BookingCTA.astro';
 		highlight="open"
 		reverse
 		altBg
-		placeholderLabel="Clinic hours"
+		image="/clapham/pexels-nicu-cobasnean-860727842-19818223.jpg"
+		imageAlt="'Come in, we are open' sign in the window at Balance Physio Clapham"
 	>
 		<ul>
 			<li>Monday, Tuesday, Wednesday — 7:30am to 8:00pm</li>
@@ -48,3 +73,133 @@ import BookingCTA from '../components/BookingCTA.astro';
 
 	<BookingCTA />
 </Layout>
+
+<style>
+	.contact-intro { padding: 90px 24px; background: #ffffff; }
+	.contact-intro-inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 64px;
+		align-items: start;
+	}
+	.contact-intro-copy .eyebrow {
+		display: inline-flex; align-items: center; gap: 8px;
+		background: rgba(0,0,0,0.06);
+		border: 1px solid rgba(0,0,0,0.1);
+		border-radius: 50px;
+		padding: 6px 16px;
+		font-size: 13px; font-weight: 600; color: #1a1a1a;
+		margin-bottom: 20px;
+	}
+	.contact-intro-copy .eyebrow-dot {
+		width: 8px; height: 8px; border-radius: 50%; background: #e87722;
+	}
+	.contact-intro-copy h2 {
+		font-size: 40px; font-weight: 800; line-height: 1.15;
+		letter-spacing: -1px; margin: 0 0 20px; color: #1a1a1a;
+	}
+	.contact-intro-copy h2 .highlight { color: #e87722; }
+	.contact-intro-copy p {
+		font-size: 17px; line-height: 1.8; color: #555555;
+		margin: 0 0 24px;
+	}
+	.contact-intro-copy .check-list { list-style: none; margin: 20px 0; padding: 0; }
+	.contact-intro-copy .check-list li {
+		position: relative; padding: 8px 0 8px 32px;
+		font-size: 16px; color: #555555; line-height: 1.6;
+	}
+	.contact-intro-copy .check-list li::before {
+		content: ''; position: absolute; left: 0; top: 15px;
+		width: 18px; height: 18px; border-radius: 50%; background: #e87722;
+	}
+	.contact-intro-copy .check-list li::after {
+		content: '✓'; position: absolute; left: 4px; top: 10px;
+		color: #ffffff; font-size: 11px; font-weight: 800;
+	}
+
+	/* Contact form */
+	.contact-form {
+		background: #f4f6f7;
+		border: 1px solid #e5e9ec;
+		border-radius: 20px;
+		padding: 36px 32px;
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+	.eyebrow-orange {
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 700;
+		color: #e87722;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		margin-bottom: 8px;
+	}
+	.contact-form .form-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 12px;
+	}
+	.contact-form input[type="text"],
+	.contact-form input[type="tel"],
+	.contact-form input[type="email"],
+	.contact-form textarea {
+		width: 100%;
+		padding: 14px 18px;
+		border: 1px solid #d8dee2;
+		border-radius: 50px;
+		font-family: inherit;
+		font-size: 15px;
+		background: #ffffff;
+		color: #1a1a1a;
+		transition: border-color .2s, box-shadow .2s;
+	}
+	.contact-form textarea {
+		border-radius: 18px;
+		resize: vertical;
+		min-height: 120px;
+	}
+	.contact-form input::placeholder,
+	.contact-form textarea::placeholder {
+		color: #9aa1a6;
+	}
+	.contact-form input:focus,
+	.contact-form textarea:focus {
+		outline: none;
+		border-color: #3EBEDF;
+		box-shadow: 0 0 0 3px rgba(62,190,223,0.15);
+	}
+	.contact-form .form-submit {
+		margin-top: 6px;
+		padding: 16px 28px;
+		border: 0;
+		border-radius: 50px;
+		background: #3EBEDF;
+		color: #ffffff;
+		font-family: inherit;
+		font-size: 16px;
+		font-weight: 700;
+		cursor: pointer;
+		transition: background .2s, transform .2s;
+	}
+	.contact-form .form-submit:hover {
+		background: #32a8c6;
+		transform: translateY(-1px);
+	}
+	.contact-form .form-note {
+		margin: 4px 0 0;
+		font-size: 12px;
+		color: #7a828a;
+		text-align: center;
+	}
+	@media (max-width: 900px) {
+		.contact-intro { padding: 60px 20px; }
+		.contact-intro-inner { grid-template-columns: 1fr; gap: 40px; }
+		.contact-intro-copy h2 { font-size: 32px; }
+		.contact-form { padding: 28px 22px; }
+		.contact-form .form-row { grid-template-columns: 1fr; gap: 10px; }
+	}
+</style>
