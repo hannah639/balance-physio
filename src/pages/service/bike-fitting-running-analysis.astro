@@ -1,5 +1,21 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/bike-fitting-running-analysis/slider-retul-header.jpg', alt: 'Retül bike fitting at Balance Physio Clapham' },
+	{ src: '/bike-fitting-running-analysis/slider-retul-fit-image1.webp', alt: 'Retül 3D motion capture during a bike fit' },
+	{ src: '/bike-fitting-running-analysis/slider-newbikefit.webp', alt: 'New bike fit session in progress' },
+	{ src: '/bike-fitting-running-analysis/slider-physiofit.webp', alt: 'Physio-led bike fit assessment' },
+	{ src: '/bike-fitting-running-analysis/slider-saddles.jpg', alt: 'Saddle selection for bike fitting' },
+	{ src: '/bike-fitting-running-analysis/slider-steph.webp', alt: 'Cycling position assessment at the clinic' },
+	{ src: '/bike-fitting-running-analysis/slider-retuldude1.webp', alt: 'Cyclist during a Retül bike fit' },
+	{ src: '/bike-fitting-running-analysis/slider-cyclist-zabriskie.webp', alt: 'Professional cyclist in action' },
+	{ src: '/bike-fitting-running-analysis/slider-lanzacrew3.jpg', alt: 'Cycling group training in Lanzarote' },
+	{ src: '/bike-fitting-running-analysis/mountain-bikes.webp', alt: 'Mountain biker on a trail' },
+	{ src: '/bike-fitting-running-analysis/slider-running.jpg', alt: 'Runner training outdoors' },
+	{ src: '/bike-fitting-running-analysis/slider-running-analysis.jpg', alt: 'Running gait analysis in progress' },
+	{ src: '/bike-fitting-running-analysis/slider-al-riley.jpg', alt: 'Runner in action during a race' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -9,6 +25,7 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Bike Fitting & Running Analysis"
 	seoTitle="Bike Fitting & Running Analysis in Clapham"
 	seoDescription="Clinical bike fitting and running gait analysis in Clapham. Video assessment and targeted coaching to reduce pain, prevent injury and improve performance."
+	marqueeImages={sliderImages}
 	intro={[
 		"Cycling and running involve repetitive, high-load movements where minor inefficiencies can cause pain, injury, or reduced performance.",
 		"Our approach focuses on understanding load distribution, movement control, and the adjustments needed to improve efficiency. We combine clinical assessment with video analysis for targeted improvements to technique, position, and strength.",
@@ -24,6 +41,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Difficulty improving speed, endurance, or comfort despite training",
 		"Returning to cycling or running after injury or surgery",
 	]}
+	whenImage="/bike-fitting-running-analysis/ryam-im-wales.jpg"
 	howHeading="How we"
 	howHighlight="work"
 	howIntro="Sessions may include:"
@@ -35,6 +53,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Practical coaching to improve running technique",
 		"Targeted exercises for long-term change",
 	]}
+	howImage="/bike-fitting-running-analysis/bikefun.webp"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -44,6 +63,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Competitive cyclists and triathletes refining performance",
 		"Individuals returning after injury",
 	]}
+	whoImage="/bike-fitting-running-analysis/three-friends-jogging.jpg"
 	faqs={[
 		{ q: "What should I bring to a bike fitting session?", a: "Your bike, cycling shoes, and regular cycling kit." },
 		{ q: "Do I need to be experienced to benefit?", a: "No. Many beginners benefit from learning correct technique early." },
