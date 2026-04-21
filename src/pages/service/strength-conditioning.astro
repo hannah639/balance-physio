@@ -1,14 +1,30 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/strength-conditioning/slider-IMG_0457.jpeg', alt: 'Strength and conditioning session at Balance Physio Clapham' },
+	{ src: '/strength-conditioning/slider-sam-and-alex-1.webp', alt: 'Coached squat at the Clapham clinic' },
+	{ src: '/strength-conditioning/kettle-bell.jpg', alt: 'Focused athlete training with a kettlebell' },
+	{ src: '/strength-conditioning/slider-IMG_0451.jpeg', alt: 'Bench press coaching at the Clapham clinic' },
+	{ src: '/strength-conditioning/close-up-weightlift.jpg', alt: 'Technique-focused strength training' },
+	{ src: '/strength-conditioning/slider-sam-and-alex-2.webp', alt: 'Kettlebell lift coaching at the Clapham clinic' },
+	{ src: '/strength-conditioning/older-man-trainer.jpg', alt: 'Personal trainer supporting dumbbell work' },
+	{ src: '/strength-conditioning/slider-woman-barbell.jpg', alt: 'Athletic woman training with a barbell' },
+	{ src: '/strength-conditioning/group-lunges.jpg', alt: 'Group kettlebell lunges during a strength session' },
+	{ src: '/strength-conditioning/slider-multiracial-athletes.jpg', alt: 'Athletes training together' },
+	{ src: '/strength-conditioning/slider-IMG_9469.webp', alt: 'Strength and conditioning gym at Balance Physio Clapham' },
+];
 ---
 <ServicePage
 	title="in Clapham"
 	highlight="Strength & Conditioning"
 	introYoutubeId="iVHv-B6Ywds"
+	introImage="/strength-conditioning/slider-IMG_0457.jpeg"
 	heroSubtitle="Structured, personalised strength training to improve health, performance, and long-term resilience — whatever your starting point."
 	breadcrumb="Strength & Conditioning"
 	seoTitle="Strength & Conditioning in Clapham"
 	seoDescription="Strength and conditioning coaching in Clapham. Structured, personalised training for health, performance, injury recovery, and long-term resilience."
+	marqueeImages={sliderImages}
 	intro={[
 		"Strength and conditioning is for everyone. At Balance, we provide structured, personalised strength training to improve health, performance, and long-term resilience.",
 		"Whether your goal is improving quality of life, returning to activity after injury, training for an event, or developing strength through different stages of life, we build a plan that fits.",
@@ -25,6 +41,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Are preparing for a specific goal (e.g. marathon, trekking, performance)",
 		"Want to build strength through life stages such as menopause or ageing",
 	]}
+	whenImage="/strength-conditioning/kettle-bell.jpg"
 	howHeading="How we"
 	howHighlight="work"
 	howIntro="Our approach focuses on:"
@@ -35,6 +52,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Building work capacity and resilience",
 		"Integrating holistic concepts (nutrition, breathing) into lifestyle",
 	]}
+	howImage="/strength-conditioning/close-up-weightlift.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -44,6 +62,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"People in recovery transitioning from rehabilitation to full training",
 		"Busy professionals building physical resilience alongside work demands",
 	]}
+	whoImage="/strength-conditioning/older-man-trainer.jpg"
 	faqs={[
 		{ q: "Do I need to be fit to start?", a: "No. Training is tailored to your current level." },
 		{ q: "Is this the same as going to the gym?", a: "No. Sessions are coached, structured, and focused on long-term progression rather than short-term intensity." },
