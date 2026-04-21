@@ -35,6 +35,7 @@ const {
 			eyebrow="Our approach"
 			heading="Expert clinical"
 			highlight="care"
+			altBg
 			placeholderLabel="Clinical assessment"
 		>
 			{intro.map((p) => <p set:html={p} />)}
@@ -55,7 +56,7 @@ const {
 					</div>
 				)}
 				{treatmentList && treatmentList.length > 0 && (
-					<div class="image-text-content text-grid-cell">
+					<div class="image-text-content text-grid-cell text-grid-cell--treatment">
 						<div class="eyebrow">Treatment</div>
 						<h2>{treatmentHeading} <span class="highlight">{treatmentHighlight}</span></h2>
 						{treatmentIntro && <p>{treatmentIntro}</p>}

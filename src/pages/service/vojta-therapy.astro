@@ -61,13 +61,15 @@ const testimonialParagraphs = [
 	<section slot="before-faq" class="testimonials">
 		<div class="container">
 			<div class="section-header">
-				<h2>In their <span class="highlight">own words</span></h2>
+				<h2>Hear from our <span class="highlight">happy client</span></h2>
 			</div>
-			<figure class="testimonials-stats">
-				<img src="/vojta-therapy/stats.webp" alt="Service evaluation survey results for Jose: 9.6/10 overall experience, 9.8/10 knowledge and professionalism, 9.8/10 empathy and personal approach, 9.3/10 worthiness in light of results and effort required" width="1024" height="576" />
-			</figure>
 			<blockquote class="testimonial testimonial-single">
 				{testimonialParagraphs.map((p) => <p>{p}</p>)}
+				<div class="testimonial-author">
+					<div class="testimonial-avatar">
+						<img src="/vojta-therapy/jose-avatar.webp" alt="Child receiving Vojta therapy with Jose" width="72" height="72" />
+					</div>
+				</div>
 			</blockquote>
 		</div>
 	</section>
