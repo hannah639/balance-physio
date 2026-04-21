@@ -9,6 +9,7 @@ const {
 	imageAlt = '',
 	placeholderLabel = 'Image placeholder',
 	youtubeId,
+	collage,
 } = Astro.props;
 
 const classes = ['image-text'];
@@ -28,6 +29,12 @@ const thumbUrl = youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefa
 				</button>
 			) : image ? (
 				<img src={image} alt={imageAlt} />
+			) : collage && collage.length ? (
+				<div class="media-collage">
+					{collage.map((item) => (
+						<img src={item.src} alt={item.alt || ''} />
+					))}
+				</div>
 			) : (
 				<div class="media-placeholder">{placeholderLabel}</div>
 			)}

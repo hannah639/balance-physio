@@ -60,8 +60,8 @@ import BookingCTA from '../../components/BookingCTA.astro';
 		highlight="until late"
 		reverse
 		altBg
-		image="/clapham/open-sign.webp"
-		imageAlt="Come in, we are open — Balance Physio reception sign"
+		image="/clapham/pexels-nicu-cobasnean-860727842-19818223.jpg"
+		imageAlt="'Come in, we are open' sign in the window at Balance Physio Clapham"
 	>
 		<ul>
 			<li>Monday, Tuesday, Wednesday — 7:30am to 8:00pm</li>
@@ -77,7 +77,12 @@ import BookingCTA from '../../components/BookingCTA.astro';
 		eyebrow="What's here"
 		heading="Everything under"
 		highlight="one roof"
-		placeholderLabel="Facilities overview"
+		collage={[
+			{ src: '/clapham/IMG_9460-scaled.jpg', alt: 'Early Rehab Studio with trampoline, bosu ball and rehab equipment at Balance Physio Clapham' },
+			{ src: '/clapham/IMG_9461-1-scaled.jpg', alt: 'Class & Movement Studio with rowing machine and slackline at Balance Physio Clapham' },
+			{ src: '/clapham/IMG_9469-scaled.jpg', alt: 'Strength and conditioning area with dumbbells and barbells at Balance Physio Clapham' },
+			{ src: '/clapham/IMG_9473-scaled.jpg', alt: 'Reception shop stocked with exercise, recovery and rehabilitation products at Balance Physio Clapham' },
+		]}
 	>
 		<ul>
 			<li>9 treatment rooms (4 downstairs, 5 on the first floor)</li>
