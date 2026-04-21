@@ -1,5 +1,14 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/neurological-rehabilitation/walking-frame.jpg', alt: 'Physiotherapist supporting a patient using a walking frame' },
+	{ src: '/neurological-rehabilitation/clinic-session.jpg', alt: 'AlterG anti-gravity treadmill at the Balance Clapham clinic' },
+	{ src: '/neurological-rehabilitation/basketball-wheelchair.jpg', alt: 'Active life with a long-term neurological condition' },
+	{ src: '/neurological-rehabilitation/parallel-bars.jpg', alt: 'Strength and coordination training' },
+	{ src: '/neurological-rehabilitation/rehab-gym.jpg', alt: 'Rehabilitation equipment for neurological physiotherapy' },
+	{ src: '/neurological-rehabilitation/fitness-ball.jpg', alt: 'Fitness balls and wall bars for neuro rehab' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,11 +17,13 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Neurological Rehabilitation"
 	seoTitle="Neurological Rehabilitation in Clapham"
 	seoDescription="Neurological physiotherapy in Clapham for stroke, Parkinson\'s, MS, brain injury, vestibular problems, and paediatric movement concerns."
+	marqueeImages={sliderImages}
 	intro={[
 		"Neurological conditions can change how you move, function, and manage day-to-day life.",
 		"We look at how your nervous system is affecting movement, balance, strength, and coordination — and what needs to change to help you function more independently.",
 		"Our clinical, evidence-led approach assesses movement patterns and builds a personalised plan aligned with your goals.",
 	]}
+	introImage="/neurological-rehabilitation/walking-frame.jpg"
 	whenHeading="When to consider"
 	whenHighlight="neuro rehab"
 	whenIntro="Consider an assessment if you\'re experiencing:"
@@ -25,6 +36,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Loss of confidence with movement after illness or injury",
 		"Developmental, postural, or movement concerns in babies and children",
 	]}
+	whenImage="/neurological-rehabilitation/parallel-bars.jpg"
 	howHeading="How we"
 	howHighlight="treat"
 	howList={[
@@ -35,6 +47,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Bobath-based therapy or Vojta Therapy where appropriate",
 		"Education and practical strategies supporting independence",
 	]}
+	howImage="/neurological-rehabilitation/clinic-session.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -44,6 +57,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Babies, children, and adolescents with developmental or neurological concerns",
 		"People maintaining strength, confidence, and independence with long-term conditions",
 	]}
+	whoImage="/neurological-rehabilitation/basketball-wheelchair.jpg"
 	faqs={[
 		{ q: "What is the difference between neurological physiotherapy and regular physiotherapy?", a: "Neurological physiotherapy focuses specifically on conditions affecting the brain, spinal cord, and nerves, and how these impact movement, balance, and function." },
 		{ q: "Can you help with dizziness and balance problems?", a: "Yes. We offer vestibular physiotherapy for dizziness, balance issues, and falls prevention." },
