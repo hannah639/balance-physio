@@ -16,8 +16,10 @@ const classes = ['image-text'];
 if (reverse) classes.push('reverse');
 if (altBg) classes.push('alt-bg');
 
-// Build a YouTube thumbnail URL if a videoId is provided
-const thumbUrl = youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` : null;
+// Build a YouTube thumbnail URL if a videoId is provided.
+// If a custom `image` is also supplied, prefer it — useful when the auto-generated
+// YouTube thumbnail isn't a good fit and we want branded artwork behind the play button.
+const thumbUrl = image || (youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` : null);
 ---
 <section class={classes.join(' ')}>
 	<div class="image-text-inner">

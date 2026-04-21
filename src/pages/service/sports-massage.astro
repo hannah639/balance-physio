@@ -4,6 +4,12 @@ import ImageText from '../../components/ImageText.astro';
 
 // All 8 supplied images are used next to text below — slider uses default
 // placeholder set so nothing is duplicated.
+const sliderImages = [
+	{ src: '/sports-massage/IMG_1877-scaled.jpg', alt: 'Sports massage treatment at Balance Physio Clapham' },
+	{ src: '/sports-massage/IMG_1781-scaled.jpg', alt: 'Calf soft tissue therapy at Balance Physio Clapham' },
+	{ src: '/sports-massage/IMG_1879-scaled.jpg', alt: 'Lower leg sports massage at Balance Physio Clapham' },
+	{ src: '/sports-massage/IMG_1777-e1518433915958-scaled.jpg', alt: 'Soft tissue treatment at Balance Physio Clapham' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -13,12 +19,13 @@ import ImageText from '../../components/ImageText.astro';
 	breadcrumb="Sports Massage"
 	seoTitle="Sports Massage in Clapham"
 	seoDescription="Sports massage and soft tissue therapy in Clapham. Reduce muscle tension, support recovery, and improve movement with structured, clinician-led sessions."
+	marqueeImages={sliderImages}
 	intro={[
 		"Sports massage and soft tissue therapy focus on improving muscle function, reducing tension, and supporting recovery from training, work, and daily life.",
 		"At Balance, we take a structured approach to massage. Rather than purely passive treatment, sessions are used to address specific restrictions in muscle and fascia, particularly those that develop through regular or high training loads, while helping you understand how to manage your own symptoms between appointments.",
 		"This allows massage to become part of a wider strategy for maintaining movement quality, supporting performance, and managing the ongoing demands of consistent training.",
 	]}
-	introImage="/sports-massage/01.jpg"
+	introImage="/sports-massage/athlete-massage-treatment.jpg"
 	whenHeading="When to consider"
 	whenHighlight="sports massage"
 	whenIntro="Sports massage isn't just for when something feels wrong — it's a key part of managing training load, improving recovery, and maintaining performance. You may benefit if you're experiencing:"
