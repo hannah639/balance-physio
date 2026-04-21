@@ -1,5 +1,13 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/anti-gravity-treadmill/slider-gtrainer.webp', alt: 'AlterG Anti-Gravity Treadmill at Balance Physio Clapham' },
+	{ src: '/anti-gravity-treadmill/slider-alter-g-trainer-running-london.webp', alt: 'Runner training on the AlterG treadmill' },
+	{ src: '/anti-gravity-treadmill/slider-p200.webp', alt: 'AlterG P200 anti-gravity treadmill' },
+	{ src: '/anti-gravity-treadmill/slider-IMG-4866.jpg', alt: 'AlterG treadmill in use at the clinic' },
+	{ src: '/anti-gravity-treadmill/slider-session.webp', alt: 'AlterG rehabilitation session' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -9,10 +17,12 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="AlterG Anti-Gravity Treadmill"
 	seoTitle="AlterG Anti-Gravity Treadmill in Clapham"
 	seoDescription="AlterG Anti-Gravity Treadmill in Clapham. Walk or run with reduced body weight to keep training through injury, rebuild strength and return to sport safely."
+	marqueeImages={sliderImages}
 	intro={[
 		"The AlterG uses air pressure technology to reduce body weight during walking or running, allowing load control through the joints from normal weight-bearing down to 20%.",
 		"It lets you continue training despite injury, move without pain when full weight-bearing isn\\'t possible, and rebuild strength, fitness and confidence gradually in a controlled environment.",
 	]}
+	introImage="/anti-gravity-treadmill/gtrainer3.webp"
 	whenHeading="When the AlterG"
 	whenHighlight="can help"
 	whenList={[
@@ -25,6 +35,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Reduced mobility or walking confidence",
 		"Weight reduction programmes",
 	]}
+	whenImage="/anti-gravity-treadmill/viax-man-run-rear.webp"
 	howHeading="How we"
 	howHighlight="use it"
 	howIntro="Sessions begin with an induction to discuss your goals. Treatment adjusts load, speed, and progression based on individual needs — reducing load for rehabilitation and increasing volume for performance goals. Live visual feedback is used to assess movement patterns."
@@ -35,6 +46,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Live visual feedback on gait and movement",
 		"Integration with wider physiotherapy or training plans",
 	]}
+	howImage="/anti-gravity-treadmill/via-woman-walk.webp"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -45,6 +57,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Those managing joint pain and long-term conditions",
 		"Veterans maintaining activity with reduced joint load",
 	]}
+	whoImage="/anti-gravity-treadmill/viax-man-run-front.webp"
 	faqs={[
 		{ q: "Do I need a referral?", a: "No. You can book directly online. An induction is recommended for your first visit." },
 		{ q: "What should I wear?", a: "Carry clean running shoes separately. Wear tight shorts; the clinic provides AlterG shorts to wear over them." },

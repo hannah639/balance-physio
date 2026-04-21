@@ -1,5 +1,15 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/mens-health/slider-gym-exercises.jpg', alt: 'Active older men exercising in the gym' },
+	{ src: '/mens-health/slider-monkey-bars.jpg', alt: 'Man training on monkey bars' },
+	{ src: '/mens-health/slider-stretching.jpg', alt: 'Man stretching before exercise' },
+	{ src: '/mens-health/slider-weight-training.jpg', alt: 'Mature man weight training at the gym' },
+	{ src: '/mens-health/slider-endurance.jpg', alt: 'Senior man running outdoors' },
+	{ src: '/mens-health/slider-DSCF0046.webp', alt: 'Men\\'s health physiotherapy at Balance Physio Clapham' },
+	{ src: '/mens-health/slider-image1.webp', alt: 'Men\\'s health treatment at Balance Physio Clapham' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,11 +18,13 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Men\'s Health"
 	seoTitle="Men\'s Health in Clapham"
 	seoDescription="Men\'s health physiotherapy in Clapham. Pelvic floor rehab, post-prostate recovery, pelvic pain, and bladder or bowel symptoms treated with discretion."
+	marqueeImages={sliderImages}
 	intro={[
 		"Men\'s health physiotherapy focuses on conditions affecting the pelvic floor, bladder, bowel, and sexual function.",
 		"At Balance, we take a structured and clinical approach to assessment and treatment. We identify the underlying drivers of your symptoms and build a clear plan to restore function, reduce pain, and improve confidence.",
 		"These issues are often under-reported, but they are both common and highly treatable with the right approach.",
 	]}
+	introImage="/mens-health/pulse-tracking.jpg"
 	whenHeading="When to consider"
 	whenHighlight="an assessment"
 	whenList={[
@@ -23,6 +35,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Pain related to cycling or prolonged sitting",
 		"Sexual dysfunction linked to pelvic floor function",
 	]}
+	whenImage="/mens-health/beach.jpg"
 	howHeading="How we"
 	howHighlight="treat"
 	howList={[
@@ -33,6 +46,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Postural and load management advice",
 		"Gradual return to exercise and activity",
 	]}
+	howImage="/mens-health/pullups.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -41,6 +55,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Sedentary workers addressing pelvic tension from prolonged sitting",
 		"Chronic pelvic pain patients where symptoms have persisted",
 	]}
+	whoImage="/mens-health/paddleboard.jpg"
 	faqs={[
 		{ q: "Is this only for prostate-related issues?", a: "No. We treat a wide range of pelvic health conditions, including pain, bladder, and bowel symptoms." },
 		{ q: "What happens in the first session?", a: "A detailed discussion followed by assessment of movement, breathing, and pelvic floor function where appropriate." },
