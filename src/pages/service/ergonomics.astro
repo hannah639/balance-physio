@@ -1,5 +1,16 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/ergonomics/slider-IMG_2045.webp', alt: 'Ergonomic equipment at the Balance Clapham clinic' },
+	{ src: '/ergonomics/workplace-businessman.jpg', alt: 'Ergonomic office setup with chair, keyboard and monitor' },
+	{ src: '/ergonomics/slider-file-29-11-2015.jpeg', alt: 'Home ergonomic assessment in progress' },
+	{ src: '/ergonomics/typing-hands.jpg', alt: 'Hands typing on a keyboard' },
+	{ src: '/ergonomics/slider-balance-interior.jpg', alt: 'Balance Physio Clapham interior' },
+	{ src: '/ergonomics/childrens-study-room.jpg', alt: 'Children\'s study space at home' },
+	{ src: '/ergonomics/slider-ergonomics-studio.webp', alt: 'Ergonomics studio at Balance Physio Clapham' },
+	{ src: '/ergonomics/office-desk.jpg', alt: 'Open-plan office workspace' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,10 +19,12 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Ergonomics"
 	seoTitle="Ergonomics in Clapham"
 	seoDescription="Ergonomic assessments in Clapham and online. Reduce back, neck and shoulder pain at work with practical workspace advice and targeted exercises."
+	marqueeImages={sliderImages}
 	intro={[
 		"Pain at your desk is not something you have to accept. Back pain, neck tension, shoulder blade niggles and shoulder discomfort are often driven by how your workspace is set up and how you move within it.",
 		"Ergonomics is about understanding how your body interacts with your working environment, identifying why symptoms develop, and implementing practical, sustainable solutions.",
 	]}
+	introImage="/ergonomics/workplace-businessman.jpg"
 	whenHeading="When to consider"
 	whenHighlight="ergonomics support"
 	whenIntro="You may benefit from an assessment if you are experiencing:"
@@ -23,6 +36,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Discomfort when working from home or using laptops",
 		"Fatigue or reduced productivity due to physical strain",
 	]}
+	whenImage="/ergonomics/typing-hands.jpg"
 	howHeading="How we"
 	howHighlight="work"
 	howIntro="Assessments are offered in person or virtually and may include:"
@@ -34,6 +48,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Simple, implementable changes for home or work",
 		"Targeted exercises addressing movement habits",
 	]}
+	howImage="/ergonomics/office-desk.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -44,6 +59,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Parents balancing multiple work environments",
 		"Anyone seeking improved comfort and productivity",
 	]}
+	whoImage="/ergonomics/childrens-study-room.jpg"
 	faqs={[
 		{ q: "Are virtual assessments available?", a: "Yes, including a workspace review via video." },
 		{ q: "Do I need expensive equipment?", a: "Not necessarily. Many issues resolve through simple adjustments." },
