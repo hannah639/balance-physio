@@ -1,5 +1,14 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/osteopathy/adjusting-spine.jpg', alt: 'Hands-on osteopathic treatment at Balance Physio Clapham' },
+	{ src: '/osteopathy/spine-diagnosis.jpg', alt: 'Osteopathy consultation and spine assessment' },
+	{ src: '/osteopathy/thai-massage.jpg', alt: 'Gentle hands-on soft tissue treatment' },
+	{ src: '/osteopathy/balance-osteopathy.webp', alt: 'Skeleton model at the Balance Clapham studio' },
+	{ src: '/osteopathy/shoulder-massage.jpg', alt: 'Targeted neck and shoulder treatment' },
+	{ src: '/osteopathy/skeleton.jpg', alt: 'Anatomical skeleton in the consultation room' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,11 +17,13 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Osteopathy"
 	seoTitle="Osteopathy in Clapham"
 	seoDescription="Hands-on osteopathy in Clapham, London. We combine manual therapy with nutrition and movement to treat persistent pain, restore mobility and support recovery."
+	marqueeImages={sliderImages}
 	intro={[
 		"Pain, stiffness, or restriction in movement often comes from how the body is functioning as a whole, not just one area. At Balance, osteopathy and nutrition work together to support how your body moves, recovers, and adapts.",
 		"It's not just about treating symptoms. It's about understanding how your joints, muscles, nervous system, and overall health interact, and what needs to change to restore efficient, pain-free movement.",
 		"We take a clinical, hands-on and evidence-led approach. Your treatment plan is built around your symptoms, your goals, and your starting point.",
 	]}
+	introImage="/osteopathy/adjusting-spine.jpg"
 	whenHeading="When to consider"
 	whenHighlight="osteopathy"
 	whenList={[
@@ -25,6 +36,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Lymphoedema or swelling affecting movement or comfort",
 		"Low energy levels or slower recovery from training or injury",
 	]}
+	whenImage="/osteopathy/spine-diagnosis.jpg"
 	howHeading="How we"
 	howHighlight="treat"
 	howList={[
@@ -35,6 +47,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Nutritional guidance to support recovery, energy and overall health",
 		"Practical advice to help you make sustainable changes outside the clinic",
 	]}
+	howImage="/osteopathy/thai-massage.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -45,6 +58,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Those with longer-term conditions such as arthritis",
 		"Individuals looking to improve recovery, energy and overall health",
 	]}
+	whoImage="/osteopathy/shoulder-massage.jpg"
 	faqs={[
 		{ q: "Do I need a GP referral?", a: "No. You can book directly with us." },
 		{ q: "What is the benefit of combining osteopathy and nutrition?", a: "It allows us to support both how your body moves and how it recovers. This can improve outcomes, particularly in longer-term or recurring conditions." },
