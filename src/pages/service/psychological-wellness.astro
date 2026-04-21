@@ -1,5 +1,19 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/psychological-wellness/woman-stretching-park.jpg', alt: 'Mindful stretching outdoors' },
+	{ src: '/psychological-wellness/slider-woman-breathing-outdoors.jpg', alt: 'Breathing fresh air outdoors' },
+	{ src: '/psychological-wellness/wheelchair-basketball.jpg', alt: 'Wheelchair basketball — confidence through activity' },
+	{ src: '/psychological-wellness/slider-disability-high-five.jpg', alt: 'High five with coach during adaptive sport' },
+	{ src: '/psychological-wellness/women-laughing-class.jpg', alt: 'Women laughing during an exercise class' },
+	{ src: '/psychological-wellness/slider-plus-size-workout.jpg', alt: 'Inclusive workout session' },
+	{ src: '/psychological-wellness/soccer-high-five.jpg', alt: 'Team celebration on the pitch' },
+	{ src: '/psychological-wellness/slider-soccer-team-celebrating.jpg', alt: 'Soccer team celebrating together' },
+	{ src: '/psychological-wellness/slider-mature-jogging.jpg', alt: 'Mature friends jogging together in the park' },
+	{ src: '/psychological-wellness/slider-wheelchair-racing.jpg', alt: 'Wheelchair athlete training' },
+	{ src: '/psychological-wellness/slider-women-fists-raised.jpg', alt: 'Women celebrating together' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,10 +22,12 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Psychological Wellness"
 	seoTitle="Psychological Wellness in Clapham"
 	seoDescription="Psychological wellness support in Clapham. Integrated care for pain, injury, stress and performance, supporting recovery and long-term resilience."
+	marqueeImages={sliderImages}
 	intro={[
 		"Psychological wellness is a core component of recovery, performance, and long-term health.",
 		"At Balance, we take an integrated approach — recognising that pain, injury, stress, and physical performance are all influenced by the nervous system and your psychological state.",
 	]}
+	introImage="/psychological-wellness/woman-stretching-park.jpg"
 	whenHeading="When to consider"
 	whenHighlight="this service"
 	whenIntro="You may benefit from psychological wellness input if you:"
@@ -23,6 +39,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Avoid activity due to fear of re-injury",
 		"Feel a loss of motivation with rehabilitation or training",
 	]}
+	whenImage="/psychological-wellness/wheelchair-basketball.jpg"
 	howHeading="How we"
 	howHighlight="work"
 	howIntro="Sessions may include:"
@@ -34,6 +51,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Building confidence in movement and activity",
 		"Supporting return to training, sport, or daily function",
 	]}
+	howImage="/psychological-wellness/women-laughing-class.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -43,6 +61,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Professionals",
 		"Local population seeking improved resilience",
 	]}
+	whoImage="/psychological-wellness/soccer-high-five.jpg"
 	faqs={[
 		{ q: "Is this the same as traditional therapy?", a: "No. This service focuses on the interaction between psychological factors and physical health, particularly in relation to pain, injury, and performance." },
 		{ q: "Do I need an injury to attend?", a: "No. Sessions suit anyone seeking stress management and performance support." },
