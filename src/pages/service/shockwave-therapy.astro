@@ -1,5 +1,15 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/shockwave-therapy/shockwave-procedure.jpg', alt: 'Shockwave therapy being applied to the leg' },
+	{ src: '/shockwave-therapy/back-massage.jpg', alt: 'Shockwave device used on the back' },
+	{ src: '/shockwave-therapy/close-up-medical.jpg', alt: 'Close-up of shockwave therapy on the arm' },
+	{ src: '/shockwave-therapy/male-patient.jpg', alt: 'Patient receiving extracorporeal shockwave therapy on the leg' },
+	{ src: '/shockwave-therapy/rehabilitologist.jpg', alt: 'Rehabilitologist treating a patient with shockwave' },
+	{ src: '/shockwave-therapy/massage-session.jpg', alt: 'Shockwave device used during a treatment session' },
+	{ src: '/shockwave-therapy/screen-shot-2019.webp', alt: 'Shockwave therapy at Balance Physio Clapham' },
+];
 ---
 <ServicePage
 	title="in Clapham"
@@ -8,11 +18,13 @@ import ServicePage from '../../components/ServicePage.astro';
 	breadcrumb="Shockwave Therapy"
 	seoTitle="Shockwave Therapy in Clapham"
 	seoDescription="Shockwave therapy in Clapham for stubborn tendon pain and soft tissue injuries. Restart healing as part of a structured rehabilitation plan."
+	marqueeImages={sliderImages}
 	intro={[
 		"When pain lingers, it usually means something hasn\'t fully healed. Shockwave therapy is designed for exactly that — persistent tendon and soft tissue problems that haven\'t responded to rest, exercise, or standard treatment.",
 		"At Balance, we use shockwave as part of a wider, structured rehabilitation plan. The goal isn\'t just to reduce pain, but to restart the healing process so you can move forward.",
 		"Treatment is delivered alongside clear diagnosis and loading advice, ensuring the tissue recovers properly rather than simply masking symptoms.",
 	]}
+	introImage="/shockwave-therapy/close-up-medical.jpg"
 	whenHeading="When to consider"
 	whenHighlight="shockwave"
 	whenIntro="Common conditions we treat with shockwave include:"
@@ -24,6 +36,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Shoulder tendon pain or calcification",
 		"Lateral hip pain (greater trochanteric pain)",
 	]}
+	whenImage="/shockwave-therapy/back-massage.jpg"
 	howHeading="How it"
 	howHighlight="works"
 	howIntro="Shockwave therapy uses controlled acoustic pulses delivered directly into the affected tissue. This stimulates a response in the body that helps:"
@@ -34,6 +47,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Delivered by a handheld device applied to the affected area",
 		"Most people require a short course spaced over a few weeks",
 	]}
+	howImage="/shockwave-therapy/shockwave-procedure.jpg"
 	whoHeading="Who we"
 	whoHighlight="help"
 	whoList={[
@@ -42,6 +56,7 @@ import ServicePage from '../../components/ServicePage.astro';
 		"Individuals who haven\'t responded to previous treatment",
 		"Those seeking to avoid injections or surgery where possible",
 	]}
+	whoImage="/shockwave-therapy/massage-session.jpg"
 	faqs={[
 		{ q: "Is shockwave therapy painful?", a: "It can be uncomfortable, but the intensity is adjusted to remain tolerable." },
 		{ q: "How many sessions will I need?", a: "Most people benefit from a short course of 3–5 sessions." },
