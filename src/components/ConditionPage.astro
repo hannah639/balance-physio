@@ -24,6 +24,8 @@ const {
 	whoHighlight = 'help',
 	whoIntro,
 	whoList,
+	introImage,    // optional image URL for Section 1 (intro)
+	whoImage,      // optional image URL for Section 3 (who-we-help)
 	faqs = [],
 } = Astro.props;
 ---
@@ -37,6 +39,7 @@ const {
 			highlight="care"
 			altBg
 			placeholderLabel="Clinical assessment"
+			image={introImage}
 		>
 			{intro.map((p) => <p set:html={p} />)}
 		</ImageText>
@@ -77,6 +80,7 @@ const {
 			reverse
 			altBg
 			placeholderLabel="Our patients"
+			image={whoImage}
 		>
 			{whoIntro && <p>{whoIntro}</p>}
 			<ul>
