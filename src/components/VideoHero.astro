@@ -4,7 +4,7 @@
 	</video>
 	<div class="video-hero-overlay"></div>
 	<div class="video-hero-content">
-		<h1 class="subtitle">Rehabilitation Clinic in Clapham</h1>
+		<h1 class="hero-badge hero-h1-badge"><span class="dot"></span>Rehabilitation Clinic in Clapham</h1>
 		<p class="hero-tagline">Helping You Recover, Restore Function, and Perform at Your Best</p>
 		<p>Performance, Rehabilitation &amp; Physiotherapy Clinic in Clapham</p>
 		<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-book">Book an appointment</a>
@@ -12,18 +12,32 @@
 	<div class="video-hero-scroll">&#8964;</div>
 </section>
 
-<style>
-	/* H1 must keep the small uppercase subtitle styling */
-	.bp-page .video-hero h1.subtitle {
-		font-size: 14px;
-		font-weight: 600;
-		letter-spacing: 3px;
-		text-transform: uppercase;
-		margin: 0 0 24px;
-		color: rgba(255,255,255,0.85);
+<style is:global>
+	/* H1 styled as a hero-badge pill (same treatment as "We're Different" below). Remains semantically an h1. */
+	.bp-page .video-hero-content h1.hero-h1-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		background: rgba(255,255,255,0.1);
+		border: 1px solid rgba(255,255,255,0.2);
+		border-radius: 50px;
+		padding: 6px 16px;
+		font-size: 13px;
+		font-weight: 500;
 		line-height: 1.2;
+		letter-spacing: 0;
+		text-transform: none;
+		color: rgba(255,255,255,0.85);
+		margin: 0 0 24px;
 	}
-	/* Tagline styled like the original H1 was */
+	.bp-page .video-hero-content h1.hero-h1-badge .dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--cta);
+		flex-shrink: 0;
+	}
+	/* Tagline remains the large headline */
 	.bp-page .video-hero .hero-tagline {
 		font-size: 56px;
 		font-weight: 700;
