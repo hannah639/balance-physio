@@ -7,7 +7,7 @@ const {
 	altBg = false,
 	image,
 	imageAlt = '',
-	imageContain = false,
+	imagePosition,
 	placeholderLabel = 'Image placeholder',
 	youtubeId,
 	collage,
@@ -17,8 +17,7 @@ const classes = ['image-text'];
 if (reverse) classes.push('reverse');
 if (altBg) classes.push('alt-bg');
 
-const mediaClasses = ['image-text-media'];
-if (imageContain) mediaClasses.push('image-text-media--contain');
+const imgStyle = imagePosition ? `object-position: ${imagePosition};` : undefined;
 
 // Build a YouTube thumbnail URL if a videoId is provided.
 // If a custom `image` is also supplied, prefer it, useful when the auto-generated
@@ -27,14 +26,14 @@ const thumbUrl = image || (youtubeId ? `https://img.youtube.com/vi/${youtubeId}/
 ---
 <section class={classes.join(' ')}>
 	<div class="image-text-inner">
-		<div class={mediaClasses.join(' ')}>
+		<div class="image-text-media">
 			{youtubeId ? (
 				<button class="video-trigger" data-youtube={youtubeId} aria-label="Play video">
 					<img src={thumbUrl} alt={imageAlt || 'Play video'} />
 					<span class="play-btn"><span class="play-icon">▶</span></span>
 				</button>
 			) : image ? (
-				<img src={image} alt={imageAlt} />
+				<img src={image} alt={imageAlt} style={imgStyle} />
 			) : collage && collage.length ? (
 				<div class="media-collage">
 					{collage.map((item) => (
