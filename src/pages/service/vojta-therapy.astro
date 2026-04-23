@@ -2,18 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
-import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
-
-/* Vojta-therapy folder only has an avatar file, so this page pulls from neurological-rehabilitation and paediatric photos. */
-const photos = [
-	{ src: '/neurological-rehabilitation/clinic-session.jpg', alt: 'Neurological clinic session' },
-	{ src: '/neurological-rehabilitation/fitness-ball.jpg', alt: 'Balance rehab' },
-	{ src: '/neurological-rehabilitation/parallel-bars.jpg', alt: 'Gait rehabilitation' },
-	{ src: '/neurological-rehabilitation/rehab-gym.jpg', alt: 'Rehab gym space' },
-	{ src: '/paediatric-sports-physiotherapy/padel.jpg', alt: 'Youth movement' },
-	{ src: '/physio/body-1.jpg', alt: 'Balance Physio clinical environment' },
-];
 
 const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
 
@@ -32,73 +21,83 @@ const faqs = [
 >
 	<PageHero title="in South West London" highlight="Vojta Therapy" breadcrumb="Vojta Therapy" />
 
-	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+	<section class="text-grid text-grid--light text-grid--solo">
+		<div class="text-grid-inner">
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Our approach</div>
+				<h2>Activating innate <span class="highlight">movement patterns</span></h2>
+				<p>Movement problems linked to the nervous system can affect how the body develops, adapts, and functions day to day.</p>
+				<p>Vojta Therapy is a specialised neurological treatment that works by activating innate movement patterns within the central nervous system. Rather than relying on voluntary effort alone, it stimulates automatic responses that underpin posture, coordination, and mobility.</p>
+				<p>At Balance, we take a structured and evidence-led approach to neurological rehabilitation. From your first session, we assess how movement is organised and controlled, then build a plan that supports both immediate function and long-term development.</p>
+				<p>Whether for a child with developmental concerns or an adult recovering from neurological injury, the focus is the same: improving how the body moves at a fundamental level.</p>
+				<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+			</div>
+		</div>
+	</section>
 
-	<ImageText eyebrow="Our approach" heading="Activating innate" highlight="movement patterns" image="/neurological-rehabilitation/clinic-session.jpg" imageAlt="Vojta clinical session">
-		<p>Movement problems linked to the nervous system can affect how the body develops, adapts, and functions day to day.</p>
-		<p>Vojta Therapy is a specialised neurological treatment that works by activating innate movement patterns within the central nervous system. Rather than relying on voluntary effort alone, it stimulates automatic responses that underpin posture, coordination, and mobility.</p>
-		<p>At Balance, we take a structured and evidence-led approach to neurological rehabilitation. From your first session, we assess how movement is organised and controlled, then build a plan that supports both immediate function and long-term development.</p>
-		<p>Whether for a child with developmental concerns or an adult recovering from neurological injury, the focus is the same: improving how the body moves at a fundamental level.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
-	</ImageText>
+	<section class="text-grid">
+		<div class="text-grid-inner">
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Symptoms</div>
+				<h2>When to consider <span class="highlight">Vojta Therapy</span></h2>
+				<p>Vojta Therapy can be particularly effective where movement is limited by neurological inhibition.</p>
+				<p>You may benefit if you or your child are experiencing:</p>
+				<ul>
+					<li>Delays in motor development such as rolling, crawling, or walking</li>
+					<li>Difficulties with coordination, posture, or muscle tone</li>
+					<li>Asymmetrical movement or a preference for one side</li>
+					<li>Spasticity or stiffness affecting fluid movement</li>
+					<li>Neurological conditions such as cerebral palsy</li>
+					<li>Movement limitations following stroke or brain injury</li>
+				</ul>
+				<p>If movement patterns are not developing or functioning as expected, early assessment is important.</p>
+			</div>
+			<div class="image-text-content text-grid-cell text-grid-cell--treatment">
+				<div class="eyebrow">Treatment</div>
+				<h2>How we <span class="highlight">work</span></h2>
+				<p>Vojta Therapy is based on activating specific zones of the body to trigger automatic movement responses.</p>
+				<p>Your treatment may include:</p>
+				<ul>
+					<li>Targeted stimulation of reflex points to activate global movement patterns</li>
+					<li>Positioning to support postural control and alignment</li>
+					<li>Guidance for home-based therapy where appropriate</li>
+					<li>Ongoing reassessment of movement quality and control</li>
+				</ul>
+				<p>The aim is to access and reinforce fundamental patterns such as turning, creeping, and postural stabilisation — building a foundation for more complex movement.</p>
+			</div>
+		</div>
+	</section>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="Vojta Therapy" image="/neurological-rehabilitation/fitness-ball.jpg" imageAlt="Balance rehab">
-		<p>Vojta Therapy can be particularly effective where movement is limited by neurological inhibition.</p>
-		<p>You may benefit if you or your child are experiencing:</p>
-		<ul>
-			<li>Delays in motor development such as rolling, crawling, or walking</li>
-			<li>Difficulties with coordination, posture, or muscle tone</li>
-			<li>Asymmetrical movement or a preference for one side</li>
-			<li>Spasticity or stiffness affecting fluid movement</li>
-			<li>Neurological conditions such as cerebral palsy</li>
-			<li>Movement limitations following stroke or brain injury</li>
-		</ul>
-		<p>If movement patterns are not developing or functioning as expected, early assessment is important.</p>
-	</ImageText>
-
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/neurological-rehabilitation/parallel-bars.jpg" imageAlt="Gait rehabilitation">
-		<p>Vojta Therapy is based on activating specific zones of the body to trigger automatic movement responses.</p>
-		<p>Your treatment may include:</p>
-		<ul>
-			<li>Targeted stimulation of reflex points to activate global movement patterns</li>
-			<li>Positioning to support postural control and alignment</li>
-			<li>Guidance for home-based therapy where appropriate</li>
-			<li>Ongoing reassessment of movement quality and control</li>
-		</ul>
-		<p>The aim is to access and reinforce fundamental patterns such as turning, creeping, and postural stabilisation — building a foundation for more complex movement.</p>
-		<p>Treatment is structured, consistent, and adapted to the individual's stage of development or recovery.</p>
-	</ImageText>
-
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/neurological-rehabilitation/rehab-gym.jpg" imageAlt="Neuro rehab environment">
-		<p>Progress in neurological rehabilitation is tracked carefully over time.</p>
-		<p>From your first session, we assess:</p>
-		<ul>
-			<li>Movement patterns and symmetry</li>
-			<li>Postural control</li>
-			<li>Muscle tone and coordination</li>
-			<li>Functional ability relative to milestones, age or condition</li>
-		</ul>
-		<p>As therapy progresses, we monitor changes in how movement is organised and controlled.</p>
-		<p>This allows us to:</p>
-		<ul>
-			<li>Identify meaningful improvements in function</li>
-			<li>Adjust the treatment plan as needed</li>
-			<li>Provide clear feedback to patients and families</li>
-		</ul>
-		<p>The goal is improved automatic control of movement, not just temporary change.</p>
-		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
-	</ImageText>
-
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/neurological-rehabilitation/walking-frame.jpg" imageAlt="Mobility rehabilitation">
-		<p>We support a wide range of patients across South West London:</p>
-		<ul>
-			<li><strong>Infants and children</strong> with developmental delays or neurological conditions</li>
-			<li><strong>Children with cerebral palsy</strong> or motor control disorders</li>
-			<li><strong>Adults recovering from stroke or neurological injury</strong></li>
-			<li><strong>Individuals with complex movement disorders</strong> not responding to traditional therapy</li>
-		</ul>
-		<p>We also work closely with families, providing guidance and support throughout the rehabilitation process.</p>
-	</ImageText>
+	<section class="text-grid text-grid--light">
+		<div class="text-grid-inner">
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Outcomes</div>
+				<h2>How we measure <span class="highlight">your progress</span></h2>
+				<p>Progress in neurological rehabilitation is tracked carefully over time.</p>
+				<p>From your first session, we assess:</p>
+				<ul>
+					<li>Movement patterns and symmetry</li>
+					<li>Postural control</li>
+					<li>Muscle tone and coordination</li>
+					<li>Functional ability relative to milestones, age or condition</li>
+				</ul>
+				<p>As therapy progresses, we monitor changes in how movement is organised and controlled. The goal is improved automatic control of movement, not just temporary change.</p>
+				<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+			</div>
+			<div class="image-text-content text-grid-cell text-grid-cell--treatment">
+				<div class="eyebrow">Our patients</div>
+				<h2>Who we <span class="highlight">help</span></h2>
+				<p>We support a wide range of patients across South West London:</p>
+				<ul>
+					<li>Infants and children with developmental delays or neurological conditions</li>
+					<li>Children with cerebral palsy or motor control disorders</li>
+					<li>Adults recovering from stroke or neurological injury</li>
+					<li>Individuals with complex movement disorders not responding to traditional therapy</li>
+				</ul>
+				<p>We also work closely with families, providing guidance and support throughout the rehabilitation process.</p>
+			</div>
+		</div>
+	</section>
 
 	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="specialist" image="/vojta-therapy/jose-avatar.webp" imageAlt="Dr Jose Sanz Mengibar">
 		<p>Our Vojta Therapy service is led by <strong>Dr Jose Sanz Mengibar</strong>, Consultant Neurological Physiotherapist and certified Vojta Therapist.</p>
@@ -108,10 +107,16 @@ const faqs = [
 		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
 	</ImageText>
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/physio/body-1.jpg" imageAlt="Balance clinical environment">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
-	</ImageText>
+	<section class="text-grid text-grid--light text-grid--solo">
+		<div class="text-grid-inner">
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Fees</div>
+				<h2>Pricing and <span class="highlight">insurance</span></h2>
+				<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+				<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+			</div>
+		</div>
+	</section>
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
