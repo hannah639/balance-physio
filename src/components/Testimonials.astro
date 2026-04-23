@@ -1,15 +1,21 @@
 ---
-import { sanityClient, urlFor } from '../lib/sanity.js';
-
-const testimonials = await sanityClient.fetch(
-  `*[_type == "testimonial"] | order(order asc) {
-    _id,
-    quote,
-    name,
-    description,
-    avatar
-  }`
-);
+const testimonials = [
+	{
+		quote: "I cannot recommend Balance highly enough. Three times they have brought me back from serious injury, and kept my career as a self-proclaimed elite sportsman on the road.",
+		name: "Tom Holland",
+		avatar: "/testimonials/tom-holland.jpg",
+	},
+	{
+		quote: "Part of the battle of excelling at elite level sport is finding the right support team and training structure to allow yourself to maximise your potential. Balance have played a huge part in my development as an athlete.",
+		name: "Claire Bennett",
+		avatar: "/testimonials/claire-bennett.jpg",
+	},
+	{
+		quote: "I'm absolutely over the moon to have just run a marathon PB of 2:58, which would not have been possible without the excellent service at Balance.",
+		name: "Al Riley",
+		avatar: "/testimonials/al-riley.jpg",
+	},
+];
 ---
 
 <section class="testimonials">
@@ -22,14 +28,11 @@ const testimonials = await sanityClient.fetch(
 				<div class="testimonial-card">
 					<p>{t.quote}</p>
 					<div class="testimonial-author">
-						{t.avatar && (
-							<div class="testimonial-avatar">
-								<img src={urlFor(t.avatar).width(120).height(120).url()} alt={t.name} />
-							</div>
-						)}
+						<div class="testimonial-avatar">
+							<img src={t.avatar} alt={t.name} />
+						</div>
 						<div>
 							<h4>{t.name}</h4>
-							<span>{t.description}</span>
 						</div>
 					</div>
 				</div>

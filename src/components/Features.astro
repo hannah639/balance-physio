@@ -6,7 +6,7 @@ const services = [
 	{ title: 'Osteopathy', href: '/service/osteopathy', bg: '/osteopathy.jpg' },
 	{ title: 'Sports Massage', href: '/service/sports-massage', bg: '/massage.jpg' },
 	{ title: 'Shockwave Therapy', href: '/service/shockwave-therapy', bg: '/shockwave.jpg' },
-	{ title: 'Prehab Class', href: '/service/prehab-class', bg: '/prehab.jpg' },
+	{ title: 'Prehab Class', href: '/service/prehab-class', bg: '/prehab.jpg', bgPosition: 'left center' },
 	{ title: 'Neurological Rehabilitation', href: '/service/neurological-rehabilitation', bg: '/neuro-rehab.jpg' },
 	{ title: 'Vojta Therapy', href: '/service/vojta-therapy', bg: '/vojta.jpg' },
 	{ title: "Women's Health", href: '/service/womens-health', bg: '/womens-health.jpg' },
@@ -46,7 +46,7 @@ function gradientFor(title) {
 					class="feature-card"
 					style={s.bg ? `` : `background: ${gradientFor(s.title)};`}
 				>
-					{s.bg && <div class="feature-card-bg" style={`background-image: url('${s.bg}');`} />}
+					{s.bg && <div class="feature-card-bg" style={`background-image: url('${s.bg}');${s.bgPosition ? ` background-position: ${s.bgPosition};` : ''}`} />}
 					<div class="feature-card-overlay"></div>
 					<div class="feature-card-content">
 						<div class="service-label">Service</div>
