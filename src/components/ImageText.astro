@@ -7,6 +7,7 @@ const {
 	altBg = false,
 	image,
 	imageAlt = '',
+	imageContain = false,
 	placeholderLabel = 'Image placeholder',
 	youtubeId,
 	collage,
@@ -16,6 +17,9 @@ const classes = ['image-text'];
 if (reverse) classes.push('reverse');
 if (altBg) classes.push('alt-bg');
 
+const mediaClasses = ['image-text-media'];
+if (imageContain) mediaClasses.push('image-text-media--contain');
+
 // Build a YouTube thumbnail URL if a videoId is provided.
 // If a custom `image` is also supplied, prefer it, useful when the auto-generated
 // YouTube thumbnail isn't a good fit and we want branded artwork behind the play button.
@@ -23,7 +27,7 @@ const thumbUrl = image || (youtubeId ? `https://img.youtube.com/vi/${youtubeId}/
 ---
 <section class={classes.join(' ')}>
 	<div class="image-text-inner">
-		<div class="image-text-media">
+		<div class={mediaClasses.join(' ')}>
 			{youtubeId ? (
 				<button class="video-trigger" data-youtube={youtubeId} aria-label="Play video">
 					<img src={thumbUrl} alt={imageAlt || 'Play video'} />
