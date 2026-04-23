@@ -27,8 +27,8 @@ const faqs = [
 	description="Evidence-led physiotherapy in Clapham, London. From injury recovery to long-term condition management, we help you move better, feel stronger and return to what you love."
 >
 	<PageHero
-		title="Physiotherapy in"
-		highlight="Clapham"
+		title="in Clapham"
+		highlight="Physiotherapy"
 		breadcrumb="Physiotherapy"
 	/>
 
@@ -36,13 +36,13 @@ const faqs = [
 
 	<ImageText
 		eyebrow="Our approach"
+		heading="Evidence led"
+		highlight="care"
 		image="/physio/body-1.jpg"
 		imageAlt="Physiotherapy consultation at Balance Physio"
 	>
-		<p>Pain, injury, or loss of function can change how you move, and how you live.</p>
-		<p>At Balance, physiotherapy is about more than symptom relief. It's about understanding how your body moves, why things have gone wrong, and what needs to change to get you back to full capacity.</p>
-		<p>We take a clinical, evidence-led approach to every case. From your first session, we assess how you move, not just where it hurts, then build a plan around your goals, your lifestyle, and your starting point.</p>
-		<p>Whether you're recovering from injury, managing a long-term condition, or aiming to perform at a higher level, we meet you where you are and guide you forward.</p>
+		<p>Pain, injury, or loss of function can change how you move, and how you live. At Balance, physiotherapy is about more than symptom relief. It's about understanding how your body moves, why things have gone wrong, and what needs to change to get you back to full capacity.</p>
+		<p>We take a clinical, evidence-led approach to every case. From your first session, we assess how you move, not just where it hurts, then build a plan around your goals, your lifestyle, and your starting point. Whether you're recovering from injury, managing a long-term condition, or aiming to perform at a higher level, we meet you where you are and guide you forward.</p>
 		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
 	</ImageText>
 
@@ -55,8 +55,7 @@ const faqs = [
 		image="/physio/body-2.jpg"
 		imageAlt="Assessment session with a physiotherapist"
 	>
-		<p>You don't need to wait for things to get worse.</p>
-		<p>Physiotherapy can help if you're dealing with:</p>
+		<p>You don't need to wait for things to get worse. Physiotherapy can help if you're dealing with:</p>
 		<ul>
 			<li>Ongoing back or neck pain, including sciatica</li>
 			<li>Sports injuries</li>
@@ -78,7 +77,7 @@ const faqs = [
 		image="/physio/body-3.jpg"
 		imageAlt="Hands-on physio therapy session"
 	>
-		<p>Everything we do is built around one principle: <strong>helping you move better.</strong></p>
+		<p>Everything we do is built around one principle: helping you move better.</p>
 		<p>Your treatment may include:</p>
 		<ul>
 			<li>Hands-on therapy to restore movement</li>
@@ -134,8 +133,8 @@ const faqs = [
 		eyebrow="Our team"
 		heading="Our clinical"
 		highlight="team"
-		image="/physio/body-6.jpg"
-		imageAlt="Balance Physio team collaborating on a treatment plan"
+		image="/physio/clinical-team.jpg"
+		imageAlt="Welcome chalkboard sign at Balance Performance Physiotherapy"
 	>
 		<p>Our physiotherapy team is made up of highly experienced clinicians with specialist areas of expertise.</p>
 		<p>You'll be matched with the right practitioner for your needs, whether that's a complex spinal condition, a sports injury, or a long-term neurological issue.</p>
@@ -154,7 +153,7 @@ const faqs = [
 		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
 	</ImageText>
 
-	<section class="faq-section">
+	<section class="faq-section faq-section--alt">
 		<div class="container">
 			<div class="section-header">
 				<h2>Frequently Asked Questions</h2>
@@ -174,8 +173,7 @@ const faqs = [
 </Layout>
 
 <style is:global>
-	/* Small inline section link used for the "Read More / Meet / Pricing" CTAs inside ImageText blocks.
-	   Kept low-impact so it doesn't change the overall page design. */
+	/* Small inline section link used for the "Read More / Meet / Pricing" CTAs inside ImageText blocks. */
 	.bp-page .image-text .section-link {
 		display: inline-flex;
 		align-items: center;
@@ -189,5 +187,10 @@ const faqs = [
 	}
 	.bp-page .image-text .section-link:hover {
 		border-bottom-color: var(--accent);
+	}
+	/* FAQ section on the Physio page uses the same tinted bg as the alt-bg ImageText blocks
+	   above it, so the FAQ visually separates from the (white) Pricing section that comes before. */
+	.bp-page .faq-section.faq-section--alt {
+		background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%);
 	}
 </style>
