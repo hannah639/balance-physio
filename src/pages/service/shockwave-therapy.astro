@@ -1,68 +1,123 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/shockwave-therapy/shockwave-procedure.jpg', alt: 'Shockwave therapy being applied to the leg' },
-	{ src: '/shockwave-therapy/back-massage.jpg', alt: 'Shockwave device used on the back' },
-	{ src: '/shockwave-therapy/close-up-medical.jpg', alt: 'Close-up of shockwave therapy on the arm' },
-	{ src: '/shockwave-therapy/male-patient.jpg', alt: 'Patient receiving extracorporeal shockwave therapy on the leg' },
-	{ src: '/shockwave-therapy/rehabilitologist.jpg', alt: 'Rehabilitologist treating a patient with shockwave' },
-	{ src: '/shockwave-therapy/massage-session.jpg', alt: 'Shockwave device used during a treatment session' },
-	{ src: '/shockwave-therapy/screen-shot-2019.webp', alt: 'Shockwave therapy at Balance Physio Clapham' },
+const photos = [
+	{ src: '/shockwave-therapy/shockwave-procedure.jpg', alt: 'Shockwave procedure' },
+	{ src: '/shockwave-therapy/close-up-medical.jpg', alt: 'Clinical close-up' },
+	{ src: '/shockwave-therapy/male-patient.jpg', alt: 'Male patient receiving treatment' },
+	{ src: '/shockwave-therapy/massage-session.jpg', alt: 'Massage session' },
+	{ src: '/shockwave-therapy/rehabilitologist.jpg', alt: 'Clinician treating patient' },
+	{ src: '/shockwave-therapy/back-massage.jpg', alt: 'Back therapy session' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'Is shockwave therapy painful?', a: 'It can be uncomfortable, but the intensity is adjusted to remain tolerable.' },
+	{ q: 'How many sessions will I need?', a: 'Most people benefit from a short course of 3–5 sessions.' },
+	{ q: 'Are there any side effects?', a: 'Mild soreness, redness, or bruising can occur temporarily after treatment.' },
+	{ q: 'Can I exercise afterwards?', a: 'We usually recommend reducing heavy loading for 48 hours, then progressing as advised.' },
+	{ q: 'How is this different from an injection?', a: 'Shockwave stimulates healing. It is pro-inflammatory.' },
+	{ q: 'Do I need a referral?', a: 'Yes, we require you to have a referral from a consultant. Unless you are seeing Steve our Podiatrist and he can confirm diagnosis with Ultrasound. We need to exclude a tendon tear.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Shockwave Therapy"
-	heroSubtitle="For persistent tendon and soft tissue problems that haven\'t responded to rest, exercise, or standard treatment."
-	breadcrumb="Shockwave Therapy"
-	seoTitle="Shockwave Therapy in Clapham"
-	seoDescription="Shockwave therapy in Clapham for stubborn tendon pain and soft tissue injuries. Restart healing as part of a structured rehabilitation plan."
-	marqueeImages={sliderImages}
-	intro={[
-		"When pain lingers, it usually means something hasn\'t fully healed. Shockwave therapy is designed for exactly that, persistent tendon and soft tissue problems that haven\'t responded to rest, exercise, or standard treatment.",
-		"At Balance, we use shockwave as part of a wider, structured rehabilitation plan. The goal isn\'t just to reduce pain, but to restart the healing process so you can move forward.",
-		"Treatment is delivered alongside clear diagnosis and loading advice, ensuring the tissue recovers properly rather than simply masking symptoms.",
-	]}
-	introImage="/shockwave-therapy/close-up-medical.jpg"
-	whenHeading="When to consider"
-	whenHighlight="shockwave"
-	whenIntro="Common conditions we treat with shockwave include:"
-	whenList={[
-		"Plantar fasciitis (heel pain, especially first steps in the morning)",
-		"Achilles tendinopathy",
-		"Patellar tendon pain (below the knee)",
-		"Tennis or golfer\'s elbow",
-		"Shoulder tendon pain or calcification",
-		"Lateral hip pain (greater trochanteric pain)",
-	]}
-	whenImage="/shockwave-therapy/back-massage.jpg"
-	howHeading="How it"
-	howHighlight="works"
-	howIntro="Shockwave therapy uses controlled acoustic pulses delivered directly into the affected tissue. This stimulates a response in the body that helps:"
-	howList={[
-		"Improve blood flow to the area",
-		"Reduce pain sensitivity",
-		"Encourage tissue repair",
-		"Delivered by a handheld device applied to the affected area",
-		"Most people require a short course spaced over a few weeks",
-	]}
-	howImage="/shockwave-therapy/shockwave-procedure.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Runners and athletes with persistent tendon injuries",
-		"People dealing with long-standing heel or elbow pain",
-		"Individuals who haven\'t responded to previous treatment",
-		"Those seeking to avoid injections or surgery where possible",
-	]}
-	whoImage="/shockwave-therapy/massage-session.jpg"
-	faqs={[
-		{ q: "Is shockwave therapy painful?", a: "It can be uncomfortable, but the intensity is adjusted to remain tolerable." },
-		{ q: "How many sessions will I need?", a: "Most people benefit from a short course of 3–5 sessions." },
-		{ q: "Are there any side effects?", a: "Mild soreness, redness, or bruising can occur temporarily after treatment." },
-		{ q: "Can I exercise afterwards?", a: "We usually recommend reducing heavy loading for 48 hours, then progressing as advised." },
-		{ q: "How is this different from an injection?", a: "Shockwave stimulates healing and is pro-inflammatory, whereas injections typically aim to reduce inflammation." },
-		{ q: "Do I need a referral?", a: "Yes, we require a referral from a consultant, unless you are seeing Steve, our Podiatrist, who can confirm diagnosis with Ultrasound." },
-	]}
-/>
+<Layout
+	title="Shockwave Therapy in Clapham"
+	description="Shockwave therapy in Clapham for persistent tendon and soft tissue conditions — integrated into a structured rehabilitation plan at Balance Performance Physiotherapy."
+>
+	<PageHero title="in Clapham" highlight="Shockwave Therapy" breadcrumb="Shockwave Therapy" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="When pain lingers, it usually means" highlight="something hasn't fully healed" image="/shockwave-therapy/shockwave-procedure.jpg" imageAlt="Shockwave in progress">
+		<p>Shockwave therapy is designed for exactly that — persistent tendon and soft tissue problems that haven't responded to rest, exercise, or standard treatment.</p>
+		<p>At Balance, we use shockwave as part of a wider, structured rehabilitation plan. The goal isn't just to reduce pain, but to restart the healing process and so you can move forward.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="The treatment" heading="What is" highlight="shockwave therapy?" image="/shockwave-therapy/close-up-medical.jpg" imageAlt="Clinical close-up">
+		<p>Shockwave therapy uses controlled acoustic pulses delivered directly into the affected tissue.</p>
+		<p>This stimulates a response in the body that helps:</p>
+		<ul>
+			<li>Improve blood flow to the area</li>
+			<li>Reduce pain sensitivity</li>
+			<li>Encourage tissue repair</li>
+		</ul>
+		<p>It's a non-invasive treatment that can be particularly effective when progress has stalled.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Symptoms" heading="When shockwave" highlight="can help" image="/shockwave-therapy/male-patient.jpg" imageAlt="Patient consultation">
+		<p>Shockwave therapy is commonly used for chronic tendon conditions, including:</p>
+		<ul>
+			<li>Plantar fasciitis (heel pain, especially first steps in the morning)</li>
+			<li>Achilles tendinopathy</li>
+			<li>Patellar tendon pain (below the knee)</li>
+			<li>Tennis or golfer's elbow</li>
+			<li>Shoulder tendon pain or calcification</li>
+			<li>Lateral hip pain (greater trochanteric pain)</li>
+		</ul>
+		<p>If you've tried other approaches without lasting improvement, this may be the next step.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Treatment" heading="How we" highlight="use it" image="/shockwave-therapy/massage-session.jpg" imageAlt="Treatment session">
+		<p>Shockwave isn't a standalone fix.</p>
+		<p>We integrate it into our broader rehabilitation plan — combining it with the right loading, movement work, and progression back to activity.</p>
+		<p>Treatment is targeted and controlled. Each session typically lasts around 20 minutes, and the intensity can be adjusted to suit you.</p>
+		<p>The aim is to create the right conditions for healing, not just mask symptoms.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/shockwave-therapy/rehabilitologist.jpg" imageAlt="Clinical assessment">
+		<p>We track more than pain levels.</p>
+		<p>We look at how your tendon tolerates load, how your movement improves, and what you're able to return to over time.</p>
+		<p>This allows us to:</p>
+		<ul>
+			<li>Progress your rehab safely</li>
+			<li>Reduce the risk of recurrence</li>
+			<li>Build long-term resilience in the tissue</li>
+		</ul>
+		<p>You'll have a clear sense of where you are — and what's improving.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our patients" heading="Who we" highlight="help" image="/shockwave-therapy/back-massage.jpg" imageAlt="Back therapy">
+		<p>Shockwave therapy is particularly useful for:</p>
+		<ul>
+			<li>Runners and athletes with persistent tendon injuries</li>
+			<li>People dealing with long-standing heel or elbow pain</li>
+			<li>Individuals who haven't responded to previous treatment</li>
+			<li>Those looking to avoid injections or surgery where possible</li>
+		</ul>
+		<p>It's often the turning point when recovery has plateaued.</p>
+	</ImageText>
+
+	<ImageText eyebrow="What to expect" heading="During your" highlight="session" image="/shockwave-therapy/screen-shot-2019.webp" imageAlt="Shockwave session">
+		<p>Treatment involves applying a handheld device that delivers shocks to the affected area.</p>
+		<p>You may feel a deep, rhythmic tapping sensation during the session. This can be uncomfortable at times, but is generally well tolerated and can be adjusted as needed.</p>
+		<p>Most people require a short course of treatment, typically spaced over a few weeks.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/shockwave-therapy/shockwave-procedure.jpg" imageAlt="Shockwave at Balance">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa and AXA Health.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

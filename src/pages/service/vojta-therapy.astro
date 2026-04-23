@@ -1,76 +1,131 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const testimonialParagraphs = [
-	"I am so grateful for Jose\u2019s support over the years. His understanding and application of Vojta therapy is outstanding, and I can see the advantages of long-term daily therapy for the wellbeing of my daughter. Besides therapy I also appreciate Jose\u2019s gentle input on behaviour, and skilfully managing everyone\u2019s emotions in therapy \u2013 it\u2019s a bit of a minefield and without it I probably would have quit a long time ago. And finally, where Jose stands out is his commitment to his work and the children he cares for. I have been seeing a physio long enough to understand this is far from common, Jose goes far above and beyond of what is expected of him.",
-	"Without Jose\u2019s therapy, input and expertise, my daughter would not have the mobility she has today. Jose has guided us as a family in the best interest for our daughter. My daughter has been seeing Jose for over 14 years and we would not trust anyone else regarding our daughter\u2019s therapy and well-being. His empathy towards us as a family is beyond amazing.",
-	"Jose is an excellent physiotherapist, very positive and calm. Encouraging people to do what they have to do. We\u2019ve been to other therapists who were very negative and put great pressure about Vojta and overall.",
-	"I would recommend Jose without hesitation. Jose helped us a lot. Great approach to the child, super friendly and I find Jose the best therapist so far. We are very thankful to have met Jose. He is a kind person, empathetic with his patients. Thanks to him we have so many improvements. We thank him for his patience and involvement.",
-	"Jose has an uncanny ability to understand how one\u2019s body works (or does not) and knows how to motivate you to go through the (occasionally painful) steps required to sort out the injury related issues that life brings. He is also a lovely chap, who builds a very deep sense of trust. Jose is a very knowledgeable professional and very patient with children. He is always finding the way to engage the children in the therapy.",
+/* Vojta-therapy folder only has an avatar file, so this page pulls from neurological-rehabilitation and paediatric photos. */
+const photos = [
+	{ src: '/neurological-rehabilitation/clinic-session.jpg', alt: 'Neurological clinic session' },
+	{ src: '/neurological-rehabilitation/fitness-ball.jpg', alt: 'Balance rehab' },
+	{ src: '/neurological-rehabilitation/parallel-bars.jpg', alt: 'Gait rehabilitation' },
+	{ src: '/neurological-rehabilitation/rehab-gym.jpg', alt: 'Rehab gym space' },
+	{ src: '/paediatric-sports-physiotherapy/padel.jpg', alt: 'Youth movement' },
+	{ src: '/physio/body-1.jpg', alt: 'Balance Physio clinical environment' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'What is Vojta Therapy?', a: 'It is a neurological rehabilitation method that uses reflex locomotion to activate automatic movement patterns within the body.' },
+	{ q: 'Is it only for children?', a: 'No. While commonly used in infants and children, it is also effective for adults with neurological conditions.' },
+	{ q: 'How is it different from other neurological therapies?', a: 'Vojta Therapy focuses on activating involuntary, reflex-driven movement patterns rather than relying solely on voluntary movement and task-based training.' },
+	{ q: 'Will my child cry during treatment?', a: 'Some children may cry during sessions due to the effort involved. This is not typically due to pain, but rather the unfamiliar nature of the movement.' },
+	{ q: 'How many sessions are needed?', a: 'This varies depending on the individual. A structured plan will be provided after the initial assessment.' },
+	{ q: 'Do I need a referral?', a: 'No — you can book directly with us.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Vojta Therapy"
-	heroSubtitle="A specialised neurological treatment that activates innate movement patterns within the central nervous system."
-	breadcrumb="Vojta Therapy"
-	seoTitle="Vojta Therapy in Clapham"
-	seoDescription="Vojta Therapy in Clapham for infants, children, and adults. A reflex-based neurological treatment supporting posture, coordination, and mobility."
-	hideMarquee
-	textGrid
-	intro={[
-		"Movement problems linked to the nervous system can affect how the body develops, adapts, and functions day to day. Vojta Therapy is a specialised neurological treatment that works by activating innate movement patterns within the central nervous system.",
-		"Rather than relying on voluntary effort alone, it stimulates automatic responses that underpin posture, coordination, and mobility.",
-		"Treatment is delivered by trained therapists and is suitable for infants, children, and adults with a range of neurological and movement conditions.",
-	]}
-	whenHeading="When to consider"
-	whenHighlight="Vojta Therapy"
-	whenList={[
-		"Delays in motor development such as rolling, crawling, or walking",
-		"Difficulties with coordination, posture, or muscle tone",
-		"Asymmetrical movement or a preference for one side",
-		"Spasticity or stiffness affecting fluid movement",
-		"Neurological conditions such as cerebral palsy",
-		"Movement limitations following stroke or brain injury",
-	]}
-	howHeading="How we"
-	howHighlight="treat"
-	howList={[
-		"Targeted stimulation of reflex points to activate global movement patterns",
-		"Positioning to support postural control and alignment",
-		"Guidance for home-based therapy where appropriate",
-		"Ongoing reassessment of movement quality and control",
-	]}
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Infants and children with developmental delays or neurological conditions",
-		"Children with cerebral palsy or motor control disorders",
-		"Adults recovering from stroke or neurological injury",
-		"Individuals with complex movement disorders",
-	]}
-	faqs={[
-		{ q: "What is Vojta Therapy?", a: "A neurological rehabilitation method using reflex locomotion to activate automatic movement patterns." },
-		{ q: "Is it only for children?", a: "No. It is effective for adults with neurological conditions too." },
-		{ q: "How is it different from other therapies?", a: "It focuses on activating involuntary, reflex-driven patterns rather than voluntary movement alone." },
-		{ q: "Will my child cry during treatment?", a: "Some children may cry due to the effort involved, not typically because of pain." },
-		{ q: "How many sessions will we need?", a: "This varies individually; a structured plan is provided after the initial assessment." },
-		{ q: "Do I need a referral?", a: "No direct referral is required." },
-	]}
+<Layout
+	title="Vojta Therapy in South West London"
+	description="Vojta Therapy at Balance Physio — a specialist neurological treatment activating innate movement patterns for infants, children and adults with neurological conditions."
 >
-	<section slot="before-faq" class="testimonials">
+	<PageHero title="in South West London" highlight="Vojta Therapy" breadcrumb="Vojta Therapy" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Activating innate" highlight="movement patterns" image="/neurological-rehabilitation/clinic-session.jpg" imageAlt="Vojta clinical session">
+		<p>Movement problems linked to the nervous system can affect how the body develops, adapts, and functions day to day.</p>
+		<p>Vojta Therapy is a specialised neurological treatment that works by activating innate movement patterns within the central nervous system. Rather than relying on voluntary effort alone, it stimulates automatic responses that underpin posture, coordination, and mobility.</p>
+		<p>At Balance, we take a structured and evidence-led approach to neurological rehabilitation. From your first session, we assess how movement is organised and controlled, then build a plan that supports both immediate function and long-term development.</p>
+		<p>Whether for a child with developmental concerns or an adult recovering from neurological injury, the focus is the same: improving how the body moves at a fundamental level.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="Vojta Therapy" image="/neurological-rehabilitation/fitness-ball.jpg" imageAlt="Balance rehab">
+		<p>Vojta Therapy can be particularly effective where movement is limited by neurological inhibition.</p>
+		<p>You may benefit if you or your child are experiencing:</p>
+		<ul>
+			<li>Delays in motor development such as rolling, crawling, or walking</li>
+			<li>Difficulties with coordination, posture, or muscle tone</li>
+			<li>Asymmetrical movement or a preference for one side</li>
+			<li>Spasticity or stiffness affecting fluid movement</li>
+			<li>Neurological conditions such as cerebral palsy</li>
+			<li>Movement limitations following stroke or brain injury</li>
+		</ul>
+		<p>If movement patterns are not developing or functioning as expected, early assessment is important.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/neurological-rehabilitation/parallel-bars.jpg" imageAlt="Gait rehabilitation">
+		<p>Vojta Therapy is based on activating specific zones of the body to trigger automatic movement responses.</p>
+		<p>Your treatment may include:</p>
+		<ul>
+			<li>Targeted stimulation of reflex points to activate global movement patterns</li>
+			<li>Positioning to support postural control and alignment</li>
+			<li>Guidance for home-based therapy where appropriate</li>
+			<li>Ongoing reassessment of movement quality and control</li>
+		</ul>
+		<p>The aim is to access and reinforce fundamental patterns such as turning, creeping, and postural stabilisation — building a foundation for more complex movement.</p>
+		<p>Treatment is structured, consistent, and adapted to the individual's stage of development or recovery.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/neurological-rehabilitation/rehab-gym.jpg" imageAlt="Neuro rehab environment">
+		<p>Progress in neurological rehabilitation is tracked carefully over time.</p>
+		<p>From your first session, we assess:</p>
+		<ul>
+			<li>Movement patterns and symmetry</li>
+			<li>Postural control</li>
+			<li>Muscle tone and coordination</li>
+			<li>Functional ability relative to milestones, age or condition</li>
+		</ul>
+		<p>As therapy progresses, we monitor changes in how movement is organised and controlled.</p>
+		<p>This allows us to:</p>
+		<ul>
+			<li>Identify meaningful improvements in function</li>
+			<li>Adjust the treatment plan as needed</li>
+			<li>Provide clear feedback to patients and families</li>
+		</ul>
+		<p>The goal is improved automatic control of movement, not just temporary change.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/neurological-rehabilitation/walking-frame.jpg" imageAlt="Mobility rehabilitation">
+		<p>We support a wide range of patients across South West London:</p>
+		<ul>
+			<li><strong>Infants and children</strong> with developmental delays or neurological conditions</li>
+			<li><strong>Children with cerebral palsy</strong> or motor control disorders</li>
+			<li><strong>Adults recovering from stroke or neurological injury</strong></li>
+			<li><strong>Individuals with complex movement disorders</strong> not responding to traditional therapy</li>
+		</ul>
+		<p>We also work closely with families, providing guidance and support throughout the rehabilitation process.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="specialist" image="/vojta-therapy/jose-avatar.webp" imageAlt="Dr Jose Sanz Mengibar">
+		<p>Our Vojta Therapy service is led by <strong>Dr Jose Sanz Mengibar</strong>, Consultant Neurological Physiotherapist and certified Vojta Therapist.</p>
+		<p>With over 20 years of clinical and research experience and a PhD in the field, Dr Jose has a deep understanding of neurological movement disorders. His approach focuses on identifying the specific inputs required to trigger effective motor responses, delivering highly individualised care for both children and adults.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Jose &rarr;</a></p>
+		<p><strong>Integrated care.</strong> Where appropriate, we work closely with the wider Balance team. This may include joint sessions with physiotherapists and other specialists — ensuring your treatment carries through into everyday movement and function.</p>
+		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/physio/body-1.jpg" imageAlt="Balance clinical environment">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
 		<div class="container">
-			<div class="section-header">
-				<h2>Hear from our <span class="highlight">happy client</span></h2>
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
 			</div>
-			<blockquote class="testimonial testimonial-single">
-				{testimonialParagraphs.map((p) => <p>{p}</p>)}
-				<div class="testimonial-author">
-					<div class="testimonial-avatar">
-						<img src="/vojta-therapy/jose-avatar.webp" alt="Child receiving Vojta therapy with Jose" width="72" height="72" />
-					</div>
-				</div>
-			</blockquote>
 		</div>
 	</section>
-</ServicePage>
+
+	<BookingCTA />
+</Layout>

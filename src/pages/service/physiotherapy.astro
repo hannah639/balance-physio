@@ -6,10 +6,12 @@ import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 
 const physioPhotos = [
-	{ src: '/physio/01-acupuncture.jpg', alt: 'Close-up of acupuncture needles' },
-	{ src: '/physio/02-feet.jpg', alt: 'Feet on a foam roller during rehab' },
-	{ src: '/physio/03-ems.jpg', alt: 'EMS electrodes on the quads' },
-	{ src: '/physio/04-archery.jpg', alt: 'Archery, movement and control' },
+	{ src: '/physio/slider-skeleton.jpg', alt: 'Anatomical skeleton in a clinic treatment room' },
+	{ src: '/physio/slider-gym.jpg', alt: 'Balance Physio rehabilitation gym and studio space' },
+	{ src: '/physio/slider-reception.jpg', alt: 'Balance Physio Clapham reception and shop area' },
+	{ src: '/physio/slider-al-riley.jpg', alt: 'Al Riley running the London Marathon' },
+	{ src: '/physio/slider-claire-bennett.jpg', alt: 'Claire Bennett, GB fencer' },
+	{ src: '/physio/slider-tom-holland.jpg', alt: 'Tom Holland playing cricket' },
 ];
 
 const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
@@ -171,26 +173,3 @@ const faqs = [
 
 	<BookingCTA />
 </Layout>
-
-<style is:global>
-	/* Small inline section link used for the "Read More / Meet / Pricing" CTAs inside ImageText blocks. */
-	.bp-page .image-text .section-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		font-weight: 600;
-		color: var(--accent);
-		text-decoration: none;
-		border-bottom: 2px solid transparent;
-		padding-bottom: 2px;
-		transition: border-color .15s;
-	}
-	.bp-page .image-text .section-link:hover {
-		border-bottom-color: var(--accent);
-	}
-	/* FAQ section on the Physio page uses the same tinted bg as the alt-bg ImageText blocks
-	   above it, so the FAQ visually separates from the (white) Pricing section that comes before. */
-	.bp-page .faq-section.faq-section--alt {
-		background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%);
-	}
-</style>

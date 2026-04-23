@@ -1,68 +1,149 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/hydrotherapy/hydro-equipment.jpg', alt: 'Hydrotherapy pool with equipment' },
-	{ src: '/hydrotherapy/elderly-water-therapy.jpg', alt: 'Older adults in a hydrotherapy session' },
+const photos = [
+	{ src: '/hydrotherapy/athlete-in-pool.jpg', alt: 'Athlete training in a hydrotherapy pool' },
+	{ src: '/hydrotherapy/elderly-water-therapy.jpg', alt: 'Aquatic therapy for older adults' },
+	{ src: '/hydrotherapy/goggles-towel.jpg', alt: 'Swim kit ready for hydrotherapy' },
+	{ src: '/hydrotherapy/hydro-equipment.jpg', alt: 'Hydrotherapy equipment' },
 	{ src: '/hydrotherapy/swim-coach-boy.jpg', alt: 'Guided session in the pool' },
-	{ src: '/hydrotherapy/athlete-in-pool.jpg', alt: 'Athlete recovering after a pool session' },
-	{ src: '/hydrotherapy/goggles-towel.jpg', alt: 'Swimming goggles and towel' },
-	{ src: '/hydrotherapy/water-texture.jpg', alt: 'Pool water surface' },
-	{ src: '/hydrotherapy/water-surface.webp', alt: 'Calm water surface' },
+	{ src: '/hydrotherapy/water-texture.jpg', alt: 'Warm hydrotherapy pool water' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'What should I bring to my hydrotherapy session?', a: 'You will need your swimming kit, a towel, and any toiletries you require for showering afterwards. It is also advisable to bring a bottle of water to stay hydrated, as the warm pool temperature can lead to fluid loss.' },
+	{ q: 'Do I need to be a swimmer to have hydrotherapy?', a: 'No. Most exercises are performed in a standing or supported position where your feet remain on the floor. Your physiotherapist will be with you or nearby to ensure you feel completely safe and supported.' },
+	{ q: 'How long does a session last?', a: 'A typical session of hydrotherapy lasts 30 to 45 minutes, but you should set aside around 60 to 75 minutes in total to allow for changing and showering.' },
+	{ q: 'Is there assistance for getting changed?', a: 'Our physiotherapists provide clinical treatment in the water. If you require significant physical assistance for dressing or undressing, we recommend bringing a carer or family member to help you in the changing rooms.' },
+	{ q: 'Can hydrotherapy help with back pain?', a: 'Yes. The buoyancy of the water takes the pressure off the spinal discs and joints, while the warmth helps to decrease muscle guarding and spasms, allowing for movements that might be impossible on land.' },
+	{ q: 'Who is not suitable for hydrotherapy?', a: 'Individuals with open wounds, active skin infections, severe heart or lung conditions, or those who have recently had a stomach upset are generally not suitable for the pool until these issues have resolved.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Hydrotherapy"
-	introYoutubeId="kJ9Ny2lFDzk"
-	introImage="/hydrotherapy/hydro-equipment.jpg"
-	heroSubtitle="Physiotherapy delivered in water to facilitate movement and resistance exercises whilst reducing load on joints and tissues."
-	breadcrumb="Hydrotherapy"
-	seoTitle="Hydrotherapy in Clapham"
-	seoDescription="Guided hydrotherapy in Clapham South. Water-based rehabilitation using buoyancy, resistance and warmth to help you move, rebuild strength and recover."
-	marqueeImages={sliderImages}
-	intro={[
-		"Hydrotherapy is a form of physiotherapy delivered in water, facilitating movement and resistance exercises whilst reducing load on joints and tissues.",
-		"At Balance, hydrotherapy is used as part of a structured rehabilitation plan. The properties of water, buoyancy, resistance, and warmth, allow you to move more freely, build strength, and regain confidence where land-based exercise may be limited.",
-		"Sessions are always guided by a physiotherapist and tailored to your specific condition and stage of recovery.",
-	]}
-	whenHeading="When to consider"
-	whenHighlight="hydrotherapy"
-	whenIntro="You may benefit if you experience:"
-	whenList={[
-		"Joint pain or stiffness limiting movement on land",
-		"Post-surgical restrictions (e.g. knee, hip, or spinal surgery)",
-		"Difficulty weight-bearing due to pain or weakness",
-		"Reduced mobility following injury or illness",
-		"Multiple areas of weakness and limitation",
-		"Balance or coordination difficulties",
-	]}
-	whenImage="/hydrotherapy/elderly-water-therapy.jpg"
-	howHeading="How we"
-	howHighlight="work"
-	howIntro="Sessions may include:"
-	howList={[
-		"Guided mobility and range of movement exercises",
-		"Strength work using water resistance",
-		"Balance and control exercises in a supported environment",
-		"Gait re-education and functional movement practice",
-	]}
-	howImage="/hydrotherapy/swim-coach-boy.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Post-operative patients recovering from joint replacement or orthopaedic surgery",
-		"Individuals with chronic pain requiring lower-load movement environments",
-		"Seniors improving strength, balance, and confidence",
-		"Neurological patients working on coordination and mobility",
-		"Active individuals maintaining conditioning during injury recovery",
-	]}
-	whoImage="/hydrotherapy/athlete-in-pool.jpg"
-	faqs={[
-		{ q: "What should I bring?", a: "Swimming kit, towel, toiletries, and water for hydration." },
-		{ q: "Do I need to be a swimmer?", a: "No. Most exercises are performed in a standing or supported position where your feet remain on the floor." },
-		{ q: "How long does a session last?", a: "A typical session of hydrotherapy lasts 30 to 45 minutes, but you should set aside around 60 to 75 minutes in total." },
-		{ q: "Can it help with back pain?", a: "Yes. The buoyancy of the water takes the pressure off the spinal discs and joints, while the warmth helps to decrease muscle guarding and spasms." },
-		{ q: "Who is hydrotherapy unsuitable for?", a: "Those with open wounds, active skin infections, severe heart or lung conditions, or recent stomach issues." },
-	]}
-/>
+<Layout
+	title="Hydrotherapy in Clapham South"
+	description="Physiotherapist-led hydrotherapy in Clapham South — rehabilitation in water using buoyancy, warmth and resistance to restore movement, strength and confidence."
+>
+	<PageHero title="in Clapham South" highlight="Hydrotherapy" breadcrumb="Hydrotherapy" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Rehabilitation in" highlight="water" image="/hydrotherapy/athlete-in-pool.jpg" imageAlt="Athlete training in water">
+		<p>Hydrotherapy is a form of physiotherapy delivered in water, facilitating movement and resistance exercises whilst reducing load on joints and tissues.</p>
+		<p>At Balance, hydrotherapy is used as part of a structured rehabilitation plan. The properties of water — buoyancy, resistance, and warmth — allow you to move more freely, build strength, and regain confidence where land-based exercise may be limited.</p>
+		<p>Sessions are always guided by a physiotherapist and tailored to your specific condition and stage of recovery.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="hydrotherapy" image="/hydrotherapy/elderly-water-therapy.jpg" imageAlt="Aquatic therapy">
+		<p>You may benefit from hydrotherapy if you experience:</p>
+		<ul>
+			<li>Joint pain or stiffness limiting movement on land</li>
+			<li>Post-surgical restrictions (e.g. knee, hip, or spinal surgery)</li>
+			<li>Difficulty weight-bearing due to pain or weakness</li>
+			<li>Reduced mobility following injury or illness</li>
+			<li>Multiple areas of weakness and limitation</li>
+			<li>Balance or coordination difficulties</li>
+		</ul>
+		<p>Hydrotherapy is particularly useful when traditional exercise is difficult.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/hydrotherapy/hydro-equipment.jpg" imageAlt="Hydrotherapy equipment">
+		<p>We use water-based exercise to progressively restore movement, strength, and function.</p>
+		<p>Your session may include:</p>
+		<ul>
+			<li>Guided mobility and range of movement exercises</li>
+			<li>Strength work using water resistance</li>
+			<li>Balance and control exercises in a supported environment</li>
+			<li>Gait re-education and functional movement practice</li>
+		</ul>
+		<p>Sessions are progressed in line with your tolerance, ensuring you are challenged without triggering flare-ups.</p>
+		<p>Where appropriate, hydrotherapy is combined with land-based rehabilitation to support a full return to activity.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/hydrotherapy/swim-coach-boy.jpg" imageAlt="Guided session">
+		<p>We monitor progress throughout your rehabilitation to ensure meaningful improvement.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Pain levels during and after movement</li>
+			<li>Range of movement and joint function</li>
+			<li>Strength and control in affected areas</li>
+			<li>Functional ability (e.g. walking, stairs, daily tasks)</li>
+			<li>Confidence in movement</li>
+		</ul>
+		<p>These measures guide progression from water-based therapy back to full land-based activity.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/hydrotherapy/goggles-towel.jpg" imageAlt="Ready for the pool">
+		<p>We work with a range of patients, including:</p>
+		<ul>
+			<li><strong>Post-operative patients:</strong> Recovering from joint replacement or orthopaedic surgery</li>
+			<li><strong>Individuals with chronic pain:</strong> Requiring a lower-load environment to begin movement</li>
+			<li><strong>Our Seniors:</strong> Improving strength, balance, and confidence</li>
+			<li><strong>Neurological patients:</strong> Working on coordination and mobility in a safe setting</li>
+			<li><strong>Active individuals:</strong> Maintaining conditioning during injury recovery</li>
+		</ul>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our hydrotherapy" highlight="team" image="/hydrotherapy/water-texture.jpg" imageAlt="Pool surface">
+		<p>Hydrotherapy is delivered by experienced physiotherapists trained in aquatic rehabilitation.</p>
+		<p>You will be guided throughout each session, with clear instruction and progression based on your individual needs.</p>
+		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Location" heading="Getting to" highlight="Hydrotherapy" image="/hydrotherapy/athlete-in-pool.jpg" imageAlt="Hydrotherapy pool">
+		<p>Balance Performance Physiotherapy conducts hydrotherapy sessions in <strong>Clapham South</strong> at <strong>Audley Village, Nightingale Place, 3 Nightingale Lane, SW4 9AH</strong>. This location is separate from our primary Gauden Road site and offers a premium, accessible environment for aquatic rehabilitation.</p>
+		<p>The facility is conveniently located near <strong>Clapham South Tube Station</strong>, making it easily accessible for residents across the SW4 and SW12 postcodes. For those travelling by car, parking is available at Audley, ensuring your visit for hydrotherapy is as convenient and stress-free as possible.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/hydrotherapy/hydro-equipment.jpg" imageAlt="Hydrotherapy at Balance">
+		<p>We provide a transparent fee structure for our specialist aquatic therapy sessions.</p>
+		<ul>
+			<li><strong>Hydrotherapy Initial Assessment:</strong> Please call 020 7627 2308 for current rates.</li>
+			<li><strong>Follow-up Aquatic Sessions:</strong> Tailored durations based on your clinical requirement.</li>
+		</ul>
+		<p>Hydrotherapy is recognised by <strong>many major insurance providers</strong>. However, as policies vary regarding "Aquatic Therapy" or "Hydrotherapy," we strongly recommend that you contact your provider to confirm coverage and obtain authorisation before booking your first session at Nightingale Place.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+			<div class="faq-list" style="margin-top: 40px;">
+				<h3 style="font-size: 22px; margin-bottom: 16px; text-align: center;">Glossary of Terms</h3>
+				<details class="faq-item">
+					<summary>Buoyancy</summary>
+					<div class="answer">The upward force exerted by a fluid that opposes the weight of an immersed object.</div>
+				</details>
+				<details class="faq-item">
+					<summary>Hydrostatic Pressure</summary>
+					<div class="answer">The pressure exerted by the water on the body, which can help reduce swelling and improve circulation.</div>
+				</details>
+				<details class="faq-item">
+					<summary>Aquatic Therapy</summary>
+					<div class="answer">Another term for hydrotherapy, focusing on exercises performed in water for rehabilitation.</div>
+				</details>
+				<details class="faq-item">
+					<summary>Resistance</summary>
+					<div class="answer">The physical property of water that provides a counter-force to movement, used for strengthening.</div>
+				</details>
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

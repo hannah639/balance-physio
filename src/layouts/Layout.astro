@@ -332,6 +332,11 @@ const jsonLd = settings.businessName ? {
 	.bp-page .faq-item summary::after { content: '+'; font-size: 28px; color: var(--accent); font-weight: 400; transition: transform .2s; }
 	.bp-page .faq-item[open] summary::after { transform: rotate(45deg); }
 	.bp-page .faq-item .answer { padding-top: 16px; font-size: 16px; line-height: 1.8; color: var(--text-muted); }
+	/* Service-page FAQ variant — tinted gradient bg so it separates from a white section above. */
+	.bp-page .faq-section.faq-section--alt { background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
+	/* Small inline CTA link used inside ImageText blocks on service pages ("Read More →", "Meet The Team →" etc). */
+	.bp-page .image-text .section-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--accent); text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; transition: border-color .15s; }
+	.bp-page .image-text .section-link:hover { border-bottom-color: var(--accent); }
 
 	/* Link grid (for services/conditions index pages) */
 	.bp-page .link-grid-section { padding: 100px 0; background: var(--primary-bg); }

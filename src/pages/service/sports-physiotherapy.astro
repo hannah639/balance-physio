@@ -1,66 +1,126 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sportsPhotos = [
-	{ src: '/sports-physio/01.jpg', alt: 'Athlete training' },
-	{ src: '/sports-physio/02.jpg', alt: 'Judo group' },
-	{ src: '/sports-physio/03.jpg', alt: 'Skiing group' },
-	{ src: '/sports-physio/04.jpg', alt: 'Beach volleyball team' },
-	{ src: '/sports-physio/05.jpg', alt: 'Skiing on the slope' },
-	{ src: '/sports-physio/06.jpg', alt: 'Badminton session' },
-	{ src: '/sports-physio/07.jpg', alt: 'Tennis player serving' },
-	{ src: '/sports-physio/08.jpg', alt: 'Tennis backhand' },
+const photos = [
+	{ src: '/sports-physio/01.jpg', alt: 'Sports physiotherapy session' },
+	{ src: '/sports-physio/02.jpg', alt: 'Rehabilitation in action' },
+	{ src: '/sports-physio/03.jpg', alt: 'Strength rehabilitation' },
+	{ src: '/sports-physio/04.jpg', alt: 'Sports rehab detail' },
+	{ src: '/sports-physio/hero-running.jpg', alt: 'Return to running' },
+	{ src: '/sports-physio/hero-cricket.jpg', alt: 'Cricket performance' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'Do I need a GP referral?', a: 'No. You can book directly with us.' },
+	{ q: 'Can children have sports physiotherapy?', a: 'Yes. We regularly work with young athletes, focusing on safe development, injury management, and long-term progression.' },
+	{ q: 'What should I wear?', a: 'Comfortable clothing that allows us to assess movement and, where relevant, sport-specific activity.' },
+	{ q: 'How many sessions will I need?', a: 'This depends on your injury and goals. After your first session, we will give you a clear plan.' },
+	{ q: 'Can I use my private health insurance?', a: 'We recommend checking directly with your provider to confirm your level of cover.' },
+	{ q: 'When can I return to sport?', a: 'We use clear criteria based on strength, movement, and performance to guide your return safely.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Sports Physiotherapy"
-	heroSubtitle="Clinical, evidence-led care to keep you training, competing and performing at the level you want."
-	breadcrumb="Sports Physiotherapy"
-	seoTitle="Sports Physiotherapy in Clapham"
-	seoDescription="Specialist sports physiotherapy in Clapham, London. From amateur to elite, we assess how you move under load, rebuild strength, and get you safely back to sport."
-	marqueeImages={sportsPhotos}
-	marqueeSpeed={40}
-	intro={[
-		"Sport places specific individual demands on the body. Whether you are training, competing, or simply trying to stay active, injury or pain can quickly affect your confidence and performance.",
-		"We take a clinical, evidence-led approach to every case. From your first session, we assess how you move under load, how your body responds to training, and where the breakdown has occurred.",
-		"We then build a structured plan around your goals, your sport, and your starting point.",
-	]}
-	introImage="/sports-physio/hero-running.jpg"
-	whenHeading="When to consider"
-	whenHighlight="sports physio"
-	whenList={[
-		"Ongoing pain that returns when you increase training",
-		"Reduced performance or difficulty progressing in your sport",
-		"Acute sports injuries such as muscle strains or ligament sprains",
-		"Tendon issues linked to running, jumping, or repetitive loading",
-		"Growth-related injuries in children and adolescents",
-		"Recovery following surgery or time away from sport",
-		"Movement limitations affecting strength, speed or control",
-	]}
-	whenImage="/sports-physio/hero-swimming.jpg"
-	howList={[
-		"Hands-on therapy to reduce pain and restore movement",
-		"Targeted exercise to rebuild strength, control and coordination",
-		"Progressive loading to prepare you for sport-specific demands",
-		"Movement analysis to identify inefficiencies and reduce injury risk",
-		"Clear education so you understand your condition and recovery",
-	]}
-	howImage="/sports-physio/hero-cricket.jpg"
-	whoList={[
-		"Adults returning to sport after injury or time away",
-		"Athletes looking to stay consistent and pain-free",
-		"High-performing athletes aiming to optimise performance",
-		"Children and young athletes managing growth and training demands",
-		"Parents seeking safe and structured support for their child's development",
-		"Individuals wanting to build strength, resilience and confidence",
-	]}
-	whoImage="/sports-physio/hero-skiing.jpg"
-	faqs={[
-		{ q: "Do I need a GP referral?", a: "No. You can book directly with us." },
-		{ q: "Can children have sports physiotherapy?", a: "Yes. We regularly work with young athletes, focusing on safe development, injury management and long-term progression." },
-		{ q: "What should I wear?", a: "Comfortable clothing that allows us to assess movement and, where relevant, sport-specific activity." },
-		{ q: "How many sessions will I need?", a: "This depends on your injury and goals. After your first session, we'll give you a clear plan." },
-		{ q: "When can I return to sport?", a: "We use clear criteria based on strength, movement and performance to guide your return safely." },
-	]}
-/>
+<Layout
+	title="Sports Physiotherapy in Clapham"
+	description="Sports physiotherapy in Clapham for adults and children — assessment, rehabilitation and return-to-performance guided by consultant physiotherapists."
+>
+	<PageHero title="in Clapham" highlight="Sports Physiotherapy" breadcrumb="Sports Physiotherapy" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Clinical, evidence-led, performance-focused" highlight="care" image="/sports-physio/hero-running.jpg" imageAlt="Runner training">
+		<p>Sport places specific individual demands on the body. Whether you are training, competing, or simply trying to stay active, injury or pain can quickly affect your confidence and performance.</p>
+		<p>At Balance, sports physiotherapy is about more than getting you out of pain. It's about understanding how you move, what your sport requires, and what needs to change to get you back performing at your best.</p>
+		<p>We take a clinical, evidence-led approach to every case. From your first session, we assess how you move under load, how your body responds to training, and where the breakdown has occurred. We then build a structured plan around your goals, your sport, and your starting point.</p>
+		<p>We work with both adults and children across all levels of sport, from those returning to activity to athletes competing at a high level. Wherever you are starting from, we meet you there and guide you forward.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="sports physiotherapy" image="/sports-physio/01.jpg" imageAlt="Sports assessment">
+		<p>You don't need to wait until you are injured to benefit from sports physiotherapy.</p>
+		<p>We can help if you are dealing with:</p>
+		<ul>
+			<li>Ongoing pain that returns when you increase training</li>
+			<li>Reduced performance or difficulty progressing in your sport</li>
+			<li>Acute sports injuries such as muscle strains or ligament sprains</li>
+			<li>Tendon issues linked to running, jumping, or repetitive loading</li>
+			<li>Growth-related injuries in children and adolescents</li>
+			<li>Recovery following surgery or time away from sport</li>
+			<li>Movement limitations affecting strength, speed, or control</li>
+		</ul>
+		<p>If something is holding you back, or not improving as expected, it's worth getting it assessed.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/sports-physio/02.jpg" imageAlt="Hands-on physio">
+		<p>Everything we do is built around one principle: helping you move and perform better.</p>
+		<p>Your treatment may include:</p>
+		<ul>
+			<li>Hands-on therapy to reduce pain and restore movement</li>
+			<li>Targeted exercise to rebuild strength, control, and coordination</li>
+			<li>Progressive loading to prepare you for sport-specific demands</li>
+			<li>Movement analysis to identify inefficiencies and reduce injury risk</li>
+			<li>Clear education so you understand your condition and recovery</li>
+		</ul>
+		<p>We do not separate rehabilitation from performance. From early in your recovery, we begin building towards the demands of your sport, so you are not just pain-free, but ready to return stronger and more capable.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/sports-physio/03.jpg" imageAlt="Progress assessment">
+		<p>We don't guess.</p>
+		<p>From your first session, we establish a clear baseline of how you move, how your body handles load, and what you can currently do in your sport. As you progress, we regularly reassess strength, control, and performance.</p>
+		<p>This keeps your treatment focused and accountable.</p>
+		<p>For you, that means:</p>
+		<ul>
+			<li>Clear evidence that you're improving</li>
+			<li>A plan that adapts as your training and performance progress</li>
+			<li>Confidence in your return to sport, training, and competition</li>
+		</ul>
+		<p><a href="/outcomes" class="section-link">Read More About our Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/sports-physio/hero-cricket.jpg" imageAlt="Cricket performance">
+		<p>We work with people across a wide range of sporting backgrounds and experience levels.</p>
+		<ul>
+			<li>Adults returning to sport after injury or time away</li>
+			<li>Athletes looking to stay consistent and pain-free</li>
+			<li>High-performing athletes aiming to optimise performance</li>
+			<li>Children and young athletes managing growth and training demands</li>
+			<li>Parents seeking safe and structured support for their child's development</li>
+			<li>Individuals wanting to build strength, resilience, and confidence in movement</li>
+		</ul>
+		<p>Whatever your starting point, the goal is the same: better movement, better performance, and long-term resilience.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="team" image="/sports-physio/04.jpg" imageAlt="Balance clinical team">
+		<p>Our sports physiotherapy service is delivered by a highly experienced team with specialist expertise across both adult and youth populations.</p>
+		<p>Spinal fracture management is led by our Consultant Physiotherapists, Dr Lucy Goldby and Caroline Curtis, who bring extensive experience in complex musculoskeletal and orthopaedic care.</p>
+		<p>All other sports injuries and performance-related cases are managed by our Consultant Physiotherapy team for adults, and our Consultant Youth Physiotherapy team for children and adolescents. This ensures that every patient is treated by a clinician with the specific expertise required for their age, sport, and stage of development.</p>
+		<p>We work collaboratively across the team, combining clinical expertise with a deep understanding of movement and performance, so your care is always precise, structured, and goal-driven.</p>
+		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/sports-physio/05.jpg" imageAlt="Sports physio at Balance">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We are also recognised by major insurance providers, including Bupa and AXA PPP Health.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

@@ -1,69 +1,128 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const liftPhotos = [
-	{ src: '/lift/01.jpg', alt: 'Kettlebell deadlift coaching' },
-	{ src: '/lift/02.jpg', alt: 'Barbell curl coaching' },
-	{ src: '/lift/03.jpg', alt: 'Overhead press' },
-	{ src: '/lift/04.jpg', alt: 'Kettlebells' },
-	{ src: '/lift/05.jpg', alt: 'Weightlifting in the gym' },
-	{ src: '/lift/06.jpg', alt: 'Barbell workout' },
+const photos = [
+	{ src: '/lift/01.jpg', alt: 'Lift Club session' },
+	{ src: '/lift/02.jpg', alt: 'Coached lifting' },
+	{ src: '/lift/03.jpg', alt: 'Strength programme' },
+	{ src: '/lift/body-barbell.jpg', alt: 'Barbell training' },
+	{ src: '/lift/body-clean.jpg', alt: 'Clean lift technique' },
+	{ src: '/lift/body-kettlebells.jpg', alt: 'Kettlebell work' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'Do I need experience to join?', a: 'No. The club is beginner-friendly and coached throughout.' },
+	{ q: 'Will I get individual attention in a group setting?', a: 'Yes. Group sizes are kept small to allow for coaching and feedback.' },
+	{ q: "Can I join if I've had back pain?", a: "Yes. Sessions are delivered within a clinical setting and can be adapted as needed. Alex is also an apprentice physiotherapist, so you're in good hands." },
+	{ q: 'What is a progressive programme?', a: 'A structured plan where exercises and loads are gradually increased over time to build strength safely.' },
+	{ q: 'Can I train during pregnancy?', a: 'Yes. Exercises can be adapted appropriately. Best to call and chat to us first.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Lift (Weight Training) Club"
-	heroSubtitle="Build strength, confidence, and resilience through structured coaching in a supportive, small-group setting."
-	breadcrumb="Lift (Weight Training) Club"
-	seoTitle="Lift (Weight Training) Club in Clapham"
-	seoDescription="Coached weight training in Clapham. Small-group strength sessions that bridge rehabilitation and independent training, progressive and tailored to you."
-	marqueeImages={liftPhotos}
-	intro={[
-		"Our Weight Training Club provides a supportive, coached environment to learn and develop strength safely. It is designed to bridge the gap between rehabilitation and independent training, helping you build the foundations for long-term health and performance.",
-		"Whether you are completely new to lifting or looking to refine your technique, sessions are structured, progressive, and tailored within a small group setting.",
-		"Strength training is a key component of maintaining muscle mass, bone health, and overall physical resilience.",
-	]}
-	introImage="/lift/body-dumbbells.jpg"
-	whenHeading="When to consider"
-	whenHighlight="joining"
-	whenIntro="You may benefit from the Weight Training Club if you:"
-	whenList={[
-		"Want to learn how to lift safely and effectively",
-		"Feel unsure about technique (e.g. squat, hinge, press)",
-		"Have stopped progressing with independent training",
-		"Have seen the research into the health benefits of lifting",
-		"Are returning to strength training after injury",
-		"Want a structured and consistent approach to training",
-	]}
-	whenImage="/lift/body-barbell.jpg"
-	howHeading="How the"
-	howHighlight="club works"
-	howIntro="Sessions follow a structured programme designed to build strength progressively. You will:"
-	howList={[
-		"Learn the fundamental movement patterns: push, pull, squat, and hinge",
-		"Train using barbells and other resistance equipment",
-		"Receive coaching on technique and positioning",
-		"Progress load and complexity over time",
-		"Train in a small group with individual guidance",
-		"Have fun!",
-	]}
-	howImage="/lift/body-clean.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoIntro="The club is designed to be inclusive and accessible. No prior experience is required."
-	whoList={[
-		"Beginners learning lifting technique from the ground up",
-		"Postnatal and prenatal clients training safely with appropriate modifications",
-		"Individuals with previous injuries returning to strength in a controlled environment",
-		"Our veterans maintaining and increasing muscle mass, bone density, and function",
-		"Regular gym users seeking structure and coaching to progress further",
-	]}
-	whoImage="/lift/body-kettlebells.jpg"
-	faqs={[
-		{ q: "Do I need experience to join?", a: "No. The club is beginner-friendly and coached throughout." },
-		{ q: "Will I get individual attention in a group setting?", a: "Yes. Group sizes are kept small to allow for coaching and feedback." },
-		{ q: "Can I join if I've had back pain?", a: "Yes. Sessions are delivered within a clinical setting and can be adapted as needed. Alex is also an apprentice physiotherapist, so you're in good hands." },
-		{ q: "What is a progressive programme?", a: "A structured plan where exercises and loads are gradually increased over time to build strength safely." },
-		{ q: "Can I train during pregnancy?", a: "Yes. Exercises can be adapted appropriately. Best to call and chat to us first." },
-	]}
-/>
+<Layout
+	title="Lift (Weight Training) Club in Clapham"
+	description="Physiotherapy-led weight training club in Clapham — learn barbell fundamentals in a coached, small-group, progressive programme suitable for beginners onwards."
+>
+	<PageHero title="in Clapham" highlight="Lift (Weight Training) Club" breadcrumb="Lift Club" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Build strength, confidence," highlight="and resilience" image="/lift/04.jpg" imageAlt="Lift Club small group">
+		<p>Build strength, confidence, and resilience through structured coaching.</p>
+		<p>Our Weight Training Club provides a supportive, coached environment to learn and develop strength safely. It is designed to bridge the gap between rehabilitation and independent training, helping you build the foundations for long-term health and performance.</p>
+		<p>Whether you are completely new to lifting or looking to refine your technique, sessions are structured, progressive, and tailored within a small group setting.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Who it's for" heading="When to" highlight="consider joining" image="/lift/05.jpg" imageAlt="Member training">
+		<p>You may benefit from the Weight Training Club if you:</p>
+		<ul>
+			<li>Want to learn how to lift safely and effectively</li>
+			<li>Feel unsure about technique (e.g. squat, hinge, press)</li>
+			<li>Have stopped progressing with independent training</li>
+			<li>Have seen the research into the health benefits of lifting</li>
+			<li>Are returning to strength training after injury</li>
+			<li>Want a structured and consistent approach to training</li>
+		</ul>
+		<p>Strength training is a key component of maintaining muscle mass, bone health, and overall physical resilience.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Sessions" heading="How the" highlight="club works" image="/lift/06.jpg" imageAlt="Coached class">
+		<p>Sessions follow a structured programme designed to build strength progressively.</p>
+		<p>You will:</p>
+		<ul>
+			<li>Learn the fundamental movement patterns: push, pull, squat, and hinge</li>
+			<li>Train using barbells and other resistance equipment</li>
+			<li>Receive coaching on technique and positioning</li>
+			<li>Progress load and complexity over time</li>
+			<li>Train in a small group with individual guidance</li>
+			<li>Have Fun!</li>
+		</ul>
+		<p>Programmes typically run in progressive blocks, allowing you to build strength in a measurable and sustainable way.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/lift/body-dumbbells.jpg" imageAlt="Dumbbell work">
+		<p>We track your development to ensure consistent improvement.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Strength progression across key lifts</li>
+			<li>Improvements in movement quality and control</li>
+			<li>Increased tolerance to load and training volume</li>
+			<li>Reduction in pain or post-training irritation</li>
+			<li>Confidence and independence in training</li>
+		</ul>
+		<p>This ensures you are not just exercising, but progressing.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our members" heading="Who we" highlight="help" image="/lift/body-kettlebells.jpg" imageAlt="Kettlebell training">
+		<p>The club is designed to be inclusive and accessible:</p>
+		<ul>
+			<li><strong>Beginners:</strong> Learning lifting technique from the ground up</li>
+			<li><strong>Postnatal and prenatal clients:</strong> Training safely with appropriate modifications</li>
+			<li><strong>Individuals with previous injuries:</strong> Returning to strength in a controlled environment</li>
+			<li><strong>Our Veterans:</strong> Maintaining and increasing muscle mass, bone density, and function</li>
+			<li><strong>Regular gym users:</strong> Seeking structure and coaching to progress further</li>
+		</ul>
+		<p>No prior experience is required.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Your coach" heading="Your" highlight="coach" image="/lift/body-clean.jpg" imageAlt="Coach demonstrating technique">
+		<p>The Weight Training Club is led by <strong>Alex Deif</strong>, a Level 4 qualified personal trainer with over a decade of experience.</p>
+		<p>Alex specialises in:</p>
+		<ul>
+			<li>Lower back pain management</li>
+			<li>Pre and postnatal training</li>
+			<li>Strength and conditioning across multiple sports</li>
+			<li>Power lifting</li>
+		</ul>
+		<p>His coaching focuses on clear instruction, adaptable programming, and helping you build confidence in your training.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Alex &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/lift/body-barbell.jpg" imageAlt="Barbell setup">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

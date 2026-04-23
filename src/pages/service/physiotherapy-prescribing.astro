@@ -1,56 +1,114 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+
+/* Prescribing folder only has 4 images — cycle + use /physio/body-* as needed. */
+const photos = [
+	{ src: '/physiotherapy-prescribing/reception.jpg', alt: 'Balance Physio reception' },
+	{ src: '/physiotherapy-prescribing/treatment-rooms.jpg', alt: 'Treatment rooms' },
+	{ src: '/physiotherapy-prescribing/front-entrance.jpg', alt: 'Clinic entrance' },
+	{ src: '/physiotherapy-prescribing/screenshot.webp', alt: 'Digital prescribing' },
+	{ src: '/physio/body-1.jpg', alt: 'Clinical consultation' },
+	{ src: '/physio/body-4.jpg', alt: 'Rehabilitation session' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'What is an independent prescriber?', a: 'A clinician trained to assess, diagnose, and prescribe medication within their area of expertise.' },
+	{ q: 'Do I still need to see my GP?', a: 'Not always for musculoskeletal issues, though we recommend keeping your GP informed.' },
+	{ q: 'Is medication always necessary?', a: 'No. It is used only when it will support your rehabilitation.' },
+	{ q: 'Can this help with severe back or neck pain?', a: 'Yes. Reducing pain can allow earlier movement and treatment.' },
+	{ q: 'Will I stay on medication long-term?', a: 'The aim is to reduce and stop medication as your condition improves.' },
+];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Physiotherapy Prescribing"
-	heroSubtitle="Medication can be an important part of rehabilitation, when used appropriately. Independent prescribing lets us reduce pain so movement-based treatment can work."
-	breadcrumb="Physiotherapy Prescribing"
-	seoTitle="Physiotherapy Prescribing in Clapham"
-	seoDescription="Independent physiotherapy prescribing in Clapham. Medication reviewed and prescribed alongside rehabilitation to reduce pain and support recovery."
-	intro={[
-		"Medication can be an important part of rehabilitation, when used appropriately. At Balance, independent prescribing allows us to reduce pain and inflammation so that physiotherapy and movement-based treatment can be effective.",
-		"The aim is not to rely on medication, but to create a window where we can reduce the pain so that you can move, exercise, and recover.",
-	]}
-	introImage="/physiotherapy-prescribing/treatment-rooms.jpg"
-	whenHeading="When prescribing"
-	whenHighlight="may be appropriate"
-	whenIntro="You may benefit from this service if you:"
-	whenList={[
-		"Have pain levels preventing movement or exercise",
-		"Experience acute back or neck pain",
-		"Have significant post-operative pain limiting rehabilitation",
-		"Experience nerve-related symptoms such as burning, tingling, or shooting pain",
-		"Are not responding to over-the-counter medication",
-		"Need support managing or reviewing current medication",
-	]}
-	whenImage="/physiotherapy-prescribing/reception.jpg"
-	howHeading="How we"
-	howHighlight="work"
-	howIntro="Our approach prioritises using the minimum effective support, with a clear plan to reduce reliance on medication as your condition improves."
-	howList={[
-		"Clinical assessment of your condition",
-		"Review of current medications and response",
-		"Prescribing within scope of practice",
-		"Clear guidance on dosage, duration, and expected effect",
-		"Integration with physiotherapy and exercise-based treatment",
-	]}
-	howImage="/physiotherapy-prescribing/screenshot.webp"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"People with acute spinal pain",
-		"Post-operative patients",
-		"Individuals with severe pain",
-		"Patients with nerve pain",
-		"Time-sensitive cases needing rapid support",
-	]}
-	whoImage="/physiotherapy-prescribing/front-entrance.jpg"
-	faqs={[
-		{ q: "What is an independent prescriber?", a: "A clinician trained to assess, diagnose, and prescribe medication within their area of expertise." },
-		{ q: "Do I still need to see my GP?", a: "Not always for musculoskeletal issues, though we recommend keeping your GP informed." },
-		{ q: "Is medication always necessary?", a: "No. It is used only when it will support your rehabilitation." },
-		{ q: "Can this help with severe back or neck pain?", a: "Yes. Reducing pain can allow earlier movement and treatment." },
-		{ q: "Will I stay on medication long-term?", a: "The aim is to reduce and stop medication as your condition improves." },
-	]}
-/>
+<Layout
+	title="Physiotherapy Prescribing in Clapham"
+	description="Independent physiotherapy prescribing in Clapham — targeted medication to reduce pain and support rehabilitation, integrated with your physiotherapy care."
+>
+	<PageHero title="in Clapham" highlight="Physiotherapy Prescribing" breadcrumb="Physiotherapy Prescribing" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Medication can be an important part of" highlight="rehabilitation" image="/physiotherapy-prescribing/reception.jpg" imageAlt="Balance Physio reception">
+		<p>Medication can be an important part of rehabilitation — when used appropriately.</p>
+		<p>At Balance, independent prescribing allows us to reduce pain and inflammation so that physiotherapy and movement-based treatment can be effective. The aim is not to rely on medication, but to create a window where we can reduce the pain so that you can move, exercise, and recover.</p>
+		<p>This service is integrated within your physiotherapy care, ensuring a joined-up and efficient approach.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When prescribing" highlight="may be appropriate" image="/physiotherapy-prescribing/treatment-rooms.jpg" imageAlt="Treatment room">
+		<p>You may benefit from physiotherapy-led prescribing if you:</p>
+		<ul>
+			<li>Have pain levels that prevent movement or exercise</li>
+			<li>Are experiencing acute back or neck pain</li>
+			<li>Have significant post-operative pain limiting rehabilitation</li>
+			<li>Experience nerve-related symptoms (e.g. burning, tingling, shooting pain)</li>
+			<li>Are not responding to over-the-counter medication</li>
+			<li>Need support managing or reviewing current medication</li>
+		</ul>
+		<p>In these cases, appropriate medication can help you engage with treatment more effectively.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/physio/body-1.jpg" imageAlt="Clinical consultation">
+		<p>Prescribing is used as part of a wider rehabilitation plan.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Clinical assessment of your condition</li>
+			<li>Review of current medications and response</li>
+			<li>Prescribing where appropriate within scope of practice</li>
+			<li>Clear guidance on dosage, duration, and expected effect</li>
+			<li>Integration with physiotherapy and exercise-based treatment</li>
+		</ul>
+		<p>We prioritise using the minimum effective support, with a clear plan to reduce reliance on medication as your condition improves.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/physiotherapy-prescribing/screenshot.webp" imageAlt="Digital notes">
+		<p>Medication is used to support measurable improvements in your rehabilitation.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Reduction in pain to allow movement and exercise</li>
+			<li>Improved tolerance to physiotherapy sessions</li>
+			<li>Increased range of movement and function</li>
+			<li>Reduced reliance on medication over time</li>
+			<li>Progression towards normal activity levels</li>
+		</ul>
+		<p>Prescribing is reviewed regularly to ensure it continues to support your recovery.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/physio/body-4.jpg" imageAlt="Rehabilitation">
+		<p>This service is particularly relevant for:</p>
+		<ul>
+			<li><strong>Acute spinal pain:</strong> Back and neck conditions limiting movement and function</li>
+			<li><strong>Post-operative patients:</strong> Supporting early-stage rehabilitation</li>
+			<li><strong>Individuals with severe pain:</strong> Where symptoms prevent engagement with treatment</li>
+			<li><strong>Patients with nerve pain:</strong> Requiring specific medication strategies</li>
+			<li><strong>Time-sensitive cases:</strong> Where rapid access to prescribing supports faster recovery</li>
+		</ul>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/physiotherapy-prescribing/front-entrance.jpg" imageAlt="Balance Physio entrance">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

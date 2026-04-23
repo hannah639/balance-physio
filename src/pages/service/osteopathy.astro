@@ -1,69 +1,140 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/osteopathy/adjusting-spine.jpg', alt: 'Hands-on osteopathic treatment at Balance Physio Clapham' },
-	{ src: '/osteopathy/spine-diagnosis.jpg', alt: 'Osteopathy consultation and spine assessment' },
-	{ src: '/osteopathy/thai-massage.jpg', alt: 'Gentle hands-on soft tissue treatment' },
-	{ src: '/osteopathy/balance-osteopathy.webp', alt: 'Skeleton model at the Balance Clapham studio' },
-	{ src: '/osteopathy/shoulder-massage.jpg', alt: 'Targeted neck and shoulder treatment' },
-	{ src: '/osteopathy/skeleton.jpg', alt: 'Anatomical skeleton in the consultation room' },
+const photos = [
+	{ src: '/osteopathy/balance-osteopathy.webp', alt: 'Osteopathy at Balance Physio' },
+	{ src: '/osteopathy/adjusting-spine.jpg', alt: 'Spinal adjustment' },
+	{ src: '/osteopathy/shoulder-massage.jpg', alt: 'Shoulder treatment' },
+	{ src: '/osteopathy/skeleton.jpg', alt: 'Anatomy skeleton reference' },
+	{ src: '/osteopathy/spine-diagnosis.jpg', alt: 'Spine assessment' },
+	{ src: '/osteopathy/thai-massage.jpg', alt: 'Soft tissue technique' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'Do I need a GP referral?', a: 'No. You can book directly with us.' },
+	{ q: 'What is the benefit of combining osteopathy and nutrition?', a: 'It allows us to support both how your body moves and how it recovers. This can improve outcomes, particularly in longer-term or recurring conditions.' },
+	{ q: 'Is osteopathy safe during pregnancy?', a: 'Yes. Treatment is adapted to ensure it is safe and appropriate at every stage.' },
+	{ q: 'Will my back be "cracked"?', a: 'Not necessarily. We use a range of techniques, and treatment is always tailored to your needs.' },
+	{ q: 'What should I wear?', a: 'Comfortable clothing that allows us to assess movement.' },
+	{ q: 'How many sessions will I need?', a: 'This depends on your condition. We will give you a clear plan after your first session.' },
+	{ q: 'Can I use private health insurance?', a: 'Yes. We work with providers including Bupa and AXA Health, but we recommend checking your cover in advance.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Osteopathy"
-	heroSubtitle="Hands-on, evidence-led osteopathy combined with nutritional support, treating the whole body, not just the symptoms."
-	breadcrumb="Osteopathy"
-	seoTitle="Osteopathy in Clapham"
-	seoDescription="Hands-on osteopathy in Clapham, London. We combine manual therapy with nutrition and movement to treat persistent pain, restore mobility and support recovery."
-	marqueeImages={sliderImages}
-	intro={[
-		"Pain, stiffness, or restriction in movement often comes from how the body is functioning as a whole, not just one area. At Balance, osteopathy and nutrition work together to support how your body moves, recovers, and adapts.",
-		"It's not just about treating symptoms. It's about understanding how your joints, muscles, nervous system, and overall health interact, and what needs to change to restore efficient, pain-free movement.",
-		"We take a clinical, hands-on and evidence-led approach. Your treatment plan is built around your symptoms, your goals, and your starting point.",
-	]}
-	introImage="/osteopathy/adjusting-spine.jpg"
-	whenHeading="When to consider"
-	whenHighlight="osteopathy"
-	whenList={[
-		"Ongoing back or neck pain linked to posture or daily activity",
-		"Joint stiffness or reduced mobility",
-		"Pain related to work or repetitive strain",
-		"Discomfort during pregnancy, including pelvic or lower back pain",
-		"Lingering symptoms following injury or trauma, including whiplash",
-		"Stiffness associated with arthritis or general wear and tear",
-		"Lymphoedema or swelling affecting movement or comfort",
-		"Low energy levels or slower recovery from training or injury",
-	]}
-	whenImage="/osteopathy/spine-diagnosis.jpg"
-	howHeading="How we"
-	howHighlight="treat"
-	howList={[
-		"Hands-on manual therapy to improve joint and tissue movement",
-		"Soft tissue work to reduce tension and improve circulation",
-		"Movement assessment to identify restrictions or compensations",
-		"Breathing and postural work where relevant",
-		"Nutritional guidance to support recovery, energy and overall health",
-		"Practical advice to help you make sustainable changes outside the clinic",
-	]}
-	howImage="/osteopathy/thai-massage.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"People managing everyday back, neck or joint pain",
-		"Office-based professionals dealing with postural strain",
-		"Pregnant individuals needing safe, effective support",
-		"Active individuals and athletes managing injury or restriction",
-		"Those with longer-term conditions such as arthritis",
-		"Individuals looking to improve recovery, energy and overall health",
-	]}
-	whoImage="/osteopathy/shoulder-massage.jpg"
-	faqs={[
-		{ q: "Do I need a GP referral?", a: "No. You can book directly with us." },
-		{ q: "What is the benefit of combining osteopathy and nutrition?", a: "It allows us to support both how your body moves and how it recovers. This can improve outcomes, particularly in longer-term or recurring conditions." },
-		{ q: "Is osteopathy safe during pregnancy?", a: "Yes. Treatment is adapted to ensure it is safe and appropriate at every stage." },
-		{ q: "Will my back be cracked?", a: "Not necessarily. We use a range of techniques, and treatment is always tailored to your needs." },
-		{ q: "Can I use private health insurance?", a: "Yes. We work with providers including Bupa and AXA Health, but recommend checking your cover in advance." },
-	]}
-/>
+<Layout
+	title="Osteopathy and Nutrition in Clapham"
+	description="Osteopathy and nutritional therapy in Clapham — hands-on treatment combined with lifestyle and nutrition support to restore movement and resilience."
+>
+	<PageHero title="in Clapham" highlight="Osteopathy and Nutrition" breadcrumb="Osteopathy and Nutrition" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="A clinical, hands-on," highlight="evidence-led approach" image="/osteopathy/balance-osteopathy.webp" imageAlt="Osteopathy at Balance">
+		<p>Pain, stiffness, or restriction in movement often comes from how the body is functioning as a whole, not just one area.</p>
+		<p>At Balance, osteopathy and nutrition work together to support how your body moves, recovers, and adapts. It's not just about treating symptoms. It's about understanding how your joints, muscles, nervous system, and overall health interact, and what needs to change to restore efficient, pain-free movement.</p>
+		<p>We take a clinical, hands-on and evidence-led approach. From your first session, we assess how your body moves and responds, alongside any wider factors that may be influencing your recovery, including lifestyle and nutrition. Your treatment plan is then built around your symptoms, your goals, and your starting point.</p>
+		<p>Whether you're dealing with persistent pain, recovering from injury, or looking to improve your overall health and resilience, we help you move forward with clarity and control.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider osteopathy" highlight="and nutrition support" image="/osteopathy/spine-diagnosis.jpg" imageAlt="Spine assessment">
+		<p>Osteopathy and nutritional therapy can support a wide range of musculoskeletal and health-related concerns.</p>
+		<p>You may benefit if you're experiencing:</p>
+		<ul>
+			<li>Ongoing back or neck pain linked to posture or daily activity</li>
+			<li>Joint stiffness or reduced mobility</li>
+			<li>Pain related to work or repetitive strain</li>
+			<li>Discomfort during pregnancy, including pelvic or lower back pain</li>
+			<li>Lingering symptoms following injury or trauma, including whiplash</li>
+			<li>Stiffness associated with arthritis or general wear and tear</li>
+			<li>Lymphoedema or swelling that is affecting movement or comfort</li>
+			<li>Low energy levels or slower recovery from training or injury</li>
+			<li>A sense that your overall health is affecting how your body feels and performs</li>
+		</ul>
+		<p>If your body is not recovering or functioning as you would expect, it is worth looking at both physical and lifestyle factors.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/osteopathy/adjusting-spine.jpg" imageAlt="Osteopathic adjustment">
+		<p>Our approach is built around improving how your body functions as a complete system.</p>
+		<p>Your treatment may include:</p>
+		<ul>
+			<li>Hands-on manual therapy to improve joint and tissue movement</li>
+			<li>Soft tissue work to reduce tension and improve circulation</li>
+			<li>Movement assessment to identify restrictions or compensations</li>
+			<li>Breathing and postural work where relevant</li>
+			<li>Nutritional guidance to support recovery, energy, and overall health</li>
+			<li>Practical advice to help you make sustainable changes outside the clinic</li>
+		</ul>
+		<p>By combining osteopathy with nutritional therapy where appropriate, we can support not just how you move, but how your body adapts, heals, and performs over time.</p>
+		<p>Treatment is always tailored to you. We use a range of techniques depending on your presentation, your comfort, and what will be most effective.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/osteopathy/shoulder-massage.jpg" imageAlt="Shoulder treatment">
+		<p>We track change in a way that is meaningful and relevant to your daily life.</p>
+		<p>From your first session, we establish a baseline of:</p>
+		<ul>
+			<li>Movement quality</li>
+			<li>Joint mobility</li>
+			<li>Pain levels</li>
+			<li>Functional ability, what you can actually do day to day</li>
+			<li>Relevant lifestyle factors that may influence recovery</li>
+		</ul>
+		<p>As treatment progresses, we reassess regularly.</p>
+		<p>This means:</p>
+		<ul>
+			<li>You can see what is improving</li>
+			<li>Your treatment adapts as your body and habits change</li>
+			<li>We stay focused on outcomes, not just sessions</li>
+		</ul>
+		<p>The aim is simple: improved movement, reduced pain, and better long-term function and health.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/osteopathy/thai-massage.jpg" imageAlt="Soft tissue work">
+		<p>We work with a wide range of individuals across Clapham and South West London:</p>
+		<ul>
+			<li>People managing everyday back, neck, or joint pain</li>
+			<li>Office-based professionals dealing with postural strain</li>
+			<li>Pregnant individuals needing safe, effective support</li>
+			<li>Active individuals and athletes managing injury or restriction</li>
+			<li>Those with longer-term conditions such as arthritis</li>
+			<li>Individuals looking to improve recovery, energy, and overall health</li>
+		</ul>
+		<p>Whatever your starting point, the goal is to restore movement, reduce limitations, and support your body more effectively.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our expert osteopath" highlight="and nutritionist" image="/osteopathy/skeleton.jpg" imageAlt="Clinical environment">
+		<p>Our osteopathy and nutrition service is led by Eli Ferracci, an experienced Osteopath and Nutritional Therapist with over 15 years of clinical experience.</p>
+		<p>Eli combines hands-on treatment with a broader understanding of movement, lifestyle, and nutrition. Her approach focuses on identifying the underlying cause of dysfunction, not just where symptoms are felt, and supporting you in building a more resilient and adaptable body.</p>
+		<p>Where appropriate, nutritional therapy is integrated into your care to support recovery, manage inflammation, and improve overall wellbeing alongside physical treatment.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Eli &rarr;</a></p>
+		<p><strong>Integrated care.</strong> Where appropriate, we work closely with the wider Balance team. This may include joint sessions with physiotherapists, strength and conditioning coaches, or running specialists, ensuring your treatment carries through into how you move, train, and recover.</p>
+		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/osteopathy/balance-osteopathy.webp" imageAlt="Osteopathy at Balance">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We are also recognised by all major insurance providers, including Bupa and AXA Health.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

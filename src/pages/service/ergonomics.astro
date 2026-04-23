@@ -1,70 +1,125 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/ergonomics/slider-IMG_2045.webp', alt: 'Ergonomic equipment at the Balance Clapham clinic' },
-	{ src: '/ergonomics/workplace-businessman.jpg', alt: 'Ergonomic office setup with chair, keyboard and monitor' },
-	{ src: '/ergonomics/slider-file-29-11-2015.jpeg', alt: 'Home ergonomic assessment in progress' },
-	{ src: '/ergonomics/typing-hands.jpg', alt: 'Hands typing on a keyboard' },
-	{ src: '/ergonomics/slider-balance-interior.jpg', alt: 'Balance Physio Clapham interior' },
-	{ src: '/ergonomics/childrens-study-room.jpg', alt: 'Children\'s study space at home' },
-	{ src: '/ergonomics/slider-ergonomics-studio.webp', alt: 'Ergonomics studio at Balance Physio Clapham' },
-	{ src: '/ergonomics/office-desk.jpg', alt: 'Open-plan office workspace' },
+const photos = [
+	{ src: '/ergonomics/slider-balance-interior.jpg', alt: 'Balance Physio clinic interior' },
+	{ src: '/ergonomics/slider-ergonomics-studio.webp', alt: 'Ergonomics studio' },
+	{ src: '/ergonomics/slider-IMG_2045.webp', alt: 'Workspace review' },
+	{ src: '/ergonomics/slider-file-29-11-2015.jpeg', alt: 'Ergonomics session' },
+	{ src: '/ergonomics/office-desk.jpg', alt: 'Office desk setup' },
+	{ src: '/ergonomics/typing-hands.jpg', alt: 'Keyboard and mouse position' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'Do I need to come into the clinic for an ergonomic assessment?', a: 'No. We offer both in-person and virtual assessments, including reviewing your setup via video.' },
+	{ q: 'Do I need to buy expensive equipment?', a: 'Not always. Many issues can be improved with simple adjustments. If equipment is needed, we will guide you on what is worth investing in.' },
+	{ q: 'Can ergonomics help with back and neck pain?', a: 'Yes. Poor setup and movement habits are common contributors to these symptoms.' },
+	{ q: 'Will I get exercises to do?', a: 'Yes. We provide simple, targeted exercises to address the movement patterns contributing to your pain.' },
+	{ q: 'Can you help with home working setups?', a: 'Yes. We regularly assess and optimise home environments, even with limited space or equipment.' },
+	{ q: 'How quickly will I see improvement?', a: 'Many people notice changes quickly once adjustments are made, especially when combined with the right exercises.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Ergonomics"
-	heroSubtitle="Pain at your desk is not something you have to accept. Back, neck and shoulder issues are often driven by how your workspace is set up and how you move within it."
-	breadcrumb="Ergonomics"
-	seoTitle="Ergonomics in Clapham"
-	seoDescription="Ergonomic assessments in Clapham and online. Reduce back, neck and shoulder pain at work with practical workspace advice and targeted exercises."
-	marqueeImages={sliderImages}
-	intro={[
-		"Pain at your desk is not something you have to accept. Back pain, neck tension, shoulder blade niggles and shoulder discomfort are often driven by how your workspace is set up and how you move within it.",
-		"Ergonomics is about understanding how your body interacts with your working environment, identifying why symptoms develop, and implementing practical, sustainable solutions.",
-	]}
-	introImage="/ergonomics/workplace-businessman.jpg"
-	whenHeading="When to consider"
-	whenHighlight="ergonomics support"
-	whenIntro="You may benefit from an assessment if you are experiencing:"
-	whenList={[
-		"Back pain during or after work",
-		"Neck stiffness or tension linked to screen use",
-		"Shoulder discomfort from prolonged sitting or poor setup",
-		"Headaches associated with desk posture",
-		"Discomfort when working from home or using laptops",
-		"Fatigue or reduced productivity due to physical strain",
-	]}
-	whenImage="/ergonomics/typing-hands.jpg"
-	howHeading="How we"
-	howHighlight="work"
-	howIntro="Assessments are offered in person or virtually and may include:"
-	howList={[
-		"Video analysis of your workspace to identify symptom drivers",
-		"Clear explanation of why pain has developed",
-		"Immediate setup adjustments to reduce strain",
-		"Guidance on chairs, desks, keyboards, monitor height, and supports",
-		"Simple, implementable changes for home or work",
-		"Targeted exercises addressing movement habits",
-	]}
-	howImage="/ergonomics/office-desk.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Office-based professionals",
-		"Remote workers",
-		"Hybrid workers",
-		"Individuals with recurring musculoskeletal pain",
-		"Parents balancing multiple work environments",
-		"Anyone seeking improved comfort and productivity",
-	]}
-	whoImage="/ergonomics/childrens-study-room.jpg"
-	faqs={[
-		{ q: "Are virtual assessments available?", a: "Yes, including a workspace review via video." },
-		{ q: "Do I need expensive equipment?", a: "Not necessarily. Many issues resolve through simple adjustments." },
-		{ q: "Can this help with back and neck pain?", a: "Yes. Poor setup and movement habits commonly contribute to both." },
-		{ q: "Will I get exercises?", a: "Yes. Targeted exercises address the movement patterns contributing to your pain." },
-		{ q: "Can you help with my home setup?", a: "Yes, even with limited space or equipment." },
-	]}
-/>
+<Layout
+	title="Ergonomics in Clapham"
+	description="Ergonomic workspace assessments in Clapham — clinical guidance for home, office and hybrid workers to reduce pain and improve comfort, with in-person or virtual options."
+>
+	<PageHero title="in Clapham" highlight="Ergonomics" breadcrumb="Ergonomics" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Pain at your desk is not something" highlight="you have to accept" image="/ergonomics/workplace-businessman.jpg" imageAlt="Business professional at desk">
+		<p>Back pain, neck tension, shoulder blade niggles and shoulder discomfort are often driven by how your workspace is set up and how you move within it.</p>
+		<p>At Balance, ergonomics is about more than finding the best chair for you. It's about understanding how your body interacts with your working environment, why your symptoms are developing, and what needs to change to reduce strain.</p>
+		<p>With over twenty-five years of experience, we have worked with London's foremost ergonomic companies, individuals across home and office settings to create practical, sustainable solutions. Whether you are working from home, in a corporate environment, or a combination of both, we help you build a workspace that supports your body rather than working against it.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="ergonomics support" image="/ergonomics/office-desk.jpg" imageAlt="Desk setup">
+		<p>You do not need to wait until pain becomes persistent.</p>
+		<p>Ergonomic assessment can help if you are dealing with:</p>
+		<ul>
+			<li>Back pain during or after work</li>
+			<li>Neck stiffness or tension linked to screen use</li>
+			<li>Shoulder discomfort from prolonged sitting or poor setup</li>
+			<li>Headaches associated with desk posture</li>
+			<li>Discomfort when working from home or using laptops</li>
+			<li>Fatigue or reduced productivity due to physical strain</li>
+		</ul>
+		<p>If your workspace does not feel right, or your symptoms keep returning, it is worth getting it assessed.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Assessment" heading="How we" highlight="work" image="/ergonomics/typing-hands.jpg" imageAlt="Hands at keyboard">
+		<p>Everything we do is built around one principle: helping you move better within your environment.</p>
+		<p>Your assessment may include:</p>
+		<ul>
+			<li>Video analysis of your workspace to identify what is driving your symptoms</li>
+			<li>Clear explanation of why your pain has developed</li>
+			<li>Immediate adjustments to your setup to reduce strain</li>
+			<li>Advice on chairs, desks, keyboards, monitor height, and supports</li>
+			<li>Simple changes you can implement straight away at home or work</li>
+			<li>Targeted exercises to address movement habits contributing to pain</li>
+		</ul>
+		<p>We offer both in-person and virtual assessments. This can include reviewing your workspace through video or images, allowing us to provide practical solutions wherever you are working.</p>
+		<p>The goal is not just comfort, but long-term change in how you sit, move, and work.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/ergonomics/slider-ergonomics-studio.webp" imageAlt="Ergonomics studio">
+		<p>We don't guess.</p>
+		<p>From your first session, we look at how your workspace is set up, how you move throughout your day, and how your symptoms respond to different positions and tasks. As you implement changes, we reassess how your pain, movement, and tolerance to work improve.</p>
+		<p>This keeps your plan focused and effective.</p>
+		<p>For you, that means:</p>
+		<ul>
+			<li>Clear evidence that your symptoms are improving</li>
+			<li>A setup that evolves as your needs and workload change</li>
+			<li>Confidence working without ongoing discomfort</li>
+		</ul>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/ergonomics/childrens-study-room.jpg" imageAlt="Home study space">
+		<p>We work with a wide range of individuals across Clapham and South West London.</p>
+		<ul>
+			<li>Office-based professionals working long hours at a desk</li>
+			<li>People working from home wanting to create an optimal setup</li>
+			<li>Hybrid workers moving between multiple environments</li>
+			<li>Individuals with recurring back, neck, or shoulder pain</li>
+			<li>Parents balancing work and home setups</li>
+			<li>Anyone looking to improve comfort, productivity, and long-term health</li>
+		</ul>
+		<p>Whatever your working environment, the aim is the same: reduce pain, improve movement, and make your setup work for you.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="team" image="/ergonomics/slider-balance-interior.jpg" imageAlt="Balance clinic">
+		<p>Our ergonomics service is delivered by experienced physiotherapists with a strong understanding of movement, posture, and workplace demands along with a depth of knowledge on the most useful desks, chairs, screens, mice and keyboards.</p>
+		<p>You will be guided by a clinician who can assess both your body and your environment, ensuring that any changes are practical, realistic, and tailored to your day-to-day life.</p>
+		<p>We combine clinical expertise with real-world application, so the advice you receive is not just theoretical, but something you can implement immediately.</p>
+		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/ergonomics/slider-IMG_2045.webp" imageAlt="Workspace review">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We are also recognised by major insurance providers, including Bupa and AXA PPP Health.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

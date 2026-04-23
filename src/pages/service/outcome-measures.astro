@@ -1,54 +1,119 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+
+/* No outcome-measures folder exists. Using physio body images and service clinical photos. Hannah may want to swap these later. */
+const photos = [
+	{ src: '/physio/body-1.jpg', alt: 'Physiotherapy assessment' },
+	{ src: '/physio/body-2.jpg', alt: 'Clinical review' },
+	{ src: '/physio/body-3.jpg', alt: 'Rehabilitation session' },
+	{ src: '/physio/body-4.jpg', alt: 'Progress tracking' },
+	{ src: '/physio/body-5.jpg', alt: 'Movement assessment' },
+	{ src: '/physio/body-6.jpg', alt: 'Clinical environment' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'What is an outcome measure?', a: 'A standardised test or questionnaire used to assess your current level of function and track change over time.' },
+	{ q: 'Why is this important?', a: 'It provides objective evidence of progress, helping guide treatment and maintain clarity.' },
+	{ q: 'Will I need to complete questionnaires?', a: 'Sometimes. These take less than two minutes and provide useful insights into how your condition affects you.' },
+	{ q: 'What kind of physical tests are used?', a: 'This depends on your condition, but may include strength, movement, or functional testing.' },
+	{ q: 'Can I see my results?', a: "Yes. It's your data." },
+	{ q: 'Is this required by insurance companies?', a: 'In some cases, yes. Objective measures can help support ongoing treatment approval.' },
+];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Outcome Measures"
-	heroSubtitle="Effective rehabilitation should be measured externally and independently, not guessed."
-	breadcrumb="Outcome Measures"
-	seoTitle="Outcome Measures in Clapham"
-	seoDescription="Objective outcome measures in Clapham. Independently validated tracking of pain, function and progress to guide every stage of your rehabilitation."
-	hideMarquee
-	textGrid
-	intro={[
-		"At Balance, outcome measures track progress objectively so we can understand your starting point, monitor changes over time, and ensure treatment produces meaningful improvements.",
-		"They form a core component of rehabilitation planning, review, and progression, giving you and your clinician a clear, shared picture of how you are doing.",
-	]}
-	whenHeading="When outcome measures"
-	whenHighlight="are important"
-	whenIntro="Everyone benefits from a structured, data-led approach:"
-	whenList={[
-		"Clear visibility of improvement over time",
-		"Accurate charting of intervention responsiveness",
-		"A safety net for symptom re-emergence with direct therapist access",
-		"Objective data for insurance or return-to-work and sport requirements",
-		"Historical outcomes to predict likely improvement patterns",
-	]}
-	howHeading="How outcome"
-	howHighlight="measures are used"
-	howIntro="We combine patient-reported, internationally validated measures with objective clinical tests."
-	howList={[
-		"Questionnaires assessing pain, function, and quality of life",
-		"Task-specific measures relevant to your individual goals",
-		"Lifestyle and preference questions completed before your first appointment",
-		"Evidence-based objective clinical measures",
-		"Reviews at 6 weeks, 3 months, 6 months, and 12 months post-intervention",
-	]}
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Post-surgical rehabilitation, monitoring recovery and readiness to progress",
-		"Sports injuries, supporting return-to-play decisions",
-		"Chronic conditions, with long-term functional tracking",
-		"Neurological rehabilitation, assessing balance, gait and independence",
-		"General physiotherapy, providing clarity and direction for all patients",
-	]}
-	faqs={[
-		{ q: "What is an outcome measure?", a: "A standardised test or questionnaire used to assess your current level of function and track change over time." },
-		{ q: "Why is this important?", a: "It provides objective evidence of progress, helping guide treatment and maintain clarity." },
-		{ q: "Will I complete questionnaires?", a: "Possibly. They take under two minutes and provide useful insights into how your condition is affecting you." },
-		{ q: "What physical tests are used?", a: "It depends on your condition, and may include strength, movement, or functional testing." },
-		{ q: "Can I see my results?", a: "Yes. It's your data." },
-		{ q: "Is this required by insurance?", a: "Sometimes. Objective measures support ongoing treatment approval requests." },
-	]}
-/>
+<Layout
+	title="Outcome Measures in Physiotherapy"
+	description="How Balance Performance Physiotherapy uses validated outcome measures — via Cemplicity — to track recovery objectively and guide rehabilitation decisions."
+>
+	<PageHero title="in Physiotherapy" highlight="Outcome Measures" breadcrumb="Outcome Measures" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Effective rehabilitation should be" highlight="measured, not guessed" image="/physio/body-1.jpg" imageAlt="Clinical assessment">
+		<p>Effective rehabilitation should be measured externally and independently, not guessed.</p>
+		<p>At Balance, we use outcome measures to track your progress objectively. This allows us to understand where you are starting from, monitor change over time, and ensure your treatment is leading to meaningful improvements.</p>
+		<p>Outcome measures form a core part of how we plan, review, and progress your rehabilitation.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Why measure" heading="When outcome measures" highlight="are important" image="/physio/body-2.jpg" imageAlt="Outcomes review">
+		<p>Everyone benefits from a structured, data-led approach:</p>
+		<ul>
+			<li>So you can clearly see the improvement over time</li>
+			<li>Accurately chart the responsiveness of interventions</li>
+			<li>Have a safety net straight back to your physiotherapist if symptoms re-emerge</li>
+			<li>Require objective data for insurance or return-to-work/sport</li>
+			<li>Our past outcomes tell us how you are likely to improve with us</li>
+		</ul>
+		<p>This approach ensures your rehabilitation is clear, purposeful, and accountable.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Method" heading="How we use" highlight="outcome measures" image="/physio/body-3.jpg" imageAlt="Clinical scoring">
+		<p>We use a combination of patient-reported, internationally validated measures to build a complete picture of your progress.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Questionnaires assessing pain, function, and quality of life</li>
+			<li>Task-specific measures relevant to your goals</li>
+			<li>Questions about lifestyle and your options — this tells us what you want to achieve before we've met you</li>
+		</ul>
+		<p>Additionally we add evidence-based objective measures in clinic to complete a total picture of you.</p>
+		<p>Your baseline is established before meeting us, and results are reviewed at six weeks, three, six and twelve months post intervention.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/physio/body-4.jpg" imageAlt="Tracking progress">
+		<p>Progress is assessed using an external company, Cemplicity, with reliable, valid and repeatable measures.</p>
+		<p>This allows us to track:</p>
+		<ul>
+			<li>Changes in pain and symptom behaviour</li>
+			<li>Reductions in disability</li>
+			<li>Increased range of movement</li>
+			<li>Functional gains in daily life or sport</li>
+			<li>Progress towards specific goals or milestones</li>
+		</ul>
+		<p>This ensures decisions are based on evidence, not assumption.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/physio/body-5.jpg" imageAlt="Range of patients">
+		<p>Outcome measures are used across all areas of physiotherapy, including:</p>
+		<ul>
+			<li><strong>Post-surgical rehabilitation:</strong> Monitoring recovery and readiness to progress</li>
+			<li><strong>Sports injuries:</strong> Supporting return-to-play decisions</li>
+			<li><strong>Chronic conditions:</strong> Tracking long-term changes in function</li>
+			<li><strong>Neurological rehabilitation:</strong> Assessing balance, gait, and independence</li>
+			<li><strong>General physiotherapy:</strong> Providing clarity and direction for all patients</li>
+		</ul>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our approach" heading="Clinical judgement," highlight="data-informed" image="/physio/body-6.jpg" imageAlt="Clinician with patient">
+		<p>We combine your subjective data with our objective measures and clinical expertise.</p>
+		<p>Your physiotherapist will explain what your results mean and how they relate to your recovery. This ensures you understand your progress and remain actively involved in your treatment.</p>
+		<p>We use outcome measures to guide decisions — not replace clinical judgement.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/physio/body-7.jpg" imageAlt="Balance Physio clinic">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

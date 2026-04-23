@@ -1,68 +1,121 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/mens-health/slider-gym-exercises.jpg', alt: 'Active older men exercising in the gym' },
-	{ src: '/mens-health/slider-monkey-bars.jpg', alt: 'Man training on monkey bars' },
-	{ src: '/mens-health/slider-stretching.jpg', alt: 'Man stretching before exercise' },
-	{ src: '/mens-health/slider-weight-training.jpg', alt: 'Mature man weight training at the gym' },
-	{ src: '/mens-health/slider-endurance.jpg', alt: 'Senior man running outdoors' },
-	{ src: '/mens-health/slider-DSCF0046.webp', alt: 'Men\'s health physiotherapy at Balance Physio Clapham' },
-	{ src: '/mens-health/slider-image1.webp', alt: 'Men\'s health treatment at Balance Physio Clapham' },
+const photos = [
+	{ src: '/mens-health/slider-endurance.jpg', alt: 'Endurance training' },
+	{ src: '/mens-health/slider-gym-exercises.jpg', alt: 'Gym exercises' },
+	{ src: '/mens-health/slider-stretching.jpg', alt: 'Mobility training' },
+	{ src: '/mens-health/slider-weight-training.jpg', alt: 'Weight training' },
+	{ src: '/mens-health/slider-monkey-bars.jpg', alt: 'Calisthenics' },
+	{ src: '/mens-health/beach.jpg', alt: 'Active lifestyle' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'Is this only for prostate-related issues?', a: 'No. We treat a wide range of pelvic health conditions, including pain, bladder, and bowel symptoms.' },
+	{ q: 'What happens in the first session?', a: 'A detailed discussion followed by assessment of movement, breathing, and pelvic floor function where appropriate.' },
+	{ q: 'Is internal assessment required?', a: 'No. It is optional and only performed with your consent.' },
+	{ q: 'Can physiotherapy help with cycling-related pain?', a: 'Yes. We address both mechanical load and pelvic floor tension to reduce symptoms.' },
+	{ q: 'How many sessions will I need?', a: 'This varies, but most people improve over a short course of structured rehabilitation.' },
+	{ q: 'Do I need a referral?', a: 'No. You can book directly, though some insurers may require one.' },
+	{ q: 'Is it confidential?', a: 'Yes. All consultations are private and handled with discretion.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Men\'s Health"
-	heroSubtitle="Expert pelvic health physiotherapy for men, addressing pelvic floor, bladder, bowel, and sexual function concerns with discretion and clinical rigour."
-	breadcrumb="Men\'s Health"
-	seoTitle="Men\'s Health in Clapham"
-	seoDescription="Men\'s health physiotherapy in Clapham. Pelvic floor rehab, post-prostate recovery, pelvic pain, and bladder or bowel symptoms treated with discretion."
-	marqueeImages={sliderImages}
-	intro={[
-		"Men\'s health physiotherapy focuses on conditions affecting the pelvic floor, bladder, bowel, and sexual function.",
-		"At Balance, we take a structured and clinical approach to assessment and treatment. We identify the underlying drivers of your symptoms and build a clear plan to restore function, reduce pain, and improve confidence.",
-		"These issues are often under-reported, but they are both common and highly treatable with the right approach.",
-	]}
-	introImage="/mens-health/pulse-tracking.jpg"
-	whenHeading="When to consider"
-	whenHighlight="an assessment"
-	whenList={[
-		"Persistent pelvic pain (perineum, testicles, lower abdomen)",
-		"Urinary symptoms such as leaking, urgency, or difficulty starting flow",
-		"Post-prostate surgery symptoms (e.g. dribbling or incontinence)",
-		"Bowel dysfunction, including poor control or chronic constipation",
-		"Pain related to cycling or prolonged sitting",
-		"Sexual dysfunction linked to pelvic floor function",
-	]}
-	whenImage="/mens-health/beach.jpg"
-	howHeading="How we"
-	howHighlight="treat"
-	howList={[
-		"Pelvic floor assessment (external and, where appropriate, internal)",
-		"Targeted strengthening or down-training of the pelvic floor",
-		"Hands-on therapy to reduce tension and improve tissue function",
-		"Breathing and relaxation strategies to reduce overactivity",
-		"Postural and load management advice",
-		"Gradual return to exercise and activity",
-	]}
-	howImage="/mens-health/pullups.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Post-surgical patients recovering from prostate or bladder procedures",
-		"Cyclists and active individuals managing pelvic pain",
-		"Sedentary workers addressing pelvic tension from prolonged sitting",
-		"Chronic pelvic pain patients where symptoms have persisted",
-	]}
-	whoImage="/mens-health/paddleboard.jpg"
-	faqs={[
-		{ q: "Is this only for prostate-related issues?", a: "No. We treat a wide range of pelvic health conditions, including pain, bladder, and bowel symptoms." },
-		{ q: "What happens in the first session?", a: "A detailed discussion followed by assessment of movement, breathing, and pelvic floor function where appropriate." },
-		{ q: "Is internal assessment required?", a: "No. It is optional and only performed with your consent." },
-		{ q: "Can physiotherapy help with cycling-related pain?", a: "Yes. We address both mechanical load and pelvic floor tension to reduce symptoms." },
-		{ q: "How many sessions will I need?", a: "This varies, but most people improve over a short course of structured rehabilitation." },
-		{ q: "Do I need a referral?", a: "No. You can book directly, though some insurers may require one." },
-		{ q: "Is it confidential?", a: "Yes. All consultations are private and handled with discretion." },
-	]}
-/>
+<Layout
+	title="Men's Health Physiotherapy in Clapham"
+	description="Men's pelvic health physiotherapy in Clapham — treatment for pelvic pain, bladder and bowel issues, post-prostate recovery and cycling-related symptoms."
+>
+	<PageHero title="in Clapham" highlight="Men's Health Physiotherapy" breadcrumb="Men's Health Physiotherapy" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Structured, clinical" highlight="pelvic health care" image="/mens-health/pulse-tracking.jpg" imageAlt="Clinical assessment">
+		<p>Men's health physiotherapy focuses on conditions affecting the pelvic floor, bladder, bowel, and sexual function.</p>
+		<p>At Balance, we take a structured and clinical approach to assessment and treatment. We identify the underlying drivers of your symptoms and build a clear plan to restore function, reduce pain, and improve confidence.</p>
+		<p>These issues are often under-reported, but they are both common and highly treatable with the right approach.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="men's health physiotherapy" image="/mens-health/slider-DSCF0046.webp" imageAlt="Men's health consultation">
+		<p>You may benefit from an assessment if you experience:</p>
+		<ul>
+			<li>Persistent pelvic pain (perineum, testicles, lower abdomen)</li>
+			<li>Urinary symptoms such as leaking, urgency, or difficulty starting flow</li>
+			<li>Post-prostate surgery symptoms (e.g. dribbling or incontinence)</li>
+			<li>Bowel dysfunction, including poor control or chronic constipation</li>
+			<li>Pain related to cycling or prolonged sitting</li>
+			<li>Sexual dysfunction linked to pelvic floor function</li>
+		</ul>
+		<p>If symptoms are ongoing or affecting your day-to-day life, it is worth addressing them directly.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/mens-health/pullups.jpg" imageAlt="Strength rehabilitation">
+		<p>We assess how your symptoms relate to movement, muscle function, and nervous system sensitivity.</p>
+		<p>Your treatment may include:</p>
+		<ul>
+			<li>Pelvic floor assessment (external and, where appropriate, internal)</li>
+			<li>Targeted strengthening or down-training of the pelvic floor</li>
+			<li>Hands-on therapy to reduce tension and improve tissue function</li>
+			<li>Breathing and relaxation strategies to reduce overactivity</li>
+			<li>Postural and load management advice</li>
+			<li>Gradual return to exercise and activity</li>
+		</ul>
+		<p>Everything is explained clearly so you understand both the problem and the solution.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/mens-health/slider-image1.webp" imageAlt="Assessment progress">
+		<p>We track your progress throughout treatment to ensure meaningful improvement.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Symptom tracking (pain levels, urinary or bowel symptoms)</li>
+			<li>Pelvic floor function (strength, control, ability to relax)</li>
+			<li>Functional outcomes (e.g. sitting tolerance, return to cycling or sport)</li>
+			<li>Movement quality and confidence</li>
+			<li>Reduction in symptom flare-ups</li>
+		</ul>
+		<p>This allows us to adjust your treatment and keep you moving forward.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/mens-health/paddleboard.jpg" imageAlt="Active lifestyle">
+		<p>We work with men across a range of presentations:</p>
+		<ul>
+			<li><strong>Post-surgical patients:</strong> Recovery following prostate or bladder procedures</li>
+			<li><strong>Cyclists and active individuals:</strong> Managing pelvic pain and pressure-related symptoms</li>
+			<li><strong>Sedentary workers:</strong> Addressing pelvic tension linked to prolonged sitting</li>
+			<li><strong>Chronic pelvic pain presentations:</strong> Where symptoms have persisted despite previous treatment</li>
+		</ul>
+		<p>Our focus is always on restoring normal function and reducing reliance on ongoing treatment.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our men's health" highlight="physiotherapist" image="/mens-health/beach.jpg" imageAlt="Men's health specialist">
+		<p><strong>Jo Fordyce</strong> leads our men's pelvic health service. With over 25 years of experience, she helps men manage pelvic health concerns, improve symptoms, and return to normal activity with confidence.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Jo &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/mens-health/slider-monkey-bars.jpg" imageAlt="Balance Physio">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

@@ -1,76 +1,134 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/bike-fitting-running-analysis/slider-retul-header.jpg', alt: 'Retül bike fitting at Balance Physio Clapham' },
-	{ src: '/bike-fitting-running-analysis/slider-retul-fit-image1.webp', alt: 'Retül 3D motion capture during a bike fit' },
-	{ src: '/bike-fitting-running-analysis/slider-newbikefit.webp', alt: 'New bike fit session in progress' },
-	{ src: '/bike-fitting-running-analysis/slider-physiofit.webp', alt: 'Physio-led bike fit assessment' },
-	{ src: '/bike-fitting-running-analysis/slider-saddles.jpg', alt: 'Saddle selection for bike fitting' },
-	{ src: '/bike-fitting-running-analysis/slider-steph.webp', alt: 'Cycling position assessment at the clinic' },
-	{ src: '/bike-fitting-running-analysis/slider-retuldude1.webp', alt: 'Cyclist during a Retül bike fit' },
-	{ src: '/bike-fitting-running-analysis/slider-cyclist-zabriskie.webp', alt: 'Professional cyclist in action' },
-	{ src: '/bike-fitting-running-analysis/slider-lanzacrew3.jpg', alt: 'Cycling group training in Lanzarote' },
-	{ src: '/bike-fitting-running-analysis/mountain-bikes.webp', alt: 'Mountain biker on a trail' },
-	{ src: '/bike-fitting-running-analysis/slider-running.jpg', alt: 'Runner training outdoors' },
-	{ src: '/bike-fitting-running-analysis/slider-running-analysis.jpg', alt: 'Running gait analysis in progress' },
-	{ src: '/bike-fitting-running-analysis/slider-al-riley.jpg', alt: 'Runner in action during a race' },
+const photos = [
+	{ src: '/bike-fitting-running-analysis/slider-retul-fit-image1.webp', alt: 'Retül bike fitting' },
+	{ src: '/bike-fitting-running-analysis/slider-cyclist-zabriskie.webp', alt: 'Professional cyclist' },
+	{ src: '/bike-fitting-running-analysis/slider-lanzacrew3.jpg', alt: 'Cycling training camp' },
+	{ src: '/bike-fitting-running-analysis/slider-newbikefit.webp', alt: 'New bike fit session' },
+	{ src: '/bike-fitting-running-analysis/slider-physiofit.webp', alt: 'Physio-led bike fit' },
+	{ src: '/bike-fitting-running-analysis/slider-running-analysis.jpg', alt: 'Running gait analysis' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'What should I bring to a bike fitting session?', a: 'Your bike, cycling shoes, and wear your regular cycling kit.' },
+	{ q: 'Do I need to be experienced to benefit?', a: 'No. Many beginners benefit from learning correct technique early.' },
+	{ q: 'Can you help me choose a new bike?', a: 'Yes — we can advise on sizing and setup before purchase.' },
+	{ q: 'How long does a session take?', a: 'Sessions are typically 60 minutes.' },
+	{ q: 'Is this the same as physiotherapy?', a: 'No. This is focused on movement and performance. If you have an active injury, we may recommend a physiotherapy assessment first.' },
+	{ q: 'What is video gait analysis?', a: 'It involves recording your running from multiple angles and reviewing it frame-by-frame to assess movement patterns.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Bike Fitting & Running Analysis"
-	introYoutubeId="vvorir-ZBT0"
-	introImage="/bike-fitting-running-analysis/slider-retul-fit-image1.webp"
-	heroSubtitle="Clinical assessment and video analysis to improve comfort, efficiency, and performance on the bike or on the run."
-	breadcrumb="Bike Fitting & Running Analysis"
-	seoTitle="Bike Fitting & Running Analysis in Clapham"
-	seoDescription="Clinical bike fitting and running gait analysis in Clapham. Video assessment and targeted coaching to reduce pain, prevent injury and improve performance."
-	marqueeImages={sliderImages}
-	intro={[
-		"Cycling and running involve repetitive, high-load movements where minor inefficiencies can cause pain, injury, or reduced performance.",
-		"Our approach focuses on understanding load distribution, movement control, and the adjustments needed to improve efficiency. We combine clinical assessment with video analysis for targeted improvements to technique, position, and strength.",
-	]}
-	whenHeading="When to consider"
-	whenHighlight="this service"
-	whenIntro="You may benefit from assessment if you are experiencing:"
-	whenList={[
-		"Pain while cycling in the neck, back, hips, or knees",
-		"Recurrent running injuries such as shin splints, plantar fasciitis, or knee pain",
-		"Numbness or tingling in the hands or feet when riding",
-		"Movement asymmetry or fatigue between sides",
-		"Difficulty improving speed, endurance, or comfort despite training",
-		"Returning to cycling or running after injury or surgery",
-	]}
-	whenImage="/bike-fitting-running-analysis/ryam-im-wales.jpg"
-	howHeading="How we"
-	howHighlight="work"
-	howIntro="Sessions may include:"
-	howList={[
-		"Video analysis of running gait or cycling position",
-		"Assessment of strength, mobility, and control",
-		"Identification of biomechanical inefficiencies or asymmetries",
-		"Adjustments to bike setup, including cleat position and reach",
-		"Practical coaching to improve running technique",
-		"Targeted exercises for long-term change",
-	]}
-	howImage="/bike-fitting-running-analysis/bikefun.webp"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Recreational runners building consistency and technique",
-		"Distance runners preparing for events or managing injury",
-		"Commuting cyclists seeking comfort and efficiency",
-		"Competitive cyclists and triathletes refining performance",
-		"Individuals returning after injury",
-	]}
-	whoImage="/bike-fitting-running-analysis/three-friends-jogging.jpg"
-	faqs={[
-		{ q: "What should I bring to a bike fitting session?", a: "Your bike, cycling shoes, and regular cycling kit." },
-		{ q: "Do I need to be experienced to benefit?", a: "No. Many beginners benefit from learning correct technique early." },
-		{ q: "Can you help me choose a new bike?", a: "Yes. We can advise on sizing and setup before purchase." },
-		{ q: "How long does a session take?", a: "Sessions are typically 60 minutes." },
-		{ q: "Is this the same as physiotherapy?", a: "No. It focuses on movement and performance. Active injuries may require physiotherapy first." },
-		{ q: "What is video gait analysis?", a: "Recording your running from multiple angles and reviewing frame-by-frame to assess movement patterns." },
-	]}
-/>
+<Layout
+	title="Clinical Bike Fitting & Running Analysis in Clapham"
+	description="Clinical bike fitting and running analysis in Clapham — video gait analysis, position adjustments, and targeted exercise to improve comfort and performance."
+>
+	<PageHero title="in Clapham" highlight="Clinical Bike Fitting & Running Analysis" breadcrumb="Bike Fitting & Running Analysis" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Better movement," highlight="fewer setbacks" image="/bike-fitting-running-analysis/slider-retul-header.jpg" imageAlt="Retül bike fit">
+		<p>Cycling and running are repetitive, high-load activities where small inefficiencies in movement can lead to pain, injury, or limited performance.</p>
+		<p>At Balance, bike fitting and running analysis focus on how your body interacts with movement and equipment. It's about understanding where load is going, how movement is being controlled, and what needs to change to improve efficiency.</p>
+		<p>We combine clinical assessment with video analysis to build a clear picture of your movement. From there, we make targeted adjustments — to technique, position, and strength — so you can move more effectively and tolerate training better.</p>
+		<p>Whether you're riding, running, or returning from injury, the aim is the same: better movement, better performance, fewer setbacks.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider bike fitting" highlight="or running analysis" image="/bike-fitting-running-analysis/bikefun.webp" imageAlt="Cyclist in action">
+		<p>You don't need to wait for pain to become limiting.</p>
+		<p>You may benefit from an assessment if you're experiencing:</p>
+		<ul>
+			<li>Pain while cycling in the neck, back, hips, or knees</li>
+			<li>Recurrent running injuries such as shin splints, plantar fasciitis, or knee pain</li>
+			<li>Numbness or tingling in the hands or feet when riding</li>
+			<li>Asymmetry in how you move or fatigue between sides</li>
+			<li>Difficulty improving speed, endurance, or comfort despite training</li>
+			<li>Returning to cycling or running after injury or surgery</li>
+		</ul>
+		<p>If something feels off, it usually is.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Assessment" heading="How we" highlight="work" image="/bike-fitting-running-analysis/slider-retuldude1.webp" imageAlt="Bike fit analysis">
+		<p>Our approach is based on analysing movement under load.</p>
+		<p>Your session may include:</p>
+		<ul>
+			<li>Video analysis of running gait or cycling position</li>
+			<li>Assessment of strength, mobility, and control</li>
+			<li>Identification of biomechanical inefficiencies or asymmetries</li>
+			<li>Adjustments to bike setup, including cleat position and reach</li>
+			<li>Practical coaching to improve running technique</li>
+			<li>Targeted exercises to support long-term change</li>
+		</ul>
+		<p>We focus on changes that are realistic, measurable, and relevant to your training.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/bike-fitting-running-analysis/slider-running-analysis.jpg" imageAlt="Running analysis review">
+		<p>We look at how your movement changes over time, not just how it looks in one session.</p>
+		<p>From your initial assessment, we establish:</p>
+		<ul>
+			<li>Movement patterns and alignment</li>
+			<li>Load distribution through joints and tissues</li>
+			<li>Areas of restriction or weakness</li>
+			<li>Current tolerance to training</li>
+		</ul>
+		<p>As you progress, we reassess and refine.</p>
+		<p>This means:</p>
+		<ul>
+			<li>You can see improvements in efficiency and control</li>
+			<li>Your plan evolves as your capacity increases</li>
+			<li>You reduce the likelihood of recurring injury</li>
+		</ul>
+		<p>The goal is improved economy, better load tolerance, and more consistent training.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/bike-fitting-running-analysis/mountain-bikes.webp" imageAlt="Mountain biking">
+		<p>We work with a wide range of cyclists and runners across South West London:</p>
+		<ul>
+			<li>Recreational runners building consistency and technique</li>
+			<li>Distance runners preparing for events or managing injury</li>
+			<li>Commuting cyclists looking for comfort and efficiency</li>
+			<li>Competitive cyclists and triathletes refining performance</li>
+			<li>Individuals returning to running or cycling after injury</li>
+		</ul>
+		<p>Whatever your level, improving movement makes a difference.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our" highlight="specialists" image="/bike-fitting-running-analysis/ryam-im-wales.jpg" imageAlt="Cycling specialist at work">
+		<p>Our bike fitting and running analysis sessions are led by experienced clinicians and coaches, delivered in partnership with <strong>Speedlab</strong>, specialists in endurance performance and biomechanics.</p>
+		<p><a href="https://speedlab.uk/" target="_blank" rel="noopener" class="section-link">Learn More About Speedlab &rarr;</a></p>
+		<p><strong>Nichola Roberts</strong> is a Specialist Cycling Physiotherapist, combining clinical injury management with cycling-specific biomechanics.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Nichola &rarr;</a></p>
+		<p><strong>Pat Leahy</strong> is a Bike Fitting Specialist and Cycle Coach with over 25 years of experience, a background in sports science, and a history as an Ironman athlete.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Pat &rarr;</a></p>
+		<p>Together, they provide a detailed understanding of how the body performs under load and how to optimise it.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/bike-fitting-running-analysis/slider-al-riley.jpg" imageAlt="Athlete at event">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

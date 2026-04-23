@@ -1,69 +1,124 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/womens-health/slider-physiotherapy.webp', alt: 'Women\'s health physiotherapy at Balance Physio Clapham' },
-	{ src: '/womens-health/slider-clinic-2017.jpg', alt: 'Clapham clinic treatment session' },
-	{ src: '/womens-health/slider-img8036.webp', alt: 'Women\'s health assessment at Balance Physio Clapham' },
-	{ src: '/womens-health/slider-img7976.webp', alt: 'Pelvic health physiotherapy session' },
-	{ src: '/womens-health/slider-mg1993.webp', alt: 'Treatment room at Balance Physio Clapham' },
-	{ src: '/womens-health/slider-mg2336.webp', alt: 'Women\'s health treatment at Balance Physio Clapham' },
+const photos = [
+	{ src: '/womens-health/slider-clinic-2017.jpg', alt: "Women's health clinic" },
+	{ src: '/womens-health/slider-img7976.webp', alt: 'Pelvic health assessment' },
+	{ src: '/womens-health/slider-img8036.webp', alt: 'Pelvic floor rehab' },
+	{ src: '/womens-health/slider-mg2336.webp', alt: 'Clinical session' },
+	{ src: '/womens-health/slider-physiotherapy.webp', alt: 'Physiotherapy session' },
+	{ src: '/womens-health/women-huddle.jpg', alt: 'Women supporting each other' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'What is a Mummy MOT?', a: 'A specialist postnatal assessment from 6 weeks onwards, including pelvic floor, abdominal, and postural checks.' },
+	{ q: 'Do I need to be pregnant to see you?', a: 'No. We treat women of all ages for a wide range of pelvic health concerns.' },
+	{ q: 'Is an internal examination required?', a: 'No. It is optional, and we will always discuss this with you first.' },
+	{ q: 'Can physiotherapy help with pain during sex?', a: 'Yes. Many causes are related to muscle function or scar tissue, which can be treated.' },
+	{ q: 'When should I seek help for pelvic girdle pain?', a: 'As soon as symptoms begin. Early treatment can significantly reduce discomfort and maintain activity levels.' },
+	{ q: 'Can I bring my baby?', a: 'Yes — you are welcome to bring your baby to your appointment.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Women\'s Health"
-	heroSubtitle="Expert pelvic health physiotherapy supporting you through pregnancy, postnatal recovery, menopause, and every stage in between."
-	breadcrumb="Women\'s Health"
-	seoTitle="Women\'s Health in Clapham"
-	seoDescription="Women\'s health physiotherapy in Clapham. Pelvic floor, pregnancy, postnatal recovery, Mummy MOT, and menopause support from experienced clinicians."
-	marqueeImages={sliderImages}
-	intro={[
-		"Women\'s health physiotherapy addresses the physical changes that occur across different stages of life, from adolescence through pregnancy, postnatal recovery, and menopause.",
-		"We take a clinical and structured approach to pelvic health, assessing how symptoms affect movement, strength, and daily function.",
-		"From this we build a clear plan to help you regain control, confidence, and resilience.",
-	]}
-	introImage="/womens-health/gynaecology.webp"
-	whenHeading="When to consider"
-	whenHighlight="an assessment"
-	whenIntro="You may benefit from assessment if experiencing:"
-	whenList={[
-		"Pelvic girdle pain, lower back pain, or discomfort during pregnancy",
-		"Bladder or bowel issues, including leaking or urgency",
-		"Postnatal changes such as abdominal separation or pelvic floor weakness",
-		"Symptoms of pelvic organ prolapse (heaviness or pressure)",
-		"Pain during intimacy or scar-related discomfort",
-		"Ongoing symptoms following gynaecological surgery",
-	]}
-	whenImage="/womens-health/pregnant-woman.jpg"
-	howHeading="How we"
-	howHighlight="treat"
-	howIntro="Treatment may include:"
-	howList={[
-		"Pelvic floor assessment and rehabilitation",
-		"Hands-on therapy to improve joint and soft tissue function",
-		"Targeted strength and control exercises",
-		"Postural and movement retraining",
-		"Education around lifestyle, load management, and recovery",
-	]}
-	howImage="/womens-health/sports-woman.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoIntro="We support women across all life stages:"
-	whoList={[
-		"Pregnancy: managing pain and staying active",
-		"Postnatal recovery: from 6 weeks onwards, including Mummy MOT",
-		"Active women: managing symptoms during sport and exercise",
-		"Perimenopause and menopause: addressing pelvic floor changes",
-		"Post-surgical recovery: following gynaecological procedures",
-	]}
-	whoImage="/womens-health/women-huddle.jpg"
-	faqs={[
-		{ q: "What is a Mummy MOT?", a: "A specialist postnatal assessment from 6 weeks onwards, including pelvic floor, abdominal, and postural checks." },
-		{ q: "Do I need to be pregnant to see you?", a: "No. We treat women of all ages for pelvic health concerns." },
-		{ q: "Is an internal examination required?", a: "No. It is optional, and clinicians discuss this beforehand." },
-		{ q: "Can physiotherapy help with pain during sex?", a: "Yes. Many causes relate to muscle function or scar tissue, which can be treated." },
-		{ q: "When should I seek help for pelvic girdle pain?", a: "As soon as symptoms begin, early treatment reduces discomfort." },
-		{ q: "Can I bring my baby?", a: "Yes. patients are welcome to bring babies to appointments." },
-	]}
-/>
+<Layout
+	title="Women's Health Physiotherapy in Clapham"
+	description="Women's health and pelvic floor physiotherapy in Clapham — pregnancy, postnatal recovery, menopause and ongoing pelvic health support."
+>
+	<PageHero title="in Clapham" highlight="Women's Health Physiotherapy" breadcrumb="Women's Health Physiotherapy" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Structured, clinical" highlight="pelvic health care" image="/womens-health/slider-clinic-2017.jpg" imageAlt="Clinic environment">
+		<p>Women's health physiotherapy addresses the physical changes that occur across different stages of life — from adolescence through pregnancy, postnatal recovery, and menopause.</p>
+		<p>At Balance, we take a clinical and structured approach to pelvic health. We assess how your symptoms are affecting your movement, strength, and day-to-day function, then build a clear plan to help you regain control, confidence, and resilience.</p>
+		<p>Whether you are managing symptoms, recovering from pregnancy or surgery, or looking to stay active without discomfort, we provide a focused and supportive pathway forward.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="women's health physiotherapy" image="/womens-health/pregnant-woman.jpg" imageAlt="Pregnancy support">
+		<p>Pelvic health concerns are common, but they are not something you need to put up with.</p>
+		<p>You may benefit from an assessment if you experience:</p>
+		<ul>
+			<li>Pelvic girdle pain, lower back pain, or discomfort during pregnancy</li>
+			<li>Bladder or bowel issues, including leaking or urgency</li>
+			<li>Postnatal changes such as abdominal separation or pelvic floor weakness</li>
+			<li>Symptoms of pelvic organ prolapse (heaviness or pressure)</li>
+			<li>Pain during intimacy or scar-related discomfort</li>
+			<li>Ongoing symptoms following gynaecological surgery</li>
+		</ul>
+		<p>If something doesn't feel right, it's worth addressing early.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/womens-health/slider-img7976.webp" imageAlt="Pelvic health assessment">
+		<p>We focus on identifying the underlying cause of your symptoms and addressing it directly.</p>
+		<p>Your treatment may include:</p>
+		<ul>
+			<li>Pelvic floor assessment and rehabilitation</li>
+			<li>Hands-on therapy to improve joint and soft tissue function</li>
+			<li>Targeted strength and control exercises</li>
+			<li>Postural and movement retraining</li>
+			<li>Education around lifestyle, load management, and recovery</li>
+		</ul>
+		<p>We keep everything practical, clear, and tailored to your stage of life and your goals.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/womens-health/slider-mg2336.webp" imageAlt="Clinical assessment">
+		<p>We track your progress from your first session to ensure your treatment is effective and focused.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Symptom tracking (e.g. leakage frequency, pain levels)</li>
+			<li>Pelvic floor strength and control assessment</li>
+			<li>Functional measures (e.g. return to running, lifting, or daily tasks)</li>
+			<li>Abdominal function (e.g. diastasis recti assessment)</li>
+			<li>Movement quality and confidence</li>
+		</ul>
+		<p>This gives you clear feedback on what's improving and helps guide the next steps in your rehabilitation.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/womens-health/sports-woman.jpg" imageAlt="Active woman">
+		<p>We support women across all life stages:</p>
+		<ul>
+			<li><strong>Pregnancy:</strong> Managing pain and staying active</li>
+			<li><strong>Postnatal recovery:</strong> From 6 weeks onwards, including Mummy MOT</li>
+			<li><strong>Active women:</strong> Managing symptoms during sport and exercise</li>
+			<li><strong>Perimenopause and menopause:</strong> Addressing pelvic floor and musculoskeletal changes</li>
+			<li><strong>Post-surgical recovery:</strong> Following gynaecological procedures</li>
+		</ul>
+		<p>Our aim is always the same — helping you move well, feel strong, and stay in control of your body.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our specialist" highlight="team" image="/womens-health/women-huddle.jpg" imageAlt="Team">
+		<p>Our women's health service combines specialist pelvic health physiotherapy with expert musculoskeletal care.</p>
+		<p><strong>Jo Fordyce</strong> leads our pelvic health service, specialising in obstetric and gynaecological conditions. With over 25 years of experience, she supports women through pregnancy, postnatal recovery, menopause, and a wide range of pelvic health concerns.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Jo &rarr;</a></p>
+		<p><strong>Caroline Curtis</strong> is a Consultant Spinal Physiotherapist with extensive experience in musculoskeletal care. She provides expert assessment and treatment for spinal and movement-related conditions, supporting women with pain and dysfunction during and beyond pregnancy.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Caroline &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/womens-health/gynaecology.webp" imageAlt="Consultation">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

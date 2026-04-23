@@ -1,71 +1,119 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/prehab-class/slider-IMG_3921.jpg', alt: 'Agility training at the Balance Clapham clinic' },
-	{ src: '/prehab-class/athletes-celebrating.jpg', alt: 'Group of athletes celebrating after a session' },
-	{ src: '/prehab-class/yoga-pilates-equipment.jpg', alt: 'Foam rollers, resistance bands and fitballs' },
-	{ src: '/prehab-class/slider-IMG_9461.webp', alt: 'Strength and mobility equipment at the Clapham clinic' },
-	{ src: '/prehab-class/unrolling-yoga-mat.jpg', alt: 'Unrolling a mat before a session' },
-	{ src: '/prehab-class/slider-IMG_1670.jpg', alt: 'Foam roller and mobility tools' },
-	{ src: '/prehab-class/elderly-legs-mats.jpg', alt: 'Prehab class accessible to all ages' },
-	{ src: '/prehab-class/slider-sportsinjury-physio.jpg', alt: 'Physiotherapist-led rehabilitation session' },
-	{ src: '/prehab-class/slider-steph.webp', alt: 'Prehab coaching at Balance Physio Clapham' },
+const photos = [
+	{ src: '/prehab-class/slider-IMG_1670.jpg', alt: 'Prehab class in session' },
+	{ src: '/prehab-class/slider-IMG_3921.jpg', alt: 'Mobility work' },
+	{ src: '/prehab-class/slider-IMG_9461.webp', alt: 'Guided movement' },
+	{ src: '/prehab-class/slider-sportsinjury-physio.jpg', alt: 'Physio-led preparation' },
+	{ src: '/prehab-class/slider-steph.webp', alt: 'Coaching in action' },
+	{ src: '/prehab-class/athletes-celebrating.jpg', alt: 'Athletes staying consistent' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'What is prehab?', a: 'Prehabilitation focuses on reducing injury risk by improving strength, mobility, and movement control before problems develop.' },
+	{ q: 'Do I need to be highly trained?', a: 'No. The class is suitable for anyone who is active or looking to become more active.' },
+	{ q: "Can I attend if I'm currently injured?", a: 'If you have an acute injury, we recommend an initial physiotherapy assessment first.' },
+	{ q: 'What should I wear?', a: 'Comfortable clothing that allows you to move freely.' },
+	{ q: 'How is this different from a fitness class?', a: 'The class is led by a physiotherapist and focuses on movement quality and injury risk, rather than intensity alone.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Prehab Class"
-	heroSubtitle="A physiotherapist-led session focused on reducing injury risk and improving movement quality, whatever your starting point."
-	breadcrumb="Prehab Class"
-	seoTitle="Prehab Class in Clapham"
-	seoDescription="Physiotherapist-led prehab class in Clapham. Build strength, mobility, and movement control to reduce injury risk and prepare for your next goal."
-	marqueeImages={sliderImages}
-	intro={[
-		"Our Prehab Class is a physiotherapist-led session focused on reducing injury risk and improving movement quality.",
-		"Prehab means preparation, it prepares you for your next stage, whether that\'s training, surgery, sport, or simply moving better day to day.",
-		"It doesn\'t matter if you\'ve never exercised before. The class is designed to meet you where you are and build from there.",
-	]}
-	introImage="/prehab-class/athletes-celebrating.jpg"
-	whenHeading="When to consider"
-	whenHighlight="prehab"
-	whenIntro="You may benefit if you:"
-	whenList={[
-		"Experience recurring niggles during or after exercise",
-		"Have been asked by a surgical team to get fit before a procedure",
-		"Feel restricted or tight in certain movements",
-		"Have an injury history and want to reduce recurrence",
-		"Feel performance is limited by movement quality",
-		"Are preparing for a specific sport or event",
-	]}
-	whenImage="/prehab-class/unrolling-yoga-mat.jpg"
-	howHeading="What the"
-	howHighlight="class involves"
-	howIntro="Sessions focus on:"
-	howList={[
-		"Mobility and joint range of movement",
-		"Strength in commonly undertrained areas",
-		"Movement control and coordination",
-		"Stability through the trunk and lower limb",
-		"Sport-specific preparation where relevant",
-	]}
-	howImage="/prehab-class/yoga-pilates-equipment.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Gym users supporting strength training",
-		"Patients recovering from injury or operations",
-		"Patients preparing for operative procedures",
-		"Runners and field athletes",
-		"Active individuals reducing injury risk",
-		"Office-based professionals counteracting stiffness",
-	]}
-	whoImage="/prehab-class/elderly-legs-mats.jpg"
-	faqs={[
-		{ q: "What is prehab?", a: "Prehabilitation focuses on reducing injury risk by improving strength, mobility, and movement control before problems develop." },
-		{ q: "Do I need to be highly trained?", a: "No. The class is suitable for anyone who is active or looking to become more active." },
-		{ q: "Can I attend if I\'m currently injured?", a: "If you have an acute injury, we recommend an initial physiotherapy assessment first." },
-		{ q: "What should I wear?", a: "Comfortable clothing that allows you to move freely." },
-		{ q: "How is this different from a fitness class?", a: "The class is led by a physiotherapist and focuses on movement quality and injury risk, rather than intensity alone." },
-	]}
-/>
+<Layout
+	title="Prehab Class in Clapham"
+	description="Physiotherapist-led prehab class in Clapham — structured mobility, strength and control work to prepare your body for training, sport or surgery."
+>
+	<PageHero title="in Clapham" highlight="Prehab Class" breadcrumb="Prehab Class" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Prepare your body for the demands of" highlight="training and sport" image="/prehab-class/yoga-pilates-equipment.jpg" imageAlt="Studio equipment">
+		<p>Our Prehab Class is a physiotherapist-led session focused on reducing injury risk and improving movement quality. Rather than reacting to problems once they occur, this class helps you build the strength, mobility, and control needed to tolerate load and perform consistently. Prehab means preparation and it prepares you for your next stage.</p>
+		<p>It doesn't matter if you've never exercised before.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Who it's for" heading="When to" highlight="consider prehab" image="/prehab-class/unrolling-yoga-mat.jpg" imageAlt="Starting a session">
+		<p>You may benefit from the Prehab Class if you:</p>
+		<ul>
+			<li>Experience recurring niggles during or after exercise</li>
+			<li>Have been asked by your surgical team to get as fit as possible before a procedure</li>
+			<li>Feel restricted or "tight" in certain movements</li>
+			<li>Have a history of injury and want to reduce recurrence</li>
+			<li>Feel your performance is limited by movement quality</li>
+			<li>Are preparing for a specific sport or event</li>
+		</ul>
+		<p>Prehab is about addressing small issues before they become larger problems.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Sessions" heading="How the" highlight="class works" image="/prehab-class/slider-IMG_3921.jpg" imageAlt="Class in progress">
+		<p>Sessions are structured and led by a physiotherapist, focusing on key areas of injury prevention.</p>
+		<p>You will work on:</p>
+		<ul>
+			<li>Mobility and joint range of movement</li>
+			<li>Strength in commonly undertrained areas</li>
+			<li>Movement control and coordination</li>
+			<li>Stability through the trunk and lower limb</li>
+			<li>Sport-specific preparation where relevant</li>
+		</ul>
+		<p>Exercises are selected to improve how your body moves under load, helping you train and perform more effectively.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/prehab-class/slider-sportsinjury-physio.jpg" imageAlt="Progress check">
+		<p>We focus on changes that support long-term resilience and performance.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Improved movement quality and control</li>
+			<li>Increased mobility in restricted areas</li>
+			<li>Better symmetry between sides</li>
+			<li>Reduced frequency of pain or niggles</li>
+			<li>Improved tolerance to training load</li>
+		</ul>
+		<p>These outcomes allow you to train more consistently with less interruption.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our members" heading="Who we" highlight="help" image="/prehab-class/elderly-legs-mats.jpg" imageAlt="Inclusive class">
+		<p>The Prehab Class is suitable for:</p>
+		<ul>
+			<li><strong>Gym users:</strong> Supporting strength training with mobility and control</li>
+			<li><strong>Patients</strong> recovering from injury or from operations</li>
+			<li><strong>Patients</strong> preparing for an operative procedure</li>
+			<li><strong>Runners and field athletes:</strong> Improving lower limb mechanics and load tolerance</li>
+			<li><strong>Active individuals:</strong> Looking to move better and reduce injury risk</li>
+			<li><strong>Office-based professionals:</strong> Counteracting stiffness before or after training</li>
+		</ul>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Your coach" heading="Your" highlight="coach" image="/prehab-class/slider-steph.webp" imageAlt="Coaching">
+		<p>The class is led by <strong>Sam Stringer</strong>, an experienced physiotherapist with a strong interest in movement and injury prevention.</p>
+		<p>His approach combines clinical reasoning with practical exercise, helping you understand not just what to do, but why it matters.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Sam &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/prehab-class/athletes-celebrating.jpg" imageAlt="Athletes">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise. This class is simply great value for money.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

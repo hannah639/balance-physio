@@ -1,68 +1,126 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/neurological-rehabilitation/walking-frame.jpg', alt: 'Physiotherapist supporting a patient using a walking frame' },
-	{ src: '/neurological-rehabilitation/clinic-session.jpg', alt: 'AlterG anti-gravity treadmill at the Balance Clapham clinic' },
-	{ src: '/neurological-rehabilitation/basketball-wheelchair.jpg', alt: 'Active life with a long-term neurological condition' },
-	{ src: '/neurological-rehabilitation/parallel-bars.jpg', alt: 'Strength and coordination training' },
-	{ src: '/neurological-rehabilitation/rehab-gym.jpg', alt: 'Rehabilitation equipment for neurological physiotherapy' },
-	{ src: '/neurological-rehabilitation/fitness-ball.jpg', alt: 'Fitness balls and wall bars for neuro rehab' },
+const photos = [
+	{ src: '/neurological-rehabilitation/clinic-session.jpg', alt: 'Neuro physio session' },
+	{ src: '/neurological-rehabilitation/parallel-bars.jpg', alt: 'Gait rehabilitation' },
+	{ src: '/neurological-rehabilitation/fitness-ball.jpg', alt: 'Balance training' },
+	{ src: '/neurological-rehabilitation/rehab-gym.jpg', alt: 'Rehab gym space' },
+	{ src: '/neurological-rehabilitation/walking-frame.jpg', alt: 'Walking rehabilitation' },
+	{ src: '/neurological-rehabilitation/basketball-wheelchair.jpg', alt: 'Adaptive sport' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'What is the difference between neurological physiotherapy and regular physiotherapy?', a: 'Neurological physiotherapy focuses specifically on conditions affecting the brain, spinal cord, and nerves, and how these impact movement, balance, and function.' },
+	{ q: 'Can you help with dizziness and balance problems?', a: 'Yes. We offer vestibular physiotherapy for dizziness, balance issues, and falls prevention.' },
+	{ q: 'Do you see children?', a: 'Yes. We work with babies, children, and adolescents with neurological, developmental, and movement concerns.' },
+	{ q: 'Is neurological rehabilitation only for recent injuries?', a: 'No. We support people at all stages, whether symptoms are recent or long term.' },
+	{ q: 'Will I get exercises to do at home?', a: 'Yes. Your therapist will build a practical programme that fits your needs and day-to-day life.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Neurological Rehabilitation"
-	heroSubtitle="Clinical, evidence-led rehabilitation for people living with conditions that affect movement, balance, strength, and coordination."
-	breadcrumb="Neurological Rehabilitation"
-	seoTitle="Neurological Rehabilitation in Clapham"
-	seoDescription="Neurological physiotherapy in Clapham for stroke, Parkinson\'s, MS, brain injury, vestibular problems, and paediatric movement concerns."
-	marqueeImages={sliderImages}
-	intro={[
-		"Neurological conditions can change how you move, function, and manage day-to-day life.",
-		"We look at how your nervous system is affecting movement, balance, strength, and coordination, and what needs to change to help you function more independently.",
-		"Our clinical, evidence-led approach assesses movement patterns and builds a personalised plan aligned with your goals.",
-	]}
-	introImage="/neurological-rehabilitation/walking-frame.jpg"
-	whenHeading="When to consider"
-	whenHighlight="neuro rehab"
-	whenIntro="Consider an assessment if you\'re experiencing:"
-	whenList={[
-		"Difficulty with walking, standing, or moving safely",
-		"Balance problems, dizziness, or falls",
-		"Muscle weakness, stiffness, or changes in tone",
-		"Reduced coordination or control",
-		"Fatigue affecting day-to-day function",
-		"Loss of confidence with movement after illness or injury",
-		"Developmental, postural, or movement concerns in babies and children",
-	]}
-	whenImage="/neurological-rehabilitation/parallel-bars.jpg"
-	howHeading="How we"
-	howHighlight="treat"
-	howList={[
-		"Hands-on therapy to improve movement and reduce restriction",
-		"Targeted exercise to build strength, control, and endurance",
-		"Balance and gait rehabilitation",
-		"Vestibular rehabilitation for dizziness and balance problems",
-		"Bobath-based therapy or Vojta Therapy where appropriate",
-		"Education and practical strategies supporting independence",
-	]}
-	howImage="/neurological-rehabilitation/clinic-session.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Adults recovering from stroke, brain injury, or spinal cord injury",
-		"People living with Parkinson\'s, Multiple Sclerosis, neuropathy, or other neurological conditions",
-		"Individuals with dizziness, vestibular problems, or falls risk",
-		"Babies, children, and adolescents with developmental or neurological concerns",
-		"People maintaining strength, confidence, and independence with long-term conditions",
-	]}
-	whoImage="/neurological-rehabilitation/basketball-wheelchair.jpg"
-	faqs={[
-		{ q: "What is the difference between neurological physiotherapy and regular physiotherapy?", a: "Neurological physiotherapy focuses specifically on conditions affecting the brain, spinal cord, and nerves, and how these impact movement, balance, and function." },
-		{ q: "Can you help with dizziness and balance problems?", a: "Yes. We offer vestibular physiotherapy for dizziness, balance issues, and falls prevention." },
-		{ q: "Do you see children?", a: "Yes. We work with babies, children, and adolescents with neurological, developmental, and movement concerns." },
-		{ q: "Is neurological rehabilitation only for recent injuries?", a: "No. We support people at all stages, whether symptoms are recent or long-term." },
-		{ q: "Will I get exercises to do at home?", a: "Yes. Our therapists build practical home programmes that fit your individual needs and daily life." },
-	]}
-/>
+<Layout
+	title="Neurological Physiotherapy in South West London"
+	description="Neurological physiotherapy in South West London — assessment, hands-on therapy, balance and gait rehabilitation, vestibular work and Vojta Therapy."
+>
+	<PageHero title="in South West London" highlight="Neurological Physiotherapy" breadcrumb="Neurological Physiotherapy" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="Clinical, evidence-led" highlight="neurological rehabilitation" image="/neurological-rehabilitation/clinic-session.jpg" imageAlt="Neuro consultation">
+		<p>Neurological conditions can change how you move, function, and manage day-to-day life.</p>
+		<p>At Balance, neurological physiotherapy is about more than managing symptoms. It's about understanding how your nervous system is affecting movement, balance, strength, and coordination — and what needs to change to help you function more independently and confidently.</p>
+		<p>We take a clinical, evidence-led approach to every case. From your first session, we assess how you move, what is limiting you, and where the greatest opportunities for progress are, then build a plan around your goals, your daily life, and your starting point.</p>
+		<p>Whether you are recovering from neurological injury, living with a long-term condition, or trying to maintain independence and confidence, we meet you where you are and guide you forward.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="neurological physiotherapy" image="/neurological-rehabilitation/parallel-bars.jpg" imageAlt="Gait rehabilitation">
+		<p>Neurological physiotherapy can help if you're dealing with:</p>
+		<ul>
+			<li>Difficulty with walking, standing, or moving safely</li>
+			<li>Balance problems, dizziness, or falls</li>
+			<li>Muscle weakness, stiffness, or changes in tone</li>
+			<li>Reduced coordination or control</li>
+			<li>Fatigue affecting day-to-day function</li>
+			<li>Loss of confidence with movement after illness or injury</li>
+			<li>Developmental, postural, or movement concerns in babies and children</li>
+		</ul>
+		<p>If movement feels harder, less reliable, or less efficient than it should, it's worth addressing early.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/neurological-rehabilitation/fitness-ball.jpg" imageAlt="Balance rehab">
+		<p>Everything we do is built around one principle: helping you move better and function more confidently.</p>
+		<p>Your treatment may include:</p>
+		<ul>
+			<li>Hands-on therapy to improve movement and reduce restriction</li>
+			<li>Targeted exercise to build strength, control, and endurance</li>
+			<li>Balance and gait rehabilitation</li>
+			<li>Vestibular rehabilitation for dizziness and balance problems</li>
+			<li>Bobath-based therapy or Vojta Therapy where appropriate</li>
+			<li>Clear education and practical strategies to support independence at home and in daily life</li>
+		</ul>
+		<p>We don't take a one-size-fits-all approach. Your programme is built around your condition, your goals, and the level you are currently at.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/neurological-rehabilitation/rehab-gym.jpg" imageAlt="Rehab gym">
+		<p>We don't guess.</p>
+		<p>From your first session, we establish a clear baseline of how you move, function, and manage day to day. As you progress, we regularly reassess — looking at balance, walking, strength, control, fatigue, and what you are practically able to do in everyday life.</p>
+		<p>This keeps your treatment focused and accountable.</p>
+		<p>For you, that means:</p>
+		<ul>
+			<li>Clear evidence that you're improving</li>
+			<li>A plan that adapts as your needs change</li>
+			<li>Confidence in your ability to move, function, and stay as independent as possible</li>
+		</ul>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/neurological-rehabilitation/basketball-wheelchair.jpg" imageAlt="Adaptive sport">
+		<p>We work with people across a wide range of neurological and vestibular needs.</p>
+		<ul>
+			<li>Adults recovering from stroke, brain injury, or spinal cord injury</li>
+			<li>People living with Parkinson's, Multiple Sclerosis, neuropathy, or other neurological conditions</li>
+			<li>Individuals with dizziness, vestibular problems, or falls risk</li>
+			<li>Babies, children, and adolescents with developmental or neurological concerns</li>
+			<li>People wanting to maintain strength, confidence, and independence with a long-term condition</li>
+		</ul>
+		<p>Whatever your starting point, the goal is the same: better movement, better function, better outcomes.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="team" image="/neurological-rehabilitation/walking-frame.jpg" imageAlt="Clinical mobility work">
+		<p>Our neurological physiotherapy team is made up of highly experienced clinicians with specialist areas of expertise. You'll be matched with the right practitioner for your needs — whether that's neurological rehabilitation, vestibular physiotherapy, Vojta Therapy, or longer-term support with strength, mobility, and independence.</p>
+		<p><strong>Jonathan Zulueta</strong> is a Consultant Vestibular Physiotherapist with over 20 years of experience. He specialises in balance disorders, dizziness, and neck-related neurological conditions, with additional expertise in osteoporosis.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Jonathan &rarr;</a></p>
+		<p><strong>Dr Jose Sanz Mengibar</strong> is a Consultant Neurological Physiotherapist and Vojta Therapist with over 20 years of experience. He brings PhD-level expertise in reflex locomotion and neurological rehabilitation.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Jose &rarr;</a></p>
+		<p><strong>Maxine Baillie-Harland</strong> provides dedicated neurological physiotherapy for both adults and children. She is known for her compassionate, patient-centred approach to neurological rehabilitation.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Maxine &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/neurological-rehabilitation/clinic-session.jpg" imageAlt="Neuro clinic">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

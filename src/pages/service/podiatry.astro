@@ -1,76 +1,159 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/podiatry/slider-podiatry-feet.webp', alt: 'Podiatry assessment at Balance Physio Clapham' },
-	{ src: '/podiatry/family-bare-feet.jpg', alt: 'Family feet on a step, podiatry for all ages' },
-	{ src: '/podiatry/slider-pexels-running.jpg', alt: 'Runner pushing off the ground' },
-	{ src: '/podiatry/men-runners-legs.jpg', alt: 'Two runners mid-stride on a city street' },
-	{ src: '/podiatry/slider-pexels-feet.webp', alt: 'Close-up of feet during gait assessment' },
-	{ src: '/podiatry/women-jogging-feet.jpg', alt: 'Running shoes mid-stride from behind' },
-	{ src: '/podiatry/slider-foot-and-ankle.webp', alt: 'Foot and ankle care' },
-	{ src: '/podiatry/children-barefoot.jpg', alt: 'Children\'s bare feet, paediatric podiatry' },
-	{ src: '/podiatry/slider-balance-balls.webp', alt: 'Balance and proprioception training' },
-	{ src: '/podiatry/slider-podiatry-balance.webp', alt: 'Podiatry care at Balance Physio Clapham' },
+const photos = [
+	{ src: '/podiatry/slider-foot-and-ankle.webp', alt: 'Foot and ankle assessment' },
+	{ src: '/podiatry/slider-pexels-feet.webp', alt: 'Podiatry assessment' },
+	{ src: '/podiatry/slider-pexels-running.jpg', alt: 'Runner in motion' },
+	{ src: '/podiatry/slider-podiatry-balance.webp', alt: 'Podiatry at Balance' },
+	{ src: '/podiatry/slider-podiatry-feet.webp', alt: 'Podiatry treatment' },
+	{ src: '/podiatry/slider-balance-balls.webp', alt: 'Balance training' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: "What's the difference between a podiatrist and a chiropodist?", a: 'The terms are often used interchangeably, but podiatry reflects a more modern, biomechanical approach to foot and lower limb health.' },
+	{ q: 'Do I need orthotics?', a: "Not always. We only prescribe them where they're clinically appropriate." },
+	{ q: 'Can you help with running injuries?', a: 'Yes — we assess how you move and load, not just the site of pain.' },
+	{ q: 'Is ultrasound included?', a: 'Only where needed. It can be added to your assessment if it helps clarify your diagnosis.' },
+	{ q: 'Can you assess children?', a: 'Yes — we offer paediatric assessments for development and gait concerns.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Podiatry"
-	heroSubtitle="Podiatry and chiropody care that looks beyond the foot, resolving pain, restoring movement, and keeping the problem from coming back."
-	breadcrumb="Podiatry"
-	seoTitle="Podiatry in Clapham"
-	seoDescription="Podiatry and chiropody in Clapham. Expert care for heel pain, Achilles, orthotics, running injuries, nails, and skin, integrated with the Balance team."
-	marqueeImages={sliderImages}
-	intro={[
-		"If your feet aren\'t working well, nothing above them will either. Foot and ankle problems don\'t stay local. They affect how you move, how you load your joints, and often show up as pain elsewhere, in the knees, hips, or lower back.",
-		"Our podiatry and chiropody service focuses on understanding that link. We look at how your body interacts with the ground, and how that influences everything above it.",
-		"The aim is simple: resolve pain, restore movement, and make sure the problem doesn\'t come back.",
-	]}
-	introImage="/podiatry/family-bare-feet.jpg"
-	whenHeading="When to consider"
-	whenHighlight="podiatry"
-	whenIntro="Common reasons people see us:"
-	whenList={[
-		"Heel pain, including plantar fasciitis",
-		"Achilles pain or stiffness",
-		"Neuroma or forefoot pain",
-		"Shin pain or running-related injuries",
-		"Recurrent ankle sprains or instability",
-		"Changes in walking or running pattern",
-		"Knee, hip, or back pain linked to how you move",
-		"Concerns about a child\'s foot development or gait",
-		"Considering off-the-peg or custom insoles",
-		"Corns, calluses, ingrown toenails, verrucas, fungal nails, or cracked heels",
-	]}
-	whenImage="/podiatry/men-runners-legs.jpg"
-	howHeading="How we"
-	howHighlight="treat"
-	howIntro="Assessment and treatment are tailored to the cause, not just the site of pain."
-	howList={[
-		"Detailed biomechanical and gait assessment",
-		"Diagnostic ultrasound where it helps clarify diagnosis",
-		"Orthotic prescription when clinically appropriate",
-		"Nail and skin care for chiropody conditions",
-		"Joint sessions with physiotherapists, strength coaches, or running specialists",
-		"Clear loading and footwear advice to keep the problem from returning",
-	]}
-	howImage="/podiatry/women-jogging-feet.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Runners and athletes with foot, ankle, or lower limb injuries",
-		"People with chronic heel, Achilles, or forefoot pain",
-		"Patients seeking advice on footwear and orthotics",
-		"Children with developmental or gait concerns",
-		"Anyone with nail or skin conditions affecting the feet",
-	]}
-	whoImage="/podiatry/children-barefoot.jpg"
-	faqs={[
-		{ q: "What\'s the difference between a podiatrist and a chiropodist?", a: "The terms are often used interchangeably, but podiatry reflects a more modern, biomechanical approach to foot and lower limb health." },
-		{ q: "Do I need orthotics?", a: "Not always. We only prescribe them where they\'re clinically appropriate." },
-		{ q: "Can you help with running injuries?", a: "Yes. we assess how you move and load, not just the site of pain." },
-		{ q: "Is ultrasound included?", a: "Only where needed. It can be added to your assessment if it helps clarify your diagnosis." },
-		{ q: "Can you assess children?", a: "Yes. we offer paediatric assessments for development and gait concerns." },
-	]}
-/>
+<Layout
+	title="Podiatry and Chiropody in Clapham"
+	description="Podiatry and chiropody in Clapham — foot, ankle and lower-limb assessment and treatment, with ultrasound and orthotic prescription where appropriate."
+>
+	<PageHero title="in Clapham" highlight="Podiatry and Chiropody" breadcrumb="Podiatry and Chiropody" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="If your feet aren't working well," highlight="nothing above them will either" image="/podiatry/men-runners-legs.jpg" imageAlt="Runners in motion">
+		<p>Foot and ankle problems don't stay local. They affect how you move, how you load your joints, and often show up as pain elsewhere — in the knees, hips, or lower back.</p>
+		<p>Our podiatry and chiropody service focuses on understanding that link. We look at how your body interacts with the ground, and how that influences everything above it.</p>
+		<p>The aim is simple: resolve pain, restore movement, and make sure the problem doesn't come back.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="podiatry" image="/podiatry/women-jogging-feet.jpg" imageAlt="Jogger's feet">
+		<p>You may benefit from podiatry if you're experiencing:</p>
+		<ul>
+			<li>Heel pain, including plantar fasciitis</li>
+			<li>Achilles pain or stiffness</li>
+			<li>Neuroma</li>
+			<li>Pain in the forefoot or ball of the foot</li>
+			<li>Shin pain or running-related injuries</li>
+			<li>Recurrent ankle sprains or instability</li>
+			<li>Changes in walking or running pattern</li>
+			<li>Knee, hip, or back pain linked to how you move</li>
+			<li>Concerns about your child's foot development or gait</li>
+			<li>Considering off the peg insoles</li>
+		</ul>
+		<p>If the issue keeps returning, or isn't improving, it's worth looking deeper.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Foot care" heading="When to consider" highlight="chiropody" image="/podiatry/family-bare-feet.jpg" imageAlt="Family bare feet">
+		<p>You may benefit from chiropody if you're experiencing:</p>
+		<ul>
+			<li>Corns and calluses</li>
+			<li>Ingrown toenails</li>
+			<li>Verrucas (plantar warts)</li>
+			<li>Fungal nail infections</li>
+			<li>Cracked heels</li>
+		</ul>
+		<p><strong>Support for medical conditions.</strong> If you have conditions like Diabetes, foot care becomes critical. Poor circulation or nerve damage can make minor issues dangerous — regular chiropody helps prevent complications.</p>
+		<p><strong>Expert advice and footwear guidance.</strong> They can recommend proper footwear, orthotics, and foot care routines tailored to your lifestyle.</p>
+		<p><strong>Improved hygiene and appearance.</strong> Regular care keeps your feet clean, nails properly managed, and skin healthy.</p>
+		<p>If the issue keeps returning, or isn't improving, it's worth looking deeper.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Treatment" heading="How we" highlight="work" image="/podiatry/children-barefoot.jpg" imageAlt="Child's foot assessment">
+		<p>We start by understanding how you move.</p>
+		<p>This includes a detailed assessment of your foot and ankle, alongside how your lower limbs function during walking, running, or sport. Often, the cause of pain isn't where you feel it — it's how force is being transferred through the body.</p>
+		<p>Your treatment may include:</p>
+		<ul>
+			<li>Targeted rehabilitation exercises</li>
+			<li>Load management and return-to-activity planning</li>
+			<li>Footwear advice based on your needs</li>
+			<li>Orthotic prescription where appropriate</li>
+		</ul>
+		<p>Everything is tailored to your movement, your goals, and your environment.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Imaging" heading="Diagnostic" highlight="ultrasound" image="/podiatry/slider-foot-and-ankle.webp" imageAlt="Foot ultrasound">
+		<p>Where needed, we use point-of-care ultrasound as part of your assessment.</p>
+		<p>This allows us to visualise tendons, ligaments, and soft tissue structures in real time, helping us confirm a diagnosis and guide your treatment more precisely.</p>
+		<p>Ultrasound is:</p>
+		<ul>
+			<li>Non-invasive and pain-free</li>
+			<li>Radiation-free</li>
+			<li>Immediate — results are discussed during your appointment</li>
+			<li>Useful for tracking how tissues are healing over time</li>
+		</ul>
+		<p>It's not always required, but when it is, it adds clarity.</p>
+		<p>POCUS (point of care ultrasound scans) have become more commonly used by podiatrists, sports doctors and orthopaedic surgeons in recent years to ensure the correct diagnosis is made at your initial assessment. The clinician performing your assessment has undertaken specialist training in order to perform the ultrasound (in conjunction with the physiotherapy or podiatry assessment). The combined findings will often provide a significant advantage in reaching a more accurate diagnosis.</p>
+		<p><strong>Why choose an ultrasound?</strong> Cost effective (ultrasound is less expensive than most alternative forms of imaging); patient safety (non-invasive, no radiation, painless procedure); results are available immediately, which can be considered alongside your physical assessment; dynamic scanning (scanning whilst patient performs movement) and comparison with the asymptomatic side; sequential assessment of healing e.g. muscle tear; high image quality for foot and ankle structures due to their superficial location.</p>
+		<p><strong>Suitable for:</strong> plantar fasciitis, Achilles tendinopathy (insertion &amp; mid portion), Achilles tear/rupture, Morton's neuroma/bursa, ankle ligament injuries, calf injuries, joint/arthritic pain in the foot/ankle, tendon pain.</p>
+		<p><strong>If the scan looks normal:</strong> it is surprisingly common to experience pain in an area, yet there may be no structural abnormality (such as tear, rupture or swelling) seen on ultrasound. If this is the case, your clinician will explain in more detail on the day and advise you as to whether any further diagnostic assessments (scans or other tests) are required.</p>
+		<p><strong>Not suitable for:</strong> knee pain and above, lumps &amp; bumps, vascular conditions (such as DVT, varicose veins), bone injury, joint injury (ultrasound scans can only visualise the outer surface of a joint). These require highly specialised training and are outside of the scope of the clinician that you will be seeing. If there are any queries or concerns, or if you are aware of any 'lumps or bumps', you will require onward referral to a specialist department in order for this to be medically investigated.</p>
+		<p><strong>At the appointment:</strong> a diagnostic musculoskeletal ultrasound will be performed in conjunction with clinical history taking and physical assessment in order to help formulate a diagnosis of your presenting complaint. Ultrasound scans will be performed by a qualified podiatrist with CASE accreditation.</p>
+		<p><strong>Price.</strong> £175 for a 30min Podiatry assessment and diagnostic ultrasound. A PDF report will be emailed to you and can take up to 3 working days with the findings from the appointment and scan. When further treatment or imaging is required, we may refer you onto a third party, whereby we will send a referral letter, after which the responsibility is on you to arrange an appointment with them. Once under their care you will be bound by the terms and conditions of that third party and we understand no liability with respect to that third party.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/podiatry/slider-pexels-running.jpg" imageAlt="Runner in action">
+		<p>Progress isn't just about pain, it's about function.</p>
+		<p>We track how your symptoms respond to load, how your movement changes, and what you're able to return to over time.</p>
+		<p>This allows us to:</p>
+		<ul>
+			<li>Adjust your plan as you improve</li>
+			<li>Progress you safely back to activity</li>
+			<li>Reduce the risk of recurring problems</li>
+		</ul>
+		<p>You'll know where you are, and what comes next.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/podiatry/slider-balance-balls.webp" imageAlt="Balance training">
+		<p>Our podiatry service supports a wide range of people, including:</p>
+		<ul>
+			<li>Runners and athletes managing injury or performance</li>
+			<li>Individuals with persistent foot or lower limb pain</li>
+			<li>Post-surgical patients rebuilding strength and mobility</li>
+			<li>Children with developmental or gait concerns</li>
+			<li>People returning to activity after time away</li>
+		</ul>
+		<p>Whether your goal is to walk comfortably or perform at a higher level, the process is the same: better movement, better outcomes.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our" highlight="Podiatrist" image="/podiatry/slider-podiatry-balance.webp" imageAlt="Podiatry at Balance">
+		<p>Steven Connor is an advanced podiatrist specialising in foot, ankle and lower limb conditions. He has experience across both the NHS and private practice, with a strong focus on sports injuries and rehabilitation, including work with elite and international athletes.</p>
+		<p><a href="/meet-the-team" class="section-link">Read More About Steven &rarr;</a></p>
+		<p><strong>Integrated care.</strong> Where appropriate, we work closely with the wider Balance team. This may include joint sessions with physiotherapists, strength and conditioning coaches, or running specialists — ensuring your rehabilitation carries through into how you actually move and train.</p>
+		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/podiatry/slider-podiatry-feet.webp" imageAlt="Podiatry treatment">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>

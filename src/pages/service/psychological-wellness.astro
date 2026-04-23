@@ -1,72 +1,120 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
-const sliderImages = [
-	{ src: '/psychological-wellness/woman-stretching-park.jpg', alt: 'Mindful stretching outdoors' },
-	{ src: '/psychological-wellness/slider-woman-breathing-outdoors.jpg', alt: 'Breathing fresh air outdoors' },
-	{ src: '/psychological-wellness/wheelchair-basketball.jpg', alt: 'Wheelchair basketball, confidence through activity' },
-	{ src: '/psychological-wellness/slider-disability-high-five.jpg', alt: 'High five with coach during adaptive sport' },
-	{ src: '/psychological-wellness/women-laughing-class.jpg', alt: 'Women laughing during an exercise class' },
-	{ src: '/psychological-wellness/slider-plus-size-workout.jpg', alt: 'Inclusive workout session' },
-	{ src: '/psychological-wellness/soccer-high-five.jpg', alt: 'Team celebration on the pitch' },
-	{ src: '/psychological-wellness/slider-soccer-team-celebrating.jpg', alt: 'Soccer team celebrating together' },
-	{ src: '/psychological-wellness/slider-mature-jogging.jpg', alt: 'Mature friends jogging together in the park' },
-	{ src: '/psychological-wellness/slider-wheelchair-racing.jpg', alt: 'Wheelchair athlete training' },
-	{ src: '/psychological-wellness/slider-women-fists-raised.jpg', alt: 'Women celebrating together' },
+const photos = [
+	{ src: '/psychological-wellness/slider-woman-breathing-outdoors.jpg', alt: 'Breathing and self-regulation' },
+	{ src: '/psychological-wellness/slider-mature-jogging.jpg', alt: 'Active wellbeing' },
+	{ src: '/psychological-wellness/slider-soccer-team-celebrating.jpg', alt: 'Team resilience' },
+	{ src: '/psychological-wellness/slider-women-fists-raised.jpg', alt: 'Confidence and strength' },
+	{ src: '/psychological-wellness/slider-disability-high-five.jpg', alt: 'Support and connection' },
+	{ src: '/psychological-wellness/slider-wheelchair-racing.jpg', alt: 'Resilience in sport' },
+];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'Is this the same as traditional therapy?', a: 'No. This service focuses on the interaction between psychological factors and physical health, particularly in relation to pain, injury, and performance.' },
+	{ q: 'Do I need an injury to attend?', a: 'No. Sessions are also suitable for everyone looking for stress management and performance support.' },
+	{ q: 'Can this help with chronic pain?', a: 'Yes. Psychological strategies can influence how pain is experienced and managed.' },
+	{ q: 'How many sessions will I need?', a: 'This varies. Some people benefit from short-term input, others from ongoing support.' },
+	{ q: 'Is breathwork included?', a: 'Where appropriate, breathing techniques may be used as part of managing the nervous system.' },
 ];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Psychological Wellness"
-	heroSubtitle="An integrated approach recognising that pain, injury, stress, and performance are all influenced by the nervous system and your psychological state."
-	breadcrumb="Psychological Wellness"
-	seoTitle="Psychological Wellness in Clapham"
-	seoDescription="Psychological wellness support in Clapham. Integrated care for pain, injury, stress and performance, supporting recovery and long-term resilience."
-	marqueeImages={sliderImages}
-	intro={[
-		"Psychological wellness is a core component of recovery, performance, and long-term health.",
-		"At Balance, we take an integrated approach, recognising that pain, injury, stress, and physical performance are all influenced by the nervous system and your psychological state.",
-	]}
-	introImage="/psychological-wellness/woman-stretching-park.jpg"
-	whenHeading="When to consider"
-	whenHighlight="this service"
-	whenIntro="You may benefit from psychological wellness input if you:"
-	whenList={[
-		"Feel frustrated or low during injury or recovery",
-		"Experience anxiety around movement or return to sport",
-		"Struggle with persistent pain and fatigue",
-		"Notice stress presenting as physical tension or symptoms",
-		"Avoid activity due to fear of re-injury",
-		"Feel a loss of motivation with rehabilitation or training",
-	]}
-	whenImage="/psychological-wellness/wheelchair-basketball.jpg"
-	howHeading="How we"
-	howHighlight="work"
-	howIntro="Sessions may include:"
-	howList={[
-		"Understanding the relationship between pain, stress, and the nervous system",
-		"Exploring your thoughts and feelings to your situation",
-		"Strategies to manage stress and regulate your physiological response",
-		"Breathing techniques and self awareness",
-		"Building confidence in movement and activity",
-		"Supporting return to training, sport, or daily function",
-	]}
-	howImage="/psychological-wellness/women-laughing-class.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"Injury and rehabilitation patients",
-		"People with persistent pain",
-		"Athletes and active individuals",
-		"Professionals",
-		"Local population seeking improved resilience",
-	]}
-	whoImage="/psychological-wellness/soccer-high-five.jpg"
-	faqs={[
-		{ q: "Is this the same as traditional therapy?", a: "No. This service focuses on the interaction between psychological factors and physical health, particularly in relation to pain, injury, and performance." },
-		{ q: "Do I need an injury to attend?", a: "No. Sessions suit anyone seeking stress management and performance support." },
-		{ q: "Can this help with chronic pain?", a: "Yes. Psychological strategies can influence how pain is experienced and managed." },
-		{ q: "How many sessions will I need?", a: "This varies. Some benefit from short-term input, others from ongoing support." },
-		{ q: "Is breathwork included?", a: "Where appropriate, breathing techniques may be used for nervous system management." },
-	]}
-/>
+<Layout
+	title="Psychological Wellness in Clapham"
+	description="Psychological wellness support in Clapham — practical, clinic-based strategies to manage pain, stress and the nervous system alongside rehabilitation and performance."
+>
+	<PageHero title="in Clapham" highlight="Psychological Wellness" breadcrumb="Psychological Wellness" />
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText eyebrow="Our approach" heading="A core component of recovery," highlight="performance, and long-term health" image="/psychological-wellness/woman-stretching-park.jpg" imageAlt="Calm movement outdoors">
+		<p>Psychological wellness is a core component of recovery, performance, and long-term health.</p>
+		<p>At Balance, we take an integrated approach — recognising that pain, injury, stress, and physical performance are all influenced by the nervous system and your psychological state. Our service provides structured support to help you manage these factors effectively alongside your physical rehabilitation or training.</p>
+		<p>Sessions are practical, focused, and aligned with your individual goals.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider psychological" highlight="wellness support" image="/psychological-wellness/slider-woman-breathing-outdoors.jpg" imageAlt="Breathing practice">
+		<p>You may benefit from psychological wellness input if you:</p>
+		<ul>
+			<li>Feel frustrated or low during injury or recovery</li>
+			<li>Experience anxiety around movement or return to sport</li>
+			<li>Struggle with persistent pain and fatigue</li>
+			<li>Notice stress presenting as physical tension or symptoms</li>
+			<li>Avoid activity due to fear of re-injury</li>
+			<li>Feel a loss of motivation with rehabilitation or training</li>
+		</ul>
+		<p>These responses are common and can directly impact recovery and performance.</p>
+	</ImageText>
+
+	<ImageText eyebrow="Approach" heading="How we" highlight="work" image="/psychological-wellness/women-laughing-class.jpg" imageAlt="Group class">
+		<p>Our approach is based on the biopsychosocial model, integrating physical and psychological factors.</p>
+		<p>Sessions may include:</p>
+		<ul>
+			<li>Understanding the relationship between pain, stress, and the nervous system</li>
+			<li>Exploring your thoughts and feelings to your situation</li>
+			<li>Strategies to manage stress and regulate your physiological response</li>
+			<li>Breathing techniques and self awareness</li>
+			<li>Building confidence in movement and activity</li>
+			<li>Supporting return to training, sport, or daily function</li>
+		</ul>
+		<p>Where relevant, this work is integrated with physiotherapy and strength coaching.</p>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/psychological-wellness/slider-plus-size-workout.jpg" imageAlt="Inclusive movement">
+		<p>We focus on meaningful changes that support both mental and physical outcomes.</p>
+		<p>This may include:</p>
+		<ul>
+			<li>Reduction in pain-related fear or avoidance</li>
+			<li>Improved confidence in movement and activity</li>
+			<li>Better stress management and emotional control</li>
+			<li>Increased engagement with rehabilitation or training</li>
+			<li>Improved consistency in sleep, recovery, and daily function</li>
+		</ul>
+		<p>Progress is reviewed and used to guide your ongoing plan.</p>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/psychological-wellness/wheelchair-basketball.jpg" imageAlt="Adaptive sport">
+		<p>We support a range of individuals, including:</p>
+		<ul>
+			<li><strong>Injury and rehabilitation patients:</strong> Managing the psychological impact of recovery</li>
+			<li><strong>People with persistent pain:</strong> Improving coping strategies and function</li>
+			<li><strong>Athletes and active individuals:</strong> Addressing performance anxiety or return-to-play concerns</li>
+			<li><strong>Professionals:</strong> Managing stress and its physical effects</li>
+			<li><strong>Our local population:</strong> Improving resilience and overall wellbeing</li>
+		</ul>
+	</ImageText>
+
+	<ImageText reverse altBg eyebrow="Our team" heading="Our" highlight="approach" image="/psychological-wellness/soccer-high-five.jpg" imageAlt="Team connection">
+		<p>Psychological wellness at Balance is delivered within a clinical environment.</p>
+		<p>We work as part of a wider team, ensuring your psychological support aligns with your physical rehabilitation and training. This allows for a consistent and joined-up approach to your health.</p>
+		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
+	</ImageText>
+
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/psychological-wellness/slider-women-fists-raised.jpg" imageAlt="Strength and confidence">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>
