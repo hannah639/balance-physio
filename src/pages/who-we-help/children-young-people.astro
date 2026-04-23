@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="Children & Young People"
+	description="Specialist physio for children and young people. Vojta therapy for infants, developmental movement support, and sports injury management for teenagers, academy members and sports scholars."
+>
+	<PageHero
+		title="& Young People"
+		highlight="Children"
+		subtitle="Children and young people have unique developmental needs that require specialist care."
+		breadcrumb="Children & Young People"
+	/>
+
+	<ImageText
+		eyebrow="From infancy to adolescence"
+		heading="Specialist care for"
+		highlight="growing bodies"
+		image="/vojta.jpg"
+		imageAlt="Vojta therapy with an infant"
+	>
+		<p>Children and young people have unique developmental needs that require specialist care. At Balance, we work with children from infancy through adolescence, addressing developmental movement disorders, neurological conditions and the sports injuries that come with an active childhood and teenage years.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Vojta therapy"
+		heading="Early intervention is"
+		highlight="critical"
+		reverse
+		altBg
+		image="/condition/childrens-neurological-developmental/baby-crawling.jpg"
+		imageAlt="Young child exploring movement"
+	>
+		<p>Vojta therapy is at the heart of our work with infants and younger children. This specialist neurophysiological approach is used in the treatment of cerebral palsy, developmental delay, plagiocephaly and scoliosis.</p>
+		<p>Early intervention is critical. The younger a child begins therapy, the greater the nervous system's capacity to develop healthy movement patterns.</p>
+		<p>We work closely with families, teaching parents techniques to continue therapy at home between sessions for consistent, sustainable progress.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Teenagers & sports scholars"
+		heading="Growing bodies need"
+		highlight="different care"
+		image="/hockey.jpg"
+		imageAlt="Young athlete playing hockey"
+	>
+		<p>For teenagers, academy members and sports scholars, sports injuries require careful management that accounts for how the developing body differs from an adult's. Growth plate issues, overuse injuries and the effects of early sports specialisation versus ranges of maturation are areas our physiotherapists and podiatrists handle with real expertise.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="The whole family"
+		heading="Working with you, not just"
+		highlight="your child"
+		reverse
+		altBg
+		image="/physio/body-6.jpg"
+		imageAlt="Family-centred physiotherapy at Balance Physio"
+	>
+		<p>At Balance, treating a child means working with the whole family. We communicate clearly, involve parents and carers fully throughout, and create an environment where children feel safe, supported and motivated to engage with their rehabilitation.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

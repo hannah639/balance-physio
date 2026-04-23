@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="Active People"
+	description="World-class physio care for anyone who moves — gym sessions, weekend running, cycling, swimming or simply staying active. The same expertise we give to professional athletes."
+>
+	<PageHero
+		title="People"
+		highlight="Active"
+		subtitle="You don't have to be a professional athlete to deserve world-class care."
+		breadcrumb="Active People"
+	/>
+
+	<ImageText
+		eyebrow="For everyone who moves"
+		heading="The same care, for"
+		highlight="everyone"
+		image="/archery.jpg"
+		imageAlt="Active person practising archery"
+	>
+		<p>You don't have to be a professional athlete to deserve world-class care. At Balance, everyone who moves — whether that is regular gym sessions, weekend running, cycling, swimming or simply staying active — deserves access to the same expertise.</p>
+		<p>We look after the armchair athlete with the same knowledge and skill as the professional. That is not a tagline. It is a principle we build everything around.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Root cause, not symptom"
+		heading="Why you're in pain, not just"
+		highlight="where"
+		reverse
+		altBg
+		image="/slider-rowing.jpeg"
+		imageAlt="Person on a rowing machine"
+	>
+		<p>With 25 specialists across physiotherapy, osteopathy, chiropractic, podiatry, sports massage and strength coaching, we identify why you are in pain, not just where, and create a plan that addresses the root cause.</p>
+		<p>Most of your recovery happens in our studios, gym and movement spaces, available to you daily as part of your programme.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Move well, for life"
+		heading="Personal bests at"
+		highlight="every decade"
+		image="/slider-steps.webp"
+		imageAlt="Agility and movement training"
+	>
+		<p>Being active is one of the most valuable things you can do for your health. We are here to make sure nothing stands in the way of that. Personal bests can happen at every decade.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="Performance Athletes"
+	description="London's largest rehabilitation centre supporting elite, club and country-level athletes. We work with multiple Team GB squads, Volleyball England, ATP Tour, the All England Club, London City Lionesses and Surrey County Cricket Club."
+>
+	<PageHero
+		title="Athletes"
+		highlight="Performance"
+		subtitle="Elite, club and country-level athletes — keeping you training, competing and performing at your best."
+		breadcrumb="Performance Athletes"
+	/>
+
+	<ImageText
+		eyebrow="Elite performers"
+		heading="The Performance"
+		highlight="Athlete"
+		image="/sports-physio/hero-cricket.jpg"
+		imageAlt="Cricket player in action"
+	>
+		<p>Whether you compete at elite, club or country level, keeping injuries from disrupting your training is key. At Balance, we have built London's largest rehabilitation centre, providing athletes the space and equipment required for their rehabilitation and training.</p>
+		<p>Come to see one of our consultants — or come with your coach and/or physio — and we'll work together to make the difference across all of your performance arenas.</p>
+		<p>Our specialists continue to work with multiple Team GB squads, British and Team GB lacrosse, the EIS, World Class Performance, Volleyball England, the ATP Tour, the All England Club, London City Lionesses and Surrey County Cricket Club.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Club & amateur"
+		heading="The Club"
+		highlight="Athlete"
+		reverse
+		altBg
+		image="/hockey.jpg"
+		imageAlt="Hockey player training"
+	>
+		<p>With 25 specialists under one roof, we bring together physiotherapists, osteopaths, chiropractors, sports massage therapists, podiatrists, psychologists and strength and conditioning coaches to keep you on — or return you to — the pitch.</p>
+		<p>Shockwave therapy, running analysis, bike fitting, sports massage and strength coaching are all available under one roof, alongside psychological wellbeing support for when the mental side of performance needs attention too.</p>
+		<p>At Balance, we look after every athlete bespokely. We don't just make you better. We make you stronger, more resilient and better equipped to manage your own body for the long term.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Event prep"
+		heading="Planning an"
+		highlight="event?"
+		image="/cycling.jpg"
+		imageAlt="Cyclist training for an event"
+	>
+		<p>Marathon, half, London to Brighton cycle ride? Make sure you get it right to start with.</p>
+		<p>A running analysis shows you how you run, which muscles are important for you to target in your strength and conditioning programme, and which could break down if you don't. Shoe management is crucial, alongside the right number of rest, running or cycling and strength sessions.</p>
+		<p>We help you invest in yourselves to ensure that you get this right from the beginning and really enjoy the fitness — and achieving the goal.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

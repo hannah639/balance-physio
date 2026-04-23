@@ -55,6 +55,16 @@ const about = [
 	{ label: 'Work For Us', href: '/work-for-us' },
 	{ label: 'Testimonials', href: '/testimonials' },
 ];
+
+const whoWeHelp = [
+	{ label: 'Performance Athletes', href: '/who-we-help/performance-athletes' },
+	{ label: 'Marathon Runners & Endurance Athletes', href: '/who-we-help/marathon-endurance' },
+	{ label: 'Active People', href: '/who-we-help/active-people' },
+	{ label: 'Pre & Post-natal Women', href: '/who-we-help/pre-post-natal' },
+	{ label: 'People with Neurological Conditions', href: '/who-we-help/neurological-conditions' },
+	{ label: 'Children & Young People', href: '/who-we-help/children-young-people' },
+	{ label: 'Post-Surgical Patients', href: '/who-we-help/post-surgical' },
+];
 ---
 <header class="bp-header">
 	<div class="header-inner">
@@ -79,6 +89,24 @@ const about = [
 					<a href="/conditions">Conditions <span class="chev">▾</span></a>
 					<div class="dropdown dropdown-wide">
 						{conditions.map((item) => <a href={item.href}>{item.label}</a>)}
+					</div>
+				</li>
+				<li class="has-dropdown has-dropdown-mega">
+					<a href="/who-we-help">Who We Help <span class="chev">▾</span></a>
+					<div class="dropdown dropdown-mega">
+						<div class="mega-left">
+							<div class="mega-eyebrow">Who We Help</div>
+							<p class="mega-intro">Whether it's aches and pains, sports injuries, pre- and post-natal care, neurological conditions, or post-surgical rehab, we've got the skills and experience to support you.</p>
+							<div class="mega-links">
+								{whoWeHelp.map((item) => <a href={item.href}>{item.label}</a>)}
+							</div>
+						</div>
+						<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="mega-card" style="background-image: url('/sports-physio/hero-running.jpg')">
+							<div class="mega-card-overlay">
+								<div class="mega-card-title">Expert care for<br/>every body.</div>
+								<div class="mega-card-cta">Book Now &rsaquo;</div>
+							</div>
+						</a>
 					</div>
 				</li>
 				<li><a href="/faqs">FAQs</a></li>
@@ -123,6 +151,15 @@ const about = [
 					<ul class="mobile-sublist">
 						<li><a href="/conditions">All conditions</a></li>
 						{conditions.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+					</ul>
+				</details>
+			</li>
+			<li>
+				<details>
+					<summary>Who We Help</summary>
+					<ul class="mobile-sublist">
+						<li><a href="/who-we-help">Overview</a></li>
+						{whoWeHelp.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
 					</ul>
 				</details>
 			</li>
@@ -186,6 +223,96 @@ const about = [
 		padding: 16px;
 		gap: 4px 20px;
 	}
+
+	/* Mega menu (Who We Help) */
+	.has-dropdown-mega .dropdown.dropdown-mega {
+		display: grid;
+		grid-template-columns: minmax(320px, 1fr) 280px;
+		min-width: 640px;
+		left: auto;
+		right: 0;
+		padding: 0;
+		gap: 0;
+		overflow: hidden;
+	}
+	.dropdown-mega .mega-left {
+		padding: 28px 28px 24px;
+		display: flex;
+		flex-direction: column;
+	}
+	.dropdown-mega .mega-eyebrow {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #e87722;
+		margin-bottom: 12px;
+	}
+	.dropdown-mega .mega-intro {
+		font-size: 14px;
+		line-height: 1.5;
+		color: #4b5563;
+		margin: 0 0 18px;
+	}
+	.dropdown-mega .mega-links {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+	.dropdown-mega .mega-links a {
+		padding: 10px 12px;
+		border-radius: 8px;
+		font-size: 14px;
+		font-weight: 600;
+		color: #1a1a1a;
+		transition: background .15s, color .15s;
+	}
+	.dropdown-mega .mega-links a:hover {
+		background: #3EBEDF;
+		color: #ffffff;
+	}
+	.dropdown-mega .mega-card {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+		background-size: cover;
+		background-position: center;
+		min-height: 260px;
+		text-decoration: none;
+		overflow: hidden;
+		padding: 0;
+		border-radius: 0;
+		font-size: inherit;
+		font-weight: inherit;
+	}
+	.dropdown-mega .mega-card:hover {
+		background-color: transparent;
+	}
+	.dropdown-mega .mega-card-overlay {
+		width: 100%;
+		padding: 20px;
+		background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0) 100%);
+		color: #ffffff;
+	}
+	.dropdown-mega .mega-card-title {
+		font-size: 22px;
+		font-weight: 700;
+		line-height: 1.2;
+		margin-bottom: 8px;
+		color: #ffffff;
+	}
+	.dropdown-mega .mega-card-cta {
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #ffffff;
+		opacity: 0.95;
+	}
+	.dropdown-mega .mega-card:hover .mega-card-cta {
+		opacity: 1;
+	}
+
 	.has-dropdown .dropdown a {
 		color: #1a1a1a;
 		padding: 8px 12px;

@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="Post-Surgical Patients"
+	description="Structured, progressive rehabilitation after ACL reconstruction, joint replacement, rotator cuff repair, spinal and foot and ankle surgery. Hydrotherapy and anti-gravity treadmill to accelerate safe recovery."
+>
+	<PageHero
+		title="Patients"
+		highlight="Post-Surgical"
+		subtitle="Surgery is often the beginning of the recovery journey, not the end of it."
+		breadcrumb="Post-Surgical Patients"
+	/>
+
+	<ImageText
+		eyebrow="Recovery that lasts"
+		heading="Structured, progressive"
+		highlight="rehabilitation"
+		image="/sports-physio/04.jpg"
+		imageAlt="Post-surgical rehabilitation at Balance Physio"
+	>
+		<p>Surgery is often the beginning of the recovery journey, not the end of it. The quality of rehabilitation in the weeks and months following an operation directly determines your outcome.</p>
+		<p>At Balance, we provide post-surgical rehabilitation that is structured, progressive and tailored to your specific procedure, your body and your goals.</p>
+		<p>We work across the full range of post-surgical presentations, including ACL reconstructions, hip and knee replacements, rotator cuff repairs, spinal procedures, and foot and ankle surgeries, with the depth and breadth of expertise that complex cases require. With 25 specialists under one roof, nothing falls through the gaps.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Hydrotherapy & AlterG"
+		heading="Load early, load"
+		highlight="safely"
+		reverse
+		altBg
+		image="/hydrotherapy.jpg"
+		imageAlt="Hydrotherapy pool at Balance Physio"
+	>
+		<p>Hydrotherapy reduces load through healing structures while enabling movement and strength work that would be impossible on land at the same stage of recovery.</p>
+		<p>Our anti-gravity treadmill allows safe, progressive loading of healing tissue earlier than conventional rehabilitation permits, often accelerating timelines significantly.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Clear milestones"
+		heading="Informed patients recover"
+		highlight="better"
+		image="/antigravity.webp"
+		imageAlt="Anti-gravity treadmill rehabilitation"
+	>
+		<p>Beyond your formal appointments, our studios, gym and movement spaces are available daily, free of charge. We give you clear milestones, honest timelines and the knowledge to understand your recovery, because informed patients recover better.</p>
+		<p>Returning to full function takes time, commitment and expert guidance. At Balance, we provide all three.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>
