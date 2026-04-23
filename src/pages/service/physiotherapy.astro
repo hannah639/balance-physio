@@ -1,6 +1,9 @@
 ---
-import ServicePage from '../../components/ServicePage.astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
 
 const physioPhotos = [
 	{ src: '/physio/01-acupuncture.jpg', alt: 'Close-up of acupuncture needles' },
@@ -8,106 +11,183 @@ const physioPhotos = [
 	{ src: '/physio/03-ems.jpg', alt: 'EMS electrodes on the quads' },
 	{ src: '/physio/04-archery.jpg', alt: 'Archery, movement and control' },
 ];
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+
+const faqs = [
+	{ q: 'Do I need a GP referral?', a: 'No. You can book directly with us.' },
+	{ q: 'What should I wear?', a: 'Comfortable clothing that allows us to assess the area being treated.' },
+	{ q: 'How many sessions will I need?', a: "This depends on your condition. After your first session, we'll give you a clear plan." },
+	{ q: 'Can I use my private health insurance?', a: 'We recommend everyone checks with their own medical insurance provider with regards to their cover.' },
+	{ q: "What's the difference between a physiotherapist and a consultant physiotherapist?", a: 'Consultant physiotherapists have advanced training and extensive experience managing complex cases in their specialist area.' },
+];
 ---
-<ServicePage
-	title="in Clapham"
-	highlight="Physiotherapy"
-	heroSubtitle="Evidence-led physiotherapy that helps you understand how your body moves, why things have gone wrong, and what needs to change."
-	breadcrumb="Physiotherapy"
-	seoTitle="Physiotherapy in Clapham"
-	seoDescription="Evidence-led physiotherapy in Clapham, London. From injury recovery to long-term condition management, we help you move better, feel stronger and return to what you love."
-	marqueeImages={physioPhotos}
-	intro={[
-		"Pain, injury, or loss of function can change how you move, and how you live.",
-		"At Balance, physiotherapy is about more than symptom relief. It's about understanding how your body moves, why things have gone wrong, and what needs to change to get you back to full capacity.",
-		"We take a clinical, evidence-led approach to every case. From your first session, we assess how you move, not just where it hurts, then build a plan around your goals, your lifestyle, and your starting point.",
-		"Whether you're recovering from injury, managing a long-term condition, or aiming to perform at a higher level, we meet you where you are and guide you forward.",
-	]}
-	introImage="/physio/body-1.jpg"
-	whenHeading="When to consider"
-	whenHighlight="physiotherapy"
-	whenIntro="You don't need to wait for things to get worse. Physiotherapy can help if you're dealing with:"
-	whenList={[
-		"Ongoing back or neck pain, including sciatica",
-		"Sports injuries",
-		"Training setbacks - not meeting your running or cycling goals",
-		"Joint pain or stiffness in the shoulder, knee, or hip",
-		"Difficulty moving after surgery or injury",
-		"Balance, coordination, or neurological issues",
-		"Headaches linked to tension or posture",
-		"Pelvic health or developmental concerns",
-		"Dizziness - Vestibular Issues",
-	]}
-	whenImage="/physio/body-2.jpg"
-	howHeading="How we"
-	howHighlight="work"
-	howIntro="Everything we do is built around one principle: helping you move better. Your treatment may include:"
-	howList={[
-		"Hands-on therapy to restore movement",
-		"Targeted exercise to rebuild strength and control",
-		"Progressive loading to prepare you for real-world demands",
-		"Clear education so you understand your condition and recovery",
-	]}
-	howImage="/physio/body-3.jpg"
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoIntro="We work with people across a wide range of needs and experience levels."
-	whoList={[
-		"Individuals dealing with everyday pain or stiffness",
-		"People like me and top athletes managing injury or performance",
-		"Post-surgical patients rebuilding strength and function",
-		"Children and young people with developmental or sports-related concerns",
-		"Adults managing complex or long-term conditions",
-	]}
-	whoImage="/physio/body-4.jpg"
-	faqs={[
-		{ q: "Do I need a GP referral?", a: "No. You can book directly with us." },
-		{ q: "What should I wear?", a: "Comfortable clothing that allows us to assess the area being treated." },
-		{ q: "How many sessions will I need?", a: "This depends on your condition. After your first session, we'll give you a clear plan." },
-		{ q: "Can I use my private health insurance?", a: "We recommend everyone checks with their own medical insurance provider with regards to their cover" },
-		{ q: "What's the difference between a physiotherapist and a consultant physiotherapist?", a: "Consultant physiotherapists have advanced training and extensive experience managing complex cases. In their specialist area." },
-	]}
+<Layout
+	title="Physiotherapy in Clapham"
+	description="Evidence-led physiotherapy in Clapham, London. From injury recovery to long-term condition management, we help you move better, feel stronger and return to what you love."
 >
-	<Fragment slot="before-faq">
-		<ImageText
-			eyebrow="Pricing & insurance"
-			heading="A transparent fee"
-			highlight="structure"
-			image="/physio/body-5.jpg"
-			imageAlt="Accessible care, getting ready to train"
-		>
-			<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa and AXA PPP Health.</p>
-		</ImageText>
+	<PageHero
+		title="Physiotherapy in"
+		highlight="Clapham"
+		breadcrumb="Physiotherapy"
+	/>
 
-		<ImageText
-			eyebrow="How we measure your progress"
-			heading="We don't"
-			highlight="guess"
-			reverse
-			altBg
-			image="/physio/body-6.jpg"
-			imageAlt="Hands-on treatment with a patient"
-		>
-			<p>From your first session, we establish a clear baseline of how you move, function, and feel. As you progress, we regularly reassess, looking at strength, mobility, pain, and what you can actually do day-to-day.</p>
-			<p>This keeps your treatment focused and accountable.</p>
-			<p>For you, that means:</p>
-			<ul>
-				<li>Clear evidence that you're improving</li>
-				<li>A plan that adapts as you progress</li>
-				<li>Confidence in your return to sport, work, or daily life</li>
-			</ul>
-		</ImageText>
+	<PhotoMarquee images={physioPhotos} heightPx={140} speedSeconds={45} />
 
-		<ImageText
-			eyebrow="Our clinical team"
-			heading="Matched to"
-			highlight="your needs"
-			image="/physio/body-7.jpg"
-			imageAlt="A collaborative team approach"
-		>
-			<p>Our physiotherapy team is made up of highly experienced clinicians with specialist areas of expertise.</p>
-			<p>You'll be matched with the right practitioner for your needs, whether that's a complex spinal condition, a sports injury, or a long-term neurological issue.</p>
-			<p>We work collaboratively, drawing on the depth of experience across the team to ensure your care is both precise and considered.</p>
-		</ImageText>
-	</Fragment>
-</ServicePage>
+	<ImageText
+		eyebrow="Our approach"
+		image="/physio/body-1.jpg"
+		imageAlt="Physiotherapy consultation at Balance Physio"
+	>
+		<p>Pain, injury, or loss of function can change how you move, and how you live.</p>
+		<p>At Balance, physiotherapy is about more than symptom relief. It's about understanding how your body moves, why things have gone wrong, and what needs to change to get you back to full capacity.</p>
+		<p>We take a clinical, evidence-led approach to every case. From your first session, we assess how you move, not just where it hurts, then build a plan around your goals, your lifestyle, and your starting point.</p>
+		<p>Whether you're recovering from injury, managing a long-term condition, or aiming to perform at a higher level, we meet you where you are and guide you forward.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+
+	<ImageText
+		reverse
+		altBg
+		eyebrow="Symptoms"
+		heading="When to consider"
+		highlight="physiotherapy"
+		image="/physio/body-2.jpg"
+		imageAlt="Assessment session with a physiotherapist"
+	>
+		<p>You don't need to wait for things to get worse.</p>
+		<p>Physiotherapy can help if you're dealing with:</p>
+		<ul>
+			<li>Ongoing back or neck pain, including sciatica</li>
+			<li>Sports injuries</li>
+			<li>Training setbacks - not meeting your running or cycling goals</li>
+			<li>Joint pain or stiffness in the shoulder, knee, or hip</li>
+			<li>Difficulty moving after surgery or injury</li>
+			<li>Balance, coordination, or neurological issues</li>
+			<li>Headaches linked to tension or posture</li>
+			<li>Pelvic health or developmental concerns</li>
+			<li>Dizziness -Vestibular Issues</li>
+		</ul>
+		<p>If something doesn't feel right, it's worth seeking our advice.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Treatment"
+		heading="How we"
+		highlight="work"
+		image="/physio/body-3.jpg"
+		imageAlt="Hands-on physio therapy session"
+	>
+		<p>Everything we do is built around one principle: <strong>helping you move better.</strong></p>
+		<p>Your treatment may include:</p>
+		<ul>
+			<li>Hands-on therapy to restore movement</li>
+			<li>Targeted exercise to rebuild strength and control</li>
+			<li>Progressive loading to prepare you for real-world demands</li>
+			<li>Clear education so you understand your condition and recovery</li>
+		</ul>
+		<p>We don't rely on passive treatment alone. You'll leave each session knowing what you're working towards, and how to get there.</p>
+	</ImageText>
+
+	<ImageText
+		reverse
+		altBg
+		eyebrow="Outcomes"
+		heading="How we measure"
+		highlight="your progress"
+		image="/physio/body-4.jpg"
+		imageAlt="Assessing movement and tracking progress"
+	>
+		<p>We don't guess.</p>
+		<p>From your first session, we establish a clear baseline of how you move, function, and feel. As you progress, we regularly reassess, looking at strength, mobility, pain, and what you can actually do day-to-day.</p>
+		<p>This keeps your treatment focused and accountable.</p>
+		<p>For you, that means:</p>
+		<ul>
+			<li>Clear evidence that you're improving</li>
+			<li>A plan that adapts as you progress</li>
+			<li>Confidence in your return to sport, work, or daily life</li>
+		</ul>
+		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Our patients"
+		heading="Who we"
+		highlight="help"
+		image="/physio/body-5.jpg"
+		imageAlt="People of varied backgrounds in a gym setting"
+	>
+		<p>We work with people across a wide range of needs and experience levels.</p>
+		<ul>
+			<li>Individuals dealing with everyday pain or stiffness</li>
+			<li>People like me and top athletes managing injury or performance</li>
+			<li>Post-surgical patients rebuilding strength and function</li>
+			<li>Children and young people with developmental or sports-related concerns</li>
+			<li>Adults managing complex or long-term conditions</li>
+		</ul>
+		<p>Whatever your starting point, the goal is the same: better movement, better function, better outcomes.</p>
+	</ImageText>
+
+	<ImageText
+		reverse
+		altBg
+		eyebrow="Our team"
+		heading="Our clinical"
+		highlight="team"
+		image="/physio/body-6.jpg"
+		imageAlt="Balance Physio team collaborating on a treatment plan"
+	>
+		<p>Our physiotherapy team is made up of highly experienced clinicians with specialist areas of expertise.</p>
+		<p>You'll be matched with the right practitioner for your needs, whether that's a complex spinal condition, a sports injury, or a long-term neurological issue.</p>
+		<p>We work collaboratively, drawing on the depth of experience across the team to ensure your care is both precise and considered.</p>
+		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Fees"
+		heading="Pricing and"
+		highlight="insurance"
+		image="/physio/body-7.jpg"
+		imageAlt="Accessible care at Balance Physio"
+	>
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa and AXA PPP Health.</p>
+		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<section class="faq-section">
+		<div class="container">
+			<div class="section-header">
+				<h2>Frequently Asked Questions</h2>
+			</div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer">{item.a}</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>
+
+<style is:global>
+	/* Small inline section link used for the "Read More / Meet / Pricing" CTAs inside ImageText blocks.
+	   Kept low-impact so it doesn't change the overall page design. */
+	.bp-page .image-text .section-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-weight: 600;
+		color: var(--accent);
+		text-decoration: none;
+		border-bottom: 2px solid transparent;
+		padding-bottom: 2px;
+		transition: border-color .15s;
+	}
+	.bp-page .image-text .section-link:hover {
+		border-bottom-color: var(--accent);
+	}
+</style>
