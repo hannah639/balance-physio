@@ -4,19 +4,131 @@ import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 
 const faqs = [
-	{ q: 'Do I need a referral?', a: 'No. you can book directly with us. You don\'t need a GP or consultant referral to access any of our services.' },
-	{ q: 'Do you accept insurance?', a: 'Yes. We\'re recognised by all major insurance providers, including Bupa and AXA PPP Health. We recommend checking directly with your insurer about the exact cover they provide.' },
-	{ q: 'What is the difference between Chiropodists and Podiatrists?', a: 'Both treat the feet, but podiatrists generally have broader training in musculoskeletal assessment, biomechanics and surgical referrals. Chiropody is the more traditional name used for nail and skin-focused foot care.' },
-	{ q: 'What should I wear at my first appointment?', a: 'Comfortable clothing that allows us to assess the area being treated, loose shorts for lower-limb assessments, or a vest/t-shirt for upper-body and spinal work.' },
-	{ q: 'How do I book?', a: 'Contact our Clinic Administration team and they\'ll email you a registration form. Once that\'s completed and returned, our admin team will contact you to arrange your first appointment.' },
-	{ q: 'How many sessions will I need?', a: 'It varies by condition. After your initial assessment we\'ll give you a clear plan with expected number of sessions and review points.' },
-	{ q: 'Can I use the gym and studios between sessions?', a: 'Yes. our clients can use our movement studios and gym daily while they\'re on an active treatment programme.' },
-	{ q: 'Do you see children?', a: 'Yes. We have consultant physiotherapists who specialise in children\'s developmental and sports-related concerns.' },
+	{
+		q: 'How do I arrange an appointment?',
+		a: `
+			<p>Our front-of-house and admin team will help you choose the most appropriate service if you are not sure yourself, and will arrange an appointment with the professionals best matched to your needs.</p>
+
+			<p><strong>Book online</strong></p>
+			<p>Head to our <a href="/contact-us" class="inline-link">contact page</a> and submit the form. When you get in touch, it helps us to know:</p>
+			<ul>
+				<li>What it is you need us to help you with</li>
+				<li>When you would like to attend</li>
+				<li>How you would like us to contact you, by phone or email</li>
+			</ul>
+			<p>Your message will come through to one of the reception team who will deal with it as soon as possible.</p>
+
+			<p><strong>Book by telephone</strong></p>
+			<p>Call <a href="tel:02076272308" class="inline-link">020 7627 2308</a>.</p>
+		`,
+	},
+	{
+		q: 'What are Balance Physio\'s opening times?',
+		a: `
+			<ul>
+				<li>Monday, Tuesday, Wednesday: 7:30am to 8:00pm</li>
+				<li>Thursday: 8:00am to 7:00pm</li>
+				<li>Friday: 7:30am to 6:00pm</li>
+				<li>Saturday: 8:00am to 4:00pm</li>
+				<li>Sunday: Studio hire events only</li>
+			</ul>
+			<p>Call <a href="tel:02076272308" class="inline-link">020 7627 2308</a> to book an appointment or make further enquiries.</p>
+			<p>Our clients come from across London and the South East of England, but we largely attract the active people of Clapham, Wandsworth, Brixton, Stockwell and those working in the City and West End. We are 15 minutes from Green Park, Victoria and London Bridge underground stations. Clapham High Street rail station is 60 seconds away and is a fast link for clients from the Clapham Junction area and those working in Canary Wharf and Docklands.</p>
+		`,
+	},
+	{
+		q: 'What methods of payment do you accept?',
+		a: `
+			<p>Payment can be made by cash, credit or debit card. You can also pay via:</p>
+			<ul>
+				<li>Our online diary system, MINDBODY ONLINE</li>
+				<li>Direct Bank Transfer. Ask us for our account details and the payment reference to enter (usually the client's full name).</li>
+				<li>PayPal. Ask us for the email address to use and we can send you a PayPal invoice.</li>
+			</ul>
+			<p>Balance is authorised to take payments over the phone. This is useful, as are PayPal and MindBody Online, if you would like to pay in advance and save time once you are in Clapham.</p>
+
+			<p><strong>Payment notice</strong></p>
+			<p>All clients of Balance Performance Physiotherapy are expected to pay after the session. All cancellations made without 24 hours' prior notice will be charged at the full fee. This also applies to missed appointments or late arrivals.</p>
+			<p>The management team is very happy to discuss any of our procedures with you.</p>
+		`,
+	},
+	{
+		q: 'Do you accept private medical insurance?',
+		a: `
+			<p>With the exception of BUPA and AXA, all of our clients with private medical or health insurance pay us directly. We then issue a full invoice as an insurance receipt so you can claim the fees back. Most insurance companies reimburse their policy holders within around ten days, but as your treatment provider it is not uncommon for us to be paid up to six months later. For this reason, we take payment on the day of each session.</p>
+			<p>Different insurance companies have varying levels of reimbursement. When the policy does not meet the full costs of treatment, it is the responsibility of the patient to make up the difference.</p>
+			<p>Recently, some insurers have reimbursed less to their customers, in some cases reducing reimbursement by over 50%. This means there is a greater chance that you will have to meet a portion of the cost. It is important to contact your insurer before treatment to clarify your policy and your cover.</p>
+			<p>It may be helpful to know that some patients have reported that their insurance company's call centre has attempted to divert their care to another centre, often with the phrase "that clinic is not on our list". This usually reflects a discrepancy between new fees insurance companies are trying to impose on clinics and the proportion the insurer will reimburse, rather than anything about the quality or appropriateness of our care.</p>
+
+			<p><strong>Balance is registered with all major insurance companies, including:</strong></p>
+			<ul>
+				<li>BUPA</li>
+				<li>AXA-PPP</li>
+				<li>AVIVA</li>
+				<li>Pru Health</li>
+				<li>Cigna</li>
+				<li>And many other less well-known insurance companies</li>
+			</ul>
+			<p>All of our physiotherapists are HCPC registered. If you wish to claim your fees back from your insurance company, you will pay after the appointment at reception, and the team can email you a full invoice to forward to your insurers.</p>
+
+			<p><strong>Getting the most from your policy</strong></p>
+			<p>It is often necessary for Balance Performance to work with each individual to obtain the maximum coverage allowable, and to advise each client on the most cost-effective use of their allowances. Whilst we are committed to optimal customer service, all the decisions we make on behalf of our clients are based purely on what we see clinically and in the best interests of clients as they return to full health, rather than on financially based decisions or on an insurance company's allowance.</p>
+		`,
+	},
+	{
+		q: 'I\'m with BUPA or AXA. Can you give me further information?',
+		a: `
+			<p>Balance Performance has BUPA and AXA-PPP managers who have worked with these companies and their clients for over 20 years. We are very familiar with the BUPA and AXA processes and adept at speaking to those at BUPA and AXA in charge of individual accounts to authorise more sessions as required, so you are in very competent hands.</p>
+
+			<p><strong>All we require is:</strong></p>
+			<ul>
+				<li>Your membership number</li>
+				<li>Your pre-authorisation number or code</li>
+				<li>That you familiarise yourself with your BUPA or AXA policy in relation to any excess payment you need to pay us when you start treatment, and your level of annual coverage. If you go over your annual coverage, BUPA or AXA will ask you to pay us directly.</li>
+			</ul>
+
+			<p><strong>Please note:</strong> In our contract with BUPA and AXA, it stipulates that members:</p>
+			<ol>
+				<li>Must be fully paid-up and valid members of BUPA with a current authorisation.</li>
+				<li>Must confirm their level of coverage and details of their excess payment, for which they are personally liable, with Balance Performance Physiotherapy Ltd. prior to commencement of treatment. The patient must agree in writing to pay these fees personally up front.</li>
+				<li>Have a valid pre-authorisation number and must commence physiotherapy within two calendar months of the date of the pre-authorisation.</li>
+				<li>Keep a note of their number of sessions if BUPA is granting physiotherapy by session number.</li>
+				<li>Have the opportunity to fill in a customer satisfaction questionnaire.</li>
+			</ol>
+			<p>Please note that clients are only entitled to one BUPA initial session (a 45-minute session) per year, for the same injury.</p>
+			<p>Should you have any queries in relation to BUPA or AXA, please ask us and we will be happy to help. Call <a href="tel:02076272308" class="inline-link">020 7627 2308</a>.</p>
+		`,
+	},
+	{
+		q: 'What classes do you run?',
+		a: `
+			<p>We have a class programme to supplement your health, sports and fitness practices. All classes are taught by teachers focused on controlled, mindful, purposeful movement.</p>
+			<p>Our regular offerings include:</p>
+			<ul>
+				<li><a href="/service/lift-weight-training-club" class="inline-link">LIFT: our weight training club</a></li>
+				<li><a href="/service/prehab-class" class="inline-link">Prehab: tissue mobility and self-myofascial release</a></li>
+				<li><a href="/service/strength-conditioning" class="inline-link">Strength and conditioning sessions</a></li>
+				<li>Women's health and postnatal core work</li>
+			</ul>
+			<p>Call <a href="tel:02076272308" class="inline-link">020 7627 2308</a> or email <a href="mailto:enquiries@balancephysio.com" class="inline-link">enquiries@balancephysio.com</a> for the current timetable.</p>
+		`,
+	},
+	{
+		q: 'Self-pay and insurance payment terms & conditions',
+		a: `
+			<p><strong>Payment due date</strong><br>Payment for all physiotherapy, podiatry and gym services is due at the time of treatment, or within 30 days of the date of service, unless previously agreed in writing.</p>
+			<p><strong>Insurance claims</strong><br>We submit claims to AXA and BUPA insurance providers on your behalf. If you are covered by any other insurance, you remain fully responsible for all charges incurred.</p>
+			<p><strong>Patient responsibility</strong><br>If your insurance provider denies coverage, only partially covers the treatment, or delays payment beyond 30 days, you are personally liable for the full outstanding balance. It is your responsibility to verify your coverage and benefits prior to treatment.</p>
+			<p><strong>Outstanding balances</strong><br>Any unpaid balances past 30 days may be subject to late fees or collection action. Continued non-payment may result in suspension of treatment services.</p>
+			<p><strong>Communication</strong><br>You agree to promptly inform us of any changes to your insurance coverage, authorisation codes or contact information.</p>
+			<p>By receiving services, you agree to these terms and accept responsibility for payment in accordance with the above.</p>
+		`,
+	},
 ];
 ---
 <Layout
 	title="FAQs"
-	description="Frequently asked questions about physiotherapy, bookings, insurance and what to expect at Balance Performance Physiotherapy in Clapham."
+	description="Frequently asked questions about appointments, opening times, payment, private medical insurance and BUPA or AXA billing at Balance Performance Physiotherapy in Clapham."
 >
 	<PageHero
 		title="Asked Questions"
@@ -31,7 +143,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer" set:html={item.a} />
 					</details>
 				))}
 			</div>
@@ -40,3 +152,19 @@ const faqs = [
 
 	<BookingCTA />
 </Layout>
+
+<style>
+	.faq-section .answer p { margin: 0 0 14px; }
+	.faq-section .answer p:last-child { margin-bottom: 0; }
+	.faq-section .answer ul,
+	.faq-section .answer ol { margin: 0 0 14px; padding-left: 22px; }
+	.faq-section .answer li { margin-bottom: 6px; line-height: 1.7; }
+	.faq-section .answer .inline-link {
+		color: #e87722;
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 2px;
+	}
+	.faq-section .answer .inline-link:hover { text-decoration-thickness: 2px; }
+	.faq-section .answer strong { color: #1a1a1a; }
+</style>

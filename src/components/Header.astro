@@ -1,28 +1,80 @@
 ---
-const services = [
-	{ label: 'Physiotherapy', href: '/service/physiotherapy' },
-	{ label: 'Sports Physiotherapy', href: '/service/sports-physiotherapy' },
-	{ label: 'Paediatric Sports Physiotherapy', href: '/service/paediatric-sports-physiotherapy' },
-	{ label: 'Osteopathy', href: '/service/osteopathy' },
-	{ label: 'Sports Massage', href: '/service/sports-massage' },
-	{ label: 'Shockwave Therapy', href: '/service/shockwave-therapy' },
-	{ label: 'Prehab Class', href: '/service/prehab-class' },
-	{ label: 'Neurological Rehabilitation', href: '/service/neurological-rehabilitation' },
-	{ label: 'Vojta Therapy', href: '/service/vojta-therapy' },
-	{ label: "Women's Health", href: '/service/womens-health' },
-	{ label: "Men's Health", href: '/service/mens-health' },
-	{ label: 'Podiatry', href: '/service/podiatry' },
-	{ label: 'Strength & Conditioning', href: '/service/strength-conditioning' },
-	{ label: 'LIFT: Weight Training Club', href: '/service/lift-weight-training-club' },
-	{ label: 'Bike Fitting & Running Analysis', href: '/service/bike-fitting-running-analysis' },
-	{ label: 'Hydrotherapy', href: '/service/hydrotherapy' },
-	{ label: 'Psychological Wellness', href: '/service/psychological-wellness' },
-	{ label: 'Anti-Gravity Treadmill', href: '/service/anti-gravity-treadmill' },
-	{ label: 'Ergonomics', href: '/service/ergonomics' },
-	{ label: 'TMJ & Jaw Pain', href: '/service/tmj-and-jaw-pain' },
-	{ label: 'Physiotherapy Prescribing', href: '/service/physiotherapy-prescribing' },
-	{ label: 'Outcome Measures', href: '/service/outcome-measures' },
+const serviceColumns = [
+	[
+		{
+			label: 'MSK & Sports',
+			items: [
+				{ label: 'Physiotherapy', href: '/service/physiotherapy' },
+				{ label: 'Sports Physiotherapy', href: '/service/sports-physiotherapy' },
+				{ label: 'Osteopathy', href: '/service/osteopathy' },
+				{ label: 'Sports Massage', href: '/service/sports-massage' },
+				{ label: 'Shockwave Therapy', href: '/service/shockwave-therapy' },
+				{ label: 'Prehab Class', href: '/service/prehab-class' },
+			],
+		},
+		{
+			label: 'Neurological',
+			items: [
+				{ label: 'Neurological Rehabilitation', href: '/service/neurological-rehabilitation' },
+				{ label: 'Vojta Therapy', href: '/service/vojta-therapy' },
+			],
+		},
+	],
+	[
+		{
+			label: 'Pelvic Health',
+			items: [
+				{ label: "Women's Health", href: '/service/womens-health' },
+				{ label: "Men's Health", href: '/service/mens-health' },
+			],
+		},
+		{
+			label: 'Foot & Lower Limb',
+			items: [
+				{ label: 'Podiatry', href: '/service/podiatry' },
+			],
+		},
+	],
+	[
+		{
+			label: 'Performance & Strength',
+			sublabel: '(Fitness & Performance)',
+			items: [
+				{ label: 'Strength & Conditioning', href: '/service/strength-conditioning' },
+				{ label: 'Lift (Weight Training) Club', href: '/service/lift-weight-training-club' },
+				{ label: 'Bike Fitting & Running Analysis', href: '/service/bike-fitting-running-analysis' },
+			],
+		},
+		{
+			label: 'Paediatric',
+			items: [
+				{ label: 'Sports Physiotherapy', href: '/service/paediatric-sports-physiotherapy' },
+				{ label: 'Vojta Therapy', href: '/service/vojta-therapy' },
+			],
+		},
+	],
+	[
+		{
+			label: 'Recovery & Wellness',
+			items: [
+				{ label: 'Hydrotherapy', href: '/service/hydrotherapy' },
+				{ label: 'Psychological Wellness', href: '/service/psychological-wellness' },
+				{ label: 'Anti-Gravity Treadmill', href: '/service/anti-gravity-treadmill' },
+				{ label: 'Ergonomics', href: '/service/ergonomics' },
+				{ label: 'TMJ & Jaw Pain', href: '/service/tmj-and-jaw-pain' },
+			],
+		},
+		{
+			label: 'Clinical Support / Advanced Care',
+			items: [
+				{ label: 'Physiotherapy Prescribing', href: '/service/physiotherapy-prescribing' },
+				{ label: 'Outcome Measures', href: '/service/outcome-measures' },
+			],
+		},
+	],
 ];
+// Flat list for mobile fallback
+const services = serviceColumns.flat().flatMap((g) => g.items);
 
 const conditions = [
 	{ label: 'Lower Back Pain', href: '/condition/lower-back-pain' },
@@ -87,10 +139,26 @@ const locations = [
 						{about.map((item) => <a href={item.href}>{item.label}</a>)}
 					</div>
 				</li>
-				<li class="has-dropdown has-dropdown-wide">
+				<li class="has-dropdown has-dropdown-services-mega">
 					<a href="/services">Services <span class="chev">▾</span></a>
-					<div class="dropdown dropdown-wide">
-						{services.map((item) => <a href={item.href}>{item.label}</a>)}
+					<div class="dropdown dropdown-services-mega">
+						<div class="services-mega-inner">
+							{serviceColumns.map((col) => (
+								<div class="services-col">
+									{col.map((group) => (
+										<div class="services-group">
+											<div class="services-group-label">
+												{group.label}
+												{group.sublabel && <><br/><span class="services-group-sublabel">{group.sublabel}</span></>}
+											</div>
+											{group.items.map((item) => (
+												<a href={item.href}>{item.label}</a>
+											))}
+										</div>
+									))}
+								</div>
+							))}
+						</div>
 					</div>
 				</li>
 				<li class="has-dropdown has-dropdown-wide">
@@ -158,7 +226,12 @@ const locations = [
 					<summary>Services</summary>
 					<ul class="mobile-sublist">
 						<li><a href="/services">All services</a></li>
-						{services.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+						{serviceColumns.flat().map((group) => (
+							<>
+								<li class="mobile-sublist-category">{group.label}{group.sublabel && <> {group.sublabel}</>}</li>
+								{group.items.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+							</>
+						))}
 					</ul>
 				</details>
 			</li>
@@ -246,6 +319,69 @@ const locations = [
 		min-width: 600px;
 		padding: 16px;
 		gap: 4px 20px;
+	}
+
+	/* Services mega menu (4 columns, categorised) */
+	.has-dropdown-services-mega .dropdown.dropdown-services-mega {
+		min-width: 920px;
+		padding: 0;
+		left: 50%;
+		transform: translateX(-50%) translateY(8px);
+	}
+	.has-dropdown-services-mega:hover .dropdown.dropdown-services-mega,
+	.has-dropdown-services-mega:focus-within .dropdown.dropdown-services-mega {
+		transform: translateX(-50%) translateY(0);
+	}
+	.services-mega-inner {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 28px 36px;
+		padding: 32px 36px 36px;
+	}
+	.services-col { display: flex; flex-direction: column; gap: 28px; }
+	.services-group { display: flex; flex-direction: column; gap: 2px; }
+	.services-group-label {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #e87722;
+		line-height: 1.35;
+		margin-bottom: 10px;
+	}
+	.services-group-sublabel {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #e87722;
+	}
+	.services-group a {
+		display: block;
+		padding: 6px 10px;
+		margin-left: -10px;
+		border-radius: 6px;
+		font-size: 14px;
+		font-weight: 500;
+		color: #1a1a1a;
+		text-decoration: none;
+		line-height: 1.4;
+		transition: background .15s, color .15s;
+	}
+	.services-group a:hover {
+		background: #f4f6f7;
+		color: #e87722;
+	}
+
+	/* Mobile category heading within Services */
+	.mobile-sublist .mobile-sublist-category {
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #e87722;
+		padding: 16px 0 6px;
+		list-style: none;
 	}
 
 	/* Mega menu (Who We Help) */
