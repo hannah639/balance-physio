@@ -16,7 +16,7 @@ const avatarGradient = gradientFor(member.name);
 ---
 <Layout
 	title={member.name}
-	description={`${member.name} — ${member.role} at Balance Performance Physiotherapy in Clapham.`}
+	description={`${member.name}, ${member.role} at Balance Performance Physiotherapy in Clapham.`}
 >
 	<PageHero
 		title={member.role}
@@ -38,7 +38,7 @@ const avatarGradient = gradientFor(member.name);
 						member.bio.map((p) => <p>{p}</p>)
 					) : (
 						<>
-							<p>{member.name} is part of the Balance Performance Physiotherapy team in Clapham. A full bio is coming soon — in the meantime, you can book a session directly or call our reception team for more information.</p>
+							<p>{member.name} is part of the Balance Performance Physiotherapy team in Clapham. A full bio is coming soon, in the meantime, you can book a session directly or call our reception team for more information.</p>
 							<p>Our clinicians work collaboratively across specialisms, so if you're not sure who to book with, our admin team will match you with the right practitioner for your needs.</p>
 						</>
 					)}

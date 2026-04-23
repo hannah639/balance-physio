@@ -171,7 +171,7 @@ export const team = [
 		bio: [
 			"Portia leads the hydrotherapy service at Audely, bringing extensive expertise from her MSc Pre-registration Physiotherapy at the University of Brighton (2021) and three years as a rotational physiotherapist in an NHS Hospital setting.",
 			"She currently works as a Senior MSK Paediatric Physiotherapist for the Central London Community Healthcare Trust, finding fulfillment in addressing both straightforward and complex needs in children and young people.",
-			"Originally from Kenya, Portia has a passion for tennis, outdoor activities, and travel—including completing a ski season in 2018. Her combination of academic credentials and comprehensive holistic experience positions her to lead the clinic\\'s hydrotherapy services.",
+			"Originally from Kenya, Portia has a passion for tennis, outdoor activities, and travel, including completing a ski season in 2018. Her combination of academic credentials and comprehensive holistic experience positions her to lead the clinic\\'s hydrotherapy services.",
 		],
 	},
 	{
@@ -216,9 +216,9 @@ export const team = [
 		role: 'Nutritional Therapist & Osteopath',
 		bio: [
 			"Eli is an osteopath and nutritional therapist at the Clapham clinic. She employs diverse manual techniques alongside natural remedies, nutrition, and exercise for integrated care.",
-			"Her personal injury experience drives her commitment to helping clients recover from pain safely and quickly. Her background in fitness, massage, lymph drainage, and osteopathy (practicing since 2011) enables her to address healing holistically—\"from the inside out.\"",
+			"Her personal injury experience drives her commitment to helping clients recover from pain safely and quickly. Her background in fitness, massage, lymph drainage, and osteopathy (practicing since 2011) enables her to address healing holistically, \"from the inside out.\"",
 			"Known as the body detective, she specializes in lifestyle adjustments using nutritional supplements and alkaline health principles. She has extensive experience with general clients and athletes from various sports, including Oxford University rowing teams.",
-			"Eli advocates for the body\\'s natural self-healing abilities and enjoys sharing this knowledge. Her multi-disciplinary expertise—combining osteopathic treatment, soft tissue therapy, and nutritional therapy—makes her a valuable asset to the clinic\\'s offerings.",
+			"Eli advocates for the body\\'s natural self-healing abilities and enjoys sharing this knowledge. Her multi-disciplinary expertise, combining osteopathic treatment, soft tissue therapy, and nutritional therapy, makes her a valuable asset to the clinic\\'s offerings.",
 		],
 	},
 	{

@@ -1,0 +1,69 @@
+---
+import ServicePage from '../../components/ServicePage.astro';
+
+const sliderImages = [
+	{ src: '/paediatric-sports-physiotherapy/padel.jpg', alt: 'Young player on a padel court' },
+	{ src: '/paediatric-sports-physiotherapy/hockey-girls.jpg', alt: 'School hockey players in action' },
+	{ src: '/paediatric-sports-physiotherapy/hockey-sticks.jpg', alt: 'Young hockey players ready to play' },
+	{ src: '/paediatric-sports-physiotherapy/football.jpg', alt: 'Young football player running with the ball' },
+	{ src: '/paediatric-sports-physiotherapy/soccer-pitch.jpg', alt: 'Young player dribbling on a blue pitch' },
+	{ src: '/paediatric-sports-physiotherapy/race-winner.jpg', alt: 'Young athlete celebrating at a track race' },
+];
+---
+<ServicePage
+	title="in Clapham"
+	highlight="Paediatric Sports Physiotherapy"
+	heroSubtitle="Consultant youth physiotherapy led by Dan Elias. Growing bodies need a unique approach to healing and performance."
+	breadcrumb="Paediatric Sports Physiotherapy"
+	seoTitle="Paediatric Sports Physiotherapy in Clapham"
+	seoDescription="Consultant youth physiotherapy in Clapham, London. Led by Dan Elias, specialist in sports injuries, developmental movement and return-to-play for children and adolescents."
+	marqueeImages={sliderImages}
+	intro={[
+		"Is your young athlete or active child struggling with an injury? Our consultant youth physiotherapy service can help. Led by Dan Elias, we understand that growing bodies need a unique approach to healing and performance.",
+		"Dan works as a physiotherapist for the England Athletics team, both nationally and internationally, across the under-13 to under-20 age groups. He brings more than 15 years of clinical experience, including elite sport, to every young patient in clinic.",
+	]}
+	introImage="/paediatric-sports-physiotherapy/race-winner.jpg"
+	whenHeading="When to book an"
+	whenHighlight="assessment"
+	whenIntro="Consultant youth physiotherapy is designed for active children and adolescents experiencing:"
+	whenList={[
+		"Pain that is affecting sport, school PE or daily activity",
+		"Growth plate issues, Osgood-Schlatter or Sever's disease",
+		"Recurring niggles that are not settling with rest",
+		"Recovery after a sports injury, surgery or fracture",
+		"Overuse injuries linked to training load or early sports specialisation",
+		"Movement patterns that parents, coaches or teachers are concerned about",
+	]}
+	whenImage="/paediatric-sports-physiotherapy/football.jpg"
+	howHeading="How we"
+	howHighlight="work"
+	howIntro="An initial consultation is 60 minutes and a follow-up is 30 minutes. We work closely with parents, coaches and schools to deliver care that fits around training and competition."
+	howList={[
+		"Assessment of the injury alongside strength, mobility and control",
+		"Clear explanation of what is going on, at a level your child understands",
+		"A rehabilitation plan built around your child's sport, training and goals",
+		"Communication with surgeons, coaches and schools where appropriate",
+		"Progressive return-to-play guidance, not just pain management",
+		"Exercises that are engaging and age-appropriate, so kids actually do them",
+	]}
+	howImage="/paediatric-sports-physiotherapy/hockey-girls.jpg"
+	whoHeading="Who we"
+	whoHighlight="help"
+	whoList={[
+		"Young athletes competing in school, club or academy sport",
+		"Teenagers with sports injuries or post-surgical rehabilitation needs",
+		"Children managing growth-related pain or overuse injuries",
+		"Sports scholars and academy members with high training demands",
+		"Active kids who have had a knock or a fall and are not recovering as expected",
+		"Families looking for a physio who communicates clearly with everyone involved",
+	]}
+	whoImage="/paediatric-sports-physiotherapy/padel.jpg"
+	faqs={[
+		{ q: "Who is this service for?", a: "Active children and adolescents, typically from around age 8 up to late teens, who have sports injuries, overuse issues or movement concerns." },
+		{ q: "Does a parent or guardian need to attend?", a: "Yes. Assessments for children under the age of 16 require a legal guardian to be present. That means a parent, rather than a grandparent or nanny." },
+		{ q: "How long is an appointment?", a: "An initial consultation is 60 minutes. A follow-up is 30 minutes." },
+		{ q: "How much does it cost?", a: "An initial consultation is £147. A follow-up is £115." },
+		{ q: "Do you communicate with our surgeon or coach?", a: "Yes. Joined-up care is central to the service. With your consent, Dan will liaise with surgeons, coaches and schools to make sure everyone is on the same page." },
+		{ q: "Can you help with growth-related pain?", a: "Yes. Conditions like Osgood-Schlatter, Sever's disease and growth plate issues need careful management that accounts for how the developing body differs from an adult's. This is a core part of the service." },
+	]}
+/>

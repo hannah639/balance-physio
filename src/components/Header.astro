@@ -2,6 +2,7 @@
 const services = [
 	{ label: 'Physiotherapy', href: '/service/physiotherapy' },
 	{ label: 'Sports Physiotherapy', href: '/service/sports-physiotherapy' },
+	{ label: 'Paediatric Sports Physiotherapy', href: '/service/paediatric-sports-physiotherapy' },
 	{ label: 'Osteopathy', href: '/service/osteopathy' },
 	{ label: 'Sports Massage', href: '/service/sports-massage' },
 	{ label: 'Shockwave Therapy', href: '/service/shockwave-therapy' },
@@ -12,7 +13,7 @@ const services = [
 	{ label: "Men's Health", href: '/service/mens-health' },
 	{ label: 'Podiatry', href: '/service/podiatry' },
 	{ label: 'Strength & Conditioning', href: '/service/strength-conditioning' },
-	{ label: 'LIFT — Weight Training Club', href: '/service/lift-weight-training-club' },
+	{ label: 'LIFT: Weight Training Club', href: '/service/lift-weight-training-club' },
 	{ label: 'Bike Fitting & Running Analysis', href: '/service/bike-fitting-running-analysis' },
 	{ label: 'Hydrotherapy', href: '/service/hydrotherapy' },
 	{ label: 'Psychological Wellness', href: '/service/psychological-wellness' },
@@ -69,7 +70,7 @@ const whoWeHelp = [
 ];
 
 const locations = [
-	{ label: 'Main Clinic — Clapham North', href: '/clinic/clapham' },
+	{ label: 'Main Clinic: Clapham North', href: '/clinic/clapham' },
 	{ label: 'Clapham South for Hydrotherapy', href: '/clinic/clapham-south-hydrotherapy' },
 ];
 ---
@@ -119,17 +120,12 @@ const locations = [
 					<div class="dropdown dropdown-mega">
 						<div class="mega-left">
 							<div class="mega-eyebrow">Our Locations</div>
-							<p class="mega-intro">Two Clapham locations — our main clinic on Gauden Road for physiotherapy, and our hydrotherapy pool at Audley Village.</p>
+							<p class="mega-intro">Two Clapham locations, our main clinic on Gauden Road for physiotherapy, and our hydrotherapy pool at Audley Village.</p>
 							<div class="mega-links">
 								{locations.map((item) => <a href={item.href}>{item.label}</a>)}
 							</div>
 						</div>
-						<a href="/clinic/clapham" class="mega-card" style="background-image: url('/clapham/pexels-nicu-cobasnean-860727842-19818223.jpg')">
-							<div class="mega-card-overlay">
-								<div class="mega-card-title">Visit us in<br/>Clapham.</div>
-								<div class="mega-card-cta">Find Us &rsaquo;</div>
-							</div>
-						</a>
+						<a href="/clinic/clapham" class="mega-card" style="background-image: url('/clapham/pexels-nicu-cobasnean-860727842-19818223.jpg')" aria-label="Visit our Clapham clinic page"></a>
 					</div>
 				</li>
 				<li><a href="/contact-us">Contact Us</a></li>
@@ -400,7 +396,7 @@ const locations = [
 	}
 	.header-cta .btn-primary:hover { background: #32a8c6; }
 
-	/* Hamburger button — hidden on desktop */
+	/* Hamburger button, hidden on desktop */
 	.hamburger {
 		display: none;
 		background: transparent;

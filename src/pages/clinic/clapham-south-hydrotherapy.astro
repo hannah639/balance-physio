@@ -4,22 +4,28 @@ import PageHero from '../../components/PageHero.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 ---
 <Layout
-	title="Clapham South — Hydrotherapy"
+	title="Clapham South for Hydrotherapy"
 	description="Our hydrotherapy location at Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH."
 >
 	<PageHero
-		title="— Hydrotherapy"
+		title="for Hydrotherapy"
 		highlight="Clapham South"
 		subtitle="Our hydrotherapy sessions take place at Audley Village, a short distance from our main Clapham North clinic."
 		breadcrumb="Clapham South for Hydrotherapy"
 	/>
 
-	<section class="bp-page">
-		<div class="container">
-			<div class="eyebrow"><span class="eyebrow-dot"></span>Hydrotherapy location</div>
-			<h2>Audley Village, <span class="highlight">Nightingale Place</span></h2>
-			<p>Hydrotherapy at Balance Performance Physiotherapy takes place at our Clapham South location. Please come here — rather than our main clinic on Gauden Road — for any hydrotherapy appointments.</p>
-			<p><strong>Address:</strong> Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH.</p>
+	<section class="location-intro">
+		<div class="location-intro-inner">
+			<div class="location-intro-copy">
+				<div class="eyebrow"><span class="eyebrow-dot"></span>Hydrotherapy location</div>
+				<h2>Audley Village, <span class="highlight">Nightingale Place</span></h2>
+				<p>Hydrotherapy at Balance Performance Physiotherapy takes place at our Clapham South location. Please come here, rather than our main clinic on Gauden Road, for any hydrotherapy appointments.</p>
+				<ul class="check-list">
+					<li><strong>Address:</strong> Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH</li>
+					<li><strong>Closest Tube:</strong> Clapham South (Northern line)</li>
+					<li><strong>For appointments:</strong> 020 7627 2308 or enquiries@balancephysio.com</li>
+				</ul>
+			</div>
 
 			<div class="location-map">
 				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.1190346254107!2d-0.1486525!3d51.45289760000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605b630c3c9d3%3A0x9ad3c77ad81840c6!2sAudley%20Nightingale%20Place!5e1!3m2!1sen!2suk!4v1776940633643!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Audley Village, Nightingale Place, Clapham South"></iframe>
@@ -31,21 +37,67 @@ import BookingCTA from '../../components/BookingCTA.astro';
 </Layout>
 
 <style>
+	.location-intro { padding: 90px 24px; background: #ffffff; }
+	.location-intro-inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 64px;
+		align-items: start;
+	}
+	.location-intro-copy .eyebrow {
+		display: inline-flex; align-items: center; gap: 8px;
+		background: rgba(0,0,0,0.06);
+		border: 1px solid rgba(0,0,0,0.1);
+		border-radius: 50px;
+		padding: 6px 16px;
+		font-size: 13px; font-weight: 600; color: #1a1a1a;
+		margin-bottom: 20px;
+	}
+	.location-intro-copy .eyebrow-dot {
+		width: 8px; height: 8px; border-radius: 50%; background: #e87722;
+	}
+	.location-intro-copy h2 {
+		font-size: 40px; font-weight: 800; line-height: 1.15;
+		letter-spacing: -1px; margin: 0 0 20px; color: #1a1a1a;
+	}
+	.location-intro-copy h2 .highlight { color: #e87722; }
+	.location-intro-copy p {
+		font-size: 17px; line-height: 1.8; color: #555555;
+		margin: 0 0 20px;
+	}
+	.location-intro-copy .check-list { list-style: none; margin: 20px 0; padding: 0; }
+	.location-intro-copy .check-list li {
+		position: relative; padding: 8px 0 8px 32px;
+		font-size: 16px; color: #555555; line-height: 1.6;
+	}
+	.location-intro-copy .check-list li::before {
+		content: ''; position: absolute; left: 0; top: 15px;
+		width: 18px; height: 18px; border-radius: 50%; background: #e87722;
+	}
+	.location-intro-copy .check-list li::after {
+		content: '✓'; position: absolute; left: 4px; top: 10px;
+		color: #ffffff; font-size: 11px; font-weight: 800;
+	}
+
 	.location-map {
-		margin-top: 32px;
-		border-radius: 16px;
+		border-radius: 20px;
 		overflow: hidden;
 		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+		background: #f4f6f7;
 	}
 	.location-map iframe {
 		display: block;
 		width: 100%;
-		height: 450px;
+		height: 540px;
 		border: 0;
 	}
-	@media (max-width: 700px) {
-		.location-map iframe {
-			height: 360px;
-		}
+
+	@media (max-width: 900px) {
+		.location-intro { padding: 60px 24px; }
+		.location-intro-inner { grid-template-columns: 1fr; gap: 40px; }
+		.location-intro-copy h2 { font-size: 32px; }
+		.location-map iframe { height: 360px; }
 	}
 </style>
