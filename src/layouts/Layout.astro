@@ -238,7 +238,7 @@ const jsonLd = settings.businessName ? {
 	   stays pinned near the top of the viewport as the user scrolls through the copy.
 	   Offset = fixed header (~84px) + ~16px breathing room. Disabled on mobile where the
 	   layout stacks vertically (see the @media (max-width: 900px) block below). */
-	.bp-page .image-text-media { position: sticky; top: 100px; align-self: start; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; background: var(--primary-bg-gradient); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+	.bp-page .image-text-media { position: sticky; top: 100px; align-self: start; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; background: var(--primary-bg-gradient); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
 	.bp-page .image-text-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 	.bp-page .image-text-media .media-collage { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; width: 100%; height: 100%; background: var(--white); }
 	.bp-page .image-text-media .media-collage img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -462,7 +462,7 @@ const jsonLd = settings.businessName ? {
 	.bp-page .feature-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 4px; }
 	.bp-page .feature-list::-webkit-scrollbar-thumb { background: var(--cta); border-radius: 4px; }
 	.bp-page .feature-card { position: relative; border-radius: var(--radius); overflow: hidden; min-width: 320px; height: 460px; cursor: pointer; flex-shrink: 0; scroll-snap-align: start; }
-	.bp-page .feature-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .4s; }
+	.bp-page .feature-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center 25%; transition: transform .4s; }
 	.bp-page .feature-card:hover .feature-card-bg { transform: scale(1.05); }
 	.bp-page .feature-card-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%); }
 	.bp-page .feature-card-content { position: absolute; top: 0; left: 0; right: 0; padding: 28px; color: var(--white); }
@@ -473,7 +473,8 @@ const jsonLd = settings.businessName ? {
 	.bp-page .feature-nav-btn:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
 	@media (max-width: 768px) {
 		.bp-page .feature-card { min-width: 280px; height: 380px; }
-		.bp-page .features .section-header p { font-size: 28px; }
+		.bp-page .features .section-header h2 { font-size: 36px; }
+		.bp-page .features .section-header p { font-size: 16px; }
 	}
 
 	.bp-page .team { padding: 100px 0; background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
@@ -503,7 +504,10 @@ const jsonLd = settings.businessName ? {
 	.bp-page .clinic-tag:hover { background: var(--accent-hover); }
 	.bp-page .clinic-tag.alt { background: var(--cta); }
 	.bp-page .clinic-tag.alt:hover { background: var(--cta-hover); }
-	@media (max-width: 768px) { .bp-page .clinics-header { flex-direction: column; gap: 24px; } }
+	@media (max-width: 768px) {
+		.bp-page .clinics-header { flex-direction: column; gap: 24px; }
+		.bp-page .clinics-header-left h2 { font-size: 30px; }
+	}
 
 	.bp-page .testimonials { padding: 100px 0; background: var(--primary-bg); }
 	.bp-page .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
