@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="Clapham South — Hydrotherapy"
+	description="Our hydrotherapy location at Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH."
+>
+	<PageHero
+		title="— Hydrotherapy"
+		highlight="Clapham South"
+		subtitle="Our hydrotherapy sessions take place at Audley Village, a short distance from our main Clapham North clinic."
+		breadcrumb="Clapham South for Hydrotherapy"
+	/>
+
+	<section class="bp-page">
+		<div class="container">
+			<div class="eyebrow"><span class="eyebrow-dot"></span>Hydrotherapy location</div>
+			<h2>Audley Village, <span class="highlight">Nightingale Place</span></h2>
+			<p>Hydrotherapy at Balance Performance Physiotherapy takes place at our Clapham South location. Please come here — rather than our main clinic on Gauden Road — for any hydrotherapy appointments.</p>
+			<p><strong>Address:</strong> Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH.</p>
+
+			<div class="location-map">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.1190346254107!2d-0.1486525!3d51.45289760000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605b630c3c9d3%3A0x9ad3c77ad81840c6!2sAudley%20Nightingale%20Place!5e1!3m2!1sen!2suk!4v1776940633643!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Audley Village, Nightingale Place, Clapham South"></iframe>
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>
+
+<style>
+	.location-map {
+		margin-top: 32px;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+	}
+	.location-map iframe {
+		display: block;
+		width: 100%;
+		height: 450px;
+		border: 0;
+	}
+	@media (max-width: 700px) {
+		.location-map iframe {
+			height: 360px;
+		}
+	}
+</style>

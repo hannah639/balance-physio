@@ -65,6 +65,11 @@ const whoWeHelp = [
 	{ label: 'Children & Young People', href: '/who-we-help/children-young-people' },
 	{ label: 'Post-Surgical Patients', href: '/who-we-help/post-surgical' },
 ];
+
+const locations = [
+	{ label: 'Main Clinic — Clapham North', href: '/clinic/clapham' },
+	{ label: 'Clapham South for Hydrotherapy', href: '/clinic/clapham-south-hydrotherapy' },
+];
 ---
 <header class="bp-header">
 	<div class="header-inner">
@@ -110,7 +115,24 @@ const whoWeHelp = [
 					</div>
 				</li>
 				<li><a href="/faqs">FAQs</a></li>
-				<li><a href="/clinic/clapham">Clapham Clinic</a></li>
+				<li class="has-dropdown has-dropdown-mega">
+					<a href="/clinic/clapham">Our Locations <span class="chev">▾</span></a>
+					<div class="dropdown dropdown-mega">
+						<div class="mega-left">
+							<div class="mega-eyebrow">Our Locations</div>
+							<p class="mega-intro">Two Clapham locations — our main clinic on Gauden Road for physiotherapy, and our hydrotherapy pool at Audley Village.</p>
+							<div class="mega-links">
+								{locations.map((item) => <a href={item.href}>{item.label}</a>)}
+							</div>
+						</div>
+						<a href="/clinic/clapham" class="mega-card" style="background-image: url('/clapham/pexels-nicu-cobasnean-860727842-19818223.jpg')">
+							<div class="mega-card-overlay">
+								<div class="mega-card-title">Visit us in<br/>Clapham.</div>
+								<div class="mega-card-cta">Find Us &rsaquo;</div>
+							</div>
+						</a>
+					</div>
+				</li>
 				<li><a href="/contact-us">Contact Us</a></li>
 			</ul>
 		</nav>
@@ -164,7 +186,14 @@ const whoWeHelp = [
 				</details>
 			</li>
 			<li><a href="/faqs" class="mobile-direct">FAQs</a></li>
-			<li><a href="/clinic/clapham" class="mobile-direct">Clapham Clinic</a></li>
+			<li>
+				<details>
+					<summary>Our Locations</summary>
+					<ul class="mobile-sublist">
+						{locations.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+					</ul>
+				</details>
+			</li>
 			<li><a href="/contact-us" class="mobile-direct">Contact Us</a></li>
 		</ul>
 		<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="mobile-menu-book">Book Now</a>
