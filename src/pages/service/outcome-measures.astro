@@ -1,19 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ImageText from '../../components/ImageText.astro';
-import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
-
-/* No outcome-measures folder exists. Using physio body images and service clinical photos. Hannah may want to swap these later. */
-const photos = [
-	{ src: '/physio/body-1.jpg', alt: 'Physiotherapy assessment' },
-	{ src: '/physio/body-2.jpg', alt: 'Clinical review' },
-	{ src: '/physio/body-3.jpg', alt: 'Rehabilitation session' },
-	{ src: '/physio/body-4.jpg', alt: 'Progress tracking' },
-	{ src: '/physio/body-5.jpg', alt: 'Movement assessment' },
-	{ src: '/physio/body-6.jpg', alt: 'Clinical environment' },
-];
 
 const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
 
@@ -32,74 +20,83 @@ const faqs = [
 >
 	<PageHero title="in Physiotherapy" highlight="Outcome Measures" breadcrumb="Outcome Measures" />
 
-	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+	<section class="text-grid text-grid--light text-grid--solo">
+		<div class="text-grid-inner">
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Our approach</div>
+				<h2>Effective rehabilitation should be <span class="highlight">measured, not guessed</span></h2>
+				<p>At Balance, we use outcome measures to track your progress objectively. This allows us to understand where you are starting from, monitor change over time, and ensure your treatment is leading to meaningful improvements.</p>
+				<p>Outcome measures form a core part of how we plan, review, and progress your rehabilitation — used to guide decisions alongside, not replace, clinical judgement.</p>
+				<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+			</div>
+		</div>
+	</section>
 
-	<ImageText eyebrow="Our approach" heading="Effective rehabilitation should be" highlight="measured, not guessed" image="/physio/body-1.jpg" imageAlt="Clinical assessment">
-		<p>Effective rehabilitation should be measured externally and independently, not guessed.</p>
-		<p>At Balance, we use outcome measures to track your progress objectively. This allows us to understand where you are starting from, monitor change over time, and ensure your treatment is leading to meaningful improvements.</p>
-		<p>Outcome measures form a core part of how we plan, review, and progress your rehabilitation.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
-	</ImageText>
+	<section class="text-grid">
+		<div class="text-grid-inner">
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Why measure</div>
+				<h2>When outcome measures are <span class="highlight">important</span></h2>
+				<p>Everyone benefits from a structured, data-led approach:</p>
+				<ul>
+					<li>So you can clearly see the improvement over time</li>
+					<li>Accurately chart the responsiveness of interventions</li>
+					<li>Have a safety net straight back to your physiotherapist if symptoms re-emerge</li>
+					<li>Require objective data for insurance or return-to-work/sport</li>
+					<li>Our past outcomes tell us how you are likely to improve with us</li>
+				</ul>
+			</div>
 
-	<ImageText reverse altBg eyebrow="Why measure" heading="When outcome measures" highlight="are important" image="/physio/body-2.jpg" imageAlt="Outcomes review">
-		<p>Everyone benefits from a structured, data-led approach:</p>
-		<ul>
-			<li>So you can clearly see the improvement over time</li>
-			<li>Accurately chart the responsiveness of interventions</li>
-			<li>Have a safety net straight back to your physiotherapist if symptoms re-emerge</li>
-			<li>Require objective data for insurance or return-to-work/sport</li>
-			<li>Our past outcomes tell us how you are likely to improve with us</li>
-		</ul>
-		<p>This approach ensures your rehabilitation is clear, purposeful, and accountable.</p>
-	</ImageText>
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Method</div>
+				<h2>How we <span class="highlight">use them</span></h2>
+				<p>We use a combination of patient-reported, internationally validated measures to build a complete picture of your progress. This may include:</p>
+				<ul>
+					<li>Questionnaires assessing pain, function, and quality of life</li>
+					<li>Task-specific measures relevant to your goals</li>
+					<li>Questions about lifestyle and your options — so we understand what you want to achieve before we've met you</li>
+				</ul>
+				<p>Your baseline is established before meeting us, and results are reviewed at six weeks, three, six and twelve months post intervention.</p>
+			</div>
 
-	<ImageText eyebrow="Method" heading="How we use" highlight="outcome measures" image="/physio/body-3.jpg" imageAlt="Clinical scoring">
-		<p>We use a combination of patient-reported, internationally validated measures to build a complete picture of your progress.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Questionnaires assessing pain, function, and quality of life</li>
-			<li>Task-specific measures relevant to your goals</li>
-			<li>Questions about lifestyle and your options — this tells us what you want to achieve before we've met you</li>
-		</ul>
-		<p>Additionally we add evidence-based objective measures in clinic to complete a total picture of you.</p>
-		<p>Your baseline is established before meeting us, and results are reviewed at six weeks, three, six and twelve months post intervention.</p>
-	</ImageText>
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Outcomes</div>
+				<h2>How we measure <span class="highlight">your progress</span></h2>
+				<p>Progress is assessed using an external company, Cemplicity, with reliable, valid and repeatable measures. This allows us to track:</p>
+				<ul>
+					<li>Changes in pain and symptom behaviour</li>
+					<li>Reductions in disability</li>
+					<li>Increased range of movement</li>
+					<li>Functional gains in daily life or sport</li>
+					<li>Progress towards specific goals or milestones</li>
+				</ul>
+			</div>
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/physio/body-4.jpg" imageAlt="Tracking progress">
-		<p>Progress is assessed using an external company, Cemplicity, with reliable, valid and repeatable measures.</p>
-		<p>This allows us to track:</p>
-		<ul>
-			<li>Changes in pain and symptom behaviour</li>
-			<li>Reductions in disability</li>
-			<li>Increased range of movement</li>
-			<li>Functional gains in daily life or sport</li>
-			<li>Progress towards specific goals or milestones</li>
-		</ul>
-		<p>This ensures decisions are based on evidence, not assumption.</p>
-		<p><a href="/outcomes" class="section-link">Read More About Outcome Measures &rarr;</a></p>
-	</ImageText>
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Our patients</div>
+				<h2>Who we <span class="highlight">help</span></h2>
+				<p>Outcome measures are used across all areas of physiotherapy, including:</p>
+				<ul>
+					<li><strong>Post-surgical rehabilitation:</strong> Monitoring recovery and readiness to progress</li>
+					<li><strong>Sports injuries:</strong> Supporting return-to-play decisions</li>
+					<li><strong>Chronic conditions:</strong> Tracking long-term changes in function</li>
+					<li><strong>Neurological rehabilitation:</strong> Assessing balance, gait, and independence</li>
+					<li><strong>General physiotherapy:</strong> Providing clarity and direction for all patients</li>
+				</ul>
+			</div>
+		</div>
+	</section>
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/physio/body-5.jpg" imageAlt="Range of patients">
-		<p>Outcome measures are used across all areas of physiotherapy, including:</p>
-		<ul>
-			<li><strong>Post-surgical rehabilitation:</strong> Monitoring recovery and readiness to progress</li>
-			<li><strong>Sports injuries:</strong> Supporting return-to-play decisions</li>
-			<li><strong>Chronic conditions:</strong> Tracking long-term changes in function</li>
-			<li><strong>Neurological rehabilitation:</strong> Assessing balance, gait, and independence</li>
-			<li><strong>General physiotherapy:</strong> Providing clarity and direction for all patients</li>
-		</ul>
-	</ImageText>
-
-	<ImageText reverse altBg eyebrow="Our approach" heading="Clinical judgement," highlight="data-informed" image="/physio/body-6.jpg" imageAlt="Clinician with patient">
-		<p>We combine your subjective data with our objective measures and clinical expertise.</p>
-		<p>Your physiotherapist will explain what your results mean and how they relate to your recovery. This ensures you understand your progress and remain actively involved in your treatment.</p>
-		<p>We use outcome measures to guide decisions — not replace clinical judgement.</p>
-	</ImageText>
-
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/physio/body-7.jpg" imageAlt="Balance Physio clinic">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
-	</ImageText>
+	<section class="text-grid text-grid--light text-grid--solo">
+		<div class="text-grid-inner">
+			<div class="image-text-content text-grid-cell">
+				<div class="eyebrow">Fees</div>
+				<h2>Pricing and <span class="highlight">insurance</span></h2>
+				<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+				<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+			</div>
+		</div>
+	</section>
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
