@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="The Performance Athlete"
+	description="London's largest rehabilitation centre supporting elite, club and country-level athletes."
+>
+	<PageHero
+		title="The Performance Athlete"
+		breadcrumb="The Performance Athlete"
+	/>
+
+	<ImageText
+		image="/sports-physio/hero-cricket.jpg"
+		imageAlt="Performance athlete in action"
+	>
+		<p>Whether you compete at elite, club or country level keeping those injuries from disrupting your training is key. At Balance, we have built London's largest rehabilitation centre providing athletes the space and equipment required for their rehabilitation and training. Come to see one of our consultants or come with your coach and / or physio and we'll work together to make the difference across all of your performance arenas. Our specialists continue to work with multiple team GB squads, British and team GB lacrosse, The EIS, World Class Performance, Volleyball England, ATP Tour, the All England Club, London City Lionesses and Surrey County Cricket Club.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

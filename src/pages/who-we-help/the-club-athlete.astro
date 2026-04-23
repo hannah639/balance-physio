@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="The Club Athlete"
+	description="25 specialists under one roof — physiotherapists, osteopaths, chiropractors, sports massage therapists, podiatrists, psychologists and strength and conditioning coaches."
+>
+	<PageHero
+		title="The Club Athlete"
+		breadcrumb="The Club Athlete"
+	/>
+
+	<ImageText
+		image="/hockey.jpg"
+		imageAlt="Club athlete training"
+	>
+		<p>With 25 specialists under one roof, we bring together physiotherapists, osteopaths, chiropractors, sports massage therapists, podiatrists, psychologists and strength and conditioning coaches to keep you on, or return you to the pitch.</p>
+		<p>Shockwave therapy, running analysis, bike fitting, sports massage and strength coaching are all available under one roof, alongside psychological wellbeing support for when the mental side of performance needs attention too.</p>
+		<p>At Balance, we look after every athlete bespokely. We don't just make you better. We make you stronger, more resilient and better equipped to manage your own body for the long term.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

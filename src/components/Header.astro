@@ -57,7 +57,9 @@ const about = [
 ];
 
 const whoWeHelp = [
-	{ label: 'Performance Athletes', href: '/who-we-help/performance-athletes' },
+	{ label: 'The Performance Athlete', href: '/who-we-help/the-performance-athlete' },
+	{ label: 'The Club Athlete', href: '/who-we-help/the-club-athlete' },
+	{ label: 'Are you planning an event?', href: '/who-we-help/are-you-planning-an-event' },
 	{ label: 'Marathon Runners & Endurance Athletes', href: '/who-we-help/marathon-endurance' },
 	{ label: 'Active People', href: '/who-we-help/active-people' },
 	{ label: 'Pre & Post-natal Women', href: '/who-we-help/pre-post-natal' },
@@ -107,10 +109,7 @@ const locations = [
 							</div>
 						</div>
 						<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="mega-card" style="background-image: url('/sports-physio/hero-running.jpg')">
-							<div class="mega-card-overlay">
-								<div class="mega-card-title">Expert care for<br/>every body.</div>
-								<div class="mega-card-cta">Book Now &rsaquo;</div>
-							</div>
+							<span class="mega-card-button">Book Now</span>
 						</a>
 					</div>
 				</li>
@@ -304,18 +303,51 @@ const locations = [
 		position: relative;
 		display: flex;
 		align-items: flex-end;
+		justify-content: center;
 		background-size: cover;
 		background-position: center;
+		background-repeat: no-repeat;
 		min-height: 260px;
 		text-decoration: none;
 		overflow: hidden;
-		padding: 0;
+		padding: 20px;
 		border-radius: 0;
 		font-size: inherit;
 		font-weight: inherit;
+		transform: none;
+		transition: none;
 	}
-	.dropdown-mega .mega-card:hover {
+	.dropdown-mega .mega-card::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 70%);
+		pointer-events: none;
+	}
+	.dropdown-mega .mega-card:hover,
+	.dropdown-mega .mega-card:focus,
+	.dropdown-mega .mega-card:active {
 		background-color: transparent;
+		background-size: cover;
+		background-position: center;
+		transform: none;
+	}
+	.dropdown-mega .mega-card-button {
+		position: relative;
+		z-index: 1;
+		display: inline-block;
+		padding: 12px 28px;
+		background: #3EBEDF;
+		color: #ffffff;
+		font-size: 14px;
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		border-radius: 50px;
+		transition: background .2s ease, transform .15s ease;
+	}
+	.dropdown-mega .mega-card:hover .mega-card-button {
+		background: #32a8c6;
+		transform: translateY(-2px);
 	}
 	.dropdown-mega .mega-card-overlay {
 		width: 100%;

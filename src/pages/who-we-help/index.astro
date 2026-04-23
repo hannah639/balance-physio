@@ -4,23 +4,23 @@ import PageHero from '../../components/PageHero.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 
 const groups = [
-	{ title: 'Performance Athletes', blurb: 'Elite, club and country-level athletes — keeping you training, competing and performing at your best.', href: '/who-we-help/performance-athletes' },
-	{ title: 'Marathon Runners & Endurance Athletes', blurb: 'Runners, cyclists, triathletes and endurance athletes at every level — from first-timers to seasoned competitors.', href: '/who-we-help/marathon-endurance' },
-	{ title: 'Active People', blurb: 'World-class care for anyone who moves — gym, weekend sport, swimming or simply staying active.', href: '/who-we-help/active-people' },
-	{ title: 'Pre & Post-natal Women', blurb: 'Expert, compassionate care through pregnancy, birth recovery and long-term postnatal rehabilitation.', href: '/who-we-help/pre-post-natal' },
-	{ title: 'People with Neurological Conditions', blurb: 'Specialist rehab for MS, stroke, Parkinson\'s, cerebral palsy and other neurological pathologies.', href: '/who-we-help/neurological-conditions' },
-	{ title: 'Children & Young People', blurb: 'Developmental care, Vojta therapy and sports injury management from infancy through adolescence.', href: '/who-we-help/children-young-people' },
-	{ title: 'Post-Surgical Patients', blurb: 'Structured, progressive rehabilitation after ACL, joint replacement, spinal, rotator cuff and other procedures.', href: '/who-we-help/post-surgical' },
+	{ title: 'The Performance Athlete', href: '/who-we-help/the-performance-athlete' },
+	{ title: 'The Club Athlete', href: '/who-we-help/the-club-athlete' },
+	{ title: 'Are you planning an event?', href: '/who-we-help/are-you-planning-an-event' },
+	{ title: 'Marathon Runners & Endurance Athletes', href: '/who-we-help/marathon-endurance' },
+	{ title: 'Active People', href: '/who-we-help/active-people' },
+	{ title: 'Pre & Post-natal Women', href: '/who-we-help/pre-post-natal' },
+	{ title: 'People with Neurological Conditions', href: '/who-we-help/neurological-conditions' },
+	{ title: 'Children & Young People', href: '/who-we-help/children-young-people' },
+	{ title: 'Post-Surgical Patients', href: '/who-we-help/post-surgical' },
 ];
 ---
 <Layout
 	title="Who We Help"
-	description="Whatever your starting point — elite athlete, weekend runner, new mum, someone living with a neurological condition, or recovering from surgery — we've got the skills and experience to support you."
+	description="Whether it's aches and pains, sports injuries, pre- and post-natal care, neurological conditions or post-surgical rehab, we've got the skills and experience to support you."
 >
 	<PageHero
-		title="We Help"
-		highlight="Who"
-		subtitle="Whether it's aches and pains, sports injuries, pre- and post-natal care, neurological conditions or post-surgical rehab, we've got the skills and experience to support you."
+		title="Who We Help"
 		breadcrumb="Who We Help"
 	/>
 
@@ -30,7 +30,6 @@ const groups = [
 				{groups.map((g) => (
 					<a href={g.href} class="link-grid-item">
 						<h3>{g.title}</h3>
-						<p>{g.blurb}</p>
 						<span class="arrow">Learn more &rsaquo;</span>
 					</a>
 				))}
