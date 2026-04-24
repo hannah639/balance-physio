@@ -10,6 +10,7 @@ const {
 	imagePosition,
 	placeholderLabel = 'Image placeholder',
 	youtubeId,
+	autoplay = false,
 	collage,
 } = Astro.props;
 
@@ -17,17 +18,36 @@ const classes = ['image-text'];
 if (reverse) classes.push('reverse');
 if (altBg) classes.push('alt-bg');
 
+const mediaClasses = ['image-text-media'];
+if (youtubeId && autoplay) mediaClasses.push('image-text-media--video');
+
 const imgStyle = imagePosition ? `object-position: ${imagePosition};` : undefined;
 
 // Build a YouTube thumbnail URL if a videoId is provided.
 // If a custom `image` is also supplied, prefer it, useful when the auto-generated
 // YouTube thumbnail isn't a good fit and we want branded artwork behind the play button.
 const thumbUrl = image || (youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` : null);
+
+// Build an embed URL with autoplay params when autoplay mode is requested.
+// mute=1 is required by browsers for autoplay to work without user interaction.
+// playsinline=1 keeps the video inline on mobile rather than going fullscreen.
+const embedUrl = youtubeId && autoplay
+	? `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1`
+	: null;
 ---
 <section class={classes.join(' ')}>
 	<div class="image-text-inner">
-		<div class="image-text-media">
-			{youtubeId ? (
+		<div class={mediaClasses.join(' ')}>
+			{youtubeId && autoplay ? (
+				<iframe
+					src={embedUrl}
+					title={imageAlt || 'Video'}
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+					allowfullscreen
+					loading="lazy"
+					frameborder="0"
+				></iframe>
+			) : youtubeId ? (
 				<button class="video-trigger" data-youtube={youtubeId} aria-label="Play video">
 					<img src={thumbUrl} alt={imageAlt || 'Play video'} />
 					<span class="play-btn"><span class="play-icon">▶</span></span>
