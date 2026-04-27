@@ -21,19 +21,13 @@ const faqs = [
 >
 	<PageHero title="in South West London" highlight="Vojta Therapy" breadcrumb="Vojta Therapy" />
 
-	<section class="text-grid text-grid--light text-grid--solo">
-		<div class="text-grid-inner">
-			<div class="image-text-content text-grid-cell">
-				<div class="eyebrow">Our approach</div>
-				<h2>Activating innate <span class="highlight">movement patterns</span></h2>
-				<p>Movement problems linked to the nervous system can affect how the body develops, adapts, and functions day to day.</p>
-				<p>Vojta Therapy is a specialised neurological treatment that works by activating innate movement patterns within the central nervous system. Rather than relying on voluntary effort alone, it stimulates automatic responses that underpin posture, coordination, and mobility.</p>
-				<p>At Balance, we take a structured and evidence-led approach to neurological rehabilitation. From your first session, we assess how movement is organised and controlled, then build a plan that supports both immediate function and long-term development.</p>
-				<p>Whether for a child with developmental concerns or an adult recovering from neurological injury, the focus is the same: improving how the body moves at a fundamental level.</p>
-				<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
-			</div>
-		</div>
-	</section>
+	<ImageText eyebrow="Our approach" heading="Activating innate" highlight="movement patterns" image="/vojta-therapy/movement-patterns.jpg" imageAlt="Vojta Therapy session at Balance">
+		<p>Movement problems linked to the nervous system can affect how the body develops, adapts, and functions day to day.</p>
+		<p>Vojta Therapy is a specialised neurological treatment that works by activating innate movement patterns within the central nervous system. Rather than relying on voluntary effort alone, it stimulates automatic responses that underpin posture, coordination, and mobility.</p>
+		<p>At Balance, we take a structured and evidence-led approach to neurological rehabilitation. From your first session, we assess how movement is organised and controlled, then build a plan that supports both immediate function and long-term development.</p>
+		<p>Whether for a child with developmental concerns or an adult recovering from neurological injury, the focus is the same: improving how the body moves at a fundamental level.</p>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
 
 	<section class="text-grid">
 		<div class="text-grid-inner">
@@ -99,7 +93,7 @@ const faqs = [
 		</div>
 	</section>
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="specialist" image="/vojta-therapy/jose-avatar.webp" imageAlt="Dr Jose Sanz Mengibar">
+	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="specialist" image="/vojta-therapy/jose-portrait.jpg" imageAlt="Dr Jose Sanz Mengibar">
 		<p>Our Vojta Therapy service is led by <strong>Dr Jose Sanz Mengibar</strong>, Consultant Neurological Physiotherapist and certified Vojta Therapist.</p>
 		<p>With over 20 years of clinical and research experience and a PhD in the field, Dr Jose has a deep understanding of neurological movement disorders. His approach focuses on identifying the specific inputs required to trigger effective motor responses, delivering highly individualised care for both children and adults.</p>
 		<p><a href="/meet-the-team" class="section-link">Read More About Jose &rarr;</a></p>
@@ -107,13 +101,26 @@ const faqs = [
 		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
 	</ImageText>
 
-	<section class="text-grid text-grid--light text-grid--solo">
+	<section class="text-grid text-grid--light">
 		<div class="text-grid-inner">
 			<div class="image-text-content text-grid-cell">
 				<div class="eyebrow">Fees</div>
 				<h2>Pricing and <span class="highlight">insurance</span></h2>
 				<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
 				<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+			</div>
+			<div class="text-grid-cell">
+				<div class="testimonial-card">
+					<p>Without Jose's therapy, input and expertise, my daughter would not have the mobility she has today. Jose has guided us as a family in the best interest of our daughter. My daughter has been seeing Jose for over 14 years and we would not trust anyone else regarding our daughter's therapy and well-being. His empathy towards us as a family is beyond amazing.</p>
+					<div class="testimonial-author">
+						<div class="testimonial-avatar">
+							<img src="/vojta-therapy/testimonial-avatar.jpg" alt="Vojta Therapy testimonial" />
+						</div>
+						<div>
+							<h4>Vojta Therapy patient family</h4>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
