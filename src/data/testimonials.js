@@ -1,6 +1,7 @@
 export const testimonials = [
     {
         name: 'Claire Bennett',
+        image: '/testimonials/claire-bennett.jpg',
         role: 'Team GB Fencer',
         quote: `I first approached Balance Physio at a time when physio support was the missing link in my preparation towards qualification for the London 2012 Olympic Games. Part of the battle of excelling at elite level sport is finding the right support team and training structure to allow yourself to maximise your potential. Balance have played a huge part in my development as an athlete. Their support, professionalism and depth of knowledge have helped me through the toughest of times during injury. And it was no coincidence that I actually achieved my season's best result during my rehabilitation period at Balance. Their skill-set and first-class care meant that I was back on my feet, tougher, fitter and stronger than ever.
 
@@ -8,6 +9,7 @@ I have been lucky enough to have had regular contact with much of the team at Ba
     },
     {
         name: 'Louise Ward',
+        image: '/testimonials/louise-ward.jpg',
         role: 'Round the World Yachtswomen, Club Triathlete & Hockey player',
         quote: `I was introduced to Balance by my surgeon, following the second (of seven!) operations on my injured ankle.
 
@@ -22,14 +24,17 @@ In 2011 I was even at the stage where I could compete in my first triathlon, whi
     },
     {
         name: 'Owen Carmen',
+        image: '/testimonials/owen-carmen.jpg',
         quote: `I started running this year and developed some problems with Lliotibial Band syndrome. I visited Anthony Adesanmi at Balance to have my run analysed and during the appointment, he enquired about my running, my goals, and then put me through the video analysis and coached me on how to change my posture, cadence and balance. I have listened and undertaken his advice and with the exercises he gave me I have overcome my problems and am running faster and further than I had been. I cannot thank you enough for your professionalism and attention. I subsequently returned for a follow up appointment to review my running and went through exercises to improve my core strength which has been extremely beneficial. If you exercise, go visit these guys as they're completely brilliant, and they'll guide you on your path. Best money I've ever spent and definitely recommend their services. Thanks Balance Physio!`,
     },
     {
         name: 'Tom Holland',
+        image: '/testimonials/tom-holland.jpg',
         quote: `I cannot recommend Balance highly enough. Three times they have brought me back from serious injury, and kept my career as a self-proclaimed elite sportsman on the road. This summer I was eased back from a damaged Achilles so successfully that by the end of it I even managed to bowl out former Test cricketer Matthew Hoggard!`,
     },
     {
         name: 'Leoni Munslow',
+        image: '/testimonials/leoni-munslow.jpg',
         quote: `I've worked with the Balance Team for the last 6 years now and each year, the team has helped me to overcome injury, educated me in so many ways and given me confidence needed to succeed.
 
 I just wanted to thank you for the support you've given me over the last year (2017) and give you a little reminder of how it's gone.
@@ -62,28 +67,34 @@ Thanks for helping be a crucial part of Team Leoni. I look forward to wearing yo
     },
     {
         name: 'Patient G',
+        image: '/testimonials/patient-g.jpg',
         quote: `I just wanted to send Caroline and Eli a quick message to thank them for everything they've have done to help me through my shoulder issue. I continued with the exercises and stretches, and I am happy to report I am back to being fully functional. Thank you again, I truly appreciated the help and guidance during our sessions.`,
     },
     {
         name: 'Tal H',
+        image: '/testimonials/tal-h.jpg',
         quote: `Just wanted to thank Caroline, Steve and Jon Lewis for all your help this year. I don't quite know where I would be right now without all your help for the various issues I have had, probably still walking around with a walking frame. Pain is lower and I am stronger across all muscles. So now I'm back to cycling properly and started jogging and playing table tennis again.`,
     },
     {
         name: 'Amanda H.',
+        image: '/testimonials/amanda-h.jpg',
         quote: `In the lead up to knee replacement surgery I had hydrotherapy sessions with Portia. I found them extremely effective for pain relief and increased muscle strength. Portia was very supportive and encouraging, always explaining the purpose of each exercise, and pointing out improvements week on week.
 
 I am very keen to start these sessions again post-operatively as I am sure they are very effective in building up strength.`,
     },
     {
         name: 'Jamie N',
+        image: '/testimonials/jamie-n.jpg',
         quote: `So I just wanted to say a huge thank you for the help over the last several months to get this knee and foot sorted. Touch wood I don't need any more physio in the future but if I do I'd definitely come back and see Anthony Adesanmi and refer to some friends. The knee seems stable and the arching exercises for the foot have helped loads! There's very little to no discomfort at all now for both of them!`,
     },
     {
         name: 'George C',
+        image: '/testimonials/george-c.jpg',
         quote: `Two hips operations later and a triathlon and the Glentress Trail half marathon completed. Thank you Caroline and Balance Physio so much for guiding my journey back to strength. You've been an incredible support and seeing improvements week by week has been so encouraging. Thank you also for helping me understand my body better, I feel I've tools now I'll use consistently to aid longevity. Couldn't wish for a better experience.`,
     },
     {
         name: 'Winston Gordon',
+        image: '/testimonials/winston.jpg',
         role: 'Team GB Judo Triple Olympian',
         quote: `Graham Anderson was my first contact at Balance with whom I worked closely with while competing with Team GB.
 
@@ -97,6 +108,7 @@ I thank them all for all their there help and support in enabling me to pursue m
     },
     {
         name: 'Miriam Bremer',
+        image: '/testimonials/miriam-bremer.jpg',
         role: 'Pilates teacher',
         quote: `I have found Balance Performance Physiotherapy to be an inspiration! Having recently suffered a knee injury through running I sought their help, and as a Pilates teacher of 5 years, I found their approach nothing short of enlightening!
 
@@ -106,6 +118,7 @@ Balance performance are interested in showing us how to move, strengthen and mai
     },
     {
         name: 'Al Riley',
+        image: '/testimonials/al-riley.jpg',
         quote: `I'm absolutely over the moon to have just run a marathon PB of 2:58, which would not have been possible without the excellent service at Balance.
 
 A year ago I developed a sudden painful hip problem so I immediately sought help from Balance because they've always been great in helping me work through injuries. Sophia did an amazing and thorough job rehabbing my hip and I was able to run again pain free…until I developed an Achilles problem halfway through the year. At this rate I was starting to worry that I wouldn't even make it to the start line. I then had regular sessions with Anthony who gave me a tailored programme of strengthening and flexibility while monitoring my progress. Amazingly I was able to begin my training schedule on time and managed to run 50+ miles per week, setting a 10k PB along the way.
@@ -114,18 +127,22 @@ I can't recommend Balance highly enough – every time I've had a running injury
     },
     {
         name: 'Sharon Templeman',
+        image: '/testimonials/sharon-templeman.jpg',
         quote: `Watch says 3.11.52, official time 3.12.16 – either way I knocked 30 minutes off my PB and got myself a London marathon 2018 championship qualifying place with the ladies elite runners, don't know how, in shock! They say you sometimes come back from injury stronger, and I want to thank you so much for your help in getting me through my injury and out the other side, there was a time I couldn't run 3 miles and I thought I'd never get to the finish line again! My running buddy was waiting for me at the finish, and I burst into tears!`,
     },
     {
         name: 'Samantha O.',
+        image: '/testimonials/samantha-o.jpg',
         quote: `Dan Elias has been seeing my adolescent son for physio for the last 3 months for a sprained ACL. We could not be more delighted to have found such a fabulous guy. He has been so professional, knowledgeable and kind and fun. My son has actively enjoyed going to see him for physio. He gradually increased the intensity of the exercises until he was able to play sport again. Balance physio were also brilliant with communication and booking appointments. I wholeheartedly recommend Dan for physio for any young person.`,
     },
     {
         name: 'Shafik S',
+        image: '/testimonials/shafik-s.jpg',
         quote: `Thanks to Caroline and the brilliant team at Balance for helping me rehab and get back to strength after hamstring surgery… it clearly worked as I just won the GN veteran fencing national championships`,
     },
     {
         name: 'Ian Brown',
+        image: '/testimonials/ian-brown.jpg',
         quote: `When I came to Balance I was walking with a slight limp and had not exercised for several years due to a knee problem. I was finding it hard to pick up my little kids and was worried about what would happen when they got bigger.
 
 I first saw Graham [sports injury specialist] who started me on the road to getting stronger. My knee problem got straightened out with expert treatment and exercise. Conditioning and strengthening work with Jonathan [movement and fitness coach] continued my progress. An exercise routine suited to me was developed with Jonathan's extensive knowledge of different exercise styles to include floor work and kettlebells that I continue with today. It really fits my lifestyle well.
@@ -140,6 +157,7 @@ Thanks to all at Balance for their excellent work and support.`,
     },
     {
         name: 'Sheila W',
+        image: '/testimonials/sheila-w.jpg',
         quote: `After Caroline Curtis contacted my GP on my behalf, he contacted me and arranged for me to go in for a blood test, as she had suggested. To my amazement I had a phone call from him the next day, to say that they already had the results and I went in to see him that afternoon. The tests did indeed show the problem to be PMR (polymyalgia rheumatica), as Caroline had suggested, and he prescribed a course of steroid treatment, sending a prescription directly to my local pharmacy so I began the course immediately on Saturday morning and already the stiffness and pain have virtually disappeared.
 
 I can't thank Caroline enough for her incredibly helpful intervention.
@@ -148,6 +166,7 @@ Best wishes and my heartfelt thanks for all the trouble you took to solve my pro
     },
     {
         name: 'Simon Buckden',
+        image: '/testimonials/simon-buckden.jpg',
         role: 'Marathon runner/charity fundraiser',
         quote: `"@BalancePrfmance really pleased with the taping it helped a lot!
 
@@ -164,10 +183,12 @@ He responded via twitter.`,
     },
     {
         name: 'Bryony M.',
+        image: '/testimonials/bryony-m.jpg',
         quote: `Huge thanks to Eli and Jarryd for seeing me on Saturday afternoon and putting me back into one piece ahead of Hackney Half Marathon yesterday. I felt a million times better going into the race after seeing them, and managed to complete in 2 hours 16 minutes, and reasonably pain free, so I was delighted.`,
     },
     {
         name: 'Matt & Andy',
+        image: '/testimonials/matt-andy.jpg',
         role: 'The Cycle Diaries',
         quote: `From the moment we got in touch with Balance they were incredibly helpful, they quickly agreed to give us free consultations and reccomened the most useful people to see. We saw a number of experts in different fields witin the Balance team who gave us valuable advice and preperation for our 13,000 mile cycle and we look forward to employing the things we learnt.
 
@@ -175,10 +196,12 @@ Go to their great website to follow their progress and to sponsor them, their ch
     },
     {
         name: 'John Hunt',
+        image: '/testimonials/john-hunt.jpg',
         quote: `I have been coming to see Lucy and Graham at Balance since they first started the excellent practice. Through rugby and now cycling, I seem to have picked up many aches, pains and some more serious problems along the way, and with their experience and extensive knowledge all problems are worked through from consultation, treatment to the follow up rehab, with full use of their gym/rehab facilities. Their ability and determination to get one back playing/training again is great for me, and I would go nowhere else!`,
     },
     {
         name: 'Kate Hudson',
+        image: '/testimonials/kate-hudson.jpg',
         quote: `Thank you so much for all your help. I definitely wouldn't have done it without you. The pain went away following your advice and exercises, and you gave me the confidence and reassurance that it was fine to try to run on.`,
     },
 ];

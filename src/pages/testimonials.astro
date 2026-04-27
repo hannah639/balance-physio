@@ -34,8 +34,15 @@ const READ_MORE_THRESHOLD = 450;
 							</div>
 							{isLong && <button type="button" class="tm-toggle" aria-expanded="false">Read more</button>}
 							<div class="tm-author">
-								<h4>{t.name}</h4>
-								{t.role && <span>{t.role}</span>}
+								{t.image && (
+									<div class="tm-avatar">
+										<img src={t.image} alt={t.name} loading="lazy" />
+									</div>
+								)}
+								<div class="tm-author-meta">
+									<h4>{t.name}</h4>
+									{t.role && <span>{t.role}</span>}
+								</div>
 							</div>
 						</article>
 					);
@@ -137,7 +144,25 @@ const READ_MORE_THRESHOLD = 450;
 	.tm-author {
 		border-top: 1px solid #eef1f3;
 		padding-top: 18px;
+		display: flex;
+		align-items: center;
+		gap: 14px;
 	}
+	.tm-avatar {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		overflow: hidden;
+		flex-shrink: 0;
+		background: #eef1f3;
+	}
+	.tm-avatar img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.tm-author-meta { min-width: 0; }
 	.tm-author h4 {
 		font-size: 15px;
 		font-weight: 800;
