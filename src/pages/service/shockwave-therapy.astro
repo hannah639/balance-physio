@@ -12,6 +12,10 @@ const photos = [
 	{ src: '/shockwave-therapy/massage-session.jpg', alt: 'Massage session' },
 	{ src: '/shockwave-therapy/rehabilitologist.jpg', alt: 'Clinician treating patient' },
 	{ src: '/shockwave-therapy/back-massage.jpg', alt: 'Back therapy session' },
+	{ src: '/shockwave-therapy/slider-1.jpg', alt: 'Shockwave therapy in progress' },
+	{ src: '/shockwave-therapy/slider-2.jpg', alt: 'Shockwave treatment session' },
+	{ src: '/shockwave-therapy/slider-3.jpg', alt: 'Targeted shockwave application' },
+	{ src: '/shockwave-therapy/slider-4.jpg', alt: 'Shockwave assessment at Balance' },
 ];
 
 const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
@@ -33,13 +37,13 @@ const faqs = [
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
-	<ImageText eyebrow="Our approach" heading="When pain lingers, it usually means" highlight="something hasn't fully healed" image="/shockwave-therapy/shockwave-procedure.jpg" imageAlt="Shockwave in progress">
+	<ImageText eyebrow="Our approach" heading="When pain lingers, it usually means" highlight="something hasn't fully healed" image="/shockwave-therapy/body-1.jpg" imageAlt="Shockwave therapy in progress">
 		<p>Shockwave therapy is designed for exactly that: persistent tendon and soft tissue problems that haven't responded to rest, exercise, or standard treatment.</p>
 		<p>At Balance, we use shockwave as part of a wider, structured rehabilitation plan. The goal isn't just to reduce pain, but to restart the healing process and so you can move forward.</p>
 		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
 	</ImageText>
 
-	<ImageText reverse altBg eyebrow="The treatment" heading="What is" highlight="shockwave therapy?" image="/shockwave-therapy/close-up-medical.jpg" imageAlt="Clinical close-up">
+	<ImageText reverse altBg eyebrow="The treatment" heading="What is" highlight="shockwave therapy?" image="/shockwave-therapy/body-2.jpg" imageAlt="Shockwave equipment close-up">
 		<p>Shockwave therapy uses controlled acoustic pulses delivered directly into the affected tissue.</p>
 		<p>This stimulates a response in the body that helps:</p>
 		<ul>
@@ -50,7 +54,7 @@ const faqs = [
 		<p>It's a non-invasive treatment that can be particularly effective when progress has stalled.</p>
 	</ImageText>
 
-	<ImageText eyebrow="Symptoms" heading="When shockwave" highlight="can help" image="/shockwave-therapy/male-patient.jpg" imageAlt="Patient consultation">
+	<ImageText eyebrow="Symptoms" heading="When shockwave" highlight="can help" image="/shockwave-therapy/body-3.jpg" imageAlt="Shockwave treatment for tendon pain">
 		<p>Shockwave therapy is commonly used for chronic tendon conditions, including:</p>
 		<ul>
 			<li>Plantar fasciitis (heel pain, especially first steps in the morning)</li>
@@ -70,7 +74,7 @@ const faqs = [
 		<p>The aim is to create the right conditions for healing, not just mask symptoms.</p>
 	</ImageText>
 
-	<ImageText eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/shockwave-therapy/rehabilitologist.jpg" imageAlt="Clinical assessment">
+	<ImageText eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/shockwave-therapy/body-5.jpg" imageAlt="Tracking shockwave therapy outcomes">
 		<p>We track more than pain levels.</p>
 		<p>We look at how your tendon tolerates load, how your movement improves, and what you're able to return to over time.</p>
 		<p>This allows us to:</p>
@@ -100,7 +104,7 @@ const faqs = [
 		<p>Most people require a short course of treatment, typically spaced over a few weeks.</p>
 	</ImageText>
 
-	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/shockwave-therapy/shockwave-procedure.jpg" imageAlt="Shockwave at Balance">
+	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/shockwave-therapy/body-last.jpg" imageAlt="Shockwave at Balance">
 		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa and AXA Health.</p>
 		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
 	</ImageText>
