@@ -25,6 +25,7 @@ const {
 	howHighlight = 'treat',
 	howIntro,
 	howList,
+	howOutro,      // optional closing block (HTML/string) rendered below the list
 	howImage,       // optional image URL
 	whoHeading = 'Who we',
 	whoHighlight = 'help',
@@ -93,6 +94,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 						<ul>
 							{howList.map((item) => <li>{item}</li>)}
 						</ul>
+						{howOutro && <p set:html={howOutro} />}
 					</div>
 				)}
 				{whoList && whoList.length > 0 && (
@@ -151,6 +153,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			<ul>
 				{howList.map((item) => <li>{item}</li>)}
 			</ul>
+			{howOutro && <p set:html={howOutro} />}
 		</ImageText>
 	)}
 

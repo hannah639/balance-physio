@@ -24,10 +24,17 @@ const faqs = [
 	{ q: 'Can hydrotherapy help with back pain?', a: 'Yes. The buoyancy of the water takes the pressure off the spinal discs and joints, while the warmth helps to decrease muscle guarding and spasms, allowing for movements that might be impossible on land.' },
 	{ q: 'Who is not suitable for hydrotherapy?', a: 'Individuals with open wounds, active skin infections, severe heart or lung conditions, or those who have recently had a stomach upset are generally not suitable for the pool until these issues have resolved.' },
 ];
+
+const glossary = [
+	{ term: 'Buoyancy', definition: 'The upward force exerted by a fluid that opposes the weight of an immersed object.' },
+	{ term: 'Hydrostatic Pressure', definition: 'The pressure exerted by the water on the body, which can help reduce swelling and improve circulation.' },
+	{ term: 'Aquatic Therapy', definition: 'Another term for hydrotherapy, focusing on exercises performed in water for rehabilitation.' },
+	{ term: 'Resistance', definition: 'The physical property of water that provides a counter-force to movement, used for strengthening.' },
+];
 ---
 <Layout
 	title="Hydrotherapy in Clapham South"
-	description="Physiotherapist-led hydrotherapy in Clapham South — rehabilitation in water using buoyancy, warmth and resistance to restore movement, strength and confidence."
+	description="Physiotherapist-led hydrotherapy in Clapham South: rehabilitation in water using buoyancy, warmth and resistance to restore movement, strength and confidence."
 >
 	<PageHero title="in Clapham South" highlight="Hydrotherapy" breadcrumb="Hydrotherapy" />
 
@@ -35,12 +42,12 @@ const faqs = [
 
 	<ImageText eyebrow="Our approach" heading="Rehabilitation in" highlight="water" youtubeId="kJ9Ny2lFDzk" autoplay imageAlt="Video: hydrotherapy at Balance Performance Physiotherapy">
 		<p>Hydrotherapy is a form of physiotherapy delivered in water, facilitating movement and resistance exercises whilst reducing load on joints and tissues.</p>
-		<p>At Balance, hydrotherapy is used as part of a structured rehabilitation plan. The properties of water — buoyancy, resistance, and warmth — allow you to move more freely, build strength, and regain confidence where land-based exercise may be limited.</p>
+		<p>At Balance, hydrotherapy is used as part of a structured rehabilitation plan. The properties of water (buoyancy, resistance, and warmth) allow you to move more freely, build strength, and regain confidence where land-based exercise may be limited.</p>
 		<p>Sessions are always guided by a physiotherapist and tailored to your specific condition and stage of recovery.</p>
 		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
 	</ImageText>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="hydrotherapy" image="/hydrotherapy/elderly-water-therapy.jpg" imageAlt="Aquatic therapy">
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="hydrotherapy" image="/hydrotherapy/when-to-consider.jpg" imageAlt="When to consider hydrotherapy">
 		<p>You may benefit from hydrotherapy if you experience:</p>
 		<ul>
 			<li>Joint pain or stiffness limiting movement on land</li>
@@ -50,10 +57,10 @@ const faqs = [
 			<li>Multiple areas of weakness and limitation</li>
 			<li>Balance or coordination difficulties</li>
 		</ul>
-		<p>Hydrotherapy is particularly useful when traditional exercise is difficult.</p>
+		<p>Hydrotherapy is particularly useful when weight-bearing exercise is difficult or has to be reduced.</p>
 	</ImageText>
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/hydrotherapy/hydro-equipment.jpg" imageAlt="Hydrotherapy equipment">
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/hydrotherapy/how-we-work.jpg" imageAlt="How hydrotherapy works">
 		<p>We use water-based exercise to progressively restore movement, strength, and function.</p>
 		<p>Your session may include:</p>
 		<ul>
@@ -66,7 +73,7 @@ const faqs = [
 		<p>Where appropriate, hydrotherapy is combined with land-based rehabilitation to support a full return to activity.</p>
 	</ImageText>
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/hydrotherapy/swim-coach-boy.jpg" imageAlt="Guided session">
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/hydrotherapy/progress-measurement.jpg" imageAlt="Measuring hydrotherapy progress">
 		<p>We monitor progress throughout your rehabilitation to ensure meaningful improvement.</p>
 		<p>This may include:</p>
 		<ul>
@@ -97,7 +104,7 @@ const faqs = [
 		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
 	</ImageText>
 
-	<ImageText eyebrow="Location" heading="Getting to" highlight="Hydrotherapy" image="/hydrotherapy/athlete-in-pool.jpg" imageAlt="Hydrotherapy pool">
+	<ImageText eyebrow="Location" heading="Getting to" highlight="Hydrotherapy" mapEmbedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.1190346254107!2d-0.1486525!3d51.45289760000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605b630c3c9d3%3A0x9ad3c77ad81840c6!2sAudley%20Nightingale%20Place!5e1!3m2!1sen!2suk!4v1776940633643!5m2!1sen!2suk" imageAlt="Audley Village, Nightingale Place, Clapham South">
 		<p>Balance Performance Physiotherapy conducts hydrotherapy sessions in <strong>Clapham South</strong> at <strong>Audley Village, Nightingale Place, 3 Nightingale Lane, SW4 9AH</strong>. This location is separate from our primary Gauden Road site and offers a premium, accessible environment for aquatic rehabilitation.</p>
 		<p>The facility is conveniently located near <strong>Clapham South Tube Station</strong>, making it easily accessible for residents across the SW4 and SW12 postcodes. For those travelling by car, parking is available at Audley, ensuring your visit for hydrotherapy is as convenient and stress-free as possible.</p>
 	</ImageText>
@@ -122,24 +129,18 @@ const faqs = [
 						<div class="answer">{item.a}</div>
 					</details>
 				))}
-			</div>
-			<div class="faq-list" style="margin-top: 40px;">
-				<h3 style="font-size: 22px; margin-bottom: 16px; text-align: center;">Glossary of Terms</h3>
 				<details class="faq-item">
-					<summary>Buoyancy</summary>
-					<div class="answer">The upward force exerted by a fluid that opposes the weight of an immersed object.</div>
-				</details>
-				<details class="faq-item">
-					<summary>Hydrostatic Pressure</summary>
-					<div class="answer">The pressure exerted by the water on the body, which can help reduce swelling and improve circulation.</div>
-				</details>
-				<details class="faq-item">
-					<summary>Aquatic Therapy</summary>
-					<div class="answer">Another term for hydrotherapy, focusing on exercises performed in water for rehabilitation.</div>
-				</details>
-				<details class="faq-item">
-					<summary>Resistance</summary>
-					<div class="answer">The physical property of water that provides a counter-force to movement, used for strengthening.</div>
+					<summary>Glossary of terms</summary>
+					<div class="answer">
+						<dl class="glossary-list">
+							{glossary.map((g) => (
+								<>
+									<dt>{g.term}</dt>
+									<dd>{g.definition}</dd>
+								</>
+							))}
+						</dl>
+					</div>
 				</details>
 			</div>
 		</div>
@@ -147,3 +148,10 @@ const faqs = [
 
 	<BookingCTA />
 </Layout>
+
+<style>
+	.glossary-list { margin: 0; padding: 0; }
+	.glossary-list dt { font-weight: 700; color: var(--text); margin-top: 14px; font-size: 16px; }
+	.glossary-list dt:first-child { margin-top: 0; }
+	.glossary-list dd { margin: 4px 0 0; padding: 0; color: var(--text-muted); line-height: 1.6; }
+</style>

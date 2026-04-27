@@ -251,12 +251,13 @@ const jsonLd = settings.businessName ? {
 	.bp-page .image-text-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 	.bp-page .image-text.reverse .image-text-inner { direction: rtl; }
 	.bp-page .image-text.reverse .image-text-inner > * { direction: ltr; }
-	/* Sticky image on desktop — when the text column is taller than the image, the image
+	/* Sticky image on desktop: when the text column is taller than the image, the image
 	   stays pinned near the top of the viewport as the user scrolls through the copy.
 	   Offset = fixed header (~84px) + ~16px breathing room. Disabled on mobile where the
 	   layout stacks vertically (see the @media (max-width: 900px) block below). */
 	.bp-page .image-text-media { position: sticky; top: 100px; align-self: start; border-radius: var(--radius); overflow: hidden; aspect-ratio: 1 / 1; background: var(--primary-bg-gradient); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
 	.bp-page .image-text-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.bp-page .image-text-media > iframe { width: 100%; height: 100%; display: block; border: 0; }
 	.bp-page .image-text-media--video { aspect-ratio: 16 / 9; background: #000; }
 	.bp-page .image-text-media--video iframe { width: 100%; height: 100%; display: block; border: 0; }
 	.bp-page .image-text-media .media-collage { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; width: 100%; height: 100%; background: var(--white); }
@@ -364,7 +365,7 @@ const jsonLd = settings.businessName ? {
 		.bp-page .image-text-inner { grid-template-columns: 1fr; gap: 40px; }
 		.bp-page .image-text.reverse .image-text-inner { direction: ltr; }
 		.bp-page .image-text-content h2 { font-size: 30px; }
-		/* On mobile the layout stacks — sticky would pin the image offscreen before the text appears.
+		/* On mobile the layout stacks; sticky would pin the image offscreen before the text appears.
 		   Reset to static so the image scrolls with the section normally. */
 		.bp-page .image-text-media { position: static; top: auto; }
 	}
@@ -395,7 +396,7 @@ const jsonLd = settings.businessName ? {
 	.bp-page .faq-item summary::after { content: '+'; font-size: 28px; color: var(--accent); font-weight: 400; transition: transform .2s; }
 	.bp-page .faq-item[open] summary::after { transform: rotate(45deg); }
 	.bp-page .faq-item .answer { padding-top: 16px; font-size: 16px; line-height: 1.8; color: var(--text-muted); }
-	/* Service-page FAQ variant — tinted gradient bg so it separates from a white section above. */
+	/* Service-page FAQ variant: tinted gradient bg so it separates from a white section above. */
 	.bp-page .faq-section.faq-section--alt { background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
 	/* Small inline CTA link used inside ImageText blocks on service pages ("Read More →", "Meet The Team →" etc). */
 	.bp-page .image-text .section-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--accent); text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; transition: border-color .15s; }
@@ -483,7 +484,7 @@ const jsonLd = settings.businessName ? {
 	}
 
 	.bp-page .activities { padding: 100px 0; background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
-	.bp-page .activities .section-header { text-align: left; max-width: 700px; margin: 0 0 60px; }
+	.bp-page .activities .section-header { text-align: center; max-width: 900px; margin: 0 auto 60px; }
 	.bp-page .activities .section-header h2 { font-size: 42px; font-weight: 800; letter-spacing: -1px; line-height: 1.2; margin-bottom: 16px; }
 	.bp-page .activities-slider { display: flex; gap: 24px; overflow-x: auto; padding-bottom: 24px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
 	.bp-page .activities-slider::-webkit-scrollbar { height: 4px; }

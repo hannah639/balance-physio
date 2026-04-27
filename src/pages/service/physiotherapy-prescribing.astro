@@ -5,7 +5,7 @@ import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 
-/* Prescribing folder only has 4 images — cycle + use /physio/body-* as needed. */
+/* Prescribing folder only has 4 images; cycle + use /physio/body-* as needed. */
 const photos = [
 	{ src: '/physiotherapy-prescribing/reception.jpg', alt: 'Balance Physio reception' },
 	{ src: '/physiotherapy-prescribing/treatment-rooms.jpg', alt: 'Treatment rooms' },
@@ -27,14 +27,14 @@ const faqs = [
 ---
 <Layout
 	title="Physiotherapy Prescribing in Clapham"
-	description="Independent physiotherapy prescribing in Clapham — targeted medication to reduce pain and support rehabilitation, integrated with your physiotherapy care."
+	description="Independent physiotherapy prescribing in Clapham: targeted medication to reduce pain and support rehabilitation, integrated with your physiotherapy care."
 >
 	<PageHero title="in Clapham" highlight="Physiotherapy Prescribing" breadcrumb="Physiotherapy Prescribing" />
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
-	<ImageText eyebrow="Our approach" heading="Medication can be an important part of" highlight="rehabilitation" image="/physiotherapy-prescribing/reception.jpg" imageAlt="Balance Physio reception">
-		<p>Medication can be an important part of rehabilitation — when used appropriately.</p>
+	<ImageText eyebrow="Our approach" heading="Medication can be an important part of" highlight="rehabilitation" image="/physiotherapy-prescribing/medication-consultation.jpg" imageAlt="Physiotherapy prescribing consultation">
+		<p>Medication can be an important part of rehabilitation, when used appropriately.</p>
 		<p>At Balance, independent prescribing allows us to reduce pain and inflammation so that physiotherapy and movement-based treatment can be effective. The aim is not to rely on medication, but to create a window where we can reduce the pain so that you can move, exercise, and recover.</p>
 		<p>This service is integrated within your physiotherapy care, ensuring a joined-up and efficient approach.</p>
 		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
@@ -53,7 +53,7 @@ const faqs = [
 		<p>In these cases, appropriate medication can help you engage with treatment more effectively.</p>
 	</ImageText>
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/physio/body-1.jpg" imageAlt="Clinical consultation">
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/physiotherapy-prescribing/medication-discussion.jpg" imageAlt="Discussing prescribing as part of treatment">
 		<p>Prescribing is used as part of a wider rehabilitation plan.</p>
 		<p>This may include:</p>
 		<ul>

@@ -12,6 +12,7 @@ const {
 	youtubeId,
 	autoplay = false,
 	collage,
+	mapEmbedUrl,
 } = Astro.props;
 
 const classes = ['image-text'];
@@ -38,7 +39,16 @@ const embedUrl = youtubeId && autoplay
 <section class={classes.join(' ')}>
 	<div class="image-text-inner">
 		<div class={mediaClasses.join(' ')}>
-			{youtubeId && autoplay ? (
+			{mapEmbedUrl ? (
+				<iframe
+					src={mapEmbedUrl}
+					title={imageAlt || 'Location map'}
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					allowfullscreen
+					frameborder="0"
+				></iframe>
+			) : youtubeId && autoplay ? (
 				<iframe
 					src={embedUrl}
 					title={imageAlt || 'Video'}
