@@ -35,7 +35,7 @@ export const team = [
 			"Since then Sophia has gone on to work with a variety of elite sports teams, including British Judo at their performance insitute in the build up to London2012. GBR Beach Volleyball GregorySheaf from 2014-18, facilitating them to become the first male beach volleyball squad to represent TeamGB.",
 			"In 2016 she became the lead physio for English Lacrosse and supported them during their bronze winning World Championships in 2017.",
 			"She also was lead of both Beach Volleyball Team GregorySheaf and Badminton England squads that went to the latest Commonwealth games, Gold Coast 2018.",
-			"She has honed her rehabilitation and return to sport skills over the past few years, through working with Badminton at the national centre as well as contracting for the English Institute of Sport in a variety of settings.",
+			"She has honed her rehabilitation and return to sport skills over the past few years, through working with Badminton at the national centre as well as contracting for the UK Sports Institute (UKSI, formerly the English Institute of Sport) in a variety of settings.",
 			"When she is not working you will find Sophia looking after her son, trying to stay fit, or watching a movie!",
 		],
 	},
@@ -238,7 +238,7 @@ export const team = [
 		bio: [
 			"Kellie qualified as a sports massage therapist in 2000. In 2007, she completed a higher diploma in Sports Massage Therapy.",
 			"An acclaimed athlete herself, Kellie was part of team GB in Judo and Dragon Boat Racing, as well as playing club rugby. She has, as a result, developed an in depth understanding of the training, determination and mentality required to be an athlete at all levels. Kellie is able to utilise her experience as an athlete to provide massage in a manner complementary to a healthy life and training schedule.",
-			"Kellie\\'s clients have included the British Judo Association, the London Irish Premiership Rugby Club, and the English Institute of Sport.",
+			"Kellie\\'s clients have included the British Judo Association, the London Irish Premiership Rugby Club, and the UK Sports Institute (UKSI, formerly the English Institute of Sport).",
 			"Every year Kellie continues her professional development by working closely with other experienced clinicians, allowing her to learn new techniques and expand on her existing knowledge.",
 			"Kellie is also a member of the Sports Massage Association.",
 		],
