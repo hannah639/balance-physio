@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+import ImageText from '../../components/ImageText.astro';
 
 const sliderImages = [
 	{ src: '/paediatric-sports-physiotherapy/padel.jpg', alt: 'Young player on a padel court' },
@@ -8,24 +9,35 @@ const sliderImages = [
 	{ src: '/paediatric-sports-physiotherapy/football.jpg', alt: 'Young football player running with the ball' },
 	{ src: '/paediatric-sports-physiotherapy/soccer-pitch.jpg', alt: 'Young player dribbling on a blue pitch' },
 	{ src: '/paediatric-sports-physiotherapy/race-winner.jpg', alt: 'Young athlete celebrating at a track race' },
+	{ src: '/paediatric-sports-physiotherapy/slider-dan-c-action.jpg', alt: 'Paediatric physio session with Dan' },
+	{ src: '/paediatric-sports-physiotherapy/slider-dan-c-mat.jpg', alt: 'Mat work in a paediatric physio session' },
+	{ src: '/paediatric-sports-physiotherapy/slider-dan-c-mat-2.jpg', alt: 'Hands-on paediatric physiotherapy' },
+	{ src: '/paediatric-sports-physiotherapy/slider-dan-c-2-balls.jpg', alt: 'Paediatric physio with stability balls' },
+	{ src: '/paediatric-sports-physiotherapy/slider-dan-c.jpg', alt: 'Paediatric physiotherapy at Balance' },
+	{ src: '/paediatric-sports-physiotherapy/slider-dan-c-yoga-2.jpg', alt: 'Yoga ball training in paediatric rehab' },
+	{ src: '/paediatric-sports-physiotherapy/slider-dan-c-yoga-3.jpg', alt: 'Yoga ball balance and control' },
+	{ src: '/paediatric-sports-physiotherapy/slider-emilia-hockey-1.jpg', alt: 'Young hockey player in action' },
+	{ src: '/paediatric-sports-physiotherapy/slider-emilia-hockey-2.jpg', alt: 'Young hockey player on the pitch' },
+	{ src: '/paediatric-sports-physiotherapy/slider-john-canoe.jpg', alt: 'Young athlete canoeing' },
+	{ src: '/paediatric-sports-physiotherapy/slider-01.jpg', alt: 'Young athlete training' },
 ];
 ---
 <ServicePage
 	title="in Clapham"
 	highlight="Paediatric Sports Physiotherapy"
-	heroSubtitle="Consultant youth physiotherapy led by Dan Elias. Growing bodies need a unique approach to healing and performance."
+	heroSubtitle="Consultant Paediatric and youth physiotherapy led by Dan Elias. Growing bodies need a unique approach to healing and performance."
 	breadcrumb="Paediatric Sports Physiotherapy"
 	seoTitle="Paediatric Sports Physiotherapy in Clapham"
-	seoDescription="Consultant youth physiotherapy in Clapham, London. Led by Dan Elias, specialist in sports injuries, developmental movement and return-to-play for children and adolescents."
+	seoDescription="Consultant Paediatric and youth physiotherapy in Clapham, London. Led by Dan Elias, specialist in sports injuries, developmental movement and return-to-play for children and adolescents."
 	marqueeImages={sliderImages}
 	intro={[
-		"Is your young athlete or active child struggling with an injury? Our consultant youth physiotherapy service can help. Led by Dan Elias, we understand that growing bodies need a unique approach to healing and performance.",
+		"Is your young athlete or active child struggling with an injury? Our consultant Paediatric and youth physiotherapy service can help. Led by Dan Elias, we understand that growing bodies need a unique approach to healing and performance.",
 		"Dan works as a physiotherapist for the England Athletics team, both nationally and internationally, across the under-13 to under-20 age groups. He brings more than 15 years of clinical experience, including elite sport, to every young patient in clinic.",
 	]}
-	introImage="/paediatric-sports-physiotherapy/race-winner.jpg"
+	introImage="/paediatric-sports-physiotherapy/intro.jpg"
 	whenHeading="When to book an"
 	whenHighlight="assessment"
-	whenIntro="Consultant youth physiotherapy is designed for active children and adolescents experiencing:"
+	whenIntro="Consultant Paediatric and youth physiotherapy is designed for active children and adolescents experiencing:"
 	whenList={[
 		"Pain that is affecting sport, school PE or daily activity",
 		"Growth plate issues, Osgood-Schlatter or Sever's disease",
@@ -66,4 +78,10 @@ const sliderImages = [
 		{ q: "Do you communicate with our surgeon or coach?", a: "Yes. Joined-up care is central to the service. With your consent, Dan will liaise with surgeons, coaches and schools to make sure everyone is on the same page." },
 		{ q: "Can you help with growth-related pain?", a: "Yes. Conditions like Osgood-Schlatter, Sever's disease and growth plate issues need careful management that accounts for how the developing body differs from an adult's. This is a core part of the service." },
 	]}
-/>
+>
+	<ImageText slot="before-faq" eyebrow="Our team" heading="Our clinical" highlight="team" image="/paediatric-sports-physiotherapy/dan-meet.jpg" imageAlt="Dan Elias, Consultant Paediatric and Youth Physiotherapist">
+		<p>Consultant Paediatric and youth physiotherapy led by Dan Elias.</p>
+		<p>Dan specialises in youth physiotherapy and sports injury rehabilitation, working with athletes across all ages and levels. For the past eight years, Dan has worked with England Athletics both nationally and internationally, supporting athletes from Under-13 to Under-20 level.</p>
+		<p><a href="/team/dan-elias" class="section-link">Read More About Dan &rarr;</a></p>
+	</ImageText>
+</ServicePage>
