@@ -87,7 +87,7 @@ const references = [
 
 	<Team
 		members={wellnessTeam}
-		sliderRow
+		centered
 		heading="Meet The Wellness Team"
 		subheading="Three specialists, three approaches — sports psychology, clinical hypnotherapy, and holistic somatic therapy."
 	/>
@@ -137,20 +137,17 @@ const references = [
 						<div class="answer">{item.a}</div>
 					</details>
 				))}
+				<details class="faq-item">
+					<summary>References</summary>
+					<div class="answer">
+						<ol class="references-list">
+							{references.map((ref) => (
+								<li>{ref}</li>
+							))}
+						</ol>
+					</div>
+				</details>
 			</div>
-		</div>
-	</section>
-
-	<section class="references-section">
-		<div class="container">
-			<details class="references-toggle">
-				<summary>References</summary>
-				<ol class="references-list">
-					{references.map((ref) => (
-						<li>{ref}</li>
-					))}
-				</ol>
-			</details>
 		</div>
 	</section>
 
@@ -158,41 +155,11 @@ const references = [
 </Layout>
 
 <style>
-	.references-section { padding: 40px 0 60px; background: #ffffff; }
-	.references-toggle {
-		max-width: 900px;
-		margin: 0 auto;
-		border: 1px solid rgba(0,0,0,0.1);
-		border-radius: 12px;
-		background: #fafafa;
-		overflow: hidden;
-	}
-	.references-toggle summary {
-		cursor: pointer;
-		padding: 20px 24px;
-		font-weight: 700;
-		font-size: 16px;
-		color: #1a1a1a;
-		list-style: none;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	.references-toggle summary::-webkit-details-marker { display: none; }
-	.references-toggle summary::after {
-		content: '+';
-		font-size: 22px;
-		font-weight: 400;
-		color: #e87722;
-		transition: transform 0.2s;
-	}
-	.references-toggle[open] summary::after { content: '−'; }
 	.references-list {
-		padding: 0 24px 24px 48px;
 		margin: 0;
+		padding-left: 24px;
 		font-size: 13px;
 		line-height: 1.7;
-		color: #555;
 	}
 	.references-list li {
 		margin-bottom: 10px;

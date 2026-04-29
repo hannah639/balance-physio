@@ -4,6 +4,7 @@ import { team, initials, gradientFor } from '../data/team.js';
 const {
 	featured = false,
 	sliderRow = false,
+	centered = false,
 	heading = 'Meet Our Team',
 	subheading = 'We have 27 professionals under one roof waiting to help you move, recover and perform.',
 	members: customMembers = null,
@@ -19,7 +20,7 @@ const members = customMembers
 		: baseTeam;
 ---
 
-<section class={`team ${sliderRow ? 'team-slider-mode' : ''}`}>
+<section class={`team ${sliderRow ? 'team-slider-mode' : ''} ${centered ? 'team-centered-mode' : ''}`}>
 	<div class="container">
 		<div class="section-header">
 			<h2>{heading}</h2>
@@ -108,6 +109,23 @@ const members = customMembers
 	.bp-page .team:not(.team-slider-mode) .team-card .info { padding: 18px 16px 20px; }
 	.bp-page .team:not(.team-slider-mode) .team-card h3 { font-size: 16px; }
 	.bp-page .team:not(.team-slider-mode) .team-card .team-link-btn { top: 216px; width: 40px; height: 40px; font-size: 16px; right: 14px; }
+
+	/* Centered mode (Wellness page) — small fixed-width cards, horizontally centred */
+	.bp-page .team.team-centered-mode .team-grid {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 24px;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+	.bp-page .team.team-centered-mode .team-card {
+		flex: 0 0 240px;
+	}
+	.bp-page .team.team-centered-mode .team-photo-wrap { height: 280px; }
+	@media (max-width: 600px) {
+		.bp-page .team.team-centered-mode .team-card { flex: 0 0 100%; max-width: 280px; }
+	}
 
 	/* Horizontal slider for homepage */
 	.team-slider-wrap { position: relative; }
