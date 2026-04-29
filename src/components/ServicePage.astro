@@ -15,23 +15,27 @@ const {
 	intro,          // array of paragraphs for intro block
 	introYoutubeId, // optional YouTube video ID for lightbox on intro block
 	introImage,     // optional image URL for intro block
+	introImageAspect, // optional aspect-ratio override for intro image (e.g. '3/4')
 	whenHeading = 'When to consider',
 	whenHighlight = 'this service',
 	whenIntro,      // string
 	whenList,       // array
 	whenOutro,      // optional closing paragraph rendered below the list
 	whenImage,      // optional image URL
+	whenImageAspect,
 	howHeading = 'How we',
 	howHighlight = 'treat',
 	howIntro,
 	howList,
 	howOutro,      // optional closing block (HTML/string) rendered below the list
 	howImage,       // optional image URL
+	howImageAspect,
 	whoHeading = 'Who we',
 	whoHighlight = 'help',
 	whoIntro,
 	whoList,
 	whoImage,       // optional image URL
+	whoImageAspect,
 	whoOutro,       // optional closing paragraph rendered below the list
 	faqs = [],
 	marqueeImages, // optional array of {src, alt}, defaults to placeholder set
@@ -120,6 +124,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			placeholderLabel="Treatment in progress"
 			youtubeId={introYoutubeId}
 			image={introImage}
+			imageAspect={introImageAspect}
 		>
 			{intro.map((p) => <p>{p}</p>)}
 		</ImageText>
@@ -134,6 +139,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			altBg
 			placeholderLabel="Assessment"
 			image={whenImage}
+			imageAspect={whenImageAspect}
 		>
 			{whenIntro && <p>{whenIntro}</p>}
 			<ul>
@@ -150,6 +156,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			highlight={howHighlight}
 			placeholderLabel="Treatment session"
 			image={howImage}
+			imageAspect={howImageAspect}
 		>
 			{howIntro && <p>{howIntro}</p>}
 			<ul>
@@ -168,6 +175,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			altBg
 			placeholderLabel="Our patients"
 			image={whoImage}
+			imageAspect={whoImageAspect}
 		>
 			{whoIntro && <p>{whoIntro}</p>}
 			<ul>

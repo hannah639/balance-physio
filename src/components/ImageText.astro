@@ -8,6 +8,7 @@ const {
 	image,
 	imageAlt = '',
 	imagePosition,
+	imageAspect,
 	placeholderLabel = 'Image placeholder',
 	youtubeId,
 	autoplay = false,
@@ -21,6 +22,10 @@ if (altBg) classes.push('alt-bg');
 
 const mediaClasses = ['image-text-media'];
 if (youtubeId && autoplay) mediaClasses.push('image-text-media--video');
+
+// Inline style on the media wrapper. We allow callers to override the default
+// 1/1 aspect-ratio (e.g. for portrait sources where letterboxing would look bad).
+const mediaStyle = imageAspect ? `aspect-ratio: ${imageAspect};` : undefined;
 
 const imgStyle = imagePosition ? `object-position: ${imagePosition};` : undefined;
 
@@ -38,7 +43,7 @@ const embedUrl = youtubeId && autoplay
 ---
 <section class={classes.join(' ')}>
 	<div class="image-text-inner">
-		<div class={mediaClasses.join(' ')}>
+		<div class={mediaClasses.join(' ')} style={mediaStyle}>
 			{mapEmbedUrl ? (
 				<iframe
 					src={mapEmbedUrl}

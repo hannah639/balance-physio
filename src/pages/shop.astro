@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ImageText from '../components/ImageText.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+---
+<Layout
+	title="Shop"
+	description="Visit our in-clinic shop in Clapham for CBD gummies, recovery rollers, gift vouchers and a curated range of products to support your treatment and training."
+>
+	<PageHero
+		title="Shop"
+		highlight="Our"
+		subtitle="A curated in-store shop at our Clapham clinic, stocked with the products our team trusts and recommends."
+		breadcrumb="Shop"
+	/>
+
+	<ImageText
+		eyebrow="In-store"
+		heading="Recovery, performance and"
+		highlight="rehab essentials"
+		image="/shop/rollers.jpg"
+		imageAlt="A selection of foam rollers and recovery tools on the Balance Physio shop shelves"
+	>
+		<p>Our reception shop is open whenever the clinic is. We stock a small but considered range of products to help you protect, perform, recover and rehabilitate.</p>
+		<p>Everything on the shelves has been chosen by our therapists for its quality and relevance to the work we do with our clients, so you can be confident you're picking up something we'd genuinely recommend.</p>
+		<ul>
+			<li>Foam rollers, peanut balls and trigger point tools</li>
+			<li>Resistance bands and rehab accessories</li>
+			<li>Recovery and mobility products</li>
+			<li>Athletic tape and supports</li>
+		</ul>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Wellbeing"
+		heading="CBD products and"
+		highlight="gift vouchers"
+		reverse
+		altBg
+		image="/shop/cbd-capsules.jpg"
+		imageAlt="CBD Brothers Blue Edition capsules on display in the Balance Physio shop"
+	>
+		<p>We stock a range of CBD products, including gummies and capsules, sourced from trusted UK suppliers and chosen for their quality and provenance.</p>
+		<p>Looking for a thoughtful gift? Our gift vouchers are redeemable across our services — physiotherapy, sports massage, strength &amp; conditioning and more — and make a meaningful gesture for someone you'd like to support on their health journey.</p>
+		<p>Pop in to browse during clinic hours, or ask reception about gift vouchers when you next visit.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>

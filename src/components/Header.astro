@@ -32,6 +32,11 @@ const serviceColumns = [
 			label: 'Foot & Lower Limb',
 			items: [
 				{ label: 'Podiatry', href: '/service/podiatry' },
+			],
+		},
+		{
+			label: 'Rehab',
+			items: [
 				{ label: 'Hydrotherapy', href: '/service/hydrotherapy' },
 			],
 		},
@@ -107,7 +112,7 @@ const about = [
 	{ label: 'Pricing', href: '/pricing' },
 	{ label: 'Work For Us', href: '/work-for-us' },
 	{ label: 'Testimonials', href: '/testimonials' },
-	{ label: 'Shop', href: 'http://shop.balancephysio.com/', external: true },
+	{ label: 'Shop', href: '/shop' },
 ];
 
 const whoWeHelp = [
@@ -573,8 +578,12 @@ const locations = [
 </style>
 
 <style is:global>
-	/* Mobile full-screen menu panel (outside Header scope, so global) */
-	.mobile-menu {
+	/* Mobile full-screen menu panel (outside Header scope, so global).
+	   The `body` prefix on every selector is intentional — it lifts these
+	   rules above the homepage's `.bp-page *` universal reset (in
+	   src/pages/index.astro) which would otherwise zero out the padding
+	   inside the menu and visibly break the layout on the homepage only. */
+	body .mobile-menu {
 		position: fixed; top: 0; left: 0; right: 0; bottom: 0;
 		background: #2c4356;
 		z-index: 99;
@@ -584,13 +593,13 @@ const locations = [
 		transition: opacity .25s ease, visibility .25s ease;
 		font-family: 'Inter', sans-serif;
 	}
-	.mobile-menu.is-open { opacity: 1; visibility: visible; }
-	.mobile-menu-inner { padding: 16px 24px 48px; max-width: 640px; margin: 0 auto; }
-	.mobile-nav { list-style: none; margin: 0; padding: 0; }
-	.mobile-nav > li {
+	body .mobile-menu.is-open { opacity: 1; visibility: visible; }
+	body .mobile-menu-inner { padding: 16px 24px 48px; max-width: 640px; margin: 0 auto; }
+	body .mobile-nav { list-style: none; margin: 0; padding: 0; }
+	body .mobile-nav > li {
 		border-bottom: 1px solid rgba(255,255,255,0.1);
 	}
-	.mobile-nav details > summary {
+	body .mobile-nav details > summary {
 		list-style: none;
 		padding: 16px 0;
 		font-size: 18px;
@@ -599,34 +608,34 @@ const locations = [
 		cursor: pointer;
 		display: flex; justify-content: space-between; align-items: center;
 	}
-	.mobile-nav details > summary::-webkit-details-marker { display: none; }
-	.mobile-nav details > summary::after {
+	body .mobile-nav details > summary::-webkit-details-marker { display: none; }
+	body .mobile-nav details > summary::after {
 		content: '+';
 		font-size: 26px; font-weight: 400;
 		color: #e87722;
 		transition: transform .2s;
 	}
-	.mobile-nav details[open] > summary::after { transform: rotate(45deg); }
-	.mobile-sublist {
+	body .mobile-nav details[open] > summary::after { transform: rotate(45deg); }
+	body .mobile-sublist {
 		list-style: none; margin: 0; padding: 0 0 16px 12px;
 	}
-	.mobile-sublist li { padding: 0; }
-	.mobile-sublist a {
+	body .mobile-sublist li { padding: 0; }
+	body .mobile-sublist a {
 		display: block;
 		padding: 10px 0;
 		font-size: 15px;
 		color: rgba(255,255,255,0.8);
 		text-decoration: none;
 	}
-	.mobile-sublist a:hover, .mobile-sublist a:active { color: #e87722; }
-	.mobile-direct {
+	body .mobile-sublist a:hover, body .mobile-sublist a:active { color: #e87722; }
+	body .mobile-direct {
 		display: block;
 		padding: 16px 0;
 		font-size: 18px; font-weight: 600;
 		color: #ffffff;
 		text-decoration: none;
 	}
-	.mobile-menu-book {
+	body .mobile-menu-book {
 		display: block;
 		margin-top: 28px;
 		padding: 16px 24px;
@@ -637,7 +646,7 @@ const locations = [
 		border-radius: 50px;
 		text-decoration: none;
 	}
-	.mobile-menu-book:hover { background: #d06618; }
+	body .mobile-menu-book:hover { background: #d06618; }
 </style>
 
 <script is:inline>
