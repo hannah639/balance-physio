@@ -31,14 +31,17 @@ import BookingCTA from '../../components/BookingCTA.astro';
 				</ul>
 			</div>
 
-			<form class="clapham-form" action="https://formsubmit.co/admin@balancephysio.com" method="POST">
+			<form class="clapham-form" action="https://api.web3forms.com/submit" method="POST">
 				<div class="eyebrow eyebrow-orange">Send us a message</div>
 
-				<!-- Formsubmit.co config, no signup needed; first submission triggers an activation email to admin@balancephysio.com -->
-				<input type="hidden" name="_subject" value="New enquiry from Balance Physio website" />
-				<input type="hidden" name="_template" value="table" />
-				<input type="hidden" name="_captcha" value="true" />
-				<input type="hidden" name="_next" value="https://balance-physio.hannah-9e0.workers.dev/clinic/clapham/?sent=1" />
+				<!-- Web3Forms configuration. The access key is owned by Hannah's account on
+				     web3forms.com; submissions are emailed to admin@balancephysio.com. -->
+				<input type="hidden" name="access_key" value="bf24d0f8-ce07-4f89-a9a7-c8a122440f3f" />
+				<input type="hidden" name="subject" value="New enquiry from Balance Physio website (Clapham clinic page)" />
+				<input type="hidden" name="from_name" value="Balance Physio website" />
+				<input type="hidden" name="redirect" value="https://balance-physio.hannah-9e0.workers.dev/thank-you" />
+				<!-- Honeypot — bots fill it, real users don't see it. Web3Forms ignores submissions where this is set. -->
+				<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
 
 				<div class="form-row">
 					<input type="text" name="First Name" placeholder="First Name" required aria-label="First Name" />

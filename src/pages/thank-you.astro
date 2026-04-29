@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+---
+<Layout
+	title="Thank you"
+	description="Thanks for getting in touch with Balance Performance Physiotherapy."
+>
+	<PageHero
+		title="you"
+		highlight="Thank"
+		subtitle="Thank you for getting in touch, we'll get back to you as soon as possible!"
+		breadcrumb="Thank you"
+		hideCta
+	/>
+
+	<section class="thank-you-actions">
+		<div class="thank-you-inner">
+			<p>In the meantime, you might find what you're looking for here:</p>
+			<div class="thank-you-links">
+				<a href="/" class="btn-outline">Back to home</a>
+				<a href="/service/physiotherapy" class="btn-outline">Browse services</a>
+				<a href="/faqs" class="btn-outline">Read our FAQs</a>
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>
+
+<style>
+	.thank-you-actions { padding: 80px 24px; background: #ffffff; }
+	.thank-you-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+	.thank-you-inner p { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; }
+	.thank-you-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+	.btn-outline {
+		display: inline-block;
+		padding: 14px 28px;
+		border: 2px solid var(--primary);
+		border-radius: 50px;
+		color: var(--primary);
+		font-weight: 600;
+		text-decoration: none;
+		transition: background .2s, color .2s;
+	}
+	.btn-outline:hover { background: var(--primary); color: #ffffff; }
+</style>
