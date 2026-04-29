@@ -32,6 +32,7 @@ const {
 	whoIntro,
 	whoList,
 	whoImage,       // optional image URL
+	whoOutro,       // optional closing paragraph rendered below the list
 	faqs = [],
 	marqueeImages, // optional array of {src, alt}, defaults to placeholder set
 	marqueeSpeed = 45,
@@ -105,6 +106,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 						<ul>
 							{whoList.map((item) => <li>{item}</li>)}
 						</ul>
+						{whoOutro && <p set:html={whoOutro} />}
 					</div>
 				)}
 			</div>
@@ -171,6 +173,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			<ul>
 				{whoList.map((item) => <li>{item}</li>)}
 			</ul>
+			{whoOutro && <p set:html={whoOutro} />}
 		</ImageText>
 	)}
 	</>)}

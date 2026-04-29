@@ -6,7 +6,7 @@ import BookingCTA from '../components/BookingCTA.astro';
 ---
 <Layout
 	title="Contact Us"
-	description="Get in touch with Balance Performance Physiotherapy in Clapham. Call 020 7627 2308 or email enquiries@balancephysio.com."
+	description="Get in touch with Balance Performance Physiotherapy in Clapham. Call 020 7627 2308 or email admin@balancephysio.com."
 >
 	<PageHero
 		title="In Touch"
@@ -22,18 +22,19 @@ import BookingCTA from '../components/BookingCTA.astro';
 				<h2>How to <span class="highlight">reach us</span></h2>
 				<ul class="check-list">
 					<li><strong>Phone:</strong> <a href="tel:02076272308" class="inline-link">020 7627 2308</a></li>
-					<li><strong>Email:</strong> <a href="mailto:enquiries@balancephysio.com" class="inline-link">enquiries@balancephysio.com</a></li>
+					<li><strong>Email:</strong> <a href="mailto:admin@balancephysio.com" class="inline-link">admin@balancephysio.com</a></li>
 					<li><strong>Clapham North, Main Clinic:</strong> 113 Gauden Rd, London SW4 6LE, United Kingdom</li>
 					<li><strong>Clapham South for Hydrotherapy:</strong> Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH</li>
 				</ul>
+				<p class="address-note">For all appointments, please contact our main clinic, Gauden Road. Audley Village is for hydrotherapy only and all appointments should be booked via Gauden Road.</p>
 				<p>For new patients, our admin team will send you a quick registration form by email. Once that's back with us, we'll book you in with the right clinician.</p>
 				<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-book">Book Now</a>
 			</div>
 
-			<form class="contact-form" action="https://formsubmit.co/enquiries@balancephysio.com" method="POST">
+			<form class="contact-form" action="https://formsubmit.co/admin@balancephysio.com" method="POST">
 				<div class="eyebrow eyebrow-orange">Send us a message</div>
 
-				<!-- Formsubmit.co config, no signup needed; first submission triggers an activation email to enquiries@balancephysio.com -->
+				<!-- Formsubmit.co config, no signup needed; first submission triggers an activation email to admin@balancephysio.com -->
 				<input type="hidden" name="_subject" value="New enquiry from Balance Physio website" />
 				<input type="hidden" name="_template" value="table" />
 				<input type="hidden" name="_captcha" value="true" />
@@ -118,6 +119,12 @@ import BookingCTA from '../components/BookingCTA.astro';
 	.contact-intro-copy .check-list li::after {
 		content: '✓'; position: absolute; left: 4px; top: 10px;
 		color: #ffffff; font-size: 11px; font-weight: 800;
+	}
+	.contact-intro-copy .address-note {
+		font-size: 14px; line-height: 1.6;
+		padding: 14px 16px; margin: 16px 0 24px;
+		background: #fdf4eb; border-left: 3px solid #e87722; border-radius: 4px;
+		color: #1a1a1a;
 	}
 
 	/* Contact form */

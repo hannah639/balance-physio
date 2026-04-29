@@ -48,16 +48,21 @@ const serviceColumns = [
 		{
 			label: 'Paediatric',
 			items: [
-				{ label: 'Sports Physiotherapy', href: '/service/paediatric-sports-physiotherapy' },
+				{ label: 'Youth Physiotherapy', href: '/service/paediatric-sports-physiotherapy' },
 				{ label: 'Vojta Therapy', href: '/service/vojta-therapy' },
 			],
 		},
 	],
 	[
 		{
-			label: 'Recovery & Wellness',
+			label: 'Rehab',
 			items: [
 				{ label: 'Hydrotherapy', href: '/service/hydrotherapy' },
+			],
+		},
+		{
+			label: 'Recovery & Wellness',
+			items: [
 				{ label: 'Wellness', href: '/service/psychological-wellness' },
 				{ label: 'Anti-Gravity Treadmill', href: '/service/anti-gravity-treadmill' },
 				{ label: 'Ergonomics', href: '/service/ergonomics' },
@@ -188,7 +193,7 @@ const locations = [
 					<div class="dropdown dropdown-mega">
 						<div class="mega-left">
 							<div class="mega-eyebrow">Our Locations</div>
-							<p class="mega-intro">Two Clapham locations, our main clinic on Gauden Road for physiotherapy, and our hydrotherapy pool at Audley Village.</p>
+							<p class="mega-intro">Our main clinic is on Gauden Road in Clapham. Our hydrotherapy service is based in Audley Village.</p>
 							<div class="mega-links">
 								{locations.map((item) => <a href={item.href}>{item.label}</a>)}
 							</div>

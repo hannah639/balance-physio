@@ -332,8 +332,8 @@ const jsonLd = settings.businessName ? {
 	.bp-page .clinics-header-right p a { color: var(--cta); font-weight: 600; }
 	.bp-page .clinics-header-right p a:hover { text-decoration: underline; }
 	.bp-page .clinic-tags { display: flex; flex-wrap: wrap; gap: 12px; }
-	.bp-page .clinic-tag { padding: 12px 24px; border-radius: 50px; font-size: 14px; font-weight: 500; background: var(--accent); border: none; color: var(--white); transition: all .2s; cursor: default; }
-	.bp-page .clinic-tag:hover { background: var(--accent-hover); }
+	.bp-page .clinic-tag { display: inline-block; padding: 12px 24px; border-radius: 50px; font-size: 14px; font-weight: 500; background: var(--accent); border: none; color: var(--white); transition: all .2s; cursor: pointer; text-decoration: none; }
+	.bp-page .clinic-tag:hover { background: var(--accent-hover); color: var(--white); text-decoration: none; }
 	.bp-page .clinic-tag.alt { background: var(--cta); }
 	.bp-page .clinic-tag.alt:hover { background: var(--cta-hover); }
 	@media (max-width: 768px) {

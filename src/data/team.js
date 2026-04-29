@@ -292,17 +292,6 @@ export const team = [
 		],
 	},
 	{
-		slug: 'ron-burnett',
-		name: 'Ron Burnett',
-		role: 'Strength & Conditioning Coach',
-		bio: [
-			"Ron is a qualified Level 3 personal trainer and resistance band training specialist. His experience is extensive and varied, from professional dancer and athletics with some yoga and tai chi sprinkled over the top!",
-			"\"I believe that everyone can be strong, flexible and athletic no matter what your body shape, age, size or previous history.\"",
-			"Ron will motivate, encourage and nurture you applying resistance bands in motion, along with the multitude of exercise tools we have at Balance Performance to strengthen, stretch and rebalance your body to give you a long, lean and athletic new look and feel.",
-			"Ron also runs \"Strong Tribe Fitness\" conducting regular boot camps and private training sessions along side work at Daleyfitness where he is head trainer.",
-		],
-	},
-	{
 		slug: 'pat-leahy',
 		name: 'Pat Leahy',
 		role: 'Bike Fitting Specialist',

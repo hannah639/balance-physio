@@ -7,6 +7,7 @@ const BOOKING_URL = 'https://go.mindbodyonline.com/book/widgets/appointments/vie
 
 const pricingCategories = [
 	{
+		anchor: 'sports-physiotherapy',
 		title: 'Sports Physiotherapy',
 		items: [
 			{ name: 'Initial Assessment', price: '£110', note: '45 min' },
@@ -17,6 +18,7 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'consultant-physiotherapy',
 		title: 'Consultant Physiotherapy',
 		items: [
 			{ name: 'Initial Assessment', price: '£155', note: '45 min' },
@@ -27,7 +29,8 @@ const pricingCategories = [
 		],
 	},
 	{
-		title: 'Consultant Pelvic Health Physiotherapy',
+		anchor: 'womens-health',
+		title: "Consultant Women's Health Physiotherapy",
 		items: [
 			{ name: 'Initial Assessment', price: '£155', note: '60 min' },
 			{ name: 'Follow Up', price: '£120', note: '30 min' },
@@ -38,13 +41,23 @@ const pricingCategories = [
 		],
 	},
 	{
-		title: 'Consultant Paediatric and Youth Physiotherapy',
+		anchor: 'mens-health',
+		title: "Consultant Men's Health Physiotherapy",
 		items: [
 			{ name: 'Initial Assessment', price: '£155', note: '60 min' },
 			{ name: 'Follow Up', price: '£120', note: '30 min' },
 		],
 	},
 	{
+		anchor: 'youth-physiotherapy',
+		title: 'Consultant Youth Physiotherapy',
+		items: [
+			{ name: 'Initial Assessment', price: '£155', note: '60 min' },
+			{ name: 'Follow Up', price: '£120', note: '30 min' },
+		],
+	},
+	{
+		anchor: 'neurological-rehabilitation',
 		title: 'Consultant Neuro, Vestibular & Vojta',
 		items: [
 			{ name: 'Neuro Initial', price: '£155', note: '60 min' },
@@ -56,6 +69,7 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'hydrotherapy',
 		title: 'Hydrotherapy',
 		items: [
 			{ name: 'Initial Consultation', price: '£155', note: '60 min' },
@@ -64,6 +78,7 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'additional-physio',
 		title: 'Additional Physio Services',
 		items: [
 			{ name: 'Dry Needling Add-On', price: '£6', note: 'Limited availability' },
@@ -76,6 +91,7 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'osteopathy',
 		title: 'Osteopathy and Nutrition',
 		items: [
 			{ name: 'Initial Assessment', price: '£155', note: '60 min' },
@@ -84,6 +100,7 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'podiatry',
 		title: 'Podiatry & Ultrasound Scans',
 		items: [
 			{ name: 'Musculoskeletal Initial', price: '£125', note: '60 min' },
@@ -95,6 +112,7 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'sports-massage',
 		title: 'Soft Tissue Therapy',
 		items: [
 			{ name: '30 Minutes', price: '£55', note: '' },
@@ -108,6 +126,7 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'strength-conditioning',
 		title: 'Strength & Conditioning',
 		items: [
 			{ name: '30 Minutes', price: '£60', note: '' },
@@ -119,6 +138,7 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'anti-gravity-treadmill',
 		title: 'Alter G Anti-Gravity Treadmill',
 		items: [
 			{ name: 'Induction', price: '£50', note: '' },
@@ -130,12 +150,14 @@ const pricingCategories = [
 		],
 	},
 	{
+		anchor: 'report-writing',
 		title: 'Report Writing',
 		items: [
 			{ name: 'Per 15 Minutes', price: '£40', note: 'For employers, schools or insurers' },
 		],
 	},
 	{
+		anchor: 'physiotherapy-prescribing',
 		title: 'Physiotherapy Prescribing',
 		items: [
 			{ name: 'Physiotherapy Prescribing', price: '£30', note: 'For those who are not self paying' },
@@ -158,7 +180,7 @@ const pricingCategories = [
 		<div class="container">
 			<div class="price-card-grid">
 				{pricingCategories.map((cat) => (
-					<div class="price-card">
+					<div class="price-card" id={cat.anchor}>
 						<h2 class="price-card-title">{cat.title}</h2>
 						<ul class="price-card-list">
 							{cat.items.map((item) => (
