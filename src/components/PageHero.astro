@@ -1,5 +1,5 @@
 ---
-const { title, highlight, subtitle, breadcrumb, ctaText = 'Book an appointment', ctaHref = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services' } = Astro.props;
+const { title, highlight, subtitle, breadcrumb, hideCta = false, ctaText = 'Book an appointment', ctaHref = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services' } = Astro.props;
 ---
 <section class="page-hero">
 	<div class="page-hero-inner">
@@ -10,6 +10,6 @@ const { title, highlight, subtitle, breadcrumb, ctaText = 'Book an appointment',
 			{highlight ? <><span class="highlight">{highlight}</span>{' '}{title}</> : title}
 		</h1>
 		{subtitle && <p class="subtitle">{subtitle}</p>}
-		<a href={ctaHref} target="_blank" rel="noopener" class="btn-book">{ctaText}</a>
+		{!hideCta && <a href={ctaHref} target="_blank" rel="noopener" class="btn-book">{ctaText}</a>}
 	</div>
 </section>
