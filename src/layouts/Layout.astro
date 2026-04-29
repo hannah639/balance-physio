@@ -256,7 +256,7 @@ const jsonLd = settings.businessName ? {
 	   Offset = fixed header (~84px) + ~16px breathing room. Disabled on mobile where the
 	   layout stacks vertically (see the @media (max-width: 900px) block below). */
 	.bp-page .image-text-media { position: sticky; top: 100px; align-self: start; border-radius: var(--radius); overflow: hidden; aspect-ratio: 1 / 1; background: var(--primary-bg-gradient); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
-	.bp-page .image-text-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.bp-page .image-text-media img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 	.bp-page .image-text-media > iframe { width: 100%; height: 100%; display: block; border: 0; }
 	.bp-page .image-text-media--video { aspect-ratio: 16 / 9; background: #000; }
 	.bp-page .image-text-media--video iframe { width: 100%; height: 100%; display: block; border: 0; }
@@ -368,7 +368,7 @@ const jsonLd = settings.businessName ? {
 		.bp-page .image-text-content h2 { font-size: 30px; }
 		/* On mobile the layout stacks; sticky would pin the image offscreen before the text appears.
 		   Reset to static so the image scrolls with the section normally. */
-		.bp-page .image-text-media { position: static; top: auto; }
+		.bp-page .image-text-media { position: static; top: auto; aspect-ratio: 4 / 3; }
 	}
 
 	/* Stats bar */
