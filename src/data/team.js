@@ -87,6 +87,7 @@ export const team = [
 		slug: 'dr-jose-sanz-mengibar',
 		name: 'Dr. Jose Sanz Mengibar',
 		role: 'Consultant Neurological Physiotherapist, Vojta Therapist',
+		photo: '/team/dr-jose-sanz-mengibar.jpg',
 		bio: [
 			"I am a Doctor in physiotherapy. My work combines academic research with clinical practice and is aided by my own experience as an elite-level gymnast. In my 19 years of clinical practice I have worked with the general public and athletes but have specialised in children and adults with neurological disorders. My approach to musculoskeletal / orthopaedic conditions is also grounded in the underlying CNS postural disfunction. My training focuses on neurological physiotherapy and my research explores ontogenetic postural development, motor neuroscience, postural control, and from limited to high motor function. I am committed to transmitting my practice and research via writing and teaching. I have lead-authored six academic articles, authored another three, and seven popular books. I have lectured in courses and congresses in Germany, Italy, and Spain. I am fluent in Spanish, English, Italian and intermediate in German.",
 		],
@@ -95,6 +96,7 @@ export const team = [
 		slug: 'dan-elias',
 		name: 'Dan Elias',
 		role: 'Consultant Youth & Sports Injury Physiotherapist',
+		photo: '/team/dan-elias.jpg',
 		bio: [
 			"Dan is a highly experienced Physiotherapist with over 16 years of clinical experience across the NHS, private practice, and elite sport. He initially completed a BSc in Sport & Exercise Science at the University of Hertfordshire, before qualifying as a Physiotherapist with a BSc from St George's, University of London. Dan went on to complete an MSc in Sports Injury Rehabilitation at the University of Salford, where he trained under Olympic Games Physiotherapists.",
 			"Dan specialises in youth physiotherapy and sports injury rehabilitation, working with athletes across all ages and levels. He has provided physiotherapy support to runners at multiple London Marathons and has extensive experience treating sprinters, endurance, and ultra-marathon athletes.",
@@ -199,6 +201,7 @@ export const team = [
 		slug: 'claire-speer',
 		name: 'Claire Speer',
 		role: 'Physiotherapist',
+		photo: '/team/claire-speer.jpg',
 		bio: [
 			"BSc (Hons) Sports Therapy, PgDip Physiotherapy, PgCert Healthcare Management, DFSEM(UK). HCPC and CSP registered.",
 			"With nearly 20 years of experience in injury management, Claire is a skilled musculoskeletal physiotherapist. She has worked in various roles, including Director of Clinical Services at a private hospital in the North of England, and leading physiotherapy teams in two private hospitals in South West London. Throughout her career, Claire has supported patients with long-term conditions, post-surgery recovery, and sports injuries, maintaining a clinical caseload in both private clinics, professional sport and the NHS.",
@@ -269,12 +272,12 @@ export const team = [
 		slug: 'kellie-collar',
 		name: 'Kellie Collar',
 		role: 'Soft Tissue Massage Therapist',
+		photo: '/team/kellie-collar.jpg',
 		bio: [
 			"Kellie qualified as a Sports Massage Therapist in 2000 and went on to complete a Higher Diploma in Sports Massage Therapy (Level 4) in 2007.",
 			"An acclaimed athlete herself, Kellie was part of team GB in Judo and Dragon Boat Racing, as well as playing club rugby. She has, as a result, developed an in depth understanding of the training, determination and mentality required to be an athlete at all levels. Kellie is able to utilise her experience as an athlete to provide massage in a manner complementary to a healthy life and training schedule.",
-			"Kellie has worked with a wide range of elite performers and organisation, including Olympic athletes, elite tennis players",
 			"Kellie has worked with a wide range of elite performers and organisations, including Olympic athletes, elite tennis players during the Wimbledon Championships, the British Judo Association, London Irish Premiership Rugby Club, and the English Institute of Sport.",
-			"Outside of work, she can be found either watching or participating in as much sport as possible. Kellie is also happily married and have two young very energetic children!",
+			"Outside of work, she can be found either watching or participating in as much sport as possible. Kellie is also happily married and has two young very energetic children!",
 			"Every year Kellie continues her professional development by working closely with other experienced clinicians, allowing her to learn new techniques and expand on her existing knowledge.",
 			"Kellie is also a member of the Sports Massage Association.",
 		],
@@ -283,6 +286,7 @@ export const team = [
 		slug: 'claire-benson',
 		name: 'Claire Benson',
 		role: 'Soft Tissue Massage Therapist',
+		photo: '/team/claire-benson.jpg',
 		bio: [
 			"Claire is a sports massage and soft tissue therapist. She also teaches yoga and is studying to be an osteopath.",
 			"Fascinated by the body, movement and the mind body connection, Claire believes that massage is a key component in achieving optimal wellbeing. Massage can help your mind and body relax, repair, restore and rejuvenate. Claire works with clients from a variety of backgrounds from on-the-go yoga teachers to desk-bound office workers; tailoring each treatment to their unique needs.",

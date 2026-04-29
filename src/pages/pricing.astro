@@ -218,6 +218,8 @@ const pricingCategories = [
 		flex-direction: column;
 		box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 		transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+		/* Offset for the fixed header so anchor scrolls don't hide the card title underneath it. */
+		scroll-margin-top: 150px;
 	}
 	.price-card:hover {
 		transform: translateY(-4px);
