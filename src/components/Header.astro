@@ -107,6 +107,7 @@ const about = [
 	{ label: 'Pricing', href: '/pricing' },
 	{ label: 'Work For Us', href: '/work-for-us' },
 	{ label: 'Testimonials', href: '/testimonials' },
+	{ label: 'Shop', href: 'http://shop.balancephysio.com/', external: true },
 ];
 
 const whoWeHelp = [
@@ -136,11 +137,15 @@ const locations = [
 				<li class="has-dropdown">
 					<a href="/about-us">About <span class="chev">▾</span></a>
 					<div class="dropdown">
-						{about.map((item) => <a href={item.href}>{item.label}</a>)}
+						{about.map((item) => (
+							item.external
+								? <a href={item.href} target="_blank" rel="noopener">{item.label}</a>
+								: <a href={item.href}>{item.label}</a>
+						))}
 					</div>
 				</li>
 				<li class="has-dropdown has-dropdown-services-mega">
-					<a href="/services">Services <span class="chev">▾</span></a>
+					<a href="/service/physiotherapy">Services <span class="chev">▾</span></a>
 					<div class="dropdown dropdown-services-mega">
 						<div class="services-mega-inner">
 							{serviceColumns.map((col) => (
@@ -162,7 +167,7 @@ const locations = [
 					</div>
 				</li>
 				<li class="has-dropdown has-dropdown-wide">
-					<a href="/conditions">Conditions <span class="chev">▾</span></a>
+					<a href="/condition/lower-back-pain">Conditions <span class="chev">▾</span></a>
 					<div class="dropdown dropdown-wide">
 						{conditions.map((item) => <a href={item.href}>{item.label}</a>)}
 					</div>
@@ -217,7 +222,13 @@ const locations = [
 				<details>
 					<summary>About</summary>
 					<ul class="mobile-sublist">
-						{about.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+						{about.map((item) => (
+							<li>
+								{item.external
+									? <a href={item.href} target="_blank" rel="noopener">{item.label}</a>
+									: <a href={item.href}>{item.label}</a>}
+							</li>
+						))}
 					</ul>
 				</details>
 			</li>
@@ -225,7 +236,6 @@ const locations = [
 				<details>
 					<summary>Services</summary>
 					<ul class="mobile-sublist">
-						<li><a href="/services">All services</a></li>
 						{serviceColumns.flat().map((group) => (
 							<>
 								<li class="mobile-sublist-category">{group.label}{group.sublabel && <> {group.sublabel}</>}</li>
@@ -239,7 +249,6 @@ const locations = [
 				<details>
 					<summary>Conditions</summary>
 					<ul class="mobile-sublist">
-						<li><a href="/conditions">All conditions</a></li>
 						{conditions.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
 					</ul>
 				</details>
