@@ -628,14 +628,19 @@ const locations = [
 		text-decoration: none;
 	}
 	body .mobile-sublist a:hover, body .mobile-sublist a:active { color: #e87722; }
-	body .mobile-direct {
+	/* These two rules need .mobile-menu in the selector (not just `body`) to
+	   beat the homepage's `.bp-page a { color: inherit }` rule on specificity.
+	   Without .mobile-menu in the chain we tie at 0,1,1 and lose on source
+	   order — making FAQs / Contact Us / Book Now inherit black on the
+	   homepage only. With it we sit at 0,2,1 and win cleanly. */
+	body .mobile-menu .mobile-direct {
 		display: block;
 		padding: 16px 0;
 		font-size: 18px; font-weight: 600;
 		color: #ffffff;
 		text-decoration: none;
 	}
-	body .mobile-menu-book {
+	body .mobile-menu .mobile-menu-book {
 		display: block;
 		margin-top: 28px;
 		padding: 16px 24px;
@@ -646,7 +651,7 @@ const locations = [
 		border-radius: 50px;
 		text-decoration: none;
 	}
-	body .mobile-menu-book:hover { background: #d06618; }
+	body .mobile-menu .mobile-menu-book:hover { background: #d06618; }
 </style>
 
 <script is:inline>
