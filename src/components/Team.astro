@@ -111,7 +111,9 @@ const members = customMembers
 	.bp-page .team:not(.team-slider-mode) .team-card .team-link-btn { top: 216px; width: 40px; height: 40px; font-size: 16px; right: 14px; }
 
 	/* Centered mode (Wellness page) — small fixed-width cards, horizontally centred */
-	.bp-page .team.team-centered-mode .team-grid {
+	/* Note: no `.bp-page` prefix because that ancestor is rendered outside this component
+	   and doesn't pick up Astro's scoping attribute, which would prevent the rule matching. */
+	.team.team-centered-mode .team-grid {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -119,12 +121,12 @@ const members = customMembers
 		max-width: 900px;
 		margin: 0 auto;
 	}
-	.bp-page .team.team-centered-mode .team-card {
+	.team.team-centered-mode .team-card {
 		flex: 0 0 240px;
 	}
-	.bp-page .team.team-centered-mode .team-photo-wrap { height: 280px; }
+	.team.team-centered-mode .team-photo-wrap { height: 280px; }
 	@media (max-width: 600px) {
-		.bp-page .team.team-centered-mode .team-card { flex: 0 0 100%; max-width: 280px; }
+		.team.team-centered-mode .team-card { flex: 0 0 100%; max-width: 280px; }
 	}
 
 	/* Horizontal slider for homepage */
