@@ -4,6 +4,8 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import Team from '../../components/Team.astro';
+import { team } from '../../data/team.js';
 
 const photos = [
 	{ src: '/psychological-wellness/slider-woman-breathing-outdoors.jpg', alt: 'Breathing and self-regulation' },
@@ -14,7 +16,8 @@ const photos = [
 	{ src: '/psychological-wellness/slider-wheelchair-racing.jpg', alt: 'Resilience in sport' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+// Wellness team slider — only the three wellness specialists.
+const wellnessTeam = team.filter((m) => m.wellness);
 
 const faqs = [
 	{ q: 'Is this the same as traditional therapy?', a: 'No. This service focuses on the interaction between psychological factors and physical health, particularly in relation to pain, injury, and performance.' },
@@ -23,48 +26,71 @@ const faqs = [
 	{ q: 'How many sessions will I need?', a: 'This varies. Some people benefit from short-term input, others from ongoing support.' },
 	{ q: 'Is breathwork included?', a: 'Where appropriate, breathing techniques may be used as part of managing the nervous system.' },
 ];
+
+const references = [
+	"Reiki Is Better Than Placebo and Has Broad Potential as a Complementary Health Therapy. David E McManus. J Evid Based Complementary Altern Med. 2017 Sep 5;22(4):1051–1057. doi: 10.1177/2156587217728644.",
+	"Complementary Therapy, May 2005. The increasing use of reiki as a complementary therapy in specialist palliative care. Authors: Barbara Burden, Dr Sandy Herron-Marx, and Professor Collette Clifford.",
+	"National Wellness Institute. The six dimensions of wellness. Available: https://nationalwellness.org/resources/six-dimensions-of-wellness/ [Accessed 12 Oct 2020].",
+	"Marques A, Santos E, Nikiphorou E, et al. Effectiveness of self-management interventions in inflammatory arthritis: a systematic review informing the 2021 EULAR recommendations for the implementation of self-management strategies in patients with inflammatory arthritis. RMD Open 2021;7:e001647. 10.1136/rmdopen-2021-001647.",
+	"El Miedany Y, El Gaafary M, El Arousy N, et al. Arthritis education: the integration of patient-reported outcome measures and patient self-management. Clin Exp Rheumatol 2012;30:899–904.",
+	"Sivertsen B, Lallukka T, Salo P, et al. Insomnia as a risk factor for ill health: results from the large population-based prospective HUNT study in Norway. J Sleep Res 2014;23:124–32. 10.1111/jsr.12102.",
+	"Irwin MR, Olmstead R, Carrillo C, et al. Sleep loss exacerbates fatigue, depression, and pain in rheumatoid arthritis. Sleep 2012;35:537–43. 10.5665/sleep.1742.",
+	"Fogarty FA, Booth RJ, Gamble GD, et al. The effect of mindfulness-based stress reduction on disease activity in people with rheumatoid arthritis: a randomised controlled trial. Ann Rheum Dis 2015;74:472–4. 10.1136/annrheumdis-2014-205946.",
+	"Health status and psychological outcomes after trauma: A prospective multicenter cohort study. Nena Kruithof, Suzanne Polinder, Leonie de Munter, Cornelis L. P. van de Ree, Koen W. W. Lansink, Mariska A. C. de Jongh, BIOS-group. Published: April 21, 2020. https://doi.org/10.1371/journal.pone.0231649.",
+	"Somatic experiencing — effectiveness and key factors of a body-oriented trauma therapy: a scoping literature review. Marie Kuhfuß, Tobias Maldei, Andreas Hetmanek and Nicola Baumann. University of Trier; Technical University of Munich.",
+	"Pain Manag Nurs. Author manuscript; available in PMC: 2015 Dec 1. Published in final edited form as: Pain Manag Nurs. 2014 Feb 28;15(4):897–908. doi: 10.1016/j.pmn.2013.07.008.",
+	"Assessing Holistic Health Interventions and Approaches for Individuals with Alcohol Use Disorder (AUD): Protocol for a Scoping Review. 2025 Jun 5. Shubhi Nanda, Anna Roberts, Gisela Butera, Donna Barnett, Gwenyth R Wallen, Jennifer J Barb.",
+	"Psychological distress after physical injury: a one-year follow-up study of conscious hospitalised patients. Laila Skogstad, Kirsti Tøien, Erlend Hem, Anette Hylen Ranhoff, Leiv Sandvik, Øivind Ekeberg. Injury. 2014 Jan;45(1):289–98. doi: 10.1016/j.injury.2012.10.001.",
+	"The Body Can Balance the Score: Using a Somatic Self-Care Intervention to Support Well-Being and Promote Healing. William Chance Nicholson, Michael Sapp, Elaine Miller Karas, Ingrid Margaret Duva and Linda Grabbe. Healthcare 2025, 13, 1258.",
+	"Hypnosis and relaxation therapies. Originally published in BMJ 1999;319:1346–1349. Republished in West J Med. 2001 Oct;175(4):269–272. doi: 10.1136/ewjm.175.4.269.",
+	"Davis, E. (2015). Literature review of the evidence-base for the effectiveness of hypnotherapy. Melbourne: PACFA.",
+	"J.H. Gruzelier. A Review of the Impact of Hypnosis, Relaxation, Guided Imagery and Individual Differences on Aspects of Immunity and Health. Pages 147–163. Published online: 7 Jul 2009.",
+	"Loren Toussaint, Quang Anh Nguyen, Claire Roettger, Kiara Dixon, Martin Offenbächer, Niko Kohls, Jameson Hirsch, Fuschia Sirois. Effectiveness of Progressive Muscle Relaxation, Deep Breathing, and Guided Imagery in Promoting Psychological and Physiological States of Relaxation.",
+	"Yunian Zhang, Boyin Chen, Xinyang Hu, and Minhong Wang. The Impact of Self-Affirmation Interventions on Well-Being. A Meta-Analysis. Knowledge Management and E-Learning Lab, Faculty of Education, The University of Hong Kong; Department of Education, University of Oxford. American Psychologist. 2025. https://doi.org/10.1037/amp0001591.",
+	"Tod, D., & Wadsworth, N. (2023). Person-centred therapy. In D. Tod & N. Wadsworth (Eds.), The Routledge handbook of sport psychology practice. Routledge.",
+	"Joseph, S., & Murphy, D. (2013). Person-centred approach, positive psychology, and relational helping. Journal of Humanistic Psychology, 53(1), 26–51.",
+	"Podlog, L., & Eklund, R. C. (2014). Psychosocial factors in sports injury rehabilitation and return to sport. Journal of Sport Rehabilitation, 23(2), 91–104.",
+	"Reese, L. M. S., Pittsinger, R., & Yang, J. (2012). Effectiveness of psychological intervention following sport injury. Journal of Sport and Health Science, 1(2), 71–79.",
+	"Mack, R., Breckon, J., O'Halloran, P., & Butt, J. (2019). Enhancing athlete engagement in sport psychology interventions using motivational interviewing: A case study. The Sport Psychologist, 33(2), 159–168.",
+];
 ---
 <Layout
-	title="Psychological Wellness in Clapham"
-	description="Psychological wellness support in Clapham: practical, clinic-based strategies to manage pain, stress and the nervous system alongside rehabilitation and performance."
+	title="Wellness in Clapham"
+	description="The Balance Wellness Team — sports psychology, hypnotherapy and holistic somatic therapy in Clapham, integrated with physiotherapy and rehabilitation."
 >
-	<PageHero title="in Clapham" highlight="Psychological Wellness" breadcrumb="Psychological Wellness" />
+	<PageHero title="in Clapham" highlight="Wellness" breadcrumb="Wellness" />
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
-	<ImageText eyebrow="Our approach" heading="A core component of recovery," highlight="performance, and long-term health" image="/psychological-wellness/woman-stretching-park.jpg" imageAlt="Calm movement outdoors">
-		<p>Psychological wellness is a core component of recovery, performance, and long-term health.</p>
-		<p>At Balance, we take an integrated approach, recognising that pain, injury, stress, and physical performance are all influenced by the nervous system and your psychological state. Our service provides structured support to help you manage these factors effectively alongside your physical rehabilitation or training.</p>
-		<p>Sessions are practical, focused, and aligned with your individual goals.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	<ImageText eyebrow="Our approach" heading="The" highlight="Wellness Team" image="/psychological-wellness/woman-stretching-park.jpg" imageAlt="Calm movement outdoors">
+		<p>Wellness can be defined as <em>'an active process through which people become aware of, and make choices toward, a more successful existence'</em> (Ref 1).</p>
+		<p>As a clinic we have integrated a Wellness team into the client offerings. The overall aim of this team is to improve the holistic health of our patients.</p>
+		<p><em>'Holistic health is a system of wellness that considers the whole person — body, mind, and spirit — and aims to restore balance and well-being through the combination of physical, mental, and emotional care'</em> (Ref 12).</p>
+		<p>Together, they represent a complete picture of health where each area supports and influences the others.</p>
+		<p>We know there is an increase in incidence of psychological distress in those that have suffered trauma (Refs 9 and 13).</p>
 	</ImageText>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider psychological" highlight="wellness support" image="/psychological-wellness/women-team-laughing.jpg" imageAlt="Group of women smiling together after sport">
-		<p>You may benefit from psychological wellness input if you:</p>
-		<ul>
-			<li>Feel frustrated or low during injury or recovery</li>
-			<li>Experience anxiety around movement or return to sport</li>
-			<li>Struggle with persistent pain and fatigue</li>
-			<li>Notice stress presenting as physical tension or symptoms</li>
-			<li>Avoid activity due to fear of re-injury</li>
-			<li>Feel a loss of motivation with rehabilitation or training</li>
-		</ul>
-		<p>These responses are common and can directly impact recovery and performance.</p>
-	</ImageText>
-
-	<ImageText eyebrow="Approach" heading="How we" highlight="work" image="/psychological-wellness/women-laughing-class.jpg" imageAlt="Group class">
+	<ImageText reverse altBg eyebrow="Approach" heading="How we work and" highlight="who we are" image="/psychological-wellness/women-laughing-class.jpg" imageAlt="Group class">
 		<p>Our approach is based on the biopsychosocial model, integrating physical and psychological factors.</p>
 		<p>Sessions may include:</p>
 		<ul>
 			<li>Understanding the relationship between pain, stress, and the nervous system</li>
-			<li>Exploring your thoughts and feelings to your situation</li>
+			<li>Exploring your thoughts and feelings about your situation</li>
 			<li>Strategies to manage stress and regulate your physiological response</li>
-			<li>Breathing techniques and self awareness</li>
+			<li>Breathing techniques and self-awareness</li>
 			<li>Building confidence in movement and activity</li>
 			<li>Supporting return to training, sport, or daily function</li>
 		</ul>
 		<p>Where relevant, this work is integrated with physiotherapy and strength coaching.</p>
+		<p>The Wellness team includes <strong>Richard</strong> — Psychotherapist and Hypnotherapist (visualisation), <strong>Sally</strong> — Sports Psychologist, and <strong>Kat</strong> — Holistic Therapist. They offer a breadth of skill sets within the team, and offer the patient choice.</p>
 	</ImageText>
+
+	<Team
+		members={wellnessTeam}
+		sliderRow
+		heading="Meet The Wellness Team"
+		subheading="Three specialists, three approaches — sports psychology, clinical hypnotherapy, and holistic somatic therapy."
+	/>
 
 	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/psychological-wellness/slider-plus-size-workout.jpg" imageAlt="Inclusive movement">
 		<p>We focus on meaningful changes that support both mental and physical outcomes.</p>
@@ -92,14 +118,13 @@ const faqs = [
 	</ImageText>
 
 	<ImageText reverse altBg eyebrow="Our team" heading="Our" highlight="approach" image="/psychological-wellness/soccer-high-five.jpg" imageAlt="Team connection">
-		<p>Psychological wellness at Balance is delivered within a clinical environment.</p>
+		<p>Wellness at Balance is delivered within a clinical environment.</p>
 		<p>We work as part of a wider team, ensuring your psychological support aligns with your physical rehabilitation and training. This allows for a consistent and joined-up approach to your health.</p>
-		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
 	</ImageText>
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/psychological-wellness/slider-women-fists-raised.jpg" imageAlt="Strength and confidence">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing" class="section-link">Pricing Information &rarr;</a></p>
+	<ImageText eyebrow="Get in touch" heading="How to" highlight="book" image="/psychological-wellness/slider-women-fists-raised.jpg" imageAlt="Strength and confidence">
+		<p>To learn more or book an appointment, please get in touch with the Balance team.</p>
+		<p><a href="/contact-us" class="btn-primary">Contact Us</a></p>
 	</ImageText>
 
 	<section class="faq-section faq-section--alt">
@@ -116,5 +141,61 @@ const faqs = [
 		</div>
 	</section>
 
+	<section class="references-section">
+		<div class="container">
+			<details class="references-toggle">
+				<summary>References</summary>
+				<ol class="references-list">
+					{references.map((ref) => (
+						<li>{ref}</li>
+					))}
+				</ol>
+			</details>
+		</div>
+	</section>
+
 	<BookingCTA />
 </Layout>
+
+<style>
+	.references-section { padding: 40px 0 60px; background: #ffffff; }
+	.references-toggle {
+		max-width: 900px;
+		margin: 0 auto;
+		border: 1px solid rgba(0,0,0,0.1);
+		border-radius: 12px;
+		background: #fafafa;
+		overflow: hidden;
+	}
+	.references-toggle summary {
+		cursor: pointer;
+		padding: 20px 24px;
+		font-weight: 700;
+		font-size: 16px;
+		color: #1a1a1a;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.references-toggle summary::-webkit-details-marker { display: none; }
+	.references-toggle summary::after {
+		content: '+';
+		font-size: 22px;
+		font-weight: 400;
+		color: #e87722;
+		transition: transform 0.2s;
+	}
+	.references-toggle[open] summary::after { content: '−'; }
+	.references-list {
+		padding: 0 24px 24px 48px;
+		margin: 0;
+		font-size: 13px;
+		line-height: 1.7;
+		color: #555;
+	}
+	.references-list li {
+		margin-bottom: 10px;
+		word-break: break-word;
+	}
+</style>

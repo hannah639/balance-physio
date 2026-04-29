@@ -6,10 +6,17 @@ const {
 	sliderRow = false,
 	heading = 'Meet Our Team',
 	subheading = 'We have 27 professionals under one roof waiting to help you move, recover and perform.',
+	members: customMembers = null,
 } = Astro.props;
 
-// Homepage "featured" shows first 8 members; team page shows all
-const members = featured ? team.slice(0, 8) : team;
+// Default lists exclude wellness-only members (Sally, Kat, Richard) — they only appear on the Wellness page.
+// `customMembers` lets the Wellness page pass in its own filtered list (the three wellness specialists).
+const baseTeam = team.filter((m) => !m.wellness);
+const members = customMembers
+	? customMembers
+	: featured
+		? baseTeam.slice(0, 8)
+		: baseTeam;
 ---
 
 <section class={`team ${sliderRow ? 'team-slider-mode' : ''}`}>

@@ -341,6 +341,52 @@ export const team = [
 			"She completed her Matwork and Apparatus training with the Pilates Foundation UK. She specialised in antenatal and postnatal Pilates and recently has certified under the Pink Ribbon Programme to work with women recovering from breast cancer. She enjoys continuous exploration of Pilates both in her own body and with others. She aims to develop people\\'s understanding and awareness of their bodies while encouraging wellbeing through functional exercise. She has been part of Pilates Sanctuary since 2007 and took on the Co-Directorship of Pilates Sanctuary together with Alice Croucher in 2009.",
 		],
 	},
+	{
+		slug: 'sally-mcginn',
+		name: 'Sally McGinn',
+		role: 'Chartered Sports Performance Psychologist',
+		photo: '/team/sally-mcginn.jpg',
+		wellness: true,
+		bio: [
+			"Sally is based on the Hampshire/Wiltshire border and created MindOdyssey about 10 years ago, to reflect the journey that clients would take when working with a sports psychologist. She is also a 'MI Spotlight practitioner', which is a specific type of approach to personality development, emphasizing personality and potential.",
+			"She also works in applied practice, as a supervisor for trainee sport psychologists completing their CASES SEPAR accreditation, supporting the development of reflective, ethical, and effective practitioners.",
+			"The majority of her applied work is currently with GB Para Badminton and National League 1 RAMS RFC, alongside a small number of private clients across individual and team sports.",
+			"She is very passionate about helping people succeed. With strong links in sport and human development, her work is focused on supporting athletes through challenge, change, and progression, including during injury rehabilitation and return-to-performance phases.",
+			"The approach she takes is grounded in positive psychology and strengths-based practice, with an emphasis on building confidence, clarity, and psychological readiness alongside physical recovery.",
+			"Sally is always very collaborative with coaches and support staff, as she sees psychology as something to underpin performance rather than sit in isolation. She will often use the Spotlight Profile by Mindflick to frame questioning and better understand client preferences, motivators, and stress responses, helping her tailor both delivery and collaboration.",
+			"Collaboration is central to the way she likes to work and, with client consent, there is a strong preference to work in partnership with the lead practitioner (such as a physiotherapist, coach, or medical professional), creating a shared understanding of goals, language, and approach. Open communication around psychological strategies and themes often enhances the work of other practitioners and helps ensure the athlete feels supported in a coordinated, joined-up manner.",
+			"Initial sessions are ideally conducted face to face, to establish rapport and a strong working alliance, with follow-up work offered online once the foundation is there.",
+		],
+	},
+	{
+		slug: 'katrina-johnson',
+		name: 'Katrina Johnson',
+		role: 'Holistic Therapist',
+		photo: '/team/katrina-johnson.jpg',
+		wellness: true,
+		bio: [
+			"Kat is deeply passionate about human health and spent the first 20 years of her career in research leadership roles within the life sciences industry. Seeking to broaden her understanding of the individual and systemic variables that drive health and wellness, Kat recently completed her MSc in Psychology, and is registered with IPHM (International Practitioner of Holistic Medicine). She offers a blend of trauma-informed psychodynamic somatic therapy called Compassionate Inquiry® (course ongoing), which is a type of psychotherapy/talking therapy, and Reiki energy healing. This combined experience forms the backbone of Kat's approach.",
+			"The somatic approach is a promising intervention for psychological distress, and has been studied when treating PTSD. It involves a body-oriented approach aiming at changing the physiological and emotional processing of the traumatic experience in a 'bottom-up' instead of 'top-down' way (Ref 10). This is opposed to traditional cognitive-behavioural therapy's 'top down' approach. We know that those that have experienced trauma show impaired cognitive functioning, due to the increased negative affect that they are experiencing in trauma-related situations. This in turn may affect their ability to engage with 'top down' talking therapy.",
+			"Given the increasing awareness of the impact of trauma on overall health outcomes (Ref 9) and the increasing use of somatic interventions to improve health outcomes (Ref 14), Compassionate Inquiry® (CI) is a somatic psychotherapeutic approach that gently uncovers and releases layers of childhood trauma, constriction and suppressed emotion embedded in the body. They believe these are at the root of mental and physical illness, as well as addiction (compassionateinquiry.com/the-approach/). The components that encompass CI such as psychotherapy, mindfulness, and somatic processing have been individually validated for their impact on the holistic health of individuals.",
+			"Reiki is a complementary therapy that aims to bring the body into its natural energetic balance by releasing tension that has built up through stress. The aims of Reiki are to activate the parasympathetic nervous system in a therapeutic setting. The profound relaxation produced by Reiki has been anecdotally reported to alleviate anxiety and stress, the perception of pain, and to promote a feeling of psychospiritual well-being (Ref 2). Reiki is currently offered as a supportive therapy for people living with cancer (cancerresearchuk.org) and patients report they feel more relaxed; it is not a cure. It has also been investigated with clinical trials looking at pain and anxiety, and there does appear to be initial evidence for its efficacy, but more studies are needed.",
+		],
+	},
+	{
+		slug: 'richard-lepper',
+		name: 'Richard Lepper',
+		role: 'Clinical Hypnotherapy & Mental Health Practitioner',
+		photo: '/team/richard-lepper.jpg',
+		wellness: true,
+		bio: [
+			"Richard is a fully qualified Clinical Hypnotherapist, mental health practitioner — psychotherapist level 4, hypnotherapy supervisor, and lecturer.",
+			"He runs a private practice in Brighton and offers online hypnotherapy sessions for clients worldwide. With over a decade of experience in a high-pressure sales environment in Central London, Richard understands the physical and mental toll of stress. These experiences inspired him to explore effective ways to manage stress and support mental well-being in corporate settings, ultimately leading him to study Clinical Hypnotherapy.",
+			"His practice is rooted in evidence-based methods, with research highlighting the effectiveness of hypnotherapy use in those suffering with pain and anxiety (Ref 16), and continuously evolves alongside advances in the scientific understanding of the brain and the mind-body connection.",
+			"He first discovered the power of hypnosis through a sports coach in the 1980s and has since applied it across many areas of life, from achieving sporting and career goals to navigating major life transitions such as loss and divorce. He is passionate about helping clients reframe their thoughts, build resilience, and achieve balance, confidence, and emotional well-being.",
+			"Several hypnotherapy techniques can help manage stress, including guided imagery, progressive relaxation, and positive affirmations. These techniques can help individuals enter a state of hypnosis and address the subconscious triggers of stress. Progressive muscle relaxation focuses on relaxing each body part. At the physiological level of analysis, the Toussaint group found PMR and guided imagery offer good improvement in relaxation (Ref 17).",
+			"Positive affirmations reinforce positive thinking. A meta analysis completed in 2025 reveals that self-affirmation interventions consistently promote small but significant improvements in various aspects of well-being, including self-perception, general well-being, and social well-being, as well as reducing psychological barriers to well-being (Ref 19).",
+			"Guided imagery involves visualising calming scenes to achieve a state of deep relaxation. These were investigated by a group looking at exam stress in medical students. They found that in two studies, hypnosis buffered the effects of stress on immune functions in medical students at exam time, and the comparison of self-hypnosis with and without immune imagery confirmed advantages to targeted imagery for both immune function and mood, and importantly, fewer winter viral infections (Ref 18).",
+		],
+	},
 ];
 
 // Initials helper for placeholder avatars
