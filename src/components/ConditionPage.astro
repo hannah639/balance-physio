@@ -25,7 +25,9 @@ const {
 	whoIntro,
 	whoList,
 	introImage,    // optional image URL for Section 1 (intro)
+	introImageAspect, // optional aspect-ratio override (e.g. '3/2')
 	whoImage,      // optional image URL for Section 3 (who-we-help)
+	whoImageAspect,   // optional aspect-ratio override
 	faqs = [],
 } = Astro.props;
 ---
@@ -40,6 +42,7 @@ const {
 			altBg
 			placeholderLabel="Clinical assessment"
 			image={introImage}
+			imageAspect={introImageAspect}
 		>
 			{intro.map((p) => <p set:html={p} />)}
 		</ImageText>
@@ -81,6 +84,7 @@ const {
 			altBg
 			placeholderLabel="Our patients"
 			image={whoImage}
+			imageAspect={whoImageAspect}
 		>
 			{whoIntro && <p>{whoIntro}</p>}
 			<ul>
