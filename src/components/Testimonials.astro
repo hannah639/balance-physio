@@ -1,21 +1,7 @@
 ---
-const testimonials = [
-	{
-		quote: "I cannot recommend Balance highly enough. Three times they have brought me back from serious injury, and kept my career as a self-proclaimed elite sportsman on the road.",
-		name: "Tom Holland",
-		avatar: "/testimonials/tom-holland.jpg",
-	},
-	{
-		quote: "Part of the battle of excelling at elite level sport is finding the right support team and training structure to allow yourself to maximise your potential. Balance have played a huge part in my development as an athlete.",
-		name: "Claire Bennett",
-		avatar: "/testimonials/claire-bennett.jpg",
-	},
-	{
-		quote: "I'm absolutely over the moon to have just run a marathon PB of 2:58, which would not have been possible without the excellent service at Balance.",
-		name: "Al Riley",
-		avatar: "/testimonials/al-riley.jpg",
-	},
-];
+// Testimonials section — renders a Trustindex Google Reviews widget
+// in place of the old static testimonial cards.
+// Used on the homepage and the About Us page.
 ---
 
 <section class="testimonials">
@@ -23,20 +9,16 @@ const testimonials = [
 		<div class="section-header">
 			<h2>Kind words from our happy clients</h2>
 		</div>
-		<div class="testimonial-grid">
-			{testimonials.map((t) => (
-				<div class="testimonial-card">
-					<p>{t.quote}</p>
-					<div class="testimonial-author">
-						<div class="testimonial-avatar">
-							<img src={t.avatar} alt={t.name} />
-						</div>
-						<div>
-							<h4>{t.name}</h4>
-						</div>
-					</div>
-				</div>
-			))}
+		<div class="testimonials-trustindex">
+			<script defer async src="https://cdn.trustindex.io/loader.js?65abd11700e3871410561ef024c"></script>
 		</div>
 	</div>
 </section>
+
+<style>
+	.testimonials-trustindex {
+		max-width: 1100px;
+		margin: 0 auto;
+		min-height: 100px; /* reserve space while widget loads */
+	}
+</style>
