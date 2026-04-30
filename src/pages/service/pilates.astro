@@ -67,14 +67,30 @@ import ServicePage from '../../components/ServicePage.astro';
 		{ q: "Who do I contact with general enquiries?", a: "For general Balance enquiries, email admin@balancephysio.com or call 020 7627 2308. For Pilates-specific bookings, contact Agur or Alice directly on the numbers above." },
 	]}
 >
-	<div slot="before-faq" class="container" style="padding-top: 32px;">
-		<div class="image-text-content" style="max-width: 720px; margin: 0 auto; text-align: center;">
-			<div class="eyebrow">Booking</div>
-			<h2>Book a session at <span class="highlight">Pilates Sanctuary</span></h2>
-			<p>To book a session of one-to-one teaching or join a small group, call one of the Pilates Sanctuary Directors directly:</p>
-			<p><strong>Agur:</strong> <a href="tel:+447824901063">07824 901 063</a><br/>
-			<strong>Alice:</strong> <a href="tel:+447881953843">07881 953 843</a></p>
-			<p>For general Balance enquiries: <a href="mailto:admin@balancephysio.com">admin@balancephysio.com</a></p>
+	<section slot="before-faq" class="pilates-booking">
+		<div class="container">
+			<div class="image-text-content pilates-booking-inner">
+				<div class="eyebrow">Booking</div>
+				<h2>Book a session at <span class="highlight">Pilates Sanctuary</span></h2>
+				<p>To book a session of one-to-one teaching or join a small group, call one of the Pilates Sanctuary Directors directly:</p>
+				<p><strong>Agur:</strong> <a href="tel:+447824901063">07824 901 063</a><br/>
+				<strong>Alice:</strong> <a href="tel:+447881953843">07881 953 843</a></p>
+				<p>For general Balance enquiries: <a href="mailto:admin@balancephysio.com">admin@balancephysio.com</a></p>
+			</div>
 		</div>
-	</div>
+	</section>
+
+	<style>
+		.pilates-booking {
+			padding: 80px 0;
+			background: linear-gradient(135deg, #fdf3ed 0%, #fbe6d9 50%, #fce8d4 100%);
+		}
+		.pilates-booking-inner {
+			max-width: 720px;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.pilates-booking h2 { margin-bottom: 16px; }
+		.pilates-booking p { margin: 12px 0; }
+	</style>
 </ServicePage>
