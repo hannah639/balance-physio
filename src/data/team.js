@@ -230,6 +230,18 @@ export const team = [
 		],
 	},
 	{
+		slug: 'nichola-roberts',
+		name: 'Nichola Roberts',
+		role: 'Cycling Specialist Physiotherapist',
+		photo: '/team/nichola-roberts.jpg',
+		bio: [
+			"Nichola Roberts is a cycling specialist physiotherapist and the owner of velophysio.co.uk, providing both expert physiotherapy and bike fitting for cyclists and triathletes.",
+			"Nichola helps cyclists of all levels, from first bike rides and commuting to sportives, stage races, ultra events and professional athletes. As a cyclist herself she understands the complex nature of the bike, biomechanics, training and bike fit and is able to offer insight, knowledge, diagnostic skill, and specific exercise rehabilitation.",
+			"Nichola completed a physiotherapy degree in the UK before completing a Masters degree in Australia, and has continued to progress her knowledge with regular courses and conferences as well as working alongside fellow cycling experts and professionals.",
+			"Nichola is available on Wednesdays at Balance.",
+		],
+	},
+	{
 		slug: 'steven-connor',
 		name: 'Steven Connor',
 		role: 'Podiatrist',
@@ -391,18 +403,6 @@ export const team = [
 			"Several hypnotherapy techniques can help manage stress, including guided imagery, progressive relaxation, and positive affirmations. These techniques can help individuals enter a state of hypnosis and address the subconscious triggers of stress. Progressive muscle relaxation focuses on relaxing each body part. At the physiological level of analysis, the Toussaint group found PMR and guided imagery offer good improvement in relaxation (Ref 17).",
 			"Positive affirmations reinforce positive thinking. A meta analysis completed in 2025 reveals that self-affirmation interventions consistently promote small but significant improvements in various aspects of well-being, including self-perception, general well-being, and social well-being, as well as reducing psychological barriers to well-being (Ref 19).",
 			"Guided imagery involves visualising calming scenes to achieve a state of deep relaxation. These were investigated by a group looking at exam stress in medical students. They found that in two studies, hypnosis buffered the effects of stress on immune functions in medical students at exam time, and the comparison of self-hypnosis with and without immune imagery confirmed advantages to targeted imagery for both immune function and mood, and importantly, fewer winter viral infections (Ref 18).",
-		],
-	},
-	{
-		slug: 'nichola-roberts',
-		name: 'Nichola Roberts',
-		role: 'Cycling Specialist Physiotherapist',
-		photo: '/team/nichola-roberts.jpg',
-		bio: [
-			"Nichola Roberts is a cycling specialist physiotherapist and the owner of velophysio.co.uk, providing both expert physiotherapy and bike fitting for cyclists and triathletes.",
-			"Nichola helps cyclists of all levels, from first bike rides and commuting to sportives, stage races, ultra events and professional athletes. As a cyclist herself she understands the complex nature of the bike, biomechanics, training and bike fit and is able to offer insight, knowledge, diagnostic skill, and specific exercise rehabilitation.",
-			"Nichola completed a physiotherapy degree in the UK before completing a Masters degree in Australia, and has continued to progress her knowledge with regular courses and conferences as well as working alongside fellow cycling experts and professionals.",
-			"Nichola is available on Wednesdays at Balance.",
 		],
 	},
 	{

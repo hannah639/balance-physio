@@ -180,7 +180,7 @@ const locations = [
 					</div>
 				</li>
 				<li class="has-dropdown has-dropdown-mega">
-					<a href="/who-we-help">Who We Help <span class="chev">▾</span></a>
+					<a href="#" onclick="return false;">Who We Help <span class="chev">▾</span></a>
 					<div class="dropdown dropdown-mega">
 						<div class="mega-left">
 							<div class="mega-eyebrow">Who We Help</div>
@@ -264,7 +264,6 @@ const locations = [
 				<details>
 					<summary>Who We Help</summary>
 					<ul class="mobile-sublist">
-						<li><a href="/who-we-help">Overview</a></li>
 						{whoWeHelp.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
 					</ul>
 				</details>

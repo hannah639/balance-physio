@@ -117,17 +117,19 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 		</section>
 	</>) : (<>
 	{intro && intro.length > 0 && (
-		<ImageText
-			eyebrow="Our approach"
-			heading="Evidence-led"
-			highlight="care"
-			placeholderLabel="Treatment in progress"
-			youtubeId={introYoutubeId}
-			image={introImage}
-			imageAspect={introImageAspect}
-		>
-			{intro.map((p) => <p>{p}</p>)}
-		</ImageText>
+		<div class="service-intro">
+			<ImageText
+				eyebrow="Our approach"
+				heading="Evidence-led"
+				highlight="care"
+				placeholderLabel="Treatment in progress"
+				youtubeId={introYoutubeId}
+				image={introImage}
+				imageAspect={introImageAspect}
+			>
+				{intro.map((p) => <p>{p}</p>)}
+			</ImageText>
+		</div>
 	)}
 
 	{whenList && whenList.length > 0 && (
