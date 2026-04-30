@@ -2,6 +2,7 @@
 import { sanityClient, urlFor } from '../lib/sanity.js';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookiesBanner from '../components/CookiesBanner.astro';
 import VideoHero from '../components/VideoHero.astro';
 import Hero from '../components/Hero.astro';
 import ActivitiesSlider from '../components/ActivitiesSlider.astro';
@@ -95,17 +96,6 @@ const jsonLd = settings.businessName ? {
 		{jsonLd && (
 			<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		)}
-
-		{gtmId && (
-			<script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`} />
-		)}
-
-		{gaId && (
-			<>
-				<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-				<script is:inline set:html={`window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${gaId}');`} />
-			</>
-		)}
 	</head>
 	<body>
 		{gtmId && (
@@ -126,6 +116,7 @@ const jsonLd = settings.businessName ? {
 			<BookingCTA />
 			<Footer />
 		</div>
+		<CookiesBanner gaId={gaId} gtmId={gtmId} />
 
 		<script is:inline>
 			(function() {
