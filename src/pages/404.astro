@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+---
+<Layout
+	title="Page not found"
+	description="The page you're looking for doesn't exist. Get in touch or browse our services."
+>
+	<section class="not-found-hero">
+		<div class="container">
+			<div class="not-found-inner">
+				<div class="not-found-code">404</div>
+				<h1>We can't find that page</h1>
+				<p>The page you were looking for has either moved or doesn't exist. Don't worry — we can help you get to the right place.</p>
+				<div class="not-found-actions">
+					<a href="/" class="btn-book">Back to homepage</a>
+					<a href="/contact-us" class="btn-outline-dark">Contact us</a>
+				</div>
+
+				<div class="not-found-links">
+					<h2>Or jump to a popular page:</h2>
+					<ul>
+						<li><a href="/services">All services</a></li>
+						<li><a href="/conditions">All conditions</a></li>
+						<li><a href="/meet-the-team">Meet the team</a></li>
+						<li><a href="/our-clinic">Our clinic</a></li>
+						<li><a href="/testimonials">Testimonials</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>
+
+<style>
+	.not-found-hero {
+		padding: 140px 0 100px;
+		background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%);
+		min-height: 60vh;
+		display: flex;
+		align-items: center;
+	}
+	.not-found-inner {
+		max-width: 720px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.not-found-code {
+		font-size: 120px;
+		font-weight: 800;
+		color: var(--accent);
+		line-height: 1;
+		letter-spacing: -4px;
+		margin-bottom: 16px;
+	}
+	.not-found-hero h1 {
+		font-size: 42px;
+		font-weight: 800;
+		letter-spacing: -1px;
+		margin-bottom: 20px;
+		color: var(--text);
+	}
+	.not-found-hero p {
+		font-size: 17px;
+		line-height: 1.7;
+		color: var(--text-muted);
+		margin-bottom: 32px;
+	}
+	.not-found-actions {
+		display: flex;
+		gap: 16px;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin-bottom: 56px;
+	}
+	.btn-outline-dark {
+		display: inline-block;
+		padding: 18px 36px;
+		border-radius: 50px;
+		font-size: 15px;
+		font-weight: 600;
+		border: 2px solid var(--text);
+		color: var(--text);
+		background: transparent;
+		transition: all .2s;
+	}
+	.btn-outline-dark:hover {
+		background: var(--text);
+		color: var(--white);
+	}
+	.not-found-links {
+		text-align: left;
+		max-width: 480px;
+		margin: 0 auto;
+		padding-top: 32px;
+		border-top: 1px solid var(--border);
+	}
+	.not-found-links h2 {
+		font-size: 14px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+		color: var(--text-muted);
+		margin-bottom: 16px;
+	}
+	.not-found-links ul {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 8px 24px;
+	}
+	.not-found-links li a {
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 16px;
+	}
+	.not-found-links li a:hover {
+		text-decoration: underline;
+	}
+	@media (max-width: 600px) {
+		.not-found-hero { padding: 100px 0 60px; }
+		.not-found-code { font-size: 80px; }
+		.not-found-hero h1 { font-size: 30px; }
+		.not-found-actions .btn-book,
+		.not-found-actions .btn-outline-dark { flex: 1; min-width: 140px; }
+		.not-found-links ul { grid-template-columns: 1fr; }
+	}
+</style>
