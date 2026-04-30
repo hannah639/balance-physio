@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+---
+<Layout
+	title="The Armchair Athlete"
+	description="Restoring consistent movement, building resilience and reducing the gap between inactivity and activity. Our team supports you with programs that suit your lifestyle."
+>
+	<PageHero
+		title="The Armchair Athlete"
+		breadcrumb="The Armchair Athlete"
+	/>
+
+	<ImageText
+		image="/who-we-help/armchair-athlete.jpg"
+		imageAlt="Mature athlete walking outdoors with earphones, enjoying everyday activity"
+	>
+		<p>The goal isn't to suddenly train harder, or start lifting weights, it is to restore consistent movement, build resilience, and reduce the gap between inactivity and activity. All of our team are here to support and build programs to suit your lifestyle and restoration of movement and function comes first so that you can get back to doing the things you enjoy.</p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>
