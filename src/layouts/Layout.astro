@@ -1,27 +1,19 @@
 ---
-import { sanityClient, urlFor } from '../lib/sanity.js';
+import { siteSettings as settings } from '../data/site-settings.js';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookiesBanner from '../components/CookiesBanner.astro';
 
 const { title, description } = Astro.props;
 
-const settings = await sanityClient.fetch(
-	`*[_type == "siteSettings"][0]{
-		title, description, ogImage, gaId, gtmId,
-		businessType, businessName, phone, email,
-		streetAddress, city, region, postalCode, country,
-		latitude, longitude, priceRange, openingHours, sameAs
-	}`
-) || {};
-
-const siteTitle = settings.title || 'Balance Performance Physiotherapy';
+const siteTitle = settings.title;
 const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
 const pageDescription = description || settings.description || '';
-const ogImageUrl = settings.ogImage ? urlFor(settings.ogImage).width(1200).height(630).url() : null;
+const siteUrl = settings.siteUrl;
+const ogImageUrl = settings.ogImage ? `${siteUrl}${settings.ogImage}` : null;
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 const gaId = settings.gaId || '';
 const gtmId = settings.gtmId || '';
-const siteUrl = Astro.site?.toString() || 'https://balance-physio.hannah-9e0.workers.dev';
 
 const jsonLd = settings.businessName ? {
 	'@context': 'https://schema.org',
@@ -51,14 +43,12 @@ const jsonLd = settings.businessName ? {
 		},
 	}),
 	...(settings.openingHours?.length && {
-		openingHoursSpecification: settings.openingHours
-			.filter((h) => h.days && h.opens && h.closes)
-			.map((h) => ({
-				'@type': 'OpeningHoursSpecification',
-				dayOfWeek: h.days,
-				opens: h.opens,
-				closes: h.closes,
-			})),
+		openingHoursSpecification: settings.openingHours.map((h) => ({
+			'@type': 'OpeningHoursSpecification',
+			dayOfWeek: h.dayOfWeek,
+			opens: h.opens,
+			closes: h.closes,
+		})),
 	}),
 	...(settings.sameAs?.length && { sameAs: settings.sameAs }),
 } : null;
@@ -73,9 +63,11 @@ const jsonLd = settings.businessName ? {
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
 		{pageDescription && <meta name="description" content={pageDescription} />}
+		<link rel="canonical" href={canonicalUrl} />
 		<meta property="og:title" content={pageTitle} />
 		{pageDescription && <meta property="og:description" content={pageDescription} />}
 		{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:type" content="website" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={pageTitle} />
