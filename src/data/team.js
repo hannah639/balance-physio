@@ -180,6 +180,7 @@ export const team = [
 		slug: 'sam-stringer',
 		name: 'Sam Stringer',
 		role: 'Physiotherapist',
+		photo: '/team/sam-stringer.jpg',
 		bio: [
 			"Sam joined the Balance team in the summer of 2023. He is an active sports participant, captaining his local tennis club's 1st team and serving on the club committee. He also has a strong interest in skiing, having previously worked a season as a Chalet Host in Meribel, France.",
 			"At Balance, Sam works closely with Dr Lucy Goldby, Consultant Spinal Physiotherapist, and alongside physiotherapists from GB Rowing and England Lacrosse. He is involved in coordinating, hosting, and participating in external training courses at Balance, contributing to both his own development and the ongoing progression of the wider clinical team.",
@@ -191,6 +192,7 @@ export const team = [
 		slug: 'portia-morey',
 		name: 'Portia Morey',
 		role: 'Physiotherapist',
+		photo: '/team/portia-morey.jpg',
 		bio: [
 			"Portia works in our hydrotherapy service at Audley, bringing extensive expertise and a robust variety of experience to the team. She completed her MSc Pre-registration Physiotherapy at the University of Brighton in 2021 and spent three years as a rotational Physiotherapist in an NHS Hospital, where she developed a deep appreciation for the unique benefits of hydrotherapy, particularly in musculoskeletal care.",
 			"In addition to her role in hydrotherapy, Portia works as a Senior MSK Paediatric Physiotherapist for Oxleas Foundation NHS Trust. She finds great fulfilment in working with children and young people, addressing both simple and complex needs.",
@@ -309,6 +311,7 @@ export const team = [
 		slug: 'pat-leahy',
 		name: 'Pat Leahy',
 		role: 'Bike Fitting Specialist',
+		photo: '/team/pat-leahy.jpg',
 		bio: [
 			"A bike fitter, cycling and fitness coach, Pat Leahy is an important part of the Balance Performance team and the founder of SpeedLab. He will not simply analyse you riding, adjust and work on your bike so it fits you better. Pat works you, the rider, into the best condition to get the most from your bike. Pat has over 25 years experience coaching endurance athletes. He is considered a leading experts in preparing athletes of all abilities for cycling, triathlon and Ironman events.",
 			"Services offered:",
