@@ -313,7 +313,7 @@ export const team = [
 		role: 'Bike Fitting Specialist',
 		photo: '/team/pat-leahy.jpg',
 		bio: [
-			"A bike fitter, cycling and fitness coach, Pat Leahy is an important part of the Balance Performance team and the founder of SpeedLab. He will not simply analyse you riding, adjust and work on your bike so it fits you better. Pat works you, the rider, into the best condition to get the most from your bike. Pat has over 25 years experience coaching endurance athletes. He is considered a leading experts in preparing athletes of all abilities for cycling, triathlon and Ironman events.",
+			"A bike fitter, cycling and fitness coach, Pat Leahy is an important part of the Balance Performance team and the founder of SpeedLab. He will not simply analyse you riding, adjust and work on your bike so it fits you better, but he works you, the rider, into the best condition to get the most from your bike. Pat has over 25 years experience coaching endurance athletes. He is considered a leading experts in preparing athletes of all abilities for cycling, triathlon and Ironman events.",
 			"Services offered:",
 			"bike fitting - a number of options available using Retül bike fitting systems. Advice for getting and then fitting a new bike, increasing performance, and reducing pain on your existing bike(s).",
 			"cycle coaching - skills and conditioning. Event preparation.",
