@@ -393,6 +393,61 @@ export const team = [
 			"Guided imagery involves visualising calming scenes to achieve a state of deep relaxation. These were investigated by a group looking at exam stress in medical students. They found that in two studies, hypnosis buffered the effects of stress on immune functions in medical students at exam time, and the comparison of self-hypnosis with and without immune imagery confirmed advantages to targeted imagery for both immune function and mood, and importantly, fewer winter viral infections (Ref 18).",
 		],
 	},
+	{
+		slug: 'nichola-roberts',
+		name: 'Nichola Roberts',
+		role: 'Cycling Specialist Physiotherapist',
+		photo: '/team/nichola-roberts.jpg',
+		bio: [
+			"Nichola Roberts is a cycling specialist physiotherapist and the owner of velophysio.co.uk, providing both expert physiotherapy and bike fitting for cyclists and triathletes.",
+			"Nichola helps cyclists of all levels, from first bike rides and commuting to sportives, stage races, ultra events and professional athletes. As a cyclist herself she understands the complex nature of the bike, biomechanics, training and bike fit and is able to offer insight, knowledge, diagnostic skill, and specific exercise rehabilitation.",
+			"Nichola completed a physiotherapy degree in the UK before completing a Masters degree in Australia, and has continued to progress her knowledge with regular courses and conferences as well as working alongside fellow cycling experts and professionals.",
+			"Nichola is available on Wednesdays at Balance.",
+		],
+	},
+	{
+		slug: 'victoria-chapman',
+		name: 'Victoria Chapman',
+		role: 'Clinic Manager',
+		photo: '/team/victoria-chapman.jpg',
+		bio: [
+			"Victoria Chapman joined the Balance team in August 2025 as our Clinic Manager. With over 30 years of experience managing teams across a wide range of industries — including aesthetic clinics and an osteopathic charity — she brings a wealth of knowledge, professionalism and leadership to the role.",
+			"Victoria plays a key part in the day-to-day running of the clinic, overseeing operations, patient care and administration, while supporting the clinical team to ensure everything runs smoothly. She is passionate about delivering an exceptional experience for both patients and the team in order to create a welcoming, well-organised and supportive environment.",
+			"Outside the clinic, Victoria enjoys escaping to the countryside, watching sport, spending time with friends, and discovering new places to eat and drink.",
+		],
+	},
+	{
+		slug: 'rose-martin',
+		name: 'Rose Martin',
+		role: 'Patient Services & Accounts',
+		photo: '/team/rose-martin.jpg',
+		bio: [
+			"Rose joined Balance Performance Physiotherapy in 2013 and brings extensive experience in supporting both patients and clinical teams. She plays an integral role in the delivery of day-to-day patient services and administrative operations, and is recognised for her professionalism, efficiency, and welcoming approach.",
+			"Her responsibilities include front-of-house coordination as well as accounts and finance collection, with a strong commitment to accuracy and patient support. Rose is dedicated to ensuring each patient experience is well-organised, seamless, and positive.",
+			"Outside of her professional responsibilities, she values time spent with her children and enjoys exploring new dining experiences and connecting with family and friends.",
+		],
+	},
+	{
+		slug: 'charlotte-fordyce',
+		name: 'Charlotte Fordyce',
+		role: 'Assistant Manager',
+		photo: '/team/charlotte-fordyce.jpg',
+		bio: [
+			"Charlotte first joined Balance in August 2024 for work experience and returned a month later as a receptionist. Since then, she's grown quickly within the team, being promoted to Assistant Manager in September 2025.",
+			"She has a strong understanding of how the clinic runs day to day, supporting front of house, retail, and patient care. Charlotte focuses on making sure every patient has a smooth, positive experience while also supporting the clinicians behind the scenes. She's known for her welcoming approach and for helping create a warm atmosphere in the clinic.",
+			"Outside of work, Charlotte enjoys cooking, spending time with family and friends, and making the most of a good pub garden in the sunshine.",
+		],
+	},
+	{
+		slug: 'ruth-eastwood',
+		name: 'Ruth Eastwood',
+		role: 'Front of House',
+		photo: '/team/ruth-eastwood.jpg',
+		bio: [
+			"Ruth started with the Balance Performance Physiotherapy front of house team in November 2025. She is dedicated to helping patients feel comfortable and supported from the moment they arrive. She always wants to provide a positive experience, helping the clinic run smoothly, and supporting both patients and the team with care and professionalism.",
+			"Outside of the clinic Ruth is also a professional dancer and dog sitter, as well as enjoying time spent with friends and family and exploring new places.",
+		],
+	},
 ];
 
 // Initials helper for placeholder avatars
