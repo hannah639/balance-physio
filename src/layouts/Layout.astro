@@ -589,4 +589,44 @@ const jsonLd = settings.businessName ? {
 	.tm-avatar img[src="/testimonials/claire-bennett.jpg"] {
 		object-position: center top;
 	}
+
+	/* Image-position fixes: where 'object-fit: cover' centre-crops a portrait
+	   into a landscape slot, cutting off heads or main subjects. We bias the
+	   crop window so the focal point stays in view. (Hannah's note: don't
+	   shrink-with-whitespace, so we keep cover and just shift position.) */
+	.bp-page img[src="/team/dr-jose-sanz-mengibar.jpg"] { object-position: center top; }
+
+	/* Service pages — heads / subjects cut off at top */
+	.bp-page .image-text-media img[src="/prehab-class/body-2.jpg"],
+	.bp-page .image-text-media img[src="/pilates/intro.jpg"],
+	.bp-page .image-text-media img[src="/pilates/when-control.jpg"],
+	.bp-page .image-text-media img[src="/pilates/how-equipment.jpg"],
+	.bp-page .image-text-media img[src="/pilates/who-maternity.jpg"],
+	.bp-page .image-text-media img[src="/tmj-and-jaw-pain/jon-treating-patient.jpg"],
+	.bp-page .image-text-media img[src="/tmj-and-jaw-pain/jon-treating-patient-2.jpg"],
+	.bp-page .image-text-media img[src="/tmj-and-jaw-pain/jon-treating-patient-3.jpg"],
+	.bp-page .image-text-media img[src="/tmj-and-jaw-pain/jaw-treatment-1.jpg"],
+	.bp-page .image-text-media img[src="/bike-fitting-running-analysis/runner-profile.jpg"],
+	.bp-page .image-text-media img[src="/bike-fitting-running-analysis/cyclist-portrait.jpg"] {
+		object-position: center top;
+	}
+
+	/* Paediatric — girl was sitting too low + ball cut off. Bias a bit
+	   above centre so we lift her face into view AND keep more of the
+	   ball area visible. */
+	.bp-page .image-text-media img[src="/paediatric-sports-physiotherapy/dan-meet.jpg"] {
+		object-position: center 30%;
+	}
+
+	/* Condition pages — focal subjects cut off */
+	.bp-page .image-text-media img[src="/condition/foot-pain/intro.jpg"],
+	.bp-page .image-text-media img[src="/condition/foot-pain/who.jpg"],
+	.bp-page .image-text-media img[src="/condition/verrucas/feet-on-sand.jpg"],
+	.bp-page .image-text-media img[src="/condition/verrucas/childrens-feet.jpg"],
+	.bp-page .image-text-media img[src="/condition/womens-pelvic-health/women-group.jpg"],
+	.bp-page .image-text-media img[src="/condition/womens-pelvic-health/pregnant-belly.jpg"],
+	.bp-page .image-text-media img[src="/condition/parkinsons/senior-woman-smiling.jpg"],
+	.bp-page .image-text-media img[src="/condition/parkinsons/senior-man-smiling.jpg"] {
+		object-position: center top;
+	}
 </style>
