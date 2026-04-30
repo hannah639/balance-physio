@@ -18,7 +18,7 @@ const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view
 
 const faqs = [
 	{ q: 'Do I need a GP referral?', a: 'No. You can book directly with us.' },
-	{ q: 'Can children have sports physiotherapy?', a: 'Yes. We regularly work with young athletes, focusing on safe development, injury management, and long-term progression.' },
+	{ q: 'Can children have sports physiotherapy?', a: 'Yes. We regularly work with young athletes, focusing on safe development, injury management, and long-term progression. See our <a href="/service/paediatric-sports-physiotherapy/">youth physiotherapy</a> service for more.' },
 	{ q: 'What should I wear?', a: 'Comfortable clothing that allows us to assess movement and, where relevant, sport-specific activity.' },
 	{ q: 'How many sessions will I need?', a: 'This depends on your injury and goals. After your first session, we will give you a clear plan.' },
 	{ q: 'Can I use my private health insurance?', a: 'We recommend checking directly with your provider to confirm your level of cover.' },
@@ -89,7 +89,7 @@ const faqs = [
 			<li>Athletes looking to stay consistent and pain-free</li>
 			<li>High-performing athletes aiming to optimise performance</li>
 			<li>Children and young athletes managing growth and training demands</li>
-			<li>Parents seeking safe and structured support for their child's development</li>
+			<li>Parents seeking safe and structured support for their child's development (see our <a href="/service/paediatric-sports-physiotherapy/">youth physiotherapy</a> service)</li>
 			<li>Individuals wanting to build strength, resilience, and confidence in movement</li>
 		</ul>
 		<p>Whatever your starting point, the goal is the same: better movement, better performance, and long-term resilience.</p>
@@ -114,7 +114,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer" set:html={item.a}></div>
 					</details>
 				))}
 			</div>
