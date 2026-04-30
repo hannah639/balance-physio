@@ -11,7 +11,7 @@ export const team = [
 		bio: [
 			"Lucy is Balance's Director of Spinal Care. She has over thirty five years experience in clinical spinal disorders and is a renowned back pain specialist.",
 			"She has lectured nationally and internationally, and unusually for an academic she has continued as a full time clinician. Lucy has spent years researching the best treatment approaches for lower back pain management. She finds that the only real long term solutions emerge from ongoing commitment to rehabilitation and exercise and established Balance Performance Physiotherapy in 2001 in order to provide her clients with the environment to combat spinal pain.",
-			"Lucy completed a prescribing course several years ago and is authorised to prescribe medication for all musculoskeletal conditions. She has been acknowledged and congratulated by the Chartered Society of Physiotherapy for being a pioneer for the profession in the UK.",
+			"Lucy completed a prescribing course several years ago and is licensed to prescribe medication for all musculoskeletal conditions. She has been acknowledged and congratulated by the Chartered Society of Physiotherapy for being a pioneer for the profession in the UK.",
 			"Away from work Lucy can be found immersed in fine art, food, wine, sport and is utterly obsessed by growing as much food to feed her family and friends as they can stomach! And if you give her a perfect recipe, you'll have a friend for life.",
 		],
 	},
@@ -417,17 +417,6 @@ export const team = [
 		],
 	},
 	{
-		slug: 'rose-martin',
-		name: 'Rose Martin',
-		role: 'Patient Services & Accounts',
-		photo: '/team/rose-martin.jpg',
-		bio: [
-			"Rose joined Balance Performance Physiotherapy in 2013 and brings extensive experience in supporting both patients and clinical teams. She plays an integral role in the delivery of day-to-day patient services and administrative operations, and is recognised for her professionalism, efficiency, and welcoming approach.",
-			"Her responsibilities include front-of-house coordination as well as accounts and finance collection, with a strong commitment to accuracy and patient support. Rose is dedicated to ensuring each patient experience is well-organised, seamless, and positive.",
-			"Outside of her professional responsibilities, she values time spent with her children and enjoys exploring new dining experiences and connecting with family and friends.",
-		],
-	},
-	{
 		slug: 'charlotte-fordyce',
 		name: 'Charlotte Fordyce',
 		role: 'Assistant Manager',
@@ -436,6 +425,17 @@ export const team = [
 			"Charlotte first joined Balance in August 2024 for work experience and returned a month later as a receptionist. Since then, she's grown quickly within the team, being promoted to Assistant Manager in September 2025.",
 			"She has a strong understanding of how the clinic runs day to day, supporting front of house, retail, and patient care. Charlotte focuses on making sure every patient has a smooth, positive experience while also supporting the clinicians behind the scenes. She's known for her welcoming approach and for helping create a warm atmosphere in the clinic.",
 			"Outside of work, Charlotte enjoys cooking, spending time with family and friends, and making the most of a good pub garden in the sunshine.",
+		],
+	},
+	{
+		slug: 'rose-martin',
+		name: 'Rose Martin',
+		role: 'Patient Services & Accounts',
+		photo: '/team/rose-martin.jpg',
+		bio: [
+			"Rose joined Balance Performance Physiotherapy in 2013 and brings extensive experience in supporting both patients and clinical teams. She plays an integral role in the delivery of day-to-day patient services and administrative operations, and is recognised for her professionalism, efficiency, and welcoming approach.",
+			"Her responsibilities include front-of-house coordination as well as accounts and finance collection, with a strong commitment to accuracy and patient support. Rose is dedicated to ensuring each patient experience is well-organised, seamless, and positive.",
+			"Outside of her professional responsibilities, she values time spent with her children and enjoys exploring new dining experiences and connecting with family and friends.",
 		],
 	},
 	{

@@ -571,6 +571,10 @@ const jsonLd = settings.businessName ? {
 		.bp-page .problem-grid, .bp-page .feature-list,
 		.bp-page .team-grid, .bp-page .testimonial-grid { grid-template-columns: 1fr; }
 		.bp-page .section-header h2 { font-size: 32px; }
+		/* Approach: equalise card spacing on mobile (no lifted middle card) */
+		.bp-page .problem-card.featured { transform: none; padding: 40px 32px; }
+		.bp-page .problem-card.featured:hover { transform: translateY(-4px); }
+		.bp-page .problem-grid { gap: 20px; }
 	}
 
 	/* On services pages, hide the first body image (intro section) on mobile only.
