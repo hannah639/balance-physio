@@ -22,8 +22,8 @@ export const team = [
 		photo: '/team/caroline-curtis.jpg',
 		bio: [
 			"Caroline trained at Bristol University and qualified in 1993 with a BSc hon in physiotherapy. Initially Caroline started work at St George's hospital, specialising in musculoskeletal physiotherapy, and subsequently in 2004 became a clinical specialist/extended scope practitioner which involves working alongside orthopaedic and rheumatology consultants, diagnosing and treating complex conditions. This involved requesting investigations such as MRI scans, x-rays and blood tests where appropriate, she also trained in Injection therapy.",
-			"Caroline left her NHS practice after 23 years to concentrate on her work in the private sector treating musculoskeletal conditions, she completed her Pilates training with APPI and has experience in teaching both matt and reformer Pilates.",
-			"Alongside her NHS career Caroline has also worked in private practice for 30 years, including a 6-year spell with Rosslyn Park Rugby Club, and a trip to the 1998 World Speed Skating Championships in Hungary with the British Team and as Team physiotherapist on the England U11and U13 Lambs rugby tour to Dublin in 2014 and 2015.",
+			"Caroline left her NHS practice after 23 years to concentrate on her work in the private sector treating musculoskeletal conditions, she completed her Pilates training with APPI and has experience in teaching both mat and reformer Pilates.",
+			"Alongside her NHS career Caroline has also worked in private practice for 30 years, including a 6-year spell with Rosslyn Park Rugby Club, and a trip to the 1998 World Speed Skating Championships in Hungary with the British Team and as Team physiotherapist on the England U11 and U13 Lambs rugby tour to Dublin in 2014 and 2015.",
 			"Caroline enjoys treating spinal pain and using her acupuncture and manipulation skills alongside a manual therapy and exercise/Pilates based approach to treatment in order to restore function and aid return to sport however she also treats all areas of the body and pregnancy related pelvic girdle pain. Away from the clinic, Caroline is a keen sportswoman and was member of Wimbledon Windmiller's for many years having completed the London marathon in 3 h 47 m in 2004. And many half marathons, achieving a PB of 1h 39m.",
 			"She continues to run 18-20 miles a week and recently raced the cabbage patch 10 miler with age grade of 68 % . She attends weekly spin classes and completed the Prudential surrey ride 100 in 2017 and London surrey 46 mile in 2019. She also loves to Ski.",
 		],
@@ -37,11 +37,11 @@ export const team = [
 			"MSc SEM, PGDip SIR, BSc Hons, MCSP, ACPSEM Sil, AACP.",
 			"Sophia specialises in rehabilitation and return to sport after injury. She will be able to support all your goals for performance optimisation and physical success.",
 			"She completed her BSc in physiotherapy at St Georges Medical School in 2006, from there she headed up the academy with Millwall FC. She went on to deliver full first team duties which saw her become the first female physiotherapist to run on at The New Den for Millwall.",
-			"In 2008 she studied a Masters degree in Sports and Exercise Medicine at Barts, London as well as heading up the medical provision for sports scholars at Emanuel School in Battersea, amateur rugby with Colfes RFC, and developing her knowledge in Private practise.",
+			"In 2008 she studied a Masters degree in Sports and Exercise Medicine at Barts, London as well as heading up the medical provision for sports scholars at Emanuel School in Battersea, amateur rugby with Colfes RFC, and developing her knowledge in private practice.",
 			"Sophia has gone on to work with a variety of elite sports teams, including British Judo at their performance institute in the build up to London 2012; 2010-2013 / GBR Beach Volleyball Gregory Sheaf from 2014 - 2018, facilitating them to become the first male beach volleyball squad to represent Team GB. She also was lead of both Beach Volleyball Team Gregory Sheaf and Badminton England squads (2017/18) that went to the Commonwealth games, Gold Coast 2018.",
 			"In 2016 she became the lead physio for English Lacrosse Womens 10s squad and supported them during their bronze winning World Championships in both 2017 and 2022. She is now in preparation for the 2026 World Champs in Japan and is excited to support the team again.",
 			"She has honed her rehabilitation and return to sport skills on a contract basis, (2015-2025), for the UK Sports Institute (UKSI, formerly the English Institute of Sport) in a variety of settings including, Lee Valley Athletics centre, Surrey Sports Park, ISEH - multi-sport, and now she contracts for Paddle UK at Lee Valley White Water centre.",
-			"All of these experiences over the last 20years, have built a bed of knowledge that will help you get back to where you want to be, and achieve your goals.",
+			"All of these experiences over the last 20 years, have built a bed of knowledge that will help you get back to where you want to be, and achieve your goals.",
 		],
 	},
 	{
@@ -230,18 +230,6 @@ export const team = [
 		],
 	},
 	{
-		slug: 'nichola-roberts',
-		name: 'Nichola Roberts',
-		role: 'Cycling Specialist Physiotherapist',
-		photo: '/team/nichola-roberts.jpg',
-		bio: [
-			"Nichola Roberts is a cycling specialist physiotherapist and the owner of velophysio.co.uk, providing both expert physiotherapy and bike fitting for cyclists and triathletes.",
-			"Nichola helps cyclists of all levels, from first bike rides and commuting to sportives, stage races, ultra events and professional athletes. As a cyclist herself she understands the complex nature of the bike, biomechanics, training and bike fit and is able to offer insight, knowledge, diagnostic skill, and specific exercise rehabilitation.",
-			"Nichola completed a physiotherapy degree in the UK before completing a Masters degree in Australia, and has continued to progress her knowledge with regular courses and conferences as well as working alongside fellow cycling experts and professionals.",
-			"Nichola is available on Wednesdays at Balance.",
-		],
-	},
-	{
 		slug: 'steven-connor',
 		name: 'Steven Connor',
 		role: 'Podiatrist',
@@ -340,6 +328,18 @@ export const team = [
 			"In the early years Pat ran a successful personal training business specialising in metabolic testing for fat loss and sports performance. Pat is a former ITF TaeKwonDo champion and 4th Degree black belt. He ran a number of Taekwondo schools in SW London during his martial arts career. The schools that taught self-defence, promoted good health and prepared combat athletes for competition. Pat still enjoys holding pads and using martial training methods with his personal training clients.",
 			"Whilst still teaching martial arts, but no longer competing himself he transitioned his own training towards Ironman triathlon. Pat utilised his sports science knowledge to test different training methods on himself and his first endurance clients.",
 			"His particular areas of interest to improve performance was using metabolic and field testing to attain correct training zones, using bikefit protocols to improve comfort and aerodynamics, and working with power to train and race on the bike. After 3 years triathlon racing Pat went from a 12.5hr Ironman to a sub 10hr finish. Before finishing he was competing for Great Britain and had attained a pro racing licence for Ironman and 70.3.",
+		],
+	},
+	{
+		slug: 'nichola-roberts',
+		name: 'Nichola Roberts',
+		role: 'Cycling Specialist Physiotherapist',
+		photo: '/team/nichola-roberts.jpg',
+		bio: [
+			"Nichola Roberts is a cycling specialist physiotherapist and the owner of velophysio.co.uk, providing both expert physiotherapy and bike fitting for cyclists and triathletes.",
+			"Nichola helps cyclists of all levels, from first bike rides and commuting to sportives, stage races, ultra events and professional athletes. As a cyclist herself she understands the complex nature of the bike, biomechanics, training and bike fit and is able to offer insight, knowledge, diagnostic skill, and specific exercise rehabilitation.",
+			"Nichola completed a physiotherapy degree in the UK before completing a Masters degree in Australia, and has continued to progress her knowledge with regular courses and conferences as well as working alongside fellow cycling experts and professionals.",
+			"Nichola is available on Wednesdays at Balance.",
 		],
 	},
 	{
@@ -446,6 +446,17 @@ export const team = [
 		bio: [
 			"Ruth started with the Balance Performance Physiotherapy front of house team in November 2025. She is dedicated to helping patients feel comfortable and supported from the moment they arrive. She always wants to provide a positive experience, helping the clinic run smoothly, and supporting both patients and the team with care and professionalism.",
 			"Outside of the clinic Ruth is also a professional dancer and dog sitter, as well as enjoying time spent with friends and family and exploring new places.",
+		],
+	},
+	{
+		slug: 'lucy-rowland',
+		name: 'Lucy Rowland',
+		role: 'Front of House',
+		photo: '/team/lucy-rowland.jpg',
+		bio: [
+			"Lucy joined Balance in April 2026 and is the newest member of our front of house team. With a background in customer-facing roles, she enjoys helping clients feel welcome and at ease from the moment they arrive.",
+			"She's naturally organised and approachable, helping things run smoothly day to day while always happy to answer any questions. Lucy brings a warm, friendly energy to the team and enjoys being part of a supportive clinic environment.",
+			"Outside of work, she enjoys reading and spending time with her family.",
 		],
 	},
 ];
