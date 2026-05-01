@@ -80,7 +80,10 @@ const avatarGradient = gradientFor(member.name);
 	@media (max-width: 900px) {
 		.bio-section { padding: 60px 0; }
 		.bio-grid { grid-template-columns: 1fr; gap: 32px; }
-		.bio-photo { width: 100%; max-width: 320px; height: 280px; margin: 0 auto; }
+		/* On mobile, keep the photo's natural 3:4 portrait ratio so faces
+		   aren't cropped off at the top or bottom by the desktop fixed
+		   height of 280px. */
+		.bio-photo { width: 100%; max-width: 320px; height: auto; aspect-ratio: 3/4; margin: 0 auto; }
 		.bio-initials { font-size: 72px; }
 		.bio-body h2 { font-size: 28px; }
 	}

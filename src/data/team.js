@@ -411,7 +411,7 @@ export const team = [
 		role: 'Clinic Manager',
 		photo: '/team/victoria-chapman.jpg',
 		bio: [
-			"Victoria Chapman joined the Balance team in August 2025 as our Clinic Manager. With over 30 years of experience managing teams across a wide range of industries — including aesthetic clinics and an osteopathic charity — she brings a wealth of knowledge, professionalism and leadership to the role.",
+			"With over 25 years of experience managing teams across a wide range of industries including aesthetic clinics and an osteopathic charity she brings a wealth of knowledge, professionalism and leadership to the role.",
 			"Victoria plays a key part in the day-to-day running of the clinic, overseeing operations, patient care and administration, while supporting the clinical team to ensure everything runs smoothly. She is passionate about delivering an exceptional experience for both patients and the team in order to create a welcoming, well-organised and supportive environment.",
 			"Outside the clinic, Victoria enjoys escaping to the countryside, watching sport, spending time with friends, and discovering new places to eat and drink.",
 		],

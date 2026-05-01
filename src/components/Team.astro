@@ -161,6 +161,17 @@ const members = customMembers
 		.team-card-slide { flex: 0 0 180px; }
 		.team-card-slide .team-photo-wrap { height: 200px; }
 		.team-card-slide .team-initials { font-size: 44px; }
+		/* Grid (non-slider) cards on mobile: use aspect-ratio rather than a
+		   fixed 240px so portrait headshots aren't cropped at the top.
+		   Source images are 600x800 (3:4); preserve that. */
+		.bp-page .team:not(.team-slider-mode) .team-photo-wrap {
+			height: auto;
+			aspect-ratio: 3/4;
+		}
+		.bp-page .team:not(.team-slider-mode) .team-card .team-link-btn {
+			top: auto;
+			bottom: 80px;
+		}
 	}
 </style>
 

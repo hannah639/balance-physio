@@ -110,6 +110,10 @@ const jsonLd = settings.businessName ? {
 		</div>
 		<CookiesBanner gaId={gaId} gtmId={gtmId} />
 
+		<!-- Trustindex Google reviews badge (small floating widget). Renders
+		     site-wide via the loader script — Trustindex positions it itself. -->
+		<script defer async src="https://cdn.trustindex.io/loader.js?d31b89f7085c92783a46663d571"></script>
+
 		<script is:inline>
 			(function() {
 				var slider = document.getElementById('activitiesSlider');
@@ -199,6 +203,18 @@ const jsonLd = settings.businessName ? {
 
 	/* ── Problem/Approach ── */
 	.bp-page .problem { padding: 100px 0; background: linear-gradient(135deg, #fdf4eb 0%, #faead7 100%); }
+	/* On mobile the previous section (Conditions / .clinics) is light grey,
+	   and .problem's peach gradient created a hard horizontal break right
+	   at the join. Soften it by starting from the same neutral and easing
+	   into the peach over the first ~25% of the section. */
+	@media (max-width: 768px) {
+		.bp-page .problem {
+			background: linear-gradient(180deg,
+				var(--primary-bg) 0%,
+				#fdf4eb 18%,
+				#faead7 100%);
+		}
+	}
 	.bp-page .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
 	.bp-page .section-header h2 { font-size: 42px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; letter-spacing: -1px; }
 	.bp-page .section-header p { font-size: 18px; color: var(--text-muted); }

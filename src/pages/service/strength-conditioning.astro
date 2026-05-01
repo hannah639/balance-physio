@@ -106,7 +106,7 @@ const faqs = [
 	</ImageText>
 
 	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/strength-conditioning/pricing-new.jpg" imageAlt="Coach guiding strength training at Balance Physio">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p>We offer a transparent fee structure that reflects our level <span class="bp-egg">25</span> of clinical expertise.</p>
 		<p><a href="/pricing#strength-conditioning" class="section-link">Pricing Information &rarr;</a></p>
 	</ImageText>
 
@@ -126,3 +126,10 @@ const faqs = [
 
 	<BookingCTA />
 </Layout>
+
+<style>
+	/* 25th birthday social-media campaign easter egg — sits inline mid-sentence
+	   in the Pricing paragraph above. Red colour only; no underline, no bg —
+	   visitors who notice it can email admin@ for the prize. */
+	.bp-egg { color: #d40000; font-weight: inherit; }
+</style>

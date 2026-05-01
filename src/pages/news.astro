@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import BookingCTA from '../components/BookingCTA.astro';
+import { news } from '../data/news.js';
+---
+<Layout
+	title="News"
+	description="The latest news, team achievements and updates from Balance Performance Physiotherapy in Clapham."
+>
+	<PageHero
+		title="& Updates"
+		highlight="News"
+		subtitle="Team achievements, clinic milestones and what we've been up to lately."
+		breadcrumb="News"
+	/>
+
+	<section class="news-page">
+		<div class="container">
+			{news.length === 0 ? (
+				<p class="news-empty">More news coming soon — watch this space.</p>
+			) : (
+				<div class="news-list">
+					{news.map((item, i) => (
+						<article class={`news-card${i % 2 === 1 ? ' news-card--reverse' : ''}`} id={item.slug}>
+							{item.image && (
+								<div class="news-photo">
+									<img src={item.image} alt={item.imageAlt || ''} loading="lazy" />
+								</div>
+							)}
+							<div class="news-body">
+								<div class="news-meta">
+									{item.category && <span class="news-category">{item.category}</span>}
+									<time class="news-date">{item.date}</time>
+								</div>
+								<h2>{item.headline}</h2>
+								{item.body.map((p) => <p>{p}</p>)}
+							</div>
+						</article>
+					))}
+				</div>
+			)}
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>
+
+<style>
+	.news-page { padding: 80px 0; background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
+	.news-page .container { max-width: 1100px; }
+	.news-empty { text-align: center; font-size: 18px; color: #555; padding: 60px 0; }
+
+	.news-list { display: flex; flex-direction: column; gap: 56px; }
+	.news-card {
+		background: #ffffff;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+		display: grid;
+		grid-template-columns: 5fr 7fr;
+		align-items: stretch;
+	}
+	.news-card--reverse { grid-template-columns: 7fr 5fr; }
+	.news-card--reverse .news-photo { order: 2; }
+	.news-card--reverse .news-body { order: 1; }
+
+	.news-photo {
+		position: relative;
+		min-height: 360px;
+		background: #f0f4f6;
+		overflow: hidden;
+	}
+	.news-photo img {
+		position: absolute; inset: 0;
+		width: 100%; height: 100%;
+		object-fit: cover;
+		object-position: center top;
+		display: block;
+	}
+
+	.news-body { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+	.news-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+	.news-category {
+		display: inline-block;
+		background: rgba(232,119,34,0.1);
+		color: #e87722;
+		font-size: 12px; font-weight: 700;
+		text-transform: uppercase; letter-spacing: 1.5px;
+		padding: 5px 12px;
+		border-radius: 50px;
+	}
+	.news-date { font-size: 13px; color: #777; font-weight: 500; }
+	.news-body h2 {
+		font-size: 30px; font-weight: 800; line-height: 1.2;
+		letter-spacing: -0.5px; margin: 0 0 20px; color: #1a1a1a;
+	}
+	.news-body p {
+		font-size: 16px; line-height: 1.75; color: #555;
+		margin: 0 0 16px;
+	}
+	.news-body p:last-child { margin-bottom: 0; }
+
+	@media (max-width: 900px) {
+		.news-page { padding: 60px 0; }
+		.news-list { gap: 40px; }
+		.news-card,
+		.news-card--reverse { grid-template-columns: 1fr; }
+		.news-card--reverse .news-photo { order: 0; }
+		.news-card--reverse .news-body { order: 1; }
+		.news-photo { min-height: 0; aspect-ratio: 4/3; }
+		.news-body { padding: 32px 24px; }
+		.news-body h2 { font-size: 24px; }
+		.news-body p { font-size: 15px; }
+	}
+</style>

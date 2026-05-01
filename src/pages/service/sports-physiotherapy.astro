@@ -6,12 +6,12 @@ import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 
 const photos = [
-	{ src: '/sports-physio/rowers.jpg', alt: 'Rowing crew from overhead' },
-	{ src: '/sports-physio/teens-kayak.jpg', alt: 'Teenagers carrying a kayak' },
-	{ src: '/sports-physio/hero-running.jpg', alt: 'Return to running' },
-	{ src: '/sports-physio/hero-cricket.jpg', alt: 'Cricket performance' },
-	{ src: '/sports-physio/hero-skiing.jpg', alt: 'Skiing performance' },
-	{ src: '/sports-physio/hero-swimming.jpg', alt: 'Swimming performance' },
+	{ src: '/sports-physio/sp-clinical.jpg', alt: 'GB sprint kayaker on whitewater' },
+	{ src: '/sports-physio/sp-when.jpg', alt: 'Skier on alpine slope' },
+	{ src: '/sports-physio/sp-howwework.jpg', alt: 'Physiotherapist coaching volleyball player' },
+	{ src: '/sports-physio/sp-howwemeasure.jpg', alt: 'Olympic medallist with physiotherapist' },
+	{ src: '/sports-physio/sp-clinicalteam.jpg', alt: 'England athlete jump test in clinic gym' },
+	{ src: '/sports-physio/sp-pricing.jpg', alt: 'Athlete performing barbell hip thrust' },
 ];
 
 const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
@@ -34,7 +34,7 @@ const faqs = [
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Clinical, evidence-led, performance-focused" highlight="care" image="/sports-physio/road-cyclist.jpg" imageAlt="Road cyclist riding through a wooded road">
+	<ImageText eyebrow="Our approach" heading="Clinical, evidence-led, performance-focused" highlight="care" image="/sports-physio/sp-clinical.jpg" imageAspect="2/1" imageAlt="GB sprint kayaker Forrow paddling through whitewater">
 		<p>Sport places specific individual demands on the body. Whether you are training, competing, or simply trying to stay active, injury or pain can quickly affect your confidence and performance.</p>
 		<p>At Balance, sports physiotherapy is about more than getting you out of pain. It's about understanding how you move, what your sport requires, and what needs to change to get you back performing at your best.</p>
 		<p>We take a clinical, evidence-led approach to every case. From your first session, we assess how you move under load, how your body responds to training, and where the breakdown has occurred. We then build a structured plan around your goals, your sport, and your starting point.</p>
@@ -43,7 +43,7 @@ const faqs = [
 	</ImageText>
 	</div>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="sports physiotherapy" image="/sports-physio/football-duel.jpg" imageAlt="Two footballers competing for the ball">
+	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="sports physiotherapy" image="/sports-physio/sp-when.jpg" imageAspect="3/4" imageAlt="Skier carving a powder turn on a steep alpine slope">
 		<p>You don't need to wait until you are injured to benefit from sports physiotherapy.</p>
 		<p>We can help if you are dealing with:</p>
 		<ul>
@@ -58,7 +58,7 @@ const faqs = [
 		<p>If something is holding you back, or not improving as expected, it's worth getting it assessed.</p>
 	</ImageText>
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/sports-physio/sunset-runner.jpg" imageAlt="Athlete running at sunset">
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/sports-physio/sp-howwework.jpg" imageAspect="3/4" imageAlt="Physiotherapist coaching a volleyball player through movement assessment">
 		<p>Everything we do is built around one principle: helping you move and perform better.</p>
 		<p>Your treatment may include:</p>
 		<ul>
@@ -71,7 +71,7 @@ const faqs = [
 		<p>We do not separate rehabilitation from performance. From early in your recovery, we begin building towards the demands of your sport, so you are not just pain-free, but ready to return stronger and more capable.</p>
 	</ImageText>
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/sports-physio/swimmer.jpg" imageAlt="Freestyle swimmer mid-stroke">
+	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/sports-physio/sp-howwemeasure.jpg" imageAspect="3/4" imageAlt="Olympic medallist with her physiotherapist after the Paris 2024 Games">
 		<p>We don't guess.</p>
 		<p>From your first session, we establish a clear baseline of how you move, how your body handles load, and what you can currently do in your sport. As you progress, we regularly reassess strength, control, and performance.</p>
 		<p>This keeps your treatment focused and accountable.</p>
@@ -97,14 +97,14 @@ const faqs = [
 		<p>Whatever your starting point, the goal is the same: better movement, better performance, and long-term resilience.</p>
 	</ImageText>
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="team" image="/sports-physio/tennis-serve.jpg" imageAlt="Tennis serve on an outdoor court">
+	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="team" image="/sports-physio/sp-clinicalteam.jpg" imageAspect="3/4" imageAlt="England athlete performing a jump performance test in the clinic gym">
 		<p>Our sports physiotherapy service is delivered by a highly experienced team with specialist expertise in sports injuries, performance, rehabilitation and return to play.</p>
 		<p>Sophia Busfield is our Head of Sports Rehabilitation and Return to Play, with 20 years' experience in elite sport across a variety of teams, including British Judo and lacrosse. Our team also includes many Sports specific professionals such as our tennis specialists who staff The Championships at The All England Club and Queen's Club and the ATP Tour.</p>
 		<p>We work collaboratively across the team, combining clinical expertise with a deep understanding of movement, performance and sport-specific rehabilitation, so your care is always precise, structured and goal-driven.</p>
 		<p><a href="/meet-the-team" class="section-link">Meet The Team &rarr;</a></p>
 	</ImageText>
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/sports-physio/basketball.jpg" imageAlt="Basketball player laying the ball into the hoop">
+	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/sports-physio/sp-pricing.jpg" imageAspect="6/7" imageAlt="Athlete performing a heavy barbell hip thrust as part of strength rehab">
 		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We are also recognised by major insurance providers, including Bupa and AXA PPP Health.</p>
 		<p><a href="/pricing#sports-physiotherapy" class="section-link">Pricing Information &rarr;</a></p>
 	</ImageText>
