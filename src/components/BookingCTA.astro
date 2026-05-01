@@ -7,7 +7,7 @@
 		<p>If you're ready to start your rehabilitation journey then we're here to help! You can book online straight away or alternatively please get in touch if you have any questions.</p>
 		<div class="booking-cta-actions">
 			<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-book">Book Now</a>
-			<a href="/contact-us" class="btn-outline-white">Contact Us</a>
+			<a href="/contact-us" class="btn-outline-white btn-outline-white--lg">Contact Us</a>
 		</div>
 	</div>
 </section>
@@ -68,8 +68,10 @@
 		margin-bottom: 32px;
 	}
 	.booking-cta-actions {
-		display: flex; gap: 16px; flex-wrap: wrap;
+		display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
 	}
+	/* Larger variant to match the .btn-book sibling's height in this CTA */
+	.btn-outline-white--lg { padding: 18px 36px !important; font-size: 17px !important; }
 	@media (max-width: 768px) {
 		.booking-cta { padding: 64px 20px; min-height: 0; }
 		.booking-cta-inner h2 { font-size: 30px; }

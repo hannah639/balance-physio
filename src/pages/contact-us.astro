@@ -23,8 +23,8 @@ import BookingCTA from '../components/BookingCTA.astro';
 				<ul class="check-list">
 					<li><strong>Phone:</strong> <a href="tel:02076272308" class="inline-link">020 7627 2308</a></li>
 					<li><strong>Email:</strong> <a href="mailto:admin@balancephysio.com" class="inline-link">admin@balancephysio.com</a></li>
-					<li><strong>Clapham North, Main Clinic:</strong> 113 Gauden Rd, London SW4 6LE, United Kingdom</li>
-					<li><strong>Clapham South for Hydrotherapy:</strong> Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH</li>
+					<li><strong>Clapham North, Main Clinic:</strong> <a href="https://www.google.com/maps/place/Balance+Physio/@51.465003,-0.130667,2381m/data=!3m1!1e3!4m6!3m5!1s0x487604505fa09de1:0x4826f10ca0a3e7b1!8m2!3d51.465003!4d-0.130667!16s%2Fg%2F1tfm63rd" target="_blank" rel="noopener" class="address-link">113 Gauden Rd, London SW4 6LE, United Kingdom</a></li>
+					<li><strong>Clapham South for Hydrotherapy:</strong> <a href="https://www.google.com/maps/place/Audley+Nightingale+Place/data=!4m2!3m1!1s0x0:0x9ad3c77ad81840c6" target="_blank" rel="noopener" class="address-link">Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH</a></li>
 				</ul>
 				<p class="address-note">For all appointments, please contact our main clinic, Gauden Road. Audley Village is for hydrotherapy only and all appointments should be booked via Gauden Road.</p>
 				<p>For new patients, our admin team will send you a quick registration form by email. Once that's back with us, we'll book you in with the right clinician.</p>
@@ -113,6 +113,8 @@ import BookingCTA from '../components/BookingCTA.astro';
 		margin: 0 0 24px;
 	}
 	.contact-intro-copy .check-list { list-style: none; margin: 20px 0; padding: 0; }
+	.contact-intro-copy .address-link { color: inherit; text-decoration: none; transition: color .2s; }
+	.contact-intro-copy .address-link:hover { color: #e87722; text-decoration: underline; }
 	.contact-intro-copy .check-list li {
 		position: relative; padding: 8px 0 8px 32px;
 		font-size: 16px; color: #555555; line-height: 1.6;

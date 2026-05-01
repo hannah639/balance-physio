@@ -1,5 +1,9 @@
 ---
 const { title, highlight, subtitle, breadcrumb, hideCta = false, ctaText = 'Book an appointment', ctaHref = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services' } = Astro.props;
+
+// Open external CTAs in a new tab (e.g. the MindBody booking widget) but
+// keep internal links (e.g. /contact-us) in the same tab.
+const ctaIsExternal = /^https?:\/\//.test(ctaHref);
 ---
 <section class="page-hero">
 	<div class="page-hero-inner">
@@ -10,6 +14,10 @@ const { title, highlight, subtitle, breadcrumb, hideCta = false, ctaText = 'Book
 			{highlight ? <><span class="highlight">{highlight}</span>{' '}{title}</> : title}
 		</h1>
 		{subtitle && <p class="subtitle">{subtitle}</p>}
-		{!hideCta && <a href={ctaHref} target="_blank" rel="noopener" class="btn-book">{ctaText}</a>}
+		{!hideCta && (
+			ctaIsExternal
+				? <a href={ctaHref} target="_blank" rel="noopener" class="btn-book">{ctaText}</a>
+				: <a href={ctaHref} class="btn-book">{ctaText}</a>
+		)}
 	</div>
 </section>

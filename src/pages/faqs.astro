@@ -176,5 +176,12 @@ const faqs = [
 		text-underline-offset: 2px;
 	}
 	.faq-section .answer .inline-link:hover { text-decoration-thickness: 2px; }
+	/* Phone numbers and email addresses — make them stand out from body copy
+	   with brand blue + bold so they're clearly clickable. */
+	.faq-section .answer .inline-link[href^="tel:"],
+	.faq-section .answer .inline-link[href^="mailto:"] {
+		color: var(--cta);
+		font-weight: 700;
+	}
 	.faq-section .answer strong { color: #1a1a1a; }
 </style>
