@@ -24,10 +24,10 @@ const redirects = {
 	'/spinal-specialists/': '/meet-the-team',
 	'/sports-injury-trauma-orthopaedic/': '/service/sports-physiotherapy',
 	'/sports-injury-team/': '/meet-the-team',
-	'/shoulder-specialist-physiotherapy/': '/condition/shoulder-pain',
-	'/sports-massage-clapham-soft-tissue-therapy/': '/service/sports-massage',
+	'/shoulder-specialist-physiotherapy/': '/condition/shoulder-specialist-physiotherapy',
+	'/sports-massage-clapham-soft-tissue-therapy/': '/service/sports-massage-clapham-soft-tissue-therapy',
 	'/podiatry-and-ultrasound/': '/service/podiatry',
-	'/specialist-neuro-physio-london/': '/service/neurological-rehabilitation',
+	'/specialist-neuro-physio-london/': '/service/specialist-neuro-physio-london',
 	'/shockwave-therapy/': '/service/shockwave-therapy',
 	'/strength-conditioning/': '/service/strength-conditioning',
 	'/hydrotherapy/': '/service/hydrotherapy',
@@ -68,6 +68,15 @@ const redirects = {
 	'/blog/2012/03/barefoot-running-and-natural-movement-workshop-at-balance-performance-clapham/': '/',
 	'/blog/2014/05/radial-shockwave-therapy-and-achilles-tendonitis/': '/',
 	'/2020/05/space-adjustments-to-our-balance-performance-facility-during-covid-19/': '/',
+
+
+	// 2026 SEO URL renames — old Astro URL → new SEO-friendly URL
+	'/service/sports-massage': '/service/sports-massage-clapham-soft-tissue-therapy',
+	'/service/neurological-rehabilitation': '/service/specialist-neuro-physio-london',
+	'/service/bike-fitting-running-analysis': '/service/bike-fitting-cycling-analysis',
+	'/service/anti-gravity-treadmill': '/service/alterg-anti-gravity-treadmill-london',
+	'/condition/knee-injuries': '/condition/acl-knee-specialist-london',
+	'/condition/shoulder-pain': '/condition/shoulder-specialist-physiotherapy',
 
 	// Removed new-site index pages — safety nets in case of bookmarks / inbound links.
 	// Astro's trailing-slash handling means we only need one form per route.

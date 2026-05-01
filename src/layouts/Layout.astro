@@ -7,7 +7,19 @@ import CookiesBanner from '../components/CookiesBanner.astro';
 const { title, description } = Astro.props;
 
 const siteTitle = settings.title;
-const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+// If the page title is already a full SEO meta title — i.e. it contains a
+// pipe ('|'), or is descriptive enough that the consultant's wording stands
+// on its own (mentions Clapham/treatment/etc.) — use it verbatim. Otherwise
+// append the site title for branding on short generic page titles like
+// "About Us" / "Contact Us".
+function isFullSeoTitle(t) {
+	if (!t) return false;
+	if (t.includes('|')) return true;
+	// Heuristic: title contains location, "Treatment", "Therapy" or similar
+	// SEO signals → treat as a self-contained meta title.
+	return /\b(Clapham|London|Treatment|Therapy|Physiotherapy|Physio|Rehab)\b/i.test(t) && t.length > 24;
+}
+const pageTitle = title ? (isFullSeoTitle(title) ? title : `${title} | ${siteTitle}`) : siteTitle;
 const pageDescription = description || settings.description || '';
 const siteUrl = settings.siteUrl;
 const ogImageUrl = settings.ogImage ? `${siteUrl}${settings.ogImage}` : null;
