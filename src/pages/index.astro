@@ -203,13 +203,6 @@ const jsonLd = settings.businessName ? {
 
 	/* ── Problem/Approach ── */
 	.bp-page .problem { padding: 100px 0; background: linear-gradient(135deg, #fdf4eb 0%, #faead7 100%); }
-	/* On mobile, drop the peach gradient entirely — it created a visible
-	   hard break against the lighter Conditions section above. The
-	   Approach cards already carry their own visual weight, so a flat
-	   neutral background reads cleanly between sections. */
-	@media (max-width: 768px) {
-		.bp-page .problem { background: var(--primary-bg); }
-	}
 	.bp-page .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
 	.bp-page .section-header h2 { font-size: 42px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; letter-spacing: -1px; }
 	.bp-page .section-header p { font-size: 18px; color: var(--text-muted); }
@@ -263,6 +256,14 @@ const jsonLd = settings.businessName ? {
 
 	/* ── Activities Slider ── */
 	.bp-page .activities { padding: 100px 0; background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
+	/* On mobile, the four-stop diagonal gradient on the Activities section
+	   (the first section under the hero) read as a hard break against the
+	   dark hero above. Hannah asked for it to be flat blue on mobile —
+	   we use the bluest tone from the existing gradient palette so it
+	   stays consistent with the desktop look. */
+	@media (max-width: 768px) {
+		.bp-page .activities { background: #dce8ed; }
+	}
 	.bp-page .activities .section-header { text-align: center; max-width: 900px; margin: 0 auto 60px; }
 	.bp-page .activities .section-header h2 { font-size: 42px; font-weight: 800; letter-spacing: -1px; line-height: 1.2; margin-bottom: 16px; }
 	.bp-page .activities-slider { display: flex; gap: 24px; overflow-x: auto; padding-bottom: 24px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }

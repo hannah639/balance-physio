@@ -161,14 +161,22 @@ const members = customMembers
 		.team-card-slide { flex: 0 0 180px; }
 		.team-card-slide .team-photo-wrap { height: 200px; }
 		.team-card-slide .team-initials { font-size: 44px; }
-		/* Grid (non-slider) cards on mobile: use aspect-ratio rather than a
-		   fixed 240px so portrait headshots aren't cropped at the top.
-		   Source images are 600x800 (3:4); preserve that. */
-		.bp-page .team:not(.team-slider-mode) .team-photo-wrap {
+		/* Grid (non-slider) cards on mobile: drop the desktop fixed
+		   240px height — it crops portrait headshots at the chin.
+		   Source images are 600x800 (3:4) so we use that aspect ratio
+		   and add a generous min-height so even narrow grid columns
+		   produce a tall enough box for the full headshot.
+		   NOTE: previous attempt used `.bp-page .team:not(.team-slider-mode)`
+		   but Astro scopes that selector to require Team's component CID
+		   on .bp-page, which is defined in Layout.astro and so doesn't
+		   carry the CID. Selector silently failed to match. Removed the
+		   .bp-page prefix here so the rule actually applies. */
+		.team:not(.team-slider-mode) .team-photo-wrap {
 			height: auto;
 			aspect-ratio: 3/4;
+			min-height: 360px;
 		}
-		.bp-page .team:not(.team-slider-mode) .team-card .team-link-btn {
+		.team:not(.team-slider-mode) .team-card .team-link-btn {
 			top: auto;
 			bottom: 80px;
 		}
