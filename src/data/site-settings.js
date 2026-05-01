@@ -2,8 +2,8 @@
 // Used to be fetched from Sanity; now hardcoded here for simplicity.
 export const siteSettings = {
 	// Branding & meta
-	title: 'Balance Performance Physiotherapy',
-	description: "Award-winning physiotherapy clinic in Clapham, London. Expert sports injury, rehabilitation, and bike fitting services from a team of 25 specialists.",
+	title: 'Physiotherapy in Clapham | Balance Performance Physiotherapy',
+	description: "Expert physiotherapy in Clapham, London. Treat pain, recover from injury, and improve performance with personalised rehab at Balance Performance Physiotherapy.",
 	siteUrl: 'https://balancephysio.com',
 	ogImage: '/booking-banner.jpg', // default social-share image (1200x630 recommended)
 
