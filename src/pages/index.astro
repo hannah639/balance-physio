@@ -203,17 +203,12 @@ const jsonLd = settings.businessName ? {
 
 	/* ── Problem/Approach ── */
 	.bp-page .problem { padding: 100px 0; background: linear-gradient(135deg, #fdf4eb 0%, #faead7 100%); }
-	/* On mobile the previous section (Conditions / .clinics) is light grey,
-	   and .problem's peach gradient created a hard horizontal break right
-	   at the join. Soften it by starting from the same neutral and easing
-	   into the peach over the first ~25% of the section. */
+	/* On mobile, drop the peach gradient entirely — it created a visible
+	   hard break against the lighter Conditions section above. The
+	   Approach cards already carry their own visual weight, so a flat
+	   neutral background reads cleanly between sections. */
 	@media (max-width: 768px) {
-		.bp-page .problem {
-			background: linear-gradient(180deg,
-				var(--primary-bg) 0%,
-				#fdf4eb 18%,
-				#faead7 100%);
-		}
+		.bp-page .problem { background: var(--primary-bg); }
 	}
 	.bp-page .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
 	.bp-page .section-header h2 { font-size: 42px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; letter-spacing: -1px; }
