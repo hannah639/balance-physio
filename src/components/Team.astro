@@ -106,6 +106,19 @@ const members = customMembers
 		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 		gap: 20px;
 	}
+	/* Grid mode photos: taller boxes that fit our 600x800 (3:4) team
+	   headshots without cropping at the chin. Replaces the default
+	   240px fixed height. NOTE: drops the .bp-page prefix because
+	   Astro scopes the Team CSS by component CID — and .bp-page is
+	   defined in Layout.astro, so it doesn't carry Team's CID. The
+	   selector with .bp-page silently fails to match in the rendered
+	   DOM. Same scope-mismatch issue we hit with the mobile rule in
+	   Patch 41. */
+	.team:not(.team-slider-mode):not(.team-centered-mode) .team-photo-wrap {
+		height: auto;
+		aspect-ratio: 3/4;
+		min-height: 280px;
+	}
 	.bp-page .team:not(.team-slider-mode) .team-card .info { padding: 18px 16px 20px; }
 	.bp-page .team:not(.team-slider-mode) .team-card h3 { font-size: 16px; }
 	.bp-page .team:not(.team-slider-mode) .team-card .team-link-btn { top: 216px; width: 40px; height: 40px; font-size: 16px; right: 14px; }
