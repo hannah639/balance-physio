@@ -24,6 +24,7 @@ const redirects = {
 	'/spinal-specialists/': '/meet-the-team',
 	'/sports-injury-trauma-orthopaedic/': '/service/sports-physiotherapy',
 	'/sports-injury-team/': '/meet-the-team',
+	'/physiotherapy-total-rehabilitation/': '/service/physiotherapy',
 	'/shoulder-specialist-physiotherapy/': '/condition/shoulder-specialist-physiotherapy',
 	'/sports-massage-clapham-soft-tissue-therapy/': '/service/sports-massage-clapham-soft-tissue-therapy',
 	'/podiatry-and-ultrasound/': '/service/podiatry',
