@@ -15,7 +15,7 @@ const loop = [...unique, ...unique];
 	<div class="photo-marquee-track" style={`--marquee-duration: ${speedSeconds}s; --marquee-height: ${heightPx}px; --marquee-gap: ${gapPx}px;`}>
 		{loop.map((img, i) => (
 			<div class="photo-marquee-item">
-				<img src={img.src} alt={img.alt || ''} loading="lazy" />
+				<img src={img.src} alt={img.alt || ''} loading="lazy" decoding="async" width="800" height="600" />
 			</div>
 		))}
 	</div>

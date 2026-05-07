@@ -29,7 +29,7 @@ const avatarGradient = gradientFor(member.name);
 			<div class="bio-grid">
 				{member.photo ? (
 					<div class="bio-photo bio-photo--img">
-						<img src={member.photo} alt={member.name} />
+						<img src={member.photo} alt={member.name} decoding="async" width="500" height="600" />
 					</div>
 				) : (
 					<div class="bio-photo" style={`background: ${avatarGradient};`}>

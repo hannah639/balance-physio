@@ -33,7 +33,7 @@ const members = customMembers
 						<a href={`/team/${member.slug}/`} class="team-card team-card-slide">
 							{member.photo ? (
 								<div class="team-photo-wrap team-photo-wrap--img">
-									<img src={member.photo} alt={member.name} loading="lazy" />
+									<img src={member.photo} alt={member.name} loading="lazy" decoding="async" width="400" height="500" />
 								</div>
 							) : (
 								<div class="team-photo-wrap" style={`background: ${gradientFor(member.name)};`}>
@@ -58,7 +58,7 @@ const members = customMembers
 					<a href={`/team/${member.slug}/`} class="team-card">
 						{member.photo ? (
 							<div class="team-photo-wrap team-photo-wrap--img">
-								<img src={member.photo} alt={member.name} loading="lazy" />
+								<img src={member.photo} alt={member.name} loading="lazy" decoding="async" width="400" height="500" />
 							</div>
 						) : (
 							<div class="team-photo-wrap" style={`background: ${gradientFor(member.name)};`}>

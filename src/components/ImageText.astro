@@ -64,15 +64,23 @@ const embedUrl = youtubeId && autoplay
 				></iframe>
 			) : youtubeId ? (
 				<button class="video-trigger" data-youtube={youtubeId} aria-label="Play video">
-					<img src={thumbUrl} alt={imageAlt || 'Play video'} />
+					<img src={thumbUrl} alt={imageAlt || 'Play video'} loading="lazy" decoding="async" />
 					<span class="play-btn"><span class="play-icon">▶</span></span>
 				</button>
 			) : image ? (
-				<img src={image} alt={imageAlt} style={imgStyle} />
+				<img
+					src={image}
+					alt={imageAlt}
+					style={imgStyle}
+					loading="lazy"
+					decoding="async"
+					width="1400"
+					height="1050"
+				/>
 			) : collage && collage.length ? (
 				<div class="media-collage">
 					{collage.map((item) => (
-						<img src={item.src} alt={item.alt || ''} />
+						<img src={item.src} alt={item.alt || ''} loading="lazy" decoding="async" />
 					))}
 				</div>
 			) : (
