@@ -30,7 +30,7 @@ const members = customMembers
 			<div class="team-slider-wrap">
 				<div class="team-slider">
 					{members.map((member) => (
-						<a href={`/team/${member.slug}`} class="team-card team-card-slide">
+						<a href={`/team/${member.slug}/`} class="team-card team-card-slide">
 							{member.photo ? (
 								<div class="team-photo-wrap team-photo-wrap--img">
 									<img src={member.photo} alt={member.name} loading="lazy" />
@@ -55,7 +55,7 @@ const members = customMembers
 		) : (
 			<div class="team-grid">
 				{members.map((member) => (
-					<a href={`/team/${member.slug}`} class="team-card">
+					<a href={`/team/${member.slug}/`} class="team-card">
 						{member.photo ? (
 							<div class="team-photo-wrap team-photo-wrap--img">
 								<img src={member.photo} alt={member.name} loading="lazy" />
