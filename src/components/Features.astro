@@ -1,4 +1,6 @@
 ---
+import { bgImageSet } from '../lib/bgImage.js';
+
 const services = [
 	{ title: 'Physiotherapy', href: '/service/physiotherapy/', bg: '/archery.jpg' },
 	{ title: 'Sports Physiotherapy', href: '/service/sports-physiotherapy/', bg: '/hockey.jpg' },
@@ -47,7 +49,7 @@ function gradientFor(title) {
 					class="feature-card"
 					style={s.bg ? `` : `background: ${gradientFor(s.title)};`}
 				>
-					{s.bg && <div class="feature-card-bg" style={`background-image: url('${s.bg}');${s.bgPosition ? ` background-position: ${s.bgPosition};` : ''}`} />}
+					{s.bg && <div class="feature-card-bg" style={`${bgImageSet(s.bg)}${s.bgPosition ? ` background-position: ${s.bgPosition};` : ''}`} />}
 					<div class="feature-card-overlay"></div>
 					<div class="feature-card-content">
 						<div class="service-label">Service</div>

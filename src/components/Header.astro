@@ -1,5 +1,6 @@
 ---
 import Picture from './Picture.astro';
+import { bgImageSet } from '../lib/bgImage.js';
 
 const serviceColumns = [
 	[
@@ -192,7 +193,7 @@ const locations = [
 								{whoWeHelp.map((item) => <a href={item.href}>{item.label}</a>)}
 							</div>
 						</div>
-						<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="mega-card" style="background-image: url('/sports-physio/hero-running.jpg')">
+						<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="mega-card" style={bgImageSet('/sports-physio/hero-running.jpg')}>
 							<span class="mega-card-button">Book Now</span>
 						</a>
 					</div>
@@ -208,7 +209,7 @@ const locations = [
 								{locations.map((item) => <a href={item.href}>{item.label}</a>)}
 							</div>
 						</div>
-						<a href="/clinic/clapham/" class="mega-card" style="background-image: url('/clapham/opening-hours-banners.jpg')" aria-label="Visit our Clapham clinic page"></a>
+						<a href="/clinic/clapham/" class="mega-card" style={bgImageSet('/clapham/opening-hours-banners.jpg')} aria-label="Visit our Clapham clinic page"></a>
 					</div>
 				</li>
 				<li><a href="/contact-us/">Contact Us</a></li>
