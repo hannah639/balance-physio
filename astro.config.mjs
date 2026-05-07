@@ -25,6 +25,16 @@ const redirects = {
 	'/sports-injury-trauma-orthopaedic/': '/service/sports-physiotherapy',
 	'/sports-injury-team/': '/meet-the-team',
 	'/physiotherapy-total-rehabilitation/': '/service/physiotherapy',
+	'/paediatric-injuries-developmental-concerns/': '/service/paediatric-sports-physiotherapy',
+	'/youthphysiotherapy/': '/service/paediatric-sports-physiotherapy',
+	'/bike-fitting-cycling-analysis/': '/service/bike-fitting-cycling-analysis',
+	'/cycling-analysis-and-fitting/': '/service/bike-fitting-cycling-analysis',
+	'/new-bike-fitting/': '/service/bike-fitting-cycling-analysis',
+	'/runners/': '/service/bike-fitting-cycling-analysis',
+	'/running-analysis-and-coaching/': '/service/bike-fitting-cycling-analysis',
+	'/alterg-anti-gravity-treadmill-london/': '/service/alterg-anti-gravity-treadmill-london',
+	'/acl-knee-specialist-london/': '/condition/acl-knee-specialist-london',
+	'/classes-in-clapham/tissue-mobility-class-foam-rolling/': '/service/prehab-class',
 	'/shoulder-specialist-physiotherapy/': '/condition/shoulder-specialist-physiotherapy',
 	'/sports-massage-clapham-soft-tissue-therapy/': '/service/sports-massage-clapham-soft-tissue-therapy',
 	'/podiatry-and-ultrasound/': '/service/podiatry',
@@ -33,13 +43,26 @@ const redirects = {
 	'/strength-conditioning/': '/service/strength-conditioning',
 	'/hydrotherapy/': '/service/hydrotherapy',
 	'/womens-health-fitness/': '/service/womens-health',
-	'/pilates/': '/',
-	'/classes-in-clapham/': '/',
+	'/pilates/': '/service/pilates',
+	'/classes-in-clapham/': '/service/prehab-class',
 	'/classes-in-clapham/pilates-classes/': '/service/prehab-class',
 
 	// Facility
 	'/the-facility/': '/our-clinic',
 	'/the-facility/pilates-studio/': '/our-studios',
+	'/the-facility/location/': '/our-clinic',
+	'/the-facility/gym/': '/our-clinic',
+	'/the-facility/treatment-rooms/': '/our-clinic',
+
+	// Old WP product URLs (Shopify replaced these)
+	'/product/alter-g-session/': '/service/alterg-anti-gravity-treadmill-london',
+	'/product/flex-kinesiology-tape-gentle-adhesion/': '/shop',
+
+	// Retired services / specialty pages — soft-redirect to home or related service
+	'/personal-training/': '/',
+	'/youth-boxing-clapham/': '/',
+	'/breathing-and-breathwork/': '/',
+	'/nadia-hussain/': '/meet-the-team',
 
 	// COVID legacy
 	'/covid-19-service-balance-physiotherapy-fitness-clapham/': '/',
@@ -68,6 +91,11 @@ const redirects = {
 	'/blog/2011/10/graham-anderson-leading-atp-world-tour-physiotherapist-talks-about-his-experience-and-life-on-tour/': '/',
 	'/blog/2012/03/barefoot-running-and-natural-movement-workshop-at-balance-performance-clapham/': '/',
 	'/blog/2014/05/radial-shockwave-therapy-and-achilles-tendonitis/': '/',
+	'/blog/2013/06/bmx-kurt-yaeger-rehab-journey-and-rudimental-music-video/': '/',
+	'/2015/10/diastasis-recti-during-pregnancy/': '/service/womens-health',
+	'/2017/01/10-minutes-for-your-tendon-thoughts-from-graham-anderson-at-the-australian-open-tennis/': '/',
+	'/2017/02/vojta-therapy-uk-jose-manual-sanz-mengibar/': '/service/vojta-therapy',
+	'/2021/07/return-of-londons-longest-running-kettlebell-class/': '/',
 	'/2020/05/space-adjustments-to-our-balance-performance-facility-during-covid-19/': '/',
 
 
