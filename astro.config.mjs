@@ -43,6 +43,7 @@ const redirects = {
 	'/strength-conditioning/': '/service/strength-conditioning/',
 	'/hydrotherapy/': '/service/hydrotherapy/',
 	'/womens-health-fitness/': '/service/womens-health/',
+	'/womens-and-mens-health/': '/service/womens-health/',
 	'/pilates/': '/service/pilates/',
 	'/classes-in-clapham/': '/service/prehab-class/',
 	'/classes-in-clapham/pilates-classes/': '/service/prehab-class/',
@@ -53,6 +54,7 @@ const redirects = {
 	'/the-facility/location/': '/our-clinic/',
 	'/the-facility/gym/': '/our-clinic/',
 	'/the-facility/treatment-rooms/': '/our-clinic/',
+	'/the-facility/early-rehab-studio/': '/',
 
 	// Old WP product URLs (Shopify replaced these)
 	'/product/alter-g-session/': '/service/alterg-anti-gravity-treadmill-london/',
