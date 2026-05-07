@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import Picture from '../components/Picture.astro';
 import { news } from '../data/news.js';
 ---
 <Layout
@@ -25,7 +26,7 @@ import { news } from '../data/news.js';
 						<article class={`news-card${i % 2 === 1 ? ' news-card--reverse' : ''}`} id={item.slug}>
 							{item.image && (
 								<div class="news-photo">
-									<img src={item.image} alt={item.imageAlt || ''} loading="lazy" decoding="async" width="800" height="600" />
+									<Picture src={item.image} alt={item.imageAlt || ''} loading="lazy" decoding="async" width="800" height="600" />
 								</div>
 							)}
 							<div class="news-body">

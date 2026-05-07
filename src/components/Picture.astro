@@ -1,0 +1,86 @@
+---
+/**
+ * <Picture> — drop-in replacement for <img>, emits a <picture> element with
+ * AVIF + WebP sources and a JPG/WebP fallback, per the HMDG image-format rule.
+ *
+ * Usage:
+ *   <Picture src="/foo.jpg" alt="..." width="1400" height="934" loading="lazy" />
+ *
+ * Behaviour:
+ *   - For local images (src starts with /), emits <picture> with .avif and
+ *     .webp sources alongside the original <img>. The conversion is automatic
+ *     based on src — caller passes the original path, component derives the
+ *     variant paths.
+ *   - For external URLs (http/https), animated GIFs, or SVGs, emits a plain
+ *     <img> with no sources. There's no AVIF/WebP variant of a YouTube
+ *     thumbnail, a Sanity CDN URL, or an SVG icon.
+ *
+ * AVIF/WebP variants must exist on disk at <stem>.avif and <stem>.webp.
+ * Generated in bulk via scripts/gen-image-variants.sh — re-run that script
+ * after adding new images to /public.
+ */
+
+const {
+	src,
+	alt = '',
+	loading,
+	decoding = 'async',
+	width,
+	height,
+	class: className,
+	style,
+	...rest
+} = Astro.props;
+
+const isExternal = /^https?:\/\//.test(src);
+const dotIdx = src ? src.lastIndexOf('.') : -1;
+const ext = dotIdx > 0 ? src.slice(dotIdx + 1).toLowerCase() : '';
+const stem = dotIdx > 0 ? src.slice(0, dotIdx) : src;
+
+// Skip variant emission for formats that don't have a meaningful AVIF/WebP
+// equivalent (SVGs are vector, GIFs lose their animation in conversion).
+const skipFormats = new Set(['svg', 'gif']);
+const useVariants = src && !isExternal && !skipFormats.has(ext);
+
+const avifSrc = useVariants ? `${stem}.avif` : null;
+const webpSrc = useVariants ? `${stem}.webp` : null;
+
+// Per HMDG rule: AVIF primary, WebP fallback, JPG last resort. The <img> tag
+// inside <picture> is what browsers use when they can't decode either source —
+// that should be the most-compatible format, i.e. the JPG. For .jpg/.jpeg
+// sources this is just the original; for .webp originals (where we generated
+// a .jpg sibling), we point the fallback at that .jpg so old browsers
+// (pre-2020 Safari, very old Android) don't break.
+const fallbackSrc = useVariants
+	? (ext === 'webp' ? `${stem}.jpg` : src)
+	: src;
+---
+{useVariants ? (
+	<picture>
+		{avifSrc && <source srcset={avifSrc} type="image/avif" />}
+		{webpSrc && <source srcset={webpSrc} type="image/webp" />}
+		<img
+			src={fallbackSrc}
+			alt={alt}
+			loading={loading}
+			decoding={decoding}
+			width={width}
+			height={height}
+			class={className}
+			style={style}
+			{...rest}
+		/>
+	</picture>
+) : (
+	<img
+		src={src}
+		alt={alt}
+		loading={loading}
+		decoding={decoding}
+		width={width}
+		height={height}
+		class={className}
+		style={style}
+		{...rest}
+	/>
+)}

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import Picture from '../components/Picture.astro';
 import { testimonials } from '../data/testimonials.js';
 
 // Any testimonial longer than this character count gets a "Read more" toggle.
@@ -36,7 +37,7 @@ const READ_MORE_THRESHOLD = 450;
 							<div class="tm-author">
 								{t.image && (
 									<div class="tm-avatar">
-										<img src={t.image} alt={t.name} loading="lazy" decoding="async" width="120" height="120" />
+										<Picture src={t.image} alt={t.name} loading="lazy" decoding="async" width="120" height="120" />
 									</div>
 								)}
 								<div class="tm-author-meta">

@@ -1,4 +1,6 @@
 ---
+import Picture from './Picture.astro';
+
 const {
 	eyebrow,
 	heading,
@@ -64,11 +66,11 @@ const embedUrl = youtubeId && autoplay
 				></iframe>
 			) : youtubeId ? (
 				<button class="video-trigger" data-youtube={youtubeId} aria-label="Play video">
-					<img src={thumbUrl} alt={imageAlt || 'Play video'} loading="lazy" decoding="async" />
+					<Picture src={thumbUrl} alt={imageAlt || 'Play video'} loading="lazy" decoding="async" />
 					<span class="play-btn"><span class="play-icon">▶</span></span>
 				</button>
 			) : image ? (
-				<img
+				<Picture
 					src={image}
 					alt={imageAlt}
 					style={imgStyle}
@@ -80,7 +82,7 @@ const embedUrl = youtubeId && autoplay
 			) : collage && collage.length ? (
 				<div class="media-collage">
 					{collage.map((item) => (
-						<img src={item.src} alt={item.alt || ''} loading="lazy" decoding="async" />
+						<Picture src={item.src} alt={item.alt || ''} loading="lazy" decoding="async" />
 					))}
 				</div>
 			) : (

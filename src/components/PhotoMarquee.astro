@@ -1,4 +1,6 @@
 ---
+import Picture from './Picture.astro';
+
 const { images = [], heightPx = 140, gapPx = 16, speedSeconds = 45 } = Astro.props;
 // For a seamless loop we translate the track by -50% at the end of the
 // animation. That only looks continuous if the unique list is wider than
@@ -15,7 +17,7 @@ const loop = [...unique, ...unique];
 	<div class="photo-marquee-track" style={`--marquee-duration: ${speedSeconds}s; --marquee-height: ${heightPx}px; --marquee-gap: ${gapPx}px;`}>
 		{loop.map((img, i) => (
 			<div class="photo-marquee-item">
-				<img src={img.src} alt={img.alt || ''} loading="lazy" decoding="async" width="800" height="600" />
+				<Picture src={img.src} alt={img.alt || ''} loading="lazy" decoding="async" width="800" height="600" />
 			</div>
 		))}
 	</div>

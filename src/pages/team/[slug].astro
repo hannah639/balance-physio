@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import Picture from '../../components/Picture.astro';
 import { team, initials, gradientFor } from '../../data/team.js';
 
 export function getStaticPaths() {
@@ -29,7 +30,7 @@ const avatarGradient = gradientFor(member.name);
 			<div class="bio-grid">
 				{member.photo ? (
 					<div class="bio-photo bio-photo--img">
-						<img src={member.photo} alt={member.name} decoding="async" width="500" height="600" />
+						<Picture src={member.photo} alt={member.name} decoding="async" width="500" height="600" />
 					</div>
 				) : (
 					<div class="bio-photo" style={`background: ${avatarGradient};`}>
