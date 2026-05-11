@@ -28,6 +28,10 @@ import BookingCTA from '../components/BookingCTA.astro';
 					<li><strong>Clapham South for Hydrotherapy:</strong> <a href="https://www.google.com/maps/place/Audley+Nightingale+Place/data=!4m2!3m1!1s0x0:0x9ad3c77ad81840c6" target="_blank" rel="noopener" class="address-link">Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH</a></li>
 				</ul>
 				<p class="address-note">For all appointments, please contact our main clinic, Gauden Road. Audley Village is for hydrotherapy only and all appointments should be booked via Gauden Road.</p>
+				<div class="booking-note">
+					<strong>Booking with insurance?</strong>
+					<p>Our online booking system cannot process insurance bookings (Bupa, AXA, Bupa Global, AXA Global). Please contact us directly by phone, WhatsApp or email with your <strong>membership number</strong> and <strong>pre-authorisation code</strong> so we can book you in correctly.</p>
+				</div>
 				<p>For new patients, our admin team will send you a quick registration form by email. Once that's back with us, we'll book you in with the right clinician.</p>
 				<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-book">Book Now</a>
 			</div>
@@ -134,6 +138,14 @@ import BookingCTA from '../components/BookingCTA.astro';
 		background: #fdf4eb; border-left: 3px solid #e87722; border-radius: 4px;
 		color: #1a1a1a;
 	}
+	.contact-intro-copy .booking-note {
+		font-size: 14px; line-height: 1.6;
+		padding: 16px 18px; margin: 0 0 24px;
+		background: #ecf7fb; border-left: 4px solid #3EBEDF; border-radius: 4px;
+		color: #1a1a1a;
+	}
+	.contact-intro-copy .booking-note strong { display: block; font-size: 15px; margin-bottom: 6px; color: #1a1a1a; }
+	.contact-intro-copy .booking-note p { margin: 0; font-size: 14px; line-height: 1.65; color: #1a1a1a; }
 
 	/* Contact form */
 	.contact-form {

@@ -175,6 +175,21 @@ const pricingCategories = [
 		breadcrumb="Pricing"
 	/>
 
+	<section class="pricing-insurance-notice">
+		<div class="container">
+			<div class="insurance-notice-box">
+				<div class="insurance-notice-eyebrow"><span class="eyebrow-dot"></span>Insurance bookings</div>
+				<h2>Booking with <span class="highlight">insurance?</span></h2>
+				<p>Our online booking system cannot process insurance bookings (Bupa, AXA, Bupa Global, AXA Global). To book using your insurance, please contact us directly with your <strong>membership number</strong> and <strong>pre-authorisation code</strong> to hand.</p>
+				<ul class="insurance-notice-channels">
+					<li><strong>Call:</strong> <a href="tel:02076272308" class="inline-link">020 7627 2308</a></li>
+					<li><strong>WhatsApp:</strong> <a href="https://wa.me/447749932065" target="_blank" rel="noopener" class="inline-link">07749 932065</a></li>
+					<li><strong>Email:</strong> <a href="mailto:admin@balancephysio.com" class="inline-link">admin@balancephysio.com</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
 	<section class="pricing-section">
 		<div class="container">
 			<div class="price-card-grid">
@@ -203,6 +218,61 @@ const pricingCategories = [
 </Layout>
 
 <style>
+	/* Insurance booking notice — sits above the pricing grid */
+	.pricing-insurance-notice {
+		padding: 40px 24px 0;
+	}
+	.pricing-insurance-notice .container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+	.insurance-notice-box {
+		background: #fdf4eb;
+		border: 1px solid #f3d9b9;
+		border-left: 4px solid #e87722;
+		border-radius: 12px;
+		padding: 28px 32px;
+	}
+	.insurance-notice-eyebrow {
+		display: inline-flex; align-items: center; gap: 8px;
+		background: rgba(232,119,34,0.12);
+		border: 1px solid rgba(232,119,34,0.25);
+		border-radius: 50px;
+		padding: 5px 14px;
+		font-size: 12px; font-weight: 700; color: #c45a0d;
+		text-transform: uppercase; letter-spacing: 1.5px;
+		margin-bottom: 14px;
+	}
+	.insurance-notice-eyebrow .eyebrow-dot {
+		width: 7px; height: 7px; border-radius: 50%; background: #e87722;
+	}
+	.insurance-notice-box h2 {
+		font-size: 26px; font-weight: 800; line-height: 1.2;
+		margin: 0 0 12px; color: #1a1a1a;
+	}
+	.insurance-notice-box h2 .highlight { color: #e87722; }
+	.insurance-notice-box p {
+		font-size: 16px; line-height: 1.65; color: #4a4a4a;
+		margin: 0 0 14px;
+	}
+	.insurance-notice-channels {
+		list-style: none; margin: 0; padding: 0;
+		display: flex; flex-wrap: wrap; gap: 8px 28px;
+	}
+	.insurance-notice-channels li {
+		font-size: 15px; color: #1a1a1a;
+	}
+	.insurance-notice-channels .inline-link {
+		color: #e87722; font-weight: 600; text-decoration: none;
+	}
+	.insurance-notice-channels .inline-link:hover { text-decoration: underline; }
+	@media (max-width: 640px) {
+		.pricing-insurance-notice { padding: 30px 18px 0; }
+		.insurance-notice-box { padding: 22px 20px; }
+		.insurance-notice-box h2 { font-size: 22px; }
+		.insurance-notice-channels { flex-direction: column; gap: 6px; }
+	}
+
 	.price-card-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
