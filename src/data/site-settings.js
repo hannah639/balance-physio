@@ -8,13 +8,11 @@ export const siteSettings = {
 	ogImage: '/booking-banner.jpg', // default social-share image (1200x630 recommended)
 
 	// Analytics
-	// Disabled in site code — GA4 is now loaded server-side via Cloudflare Zaraz
-	// (Measurement ID G-B8FXY93QVZ, configured in the Cloudflare dashboard).
-	// Leave these blank to prevent double-counting. To re-enable client-side
-	// loading, restore the IDs below and the CookiesBanner will load them after
-	// consent.
-	gaId: '',
-	gtmId: '',
+	// Loaded client-side via CookiesBanner after consent. (Previously routed via
+	// Cloudflare Zaraz server-side — that integration was removed, so we're back
+	// to direct gtag/gtm loading from the browser.)
+	gaId: 'G-B8FXY93QVZ',
+	gtmId: 'GTM-THZKT967',
 
 	// Business info — drives JSON-LD LocalBusiness structured data for SEO
 	businessType: 'MedicalBusiness',
