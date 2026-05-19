@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+import Picture from '../../components/Picture.astro';
+
+const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+---
+<Layout
+	title="Mummy MOT in Clapham | Postnatal Check-up - Balance Performance Physiotherapy"
+	description="The Mummy MOT is a specialist postnatal assessment from 6 weeks after birth. Pelvic floor, abdominal and postural check with expert women's health physiotherapy in Clapham."
+>
+	<PageHero title="in Clapham" highlight="Mummy MOT" breadcrumb="Mummy MOT" />
+
+	<div class="service-intro">
+	<ImageText eyebrow="Postnatal recovery" heading="The" highlight="Mummy MOT" image="/mummy-mot/jo-pelvic-model.jpg" imageAlt="Jo Fordyce explaining pelvic anatomy with an anatomical model">
+		<p>The Mummy MOT is a post natal check up from 6 weeks onwards following delivery, including:</p>
+		<ul>
+			<li>Screening for bladder, bowel and sexual dysfunction post birth</li>
+			<li>Assessment for diastasis recti (tummy gap separation)</li>
+			<li>Pelvic floor muscle internal assessment</li>
+			<li>Postural re-education, advice on return to general exercise</li>
+			<li>Scar review from caesarean section or perineal tears</li>
+			<li>Individual exercise and treatment plan</li>
+		</ul>
+		<div class="mummy-mot-logo-wrap">
+			<Picture src="/mummy-mot/mummy-mot-logo.jpg" alt="The Mummy MOT" width="400" height="182" loading="lazy" />
+		</div>
+		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	</ImageText>
+	</div>
+
+	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/womens-health/gynaecology.webp" imageAlt="Consultation">
+		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
+		<p><a href="/pricing#womens-health" class="section-link">Pricing Information &rarr;</a></p>
+	</ImageText>
+
+	<BookingCTA />
+</Layout>
+
+<style>
+	.mummy-mot-logo-wrap {
+		margin: 24px 0;
+		max-width: 320px;
+	}
+	.mummy-mot-logo-wrap :global(picture),
+	.mummy-mot-logo-wrap :global(img) {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+</style>

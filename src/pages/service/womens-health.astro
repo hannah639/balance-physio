@@ -36,9 +36,10 @@ const faqs = [
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Structured, clinical" highlight="pelvic health care" image="/womens-health/mother-baby.jpg" imageAlt="Mother lifting her baby and laughing">
-		<p>Women's health physiotherapy addresses the physical changes that occur across different stages of life, from adolescence through pregnancy, postnatal recovery, and menopause.</p>
-		<p>At Balance, we take a clinical and structured approach to pelvic health. We assess how your symptoms are affecting your movement, strength, and day-to-day function, then build a clear plan to help you regain control, confidence, and resilience.</p>
+	<ImageText eyebrow="Our approach" heading="Structured, clinical" highlight="pelvic health care" image="/womens-health/multi-gen-women.jpg" imageAlt="Multi-generational group of women laughing together">
+		<p>One in three women will experience pelvic health symptoms over their lifetime.</p>
+		<p>Pelvic health physiotherapy addresses the changes that occur across different stages of life, from adolescence through pregnancy, postnatal recovery, menopause and beyond.</p>
+		<p>At Balance, we take a holistic approach to pelvic health assessment and treatment, recognising the often sensitive nature of these symptoms, affecting daily function and quality of life. Following an assessment your individual treatment plan is devised to help you regain control, confidence and resilience to get you back to feeling more like you.</p>
 		<p>Whether you are managing symptoms, recovering from pregnancy or surgery, or looking to stay active without discomfort, we provide a focused and supportive pathway forward.</p>
 		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
 	</ImageText>
@@ -46,27 +47,28 @@ const faqs = [
 
 	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="women's health physiotherapy" image="/womens-health/pregnant-woman.jpg" imageAlt="Pregnancy support">
 		<p>Pelvic health concerns are common, but they are not something you need to put up with.</p>
-		<p>You may benefit from an assessment if you experience:</p>
+		<p>You will benefit from booking an assessment if you experience:</p>
 		<ul>
 			<li>Pelvic girdle pain, lower back pain, or discomfort during pregnancy</li>
 			<li>Bladder or bowel issues, including leaking or urgency</li>
 			<li>Postnatal changes such as abdominal separation or pelvic floor weakness</li>
 			<li>Symptoms of pelvic organ prolapse (heaviness or pressure)</li>
 			<li>Pain during intimacy or scar-related discomfort</li>
-			<li>Ongoing symptoms following gynaecological surgery</li>
+			<li>Pelvic pain, endometriosis, bladder pain syndrome</li>
+			<li>Menopause management of pelvic health symptoms</li>
+			<li>Managing symptoms following gynaecological surgery</li>
 		</ul>
-		<p>If something doesn't feel right, it's worth addressing early.</p>
 	</ImageText>
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/womens-health/women-friends.jpg" imageAlt="Women friends laughing together">
-		<p>We focus on identifying the underlying cause of your symptoms and addressing it directly.</p>
+	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/womens-health/jo-pelvic-model.jpg" imageAlt="Jo Fordyce explaining pelvic anatomy with an anatomical model">
+		<p>Following an individual assessment, with time to explain your concerns and a physical examination which can include a vaginal examination (with your consent), Jo will devise with you a tailored treatment plan aiming to treat and manage your goals and symptoms.</p>
 		<p>Your treatment may include:</p>
 		<ul>
-			<li>Pelvic floor assessment and rehabilitation</li>
-			<li>Hands-on therapy to improve joint and soft tissue function</li>
-			<li>Targeted strength and control exercises</li>
-			<li>Postural and movement retraining</li>
-			<li>Education around lifestyle, load management, and recovery</li>
+			<li>Pelvic floor muscle assessment and rehabilitation</li>
+			<li>Bladder and bowel management</li>
+			<li>Advice regarding general exercise including Pilates</li>
+			<li>Adjuncts to treatment, biofeedback</li>
+			<li>Advice and education around self-care and lifestyle</li>
 		</ul>
 		<p>We keep everything practical, clear, and tailored to your stage of life and your goals.</p>
 	</ImageText>
@@ -77,7 +79,7 @@ const faqs = [
 		<ul>
 			<li>Symptom tracking (e.g. leakage frequency, pain levels)</li>
 			<li>Pelvic floor strength and control assessment</li>
-			<li>Functional measures (e.g. return to running, lifting, or daily tasks)</li>
+			<li>Functional goals (e.g. return to running, lifting, or daily tasks)</li>
 			<li>Abdominal function (e.g. diastasis recti assessment)</li>
 			<li>Movement quality and confidence</li>
 		</ul>
@@ -85,11 +87,11 @@ const faqs = [
 		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
 	</ImageText>
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/womens-health/sports-woman.jpg" imageAlt="Active woman">
+	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/womens-health/jo-treatment.jpg" imageAlt="Jo Fordyce treating a patient">
 		<p>We support women across all life stages:</p>
 		<ul>
 			<li><strong>Pregnancy:</strong> Managing pain and staying active</li>
-			<li><strong>Postnatal recovery:</strong> From 6 weeks onwards, including Mummy MOT</li>
+			<li><strong>Postnatal recovery:</strong> From 6 weeks onwards, including <a href="/service/mummy-mot/" class="inline-link">Mummy MOT</a></li>
 			<li><strong>Active women:</strong> Managing symptoms during sport and exercise</li>
 			<li><strong>Perimenopause and menopause:</strong> Addressing pelvic floor and musculoskeletal changes</li>
 			<li><strong>Post-surgical recovery:</strong> Following gynaecological procedures</li>
@@ -98,11 +100,15 @@ const faqs = [
 	</ImageText>
 
 	<ImageText reverse altBg eyebrow="Our team" heading="Our specialist" highlight="team" image="/womens-health/women-huddle.jpg" imageAlt="Team">
-		<p>Our women's health service combines specialist pelvic health physiotherapy with expert musculoskeletal care.</p>
-		<p><strong>Jo Fordyce</strong> leads our pelvic health service, specialising in obstetric and gynaecological conditions. With over 25 years of experience, she supports women through pregnancy, postnatal recovery, menopause, and a wide range of pelvic health concerns.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Jo &rarr;</a></p>
+		<p>Our women's health service combines specialist pelvic health physiotherapy with expert musculoskeletal care. They work with a team approach to optimise patient care.</p>
+		<p><strong>Jo Fordyce</strong> is our Consultant Pelvic Health Physiotherapist, specialising in pelvic health. With over 30 years of experience, she supports women through pregnancy, postnatal recovery, menopause, and a wide range of pelvic health concerns.</p>
+		<p><a href="/team/jo-fordyce/" class="section-link">Read More About Jo &rarr;</a></p>
 		<p><strong>Caroline Curtis</strong> is a Consultant Spinal Physiotherapist with extensive experience in musculoskeletal care. She provides expert assessment and treatment for spinal and movement-related conditions, supporting women with pain and dysfunction during and beyond pregnancy.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Caroline &rarr;</a></p>
+		<p><a href="/team/caroline-curtis/" class="section-link">Read More About Caroline &rarr;</a></p>
+		<p><strong>Deri Wilson</strong>'s aim is to apply remedial techniques in a relaxing way where possible, without sacrificing therapeutic depth. She combines myofascial work, trigger point therapy, and deep tissue massage for chronic pain relief, muscle recovery, and stress management. Deri is a member of the Wellness and Women's Health teams, working with pregnant women, new mothers, and women in perimenopause and post-menopause.</p>
+		<p><a href="/team/deri-wilson/" class="section-link">Read More About Deri &rarr;</a></p>
+		<p><strong>Alex Deif</strong> is an S&amp;C Coach with postnatal training.</p>
+		<p><a href="/team/alex-deif/" class="section-link">Read More About Alex &rarr;</a></p>
 	</ImageText>
 
 	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/womens-health/gynaecology.webp" imageAlt="Consultation">
