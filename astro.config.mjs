@@ -109,6 +109,151 @@ const redirects = {
 	'/condition/knee-injuries': '/condition/acl-knee-specialist-london/',
 	'/condition/shoulder-pain': '/condition/shoulder-specialist-physiotherapy/',
 
+
+	// =============================================================
+	// WordPress 404 sweep (May 2026) — paths from the legacy
+	// www.balancephysio.com site flagged by Search Console / Semrush.
+	// =============================================================
+
+	// Old WP blog asset URLs
+	'/blog/wp-content/uploads/2013/12/Firefly-What-Is-The-Firefly.htm': '/',
+
+	// WP tag archives
+	'/blog/tag/jason-progl/': '/',
+	'/blog/tag/naeem-akram/': '/',
+	'/blog/tag/keith-hall/': '/',
+	'/blog/tag/kettlebell-conditioning/': '/',
+	'/tag/sex/': '/',
+	'/tag/pregnancy/': '/',
+	'/tag/tai-chi/': '/',
+	'/tag/mums/': '/',
+	'/tag/kettlebells/': '/',
+	'/tag/jessica-sargeant/': '/',
+	'/tag/brazilian-jiu-jitsu/': '/',
+	'/tag/bjj/': '/',
+	'/tag/balham/': '/',
+
+	// WP blog posts and category archives
+	'/blog/contact/': '/',
+	'/blog/2015/03/on-learning-how-to-meditate-by-jim-oneil/': '/',
+	'/blog/2014/03/mark-sisson-the-primal-blueprint-on-movement-and-standing-desks/': '/',
+	'/blog/2013/11/skin-repair-wound-healing-scar-softening-callus-and-blister-care/': '/',
+	'/blog/2013/12/firefly-technology-injury-recovery-trial-at-balance-performance/': '/',
+	'/blog/2013/12/1365/': '/',
+	'/blog/2013/11/combat-athletics-a-free-cpd-lecture-for-physiotherapists-coaches-and-all-health-fitness-professionals/': '/',
+	'/blog/2013/11/combat-athletics-a-free-cpd-lecture-for-physiotherapists-coaches-and-all-health-fitness-professionals-2/': '/',
+	'/blog/2013/07/new-trigger-point-performance-therapy-mini-grid-foam-roller/': '/',
+	'/blog/2012/07/why-did-bradley-wiggins-win/': '/',
+	'/blog/2013/01/runners-resilience-offer-with-trigger-point-self-massage-kit/': '/',
+	'/blog/2013/06/alter-g-for-pain-free-running-walking-and-weight-loss/': '/',
+	'/blog/2012/08/balance-team-at-the-olympics/': '/',
+	'/blog/2012/10/utmb-one-of-europes-most-challenging-runs-mud-mayhem-and-mountain-miles/': '/',
+	'/blog/2012/07/crosscore-rotational-bodyweight-training-perfect-for-anybody-or-training-style/': '/',
+	'/blog/2012/03/crosscore180-goes-so-far-beyond-suspension-training/': '/',
+	'/blog/2012/07/hand-care-for-climbers-kettlebell-lifters-rowers-gardeners-etc/': '/',
+	'/blog/2011/04/war-machine-review-from-gymless-training-blog/': '/',
+	'/blog/2012/03/born-to-run-and-why-we-run-reviewed-ultradistance-spartathlon-and-virtually-barefooted-super-athletes/': '/',
+	'/blog/2011/03/race-walking-international-training-camp/': '/',
+	'/blog/2011/05/world-class-kettlebell-certification-from-ikff/': '/',
+	'/blog/2011/03/michael-jordan-powerful-and-graceful-athleticism/': '/',
+	'/blog/2009/06/balance-wimbledon-tennis-2009/': '/',
+	'/blog/2009/03/ultramarathon-transworld-adventurer/': '/',
+	'/blog/2007/11/the-amish-workout-on-yahoo-health/': '/',
+	'/event/pillars-of-meditation/': '/',
+	'/category/education-and-cpd/': '/',
+	'/category/online-services/': '/',
+	'/2019/12/balance-falls-and-dizziness-great-vestibular-expertise-available-from-jonathan-zulueta/': '/',
+	'/2019/01/research-article-on-music-therapy-from-vojta-therapist-jose-sanz-mengibar/': '/',
+	'/2018/03/nordic-walking-the-potential-for-balance-performance-clients/': '/',
+	'/2018/01/thoughts-on-sports-massage-soft-tissue-therapy-from-jess/': '/',
+	'/2017/01/tennis-is-a-unilateral-sport-thoughts-from-graham-anderson-at-the-australian-open-2017/': '/',
+	'/2017/01/tennis-injuries-and-the-effect-of-playing-surfaces-some-thoughts-from-graham-anderson-from-the-australian-open-2017/': '/',
+	'/2015/09/serious-physio-work-at-wimbledon/': '/',
+	'/2015/09/new-mums-does-your-back-ache-standing-cuddling-your-newborn/': '/',
+	'/2015/09/learn-to-land-before-you-return-to-running-following-knee-injury/': '/',
+
+	// Retired pages → home
+	'/workforbalance/': '/',
+	'/timetable/': '/',
+	'/taping-to-protect-and-guide/': '/',
+	'/running-injuries-and-rehabilitation/': '/',
+	'/pexservice/what-we-do/': '/',
+	'/orthotics-bespoke-and-semi-bespoke/': '/',
+	'/movement/': '/',
+	'/force-plates/': '/',
+	'/education/': '/',
+	'/combat-athletes-martial-artists/': '/',
+	'/bupa-physio/': '/',
+	'/acupuncture/': '/',
+	'/3d-retul-bike-fit/': '/',
+
+	// WP team / portfolio pages
+	'/womens-health-and-continence-team/': '/meet-the-team/',
+	'/team_designation/podiatrist/': '/meet-the-team/',
+	'/team_designation/consultant-spinal-physiotherapist/': '/meet-the-team/',
+	'/team_designation/physiotherapist/': '/meet-the-team/',
+	'/team_designation/consultant-neurological-physiotherapist/': '/meet-the-team/',
+	'/team_department/strength-and-conditioning-team/': '/meet-the-team/',
+	'/team_department/podiatrists/': '/meet-the-team/',
+	'/team_department/soft-tissue-therapy-and-sports-massage-team/': '/meet-the-team/',
+	'/team_department/physiotherapists/': '/meet-the-team/',
+	'/team_department/hydrotherapy/': '/meet-the-team/',
+	'/team/ron-burnett/': '/meet-the-team/',
+	'/soft-tissue-therapy-and-sports-massage-team/': '/meet-the-team/',
+	'/sports-injury-orthopaedic-team/': '/meet-the-team/',
+	'/portfolio_category/sports-injury-team/': '/meet-the-team/',
+	'/portfolio_category/back-pain-team/': '/meet-the-team/',
+	'/pexservice/movement-strength-fitness-team-2/': '/meet-the-team/',
+	'/pexservice/neurological-and-vestibular-specialist-team/': '/meet-the-team/',
+	'/movement-strength-and-fitness-team/': '/meet-the-team/',
+	'/movement-and-breathwork-team/': '/meet-the-team/',
+	'/health-and-wellness-team/': '/meet-the-team/',
+	'/portfolio/caroline-curtis/': '/meet-the-team/',
+	'/leanne-simmons/': '/meet-the-team/',
+
+	// WP individual testimonials
+	'/balance-performance-testimonials/maja-hadziomerovic/': '/testimonials/',
+	'/balance-performance-testimonials/tom-holland/': '/testimonials/',
+	'/balance-performance-testimonials/sarah-brendlor/': '/testimonials/',
+	'/balance-performance-testimonials/miriam-bremer/': '/testimonials/',
+	'/balance-performance-testimonials/leoni-munslow-2017/': '/testimonials/',
+	'/balance-performance-testimonials/izzy-mcnab-england-lacrosse-player/': '/testimonials/',
+	'/balance-performance-testimonials/leoni-munslow-2015/': '/testimonials/',
+	'/balance-performance-testimonials/daniel-stacey/': '/testimonials/',
+	'/balance-performance-testimonials/dion-harrison/': '/testimonials/',
+	'/balance-performance-testimonials/claire-bennett/': '/testimonials/',
+	'/balance-performance-testimonials/al-riley/': '/testimonials/',
+
+	// WP classes / studio pages
+	'/the-facility/homework-station-studio/': '/our-studios/',
+	'/the-facility/class-movement-studio/': '/our-studios/',
+	'/classes-in-clapham/tissue-mobility-class-foam-rolling-2/': '/our-studios/',
+	'/classes-in-clapham/weight-training-club/': '/our-studios/',
+	'/classes-in-clapham/womens-fitness/': '/our-studios/',
+	'/category/classes/': '/our-studios/',
+	'/classes-in-clapham/fitness-and-health-during-pregnancy/': '/our-studios/',
+	'/2020/04/restorative-yoga-online-class-timetable/': '/our-studios/',
+
+	// WP service pages
+	'/bike-fitting-and-running-analysis/': '/service/bike-fitting-cycling-analysis/',
+	'/osteopathy/': '/service/osteopathy/',
+	'/nutritional-therapy-diet/': '/service/osteopathy/',
+	'/physiotherapy/': '/service/physiotherapy/',
+	'/pexpricing/consultant-physiotherapy/': '/service/physiotherapy/',
+	'/personal-fitness-training/': '/service/sports-physiotherapy/',
+
+	// WP condition pages
+	'/pelvic-girdle-pain/': '/condition/womens-pelvic-health/',
+
+	// WP product pages
+	'/product/gift-vouchers/': '/shop/',
+	'/product/raised-spirit-cbd-oil-10/': '/shop/',
+
+	// Other
+	'/about/': '/about-us/',
+	'/faqs-2/': '/faqs/',
+	'/pexpricing/full-service-price-list/': '/pricing/',
+
 	// Removed new-site index pages — safety nets in case of bookmarks / inbound links.
 	// Astro's trailing-slash handling means we only need one form per route.
 	'/services': '/service/physiotherapy/',
