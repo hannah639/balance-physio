@@ -3,10 +3,89 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import ImageText from '../components/ImageText.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+
+const roles = [
+	{
+		title: 'Soft Tissue Therapist',
+		meta: 'Part-Time, Self-Employed',
+		body: `
+			<p>Balance Performance is seeking an experienced Soft Tissue Therapist to join our leading multidisciplinary rehabilitation team in London. This part-time, self-employed position offers the opportunity to work alongside physiotherapists, osteopaths, strength &amp; conditioning coaches, and other healthcare professionals in a collaborative clinical environment.</p>
+			<p>The role is based primarily at our Gauden Road clinic and involves treating a diverse range of patients, from those recovering from injury to individuals looking to optimise performance and wellbeing.</p>
+			<p><strong>Requirements</strong></p>
+			<ul>
+				<li>Recognised qualification in Soft Tissue Therapy, Sports Massage Therapy, or equivalent</li>
+				<li>Minimum 3 years' clinical experience preferred</li>
+				<li>Strong musculoskeletal knowledge and hands-on treatment skills</li>
+				<li>Excellent communication and client management skills</li>
+				<li>Experience working within a multidisciplinary team is desirable</li>
+			</ul>
+			<p>The role requires flexibility to work weekday evenings and Saturdays.</p>
+			<p><strong>What We Offer</strong></p>
+			<ul>
+				<li>Supportive multidisciplinary team environment</li>
+				<li>Modern, well-equipped rehabilitation facilities</li>
+				<li>Diverse patient caseload</li>
+				<li>Opportunities for professional development and increased hours</li>
+			</ul>
+			<p>If you are passionate about delivering high-quality hands-on treatment and helping clients achieve their recovery and performance goals, we would love to hear from you.</p>
+			<p>To apply, please send your CV and cover letter to <a href="mailto:clinicmanager@balancephysio.com" class="inline-link">clinicmanager@balancephysio.com</a>.</p>
+		`,
+	},
+	{
+		title: 'Hydrotherapist',
+		meta: 'Musculoskeletal Rehabilitation · Part-Time, Self-Employed',
+		body: `
+			<p>Balance Performance is looking for an experienced Hydrotherapist to join our leading multidisciplinary rehabilitation team in London. This part-time, self-employed position offers the opportunity to work with a diverse musculoskeletal caseload, with potential to increase to full-time hours.</p>
+			<p><strong>Requirements</strong></p>
+			<ul>
+				<li>Minimum 5 years' post-qualification experience</li>
+				<li>Strong musculoskeletal assessment and rehabilitation skills</li>
+				<li>Experience working within a multidisciplinary sports or spinal medicine setting</li>
+				<li>Excellent clinical reasoning and manual therapy skills</li>
+				<li>HCPC registration</li>
+			</ul>
+			<p>The role requires availability for weekday evenings and early mornings. Our modern rehabilitation clinic near Clapham North serves over 1,800 clients each month, with hydrotherapy sessions delivered at our facility near Clapham South.</p>
+			<p><strong>What We Offer</strong></p>
+			<ul>
+				<li>Collaborative multidisciplinary team environment</li>
+				<li>Excellent rehabilitation and hydrotherapy facilities</li>
+				<li>Varied and rewarding caseload</li>
+				<li>Opportunities for professional growth and increased hours</li>
+			</ul>
+			<p>To apply, please send your CV and cover letter to <a href="mailto:clinicmanager@balancephysio.com" class="inline-link">clinicmanager@balancephysio.com</a>.</p>
+		`,
+	},
+	{
+		title: 'Pilates Instructor',
+		meta: 'Part-Time, Self-Employed · Saturdays Only',
+		body: `
+			<p>Balance Performance is seeking an experienced Pilates Instructor to join our leading multidisciplinary rehabilitation team in London. This part-time, self-employed position offers the opportunity to work alongside physiotherapists, osteopaths, strength &amp; conditioning coaches, and other healthcare professionals in a collaborative clinical environment.</p>
+			<p>The role is based primarily at our Gauden Road clinic and involves delivering both individual and small-group Pilates sessions to support rehabilitation, injury prevention, movement quality, and overall wellbeing.</p>
+			<p><strong>Requirements</strong></p>
+			<ul>
+				<li>Recognised Pilates qualification (Mat and/or Reformer)</li>
+				<li>Minimum 3 years' teaching experience preferred</li>
+				<li>Strong understanding of movement, posture, and musculoskeletal health</li>
+				<li>Excellent communication and client engagement skills</li>
+				<li>Experience working within a rehabilitation or multidisciplinary setting is desirable</li>
+			</ul>
+			<p>The role requires flexibility to work weekday evenings and Saturdays.</p>
+			<p><strong>What We Offer</strong></p>
+			<ul>
+				<li>Supportive multidisciplinary team environment</li>
+				<li>Modern, well-equipped rehabilitation facilities</li>
+				<li>Diverse client base ranging from rehabilitation to performance-focused clients</li>
+				<li>Opportunities for professional development and increased hours</li>
+			</ul>
+			<p>If you are passionate about movement, rehabilitation, and helping clients achieve their health and performance goals, we would love to hear from you.</p>
+			<p>To apply, please send your CV and cover letter to <a href="mailto:clinicmanager@balancephysio.com" class="inline-link">clinicmanager@balancephysio.com</a>.</p>
+		`,
+	},
+];
 ---
 <Layout
 	title="Work For Us"
-	description="Interested in joining Balance Performance Physiotherapy? Send us your CV, we're always on the lookout for exceptional new additions to our team."
+	description="Interested in joining Balance Performance Physiotherapy? We're currently recruiting a Soft Tissue Therapist, Hydrotherapist and Saturday Pilates Instructor."
 >
 	<PageHero
 		title="For Us"
@@ -17,16 +96,24 @@ import BookingCTA from '../components/BookingCTA.astro';
 		ctaHref="/contact-us"
 	/>
 
-	<ImageText
-		eyebrow="Current roles"
-		heading="No open roles"
-		highlight="right now"
-		image="/work-for-us/welcome-sign.jpg"
-		imageAlt="Chalkboard welcome sign inside Balance Performance Physiotherapy"
-	>
-		<p>We don't have any open roles with us at the moment, but please feel free to send through your CV if anything comes up in the near future!</p>
-		<p>We're always on the lookout for exceptional new additions to our fantastic team, from consultant physiotherapists and osteopaths to soft tissue therapists, strength &amp; conditioning coaches, and admin.</p>
-	</ImageText>
+	<section class="roles-section">
+		<div class="container">
+			<p class="roles-eyebrow">Current roles</p>
+			<h2 class="roles-title">Open <span class="roles-title-accent">positions</span></h2>
+			<p class="roles-intro">We're currently recruiting for the roles below. Tap a role to read the full description.</p>
+			<div class="roles-list">
+				{roles.map((role) => (
+					<details class="role-item">
+						<summary>
+							<span class="role-name">{role.title}</span>
+							<span class="role-meta">{role.meta}</span>
+						</summary>
+						<div class="role-body" set:html={role.body} />
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
 
 	<ImageText
 		eyebrow="Apply"
@@ -37,7 +124,7 @@ import BookingCTA from '../components/BookingCTA.astro';
 		image="/work-for-us/shop-interior.jpg"
 		imageAlt="Inside the Balance Physio reception and shop"
 	>
-		<p>Send us your CV and a short note about what you're looking for. Include:</p>
+		<p>Don't see a role that fits? We're always on the lookout for exceptional new additions to our fantastic team, from consultant physiotherapists and osteopaths to soft tissue therapists, strength &amp; conditioning coaches, and admin. Send us your CV and a short note about what you're looking for. Include:</p>
 		<ul>
 			<li>Your full name</li>
 			<li>Phone number</li>
@@ -49,3 +136,58 @@ import BookingCTA from '../components/BookingCTA.astro';
 
 	<BookingCTA />
 </Layout>
+
+<style>
+	.roles-section { padding: 64px 0; }
+	.roles-eyebrow {
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: var(--cta);
+		margin: 0 0 8px;
+	}
+	.roles-title { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 12px; }
+	.roles-title-accent { color: #e87722; }
+	.roles-intro { margin: 0 0 32px; max-width: 60ch; line-height: 1.7; }
+	.roles-list { display: flex; flex-direction: column; gap: 14px; }
+	.role-item {
+		border: 1px solid #e5e5e5;
+		border-radius: 12px;
+		background: #fff;
+		overflow: hidden;
+	}
+	.role-item summary {
+		cursor: pointer;
+		padding: 20px 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		list-style: none;
+	}
+	.role-item summary::-webkit-details-marker { display: none; }
+	.role-item summary::after {
+		content: '+';
+		position: absolute;
+		right: 24px;
+		font-size: 1.6rem;
+		line-height: 1;
+		color: var(--cta);
+		font-weight: 300;
+	}
+	.role-item[open] summary::after { content: '\2013'; }
+	.role-item summary { position: relative; padding-right: 56px; }
+	.role-name { font-size: 1.25rem; font-weight: 700; color: #1a1a1a; }
+	.role-meta { font-size: 0.9rem; color: #666; }
+	.role-body { padding: 0 24px 24px; }
+	.role-body p { margin: 0 0 14px; line-height: 1.7; }
+	.role-body ul { margin: 0 0 14px; padding-left: 22px; }
+	.role-body li { margin-bottom: 6px; line-height: 1.7; }
+	.role-body strong { color: #1a1a1a; }
+	.role-body .inline-link {
+		color: var(--cta);
+		font-weight: 700;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+</style>

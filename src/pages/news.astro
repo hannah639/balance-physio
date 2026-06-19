@@ -6,14 +6,14 @@ import Picture from '../components/Picture.astro';
 import { news } from '../data/news.js';
 ---
 <Layout
-	title="News"
-	description="The latest news, team achievements and updates from Balance Performance Physiotherapy in Clapham."
+	title="Team Achievements"
+	description="Team achievements, clinic milestones and the latest from Balance Performance Physiotherapy in Clapham."
 >
 	<PageHero
-		title="& Updates"
-		highlight="News"
+		title="Achievements"
+		highlight="Team"
 		subtitle="Team achievements, clinic milestones and what we've been up to lately."
-		breadcrumb="News"
+		breadcrumb="Team Achievements"
 	/>
 
 	<section class="news-page">
@@ -25,7 +25,7 @@ import { news } from '../data/news.js';
 					{news.map((item, i) => (
 						<article class={`news-card${i % 2 === 1 ? ' news-card--reverse' : ''}`} id={item.slug}>
 							{item.image && (
-								<div class="news-photo">
+								<div class="news-photo" style={item.imagePosition ? `--news-photo-position: ${item.imagePosition};` : undefined}>
 									<Picture src={item.image} alt={item.imageAlt || ''} loading="lazy" decoding="async" width="800" height="600" />
 								</div>
 							)}
@@ -76,7 +76,7 @@ import { news } from '../data/news.js';
 		position: absolute; inset: 0;
 		width: 100%; height: 100%;
 		object-fit: cover;
-		object-position: center top;
+		object-position: var(--news-photo-position, center top);
 		display: block;
 	}
 
