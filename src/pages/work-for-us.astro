@@ -180,9 +180,12 @@ const roles = [
 	.role-name { font-size: 1.25rem; font-weight: 700; color: #1a1a1a; }
 	.role-meta { font-size: 0.9rem; color: #666; }
 	.role-body { padding: 0 24px 24px; }
-	.role-body p { margin: 0 0 14px; line-height: 1.7; }
-	.role-body ul { margin: 0 0 14px; padding-left: 22px; }
-	.role-body li { margin-bottom: 6px; line-height: 1.7; }
+	.role-body p { margin: 0 0 20px; line-height: 1.7; }
+	.role-body ul { margin: 0 0 24px; padding-left: 22px; }
+	.role-body li { margin-bottom: 10px; line-height: 1.7; }
+	/* Extra space above the bold sub-headings (Requirements / What We Offer)
+	   so each block reads as a distinct section. */
+	.role-body p:has(> strong:only-child) { margin-top: 28px; }
 	.role-body strong { color: #1a1a1a; }
 	.role-body .inline-link {
 		color: var(--cta);

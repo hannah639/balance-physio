@@ -25,7 +25,7 @@ import { news } from '../data/news.js';
 					{news.map((item, i) => (
 						<article class={`news-card${i % 2 === 1 ? ' news-card--reverse' : ''}`} id={item.slug}>
 							{item.image && (
-								<div class="news-photo" style={item.imagePosition ? `--news-photo-position: ${item.imagePosition};` : undefined}>
+								<div class={`news-photo${item.imageFit === 'contain' ? ' news-photo--contain' : ''}`} style={item.imagePosition ? `--news-photo-position: ${item.imagePosition};` : undefined}>
 									<Picture src={item.image} alt={item.imageAlt || ''} loading="lazy" decoding="async" width="800" height="600" />
 								</div>
 							)}
@@ -79,6 +79,11 @@ import { news } from '../data/news.js';
 		object-position: var(--news-photo-position, center top);
 		display: block;
 	}
+	/* Whole-image display for text-heavy graphics (e.g. event posters) that
+	   must not be cropped. Letterboxes against a dark backdrop that blends
+	   with the poster's own background. */
+	.news-photo--contain { background: #0d2438; }
+	.news-photo--contain img { object-fit: contain; object-position: center; }
 
 	.news-body { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
 	.news-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
