@@ -1,5 +1,19 @@
 export const testimonials = [
     {
+        name: 'AB',
+        quote: `Can't thank you enough for your help over the last week. Appreciate you so much!`,
+        title: 'The London Marathon 2026 Testimonial — Jo Sullivan',
+    },
+    {
+        name: 'JE',
+        title: 'Jonathan Zulueta',
+        quote: `I have Menieres Disease which is a vestibular issue that negatively affects my balance and focus. I have no physical pain.
+
+I have tried to get help from a number of well-respected local physio services and although they say that they have expertise in vestibular rehabilitation, I have found them generally well-meaning but with only a very basic understanding of the issues involved.
+
+I booked with Balance Performance by chance and was referred to Jon. I have now seen him five times so far and cannot speak more highly of his patience, expertise, reliability and professionalism. He is thorough, kind and knowledgeable and I would recommend without hesitation to anybody. I feel very fortunate to have found him!`,
+    },
+    {
         name: 'Claire Bennett',
         image: '/testimonials/claire-bennett.jpg',
         role: 'Team GB Fencer',

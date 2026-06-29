@@ -7,6 +7,11 @@ import { testimonials } from '../data/testimonials.js';
 
 // Any testimonial longer than this character count gets a "Read more" toggle.
 const READ_MORE_THRESHOLD = 450;
+
+// Only show testimonials that actually have quote text. Entries can be added to
+// the data file ahead of their copy (e.g. awaiting the quote) without rendering
+// an empty card.
+const visibleTestimonials = testimonials.filter((t) => t.quote && t.quote.trim());
 ---
 <Layout
 	title="Testimonials"
@@ -24,7 +29,7 @@ const READ_MORE_THRESHOLD = 450;
 				<h2>Kind words from our happy clients</h2>
 			</div>
 			<div class="testimonial-masonry">
-				{testimonials.map((t) => {
+				{visibleTestimonials.map((t) => {
 					const isLong = t.quote.length > READ_MORE_THRESHOLD;
 					const paras = t.quote.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 					return (
@@ -34,6 +39,7 @@ const READ_MORE_THRESHOLD = 450;
 								{paras.map((p) => <p>{p}</p>)}
 							</div>
 							{isLong && <button type="button" class="tm-toggle" aria-expanded="false">Read more</button>}
+								{t.title && <p class="tm-title">{t.title}</p>}
 							<div class="tm-author">
 								{t.image && (
 									<div class="tm-avatar">
@@ -145,6 +151,18 @@ const READ_MORE_THRESHOLD = 450;
 		align-self: flex-start;
 	}
 	.tm-toggle:hover { text-decoration: underline; }
+
+	/* Caption shown below the quote — testimonial title / clinician */
+	.tm-title {
+		order: 4;
+		margin: 18px 0 0;
+		padding-top: 16px;
+		border-top: 1px solid #eef1f3;
+		font-size: 13px;
+		font-weight: 700;
+		color: #3a4149;
+		letter-spacing: -0.1px;
+	}
 
 	.tm-author {
 		order: 1;

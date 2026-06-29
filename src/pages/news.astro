@@ -4,16 +4,40 @@ import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 import Picture from '../components/Picture.astro';
 import { news } from '../data/news.js';
+import { team, initials, gradientFor } from '../data/team.js';
+
+// Look up team members by slug so news items can reference clinicians.
+const teamBySlug = Object.fromEntries(team.map((m) => [m.slug, m]));
+
+// Short professional bio for the profile summary: first 1–2 sentences of the
+// member's bio, capped at ~240 characters, taken from their bio page content.
+function shortBio(member) {
+	if (!member || !member.bio || !member.bio.length) return '';
+	const first = member.bio[0];
+	const sentences = first.match(/[^.!?]+[.!?]+/g) || [first];
+	let out = '';
+	for (const s of sentences) {
+		if (out && (out + s).length > 240) break;
+		out += s;
+	}
+	out = out.trim();
+	return out || first.slice(0, 220).trim() + '…';
+}
+
+// Resolve each item's clinician slugs to team members (skip any unknown slug).
+function cliniciansFor(item) {
+	if (!item.clinicians) return [];
+	return item.clinicians.map((slug) => teamBySlug[slug]).filter(Boolean);
+}
 ---
 <Layout
-	title="Team Achievements"
-	description="Team achievements, clinic milestones and the latest from Balance Performance Physiotherapy in Clapham."
+	title="What have we been up to? | News & Events"
+	description="News & Events from Balance Performance Physiotherapy in Clapham."
 >
 	<PageHero
-		title="Achievements"
-		highlight="Team"
-		subtitle="Team achievements, clinic milestones and what we've been up to lately."
-		breadcrumb="Team Achievements"
+		title="What have we been up to?"
+		subtitle="News & Events"
+		breadcrumb="What have we been up to?"
 	/>
 
 	<section class="news-page">
@@ -22,7 +46,9 @@ import { news } from '../data/news.js';
 				<p class="news-empty">More news coming soon — watch this space.</p>
 			) : (
 				<div class="news-list">
-					{news.map((item, i) => (
+					{news.map((item, i) => {
+						const clinicians = cliniciansFor(item);
+						return (
 						<article class={`news-card${i % 2 === 1 ? ' news-card--reverse' : ''}`} id={item.slug}>
 							{item.image && (
 								<div class={`news-photo${item.imageFit === 'contain' ? ' news-photo--contain' : ''}`} style={item.imagePosition ? `--news-photo-position: ${item.imagePosition};` : undefined}>
@@ -30,15 +56,47 @@ import { news } from '../data/news.js';
 								</div>
 							)}
 							<div class="news-body">
-								<div class="news-meta">
-									{item.category && <span class="news-category">{item.category}</span>}
-									<time class="news-date">{item.date}</time>
-								</div>
+								{clinicians.length > 0 && (
+									<div class="news-clinicians">
+										{clinicians.map((c) => (
+											<div class="news-clinician">
+												{c.photo ? (
+													<div class="nc-avatar">
+														<Picture src={c.photo} alt={c.name} loading="lazy" decoding="async" width="120" height="120" />
+													</div>
+												) : (
+													<div class="nc-avatar nc-avatar--initials" style={`background: ${gradientFor(c.name)};`}>
+														<span>{initials(c.name)}</span>
+													</div>
+												)}
+												<div class="nc-meta">
+													<p class="nc-name">{c.name}</p>
+													<p class="nc-bio">{shortBio(c)}</p>
+													<a class="nc-link" href={`/team/${c.slug}/`}>Read Full Bio &rarr;</a>
+												</div>
+											</div>
+										))}
+									</div>
+								)}
+								{(item.category || item.date) && (
+									<div class="news-meta">
+										{item.category && <span class="news-category">{item.category}</span>}
+										{item.date && <time class="news-date">{item.date}</time>}
+									</div>
+								)}
 								<h2>{item.headline}</h2>
-								{item.body.map((p) => <p>{p}</p>)}
+								{item.allowHtml
+									? item.body.map((p) => <p set:html={p}></p>)
+									: item.body.map((p) => <p>{p}</p>)}
+								{item.cta && (
+									item.cta.external
+										? <a class="news-cta-btn" href={item.cta.href} target="_blank" rel="noopener">{item.cta.label}</a>
+										: <a class="news-cta-btn" href={item.cta.href}>{item.cta.label}</a>
+								)}
 							</div>
 						</article>
-					))}
+						);
+					})}
 				</div>
 			)}
 		</div>
@@ -106,6 +164,73 @@ import { news } from '../data/news.js';
 		margin: 0 0 16px;
 	}
 	.news-body p:last-child { margin-bottom: 0; }
+	.news-body a:not(.news-cta-btn):not(.nc-link) { color: #3EBEDF; font-weight: 600; }
+	.news-body a:not(.news-cta-btn):not(.nc-link):hover { text-decoration: underline; }
+
+	/* Clinician profile summary(ies) above the event content.
+	   Webflow-style mini profile cards: a clean rounded portrait (15px radius,
+	   cover, top-anchored), a soft surface, generous spacing and a refined
+	   arrow link — designed to feel modern and consistent with the site. */
+	.news-clinicians {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		margin-bottom: 28px;
+		padding-bottom: 28px;
+		border-bottom: 1px solid #eef1f3;
+	}
+	.news-clinician {
+		display: flex;
+		gap: 20px;
+		align-items: center;
+		background: #f7f9fa;
+		border: 1px solid #edf1f3;
+		border-radius: 15px;
+		padding: 18px 20px;
+		transition: box-shadow .2s ease, transform .2s ease;
+	}
+	.news-clinician:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.07); transform: translateY(-2px); }
+	.nc-avatar {
+		flex: 0 0 104px;
+		width: 104px; height: 130px;
+		border-radius: 15px;
+		overflow: hidden;
+		background: #eef1f3;
+		box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+	}
+	.nc-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+	.nc-avatar--initials { display: flex; align-items: center; justify-content: center; }
+	.nc-avatar--initials span { color: #fff; font-size: 34px; font-weight: 800; letter-spacing: -1px; }
+	.nc-meta { min-width: 0; }
+	.nc-name { font-size: 18px; font-weight: 800; color: #1a1a1a; margin: 0 0 6px; letter-spacing: -0.3px; }
+	.nc-bio { font-size: 14.5px; line-height: 1.6; color: #5a626a; margin: 0 0 10px; }
+	.nc-link {
+		display: inline-flex; align-items: center; gap: 5px;
+		font-size: 14px; font-weight: 700; color: #3EBEDF;
+		text-decoration: none;
+		transition: color .15s ease, gap .15s ease;
+	}
+	.nc-link:hover { color: #2898b5; gap: 9px; }
+
+	@media (max-width: 480px) {
+		.news-clinician { gap: 16px; padding: 16px; }
+		.nc-avatar { flex-basis: 88px; width: 88px; height: 112px; }
+	}
+
+	/* Prominent CTA button (sponsorship / booking) after the event body */
+	.news-cta-btn {
+		display: inline-block;
+		align-self: flex-start;
+		margin-top: 20px;
+		padding: 13px 28px;
+		background: #e87722;
+		color: #ffffff;
+		font-size: 15px; font-weight: 700;
+		border-radius: 50px;
+		text-decoration: none;
+		transition: background .2s ease, transform .15s ease;
+	}
+	.news-cta-btn:hover { background: #d06618; transform: translateY(-2px); }
 
 	@media (max-width: 900px) {
 		.news-page { padding: 60px 0; }

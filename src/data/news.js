@@ -11,6 +11,14 @@
 //   imagePosition: Optional object-position for the photo crop (default "center top")
 //   imageFit:      Optional "contain" to show the whole image uncropped (default crops to fill)
 //   body:          Array of paragraph strings (rendered as <p>...</p>)
+//   allowHtml:     Optional true to render body paragraphs as HTML (lets a
+//                  paragraph contain an inline <a> link). Content here is
+//                  author-controlled, so this is safe.
+//   clinicians:    Optional array of team-member slugs (from team.js). When
+//                  present, each clinician's photo, name, short bio and a
+//                  "Read Full Bio" link render above the event content.
+//   cta:           Optional { label, href, external } — a prominent button
+//                  rendered after the body (e.g. a sponsorship / booking link).
 
 export const news = [
 	{
@@ -28,9 +36,56 @@ export const news = [
 		],
 	},
 	{
+		slug: 'jose-saucony-london-10k-2026',
+		date: '12 July 2026',
+		clinicians: ['dr-jose-sanz-mengibar'],
+		headline: 'Dr Jose Sanz Mengibar runs The Saucony London 10k',
+		image: '/news/jose-london-10k.jpg',
+		imageAlt: 'Dr Jose Sanz Mengibar ready to run The Saucony London 10k for The National Brain Appeal',
+		allowHtml: true,
+		body: [
+			"Dr Jose Sanz Mengibar, our amazing neuro physiotherapist and Vojta specialist, will be running The Saucony London 10k for The National Brain Appeal on the 12th July 2026.",
+			"This charity is dedicated to improving the lives of the millions of people living with neurological and neuromuscular conditions. For more information on Jose treatment sessions please see <a href=\"/service/vojta-therapy/\">Vojta Therapy</a>.",
+			"Please click on the link if you would like to sponsor him.",
+			"We wish him the best of luck!!",
+		],
+		cta: {
+			label: 'Sponsor Dr Jose',
+			href: 'https://www.justgiving.com/page/jose-manuel-sanz-mengibar-2?utm_medium=FR&utm_source=WA&utm_campaign=lc_frp_share_transaction_transactional_--_page_launched_--_campaign',
+			external: true,
+		},
+	},
+	{
+		slug: 'jarryd-first-london-10k-2026',
+		date: '12 July 2026',
+		clinicians: ['jarryd-ferreira'],
+		headline: 'Jarryd Ferreira runs The Saucony London 10k',
+		image: '/news/jarryd-london-10k.jpg',
+		imageAlt: 'Jarryd Ferreira out running in training for The Saucony London 10k',
+		allowHtml: true,
+		body: [
+			"Jarryd Ferreira is also running The Saucony London 10k on the 12th July. This will be his first ever 10k as he took up running last year, he is really enjoying it and wants to challenge himself further.",
+			"Jarryd has applied his knowledge as a physio to his training to avoid injuries. If you are thinking of starting running and want to prevent injury then please <a href=\"https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services\" target=\"_blank\" rel=\"noopener\">make an appointment with him</a>.",
+			"Good luck Jarryd!",
+		],
+	},
+	{
+		slug: 'royal-society-medicine-masterclass-2026',
+		clinicians: ['dr-lucy-goldby', 'caroline-curtis'],
+		headline: 'Royal Society of Medicine event',
+		image: '/news/rsm-masterclass.jpg',
+		imageAlt: 'Dr Lucy Goldby and Caroline Curtis with Phil Batty and Alex Montgomery at the Royal Society of Medicine knee and spinal masterclass',
+		imagePosition: 'center',
+		body: [
+			"Dr Lucy Goldby and Caroline Curtis attended an event at The Royal Society of Medicine.",
+			"Lucy and Caroline attended a specialist knee and spinal masterclass led by Phil Batty, David Cumming, and Alex Montgomery, exploring the latest surgical and non-surgical treatments, real-world clinical perspectives, and current challenges in knee and spinal care. The session provided valuable insights into evolving orthopaedic practice and complex case management.",
+		],
+	},
+	{
 		slug: 'jonathan-medical-tennis-conference-2026',
 		date: 'May 2026',
 		category: 'Team Achievement',
+		clinicians: ['jonathan-zulueta'],
 		headline: 'Jonathan Zulueta speaks at the Medical Tennis Conference',
 		image: '/news/jonathan-tennis-conference.jpg',
 		imageAlt: 'Jonathan Zulueta presenting on tennis, vestibular function and balance at the Medical Tennis Conference',
@@ -56,6 +111,7 @@ export const news = [
 		slug: 'alex-dorney-triathlon-2026',
 		date: '2 May 2026',
 		category: 'Team Achievement',
+		clinicians: ['alex-deif'],
 		headline: 'Alex completes the Dorney Lake Sprint Triathlon',
 		image: '/news/alex-triathlon.jpg',
 		imageAlt: 'Alex Deif celebrating with his finisher medal at the Dorney Lake Sprint Triathlon',
