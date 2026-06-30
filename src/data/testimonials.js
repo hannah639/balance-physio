@@ -1,12 +1,13 @@
 export const testimonials = [
     {
         name: 'AB',
+        image: '/testimonials/ab-marathon.jpg',
+        role: 'The London Marathon 2026 Testimonial',
         quote: `Can't thank you enough for your help over the last week. Appreciate you so much!`,
-        title: 'The London Marathon 2026 Testimonial — Jo Sullivan',
     },
     {
         name: 'JE',
-        title: 'Jonathan Zulueta',
+        image: '/testimonials/je-balance.jpg',
         quote: `I have Menieres Disease which is a vestibular issue that negatively affects my balance and focus. I have no physical pain.
 
 I have tried to get help from a number of well-respected local physio services and although they say that they have expertise in vestibular rehabilitation, I have found them generally well-meaning but with only a very basic understanding of the issues involved.

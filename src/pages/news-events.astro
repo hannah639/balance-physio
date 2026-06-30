@@ -3,10 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 import Picture from '../components/Picture.astro';
-import { news } from '../data/news.js';
+import { events } from '../data/events.js';
 import { team, initials, gradientFor } from '../data/team.js';
 
-// Look up team members by slug so news items can reference clinicians.
+// Look up team members by slug so events can reference clinicians.
 const teamBySlug = Object.fromEntries(team.map((m) => [m.slug, m]));
 
 // Short professional bio for the profile summary: first 1–2 sentences of the
@@ -31,22 +31,22 @@ function cliniciansFor(item) {
 }
 ---
 <Layout
-	title="What have we been up to? | News & Events"
-	description="News & Events from Balance Performance Physiotherapy in Clapham."
+	title="News & Events | Balance Performance Physiotherapy"
+	description="Upcoming events at Balance Performance Physiotherapy in Clapham."
 >
 	<PageHero
-		title="What have we been up to?"
-		subtitle="News & Events"
-		breadcrumb="What have we been up to?"
+		title="News & Events"
+		subtitle="What's coming up at Balance Performance Physiotherapy."
+		breadcrumb="News & Events"
 	/>
 
 	<section class="news-page">
 		<div class="container">
-			{news.length === 0 ? (
-				<p class="news-empty">More news coming soon — watch this space.</p>
+			{events.length === 0 ? (
+				<p class="news-empty">More events coming soon — watch this space.</p>
 			) : (
 				<div class="news-list">
-					{news.map((item, i) => {
+					{events.map((item, i) => {
 						const clinicians = cliniciansFor(item);
 						const bottom = item.imageLayout === 'bottom';
 						return (
@@ -182,10 +182,7 @@ function cliniciansFor(item) {
 	.news-body a:not(.news-cta-btn):not(.nc-link) { color: #3EBEDF; font-weight: 600; }
 	.news-body a:not(.news-cta-btn):not(.nc-link):hover { text-decoration: underline; }
 
-	/* Clinician profile summary(ies), shown beneath the event content.
-	   Webflow-style mini profile cards: a clean rounded portrait (15px radius,
-	   cover, top-anchored), a soft surface, generous spacing and a refined
-	   arrow link — designed to feel modern and consistent with the site. */
+	/* Clinician profile summary(ies), shown beneath the event content. */
 	.news-clinicians {
 		display: flex;
 		flex-direction: column;

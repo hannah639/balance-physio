@@ -10,6 +10,8 @@
 //   imageAlt:      Description of the image for accessibility
 //   imagePosition: Optional object-position for the photo crop (default "center top")
 //   imageFit:      Optional "contain" to show the whole image uncropped (default crops to fill)
+//   imageLayout:   Optional "bottom" to stack the photo full-width along the
+//                  bottom of the card (landscape) instead of beside the body
 //   body:          Array of paragraph strings (rendered as <p>...</p>)
 //   allowHtml:     Optional true to render body paragraphs as HTML (lets a
 //                  paragraph contain an inline <a> link). Content here is
@@ -21,20 +23,6 @@
 //                  rendered after the body (e.g. a sponsorship / booking link).
 
 export const news = [
-	{
-		slug: 'wellness-event-september-2026',
-		date: '8 September 2026',
-		category: 'Upcoming Event',
-		headline: 'Save the date: our Wellness & Performance evening',
-		image: '/news/wellness-event-2026.jpg',
-		imageAlt: 'Wellness & Performance event poster — meet Sally McGinn, Richard Lepper and Kat Johnson. Date to be confirmed. Email admin@balancephysio.com to register.',
-		imageFit: 'contain',
-		body: [
-			"Wellness is a continuum within performance — so how can you optimise your mental health and performance? Join us on 8 September 2026 (time to be confirmed) to meet our Wellness & Performance Team and find out.",
-			"You'll hear from Sally McGinn, Chartered Sports Performance Psychologist; Richard Lepper, Clinical Hypnotherapy & Mental Health Practitioner; and Kat Johnson, Holistic Therapist.",
-			"Because healing isn't just physical. All are welcome, and you can attend in person or virtually. To register your interest, please email admin@balancephysio.com.",
-		],
-	},
 	{
 		slug: 'jose-saucony-london-10k-2026',
 		date: '12 July 2026',
@@ -75,7 +63,7 @@ export const news = [
 		headline: 'Royal Society of Medicine event',
 		image: '/news/rsm-masterclass.jpg',
 		imageAlt: 'Dr Lucy Goldby and Caroline Curtis with Phil Batty and Alex Montgomery at the Royal Society of Medicine knee and spinal masterclass',
-		imagePosition: 'center',
+		imageLayout: 'bottom',
 		body: [
 			"Dr Lucy Goldby and Caroline Curtis attended an event at The Royal Society of Medicine.",
 			"Lucy and Caroline attended a specialist knee and spinal masterclass led by Phil Batty, David Cumming, and Alex Montgomery, exploring the latest surgical and non-surgical treatments, real-world clinical perspectives, and current challenges in knee and spinal care. The session provided valuable insights into evolving orthopaedic practice and complex case management.",
@@ -99,6 +87,7 @@ export const news = [
 		slug: 'jo-utmb-snowdonia-2026',
 		date: '17 May 2026',
 		category: 'Team Achievement',
+		clinicians: ['joanne-sullivan'],
 		headline: 'Jo takes on UTMB Snowdonia — Eryri',
 		image: '/news/jo-utmb-snowdonia.jpg',
 		imageAlt: 'Jo crossing the finish line at the UTMB Ultra-Trail Snowdonia Eryri 25k',
@@ -125,6 +114,7 @@ export const news = [
 		slug: 'portia-london-marathon-2026',
 		date: '27 April 2026',
 		category: 'Team Achievement',
+		clinicians: ['portia-morey'],
 		headline: 'Huge congratulations to Portia on completing the TCS London Marathon!',
 		image: '/news/portia-marathon.jpg',
 		imageAlt: 'Portia from the Balance Physio team wearing her TCS London Marathon 2026 finisher medal',
