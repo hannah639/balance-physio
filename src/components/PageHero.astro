@@ -1,11 +1,28 @@
 ---
-const { title, highlight, subtitle, breadcrumb, hideCta = false, ctaText = 'Book an appointment', ctaHref = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services' } = Astro.props;
+import { getGlobals } from '../lib/sanity/globals';
+
+const { title, highlight, subtitle, breadcrumb, hideCta = false, ctaText = 'Book an appointment', ctaHref = null, bgImage = null } = Astro.props;
+
+const g = await getGlobals();
+
+// ctaHref defaults to the single source of truth (Sanity → Booking Links →
+// Primary booking URL). Callers that pass an explicit href — e.g. the
+// internal /contact-us link — still override it.
+const resolvedCtaHref = ctaHref ?? g.bookingUrl;
 
 // Open external CTAs in a new tab (e.g. the MindBody booking widget) but
 // keep internal links (e.g. /contact-us) in the same tab.
-const ctaIsExternal = /^https?:\/\//.test(ctaHref);
+const ctaIsExternal = /^https?:\/\//.test(resolvedCtaHref);
+
+// Optional CMS-driven hero background. Purely additive — callers that don't
+// pass bgImage render exactly as before (solid --primary-dark + accent glow).
+// A dark overlay is composited over the photo so the white heading keeps its
+// contrast ratio whichever image an editor picks.
+const heroStyle = bgImage
+	? `background-image: linear-gradient(rgba(20,42,58,0.72), rgba(20,42,58,0.72)), url('${bgImage}'); background-size: cover; background-position: center;`
+	: undefined;
 ---
-<section class="page-hero">
+<section class="page-hero" style={heroStyle}>
 	<div class="page-hero-inner">
 		{breadcrumb && (
 			<div class="breadcrumb"><a href="/">Home</a> &raquo; {breadcrumb}</div>
@@ -16,8 +33,8 @@ const ctaIsExternal = /^https?:\/\//.test(ctaHref);
 		{subtitle && <p class="subtitle">{subtitle}</p>}
 		{!hideCta && (
 			ctaIsExternal
-				? <a href={ctaHref} target="_blank" rel="noopener" class="btn-book">{ctaText}</a>
-				: <a href={ctaHref} class="btn-book">{ctaText}</a>
+				? <a href={resolvedCtaHref} target="_blank" rel="noopener" class="btn-book">{ctaText}</a>
+				: <a href={resolvedCtaHref} class="btn-book">{ctaText}</a>
 		)}
 	</div>
 </section>

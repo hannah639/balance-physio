@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
@@ -14,7 +15,7 @@ const photos = [
 	{ src: '/lift/body-kettlebells.jpg', alt: 'Kettlebell work' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: 'Do I need experience to join?', a: 'No. The club is beginner-friendly and coached throughout.' },

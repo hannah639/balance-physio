@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
@@ -15,7 +16,7 @@ const photos = [
 	{ src: '/podiatry/slider-balance-balls.webp', alt: 'Balance training' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: "What's the difference between a podiatrist and a chiropodist?", a: 'The terms are often used interchangeably, but podiatry reflects a more modern, biomechanical approach to foot and lower limb health.' },

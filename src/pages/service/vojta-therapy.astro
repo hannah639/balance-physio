@@ -1,11 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Picture from '../../components/Picture.astro';
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: 'What is Vojta Therapy?', a: 'It is a neurological rehabilitation method that uses reflex locomotion to activate automatic movement patterns within the body.' },

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
@@ -15,7 +16,7 @@ const photos = [
 	{ src: '/physio/body-4.jpg', alt: 'Rehabilitation session' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: 'What is an independent prescriber?', a: 'A clinician trained to assess, diagnose, and prescribe medication within their area of expertise.' },

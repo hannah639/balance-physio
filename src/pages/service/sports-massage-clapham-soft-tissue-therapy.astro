@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
@@ -16,7 +17,7 @@ const photos = [
 	{ src: '/sports-massage/slider-extra-2.jpg', alt: 'Soft tissue release' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: 'Is sports massage only for athletes?', a: 'No. It is suitable for anyone with muscle tension, stiffness, or recovery needs, though it is particularly beneficial for those training regularly.' },

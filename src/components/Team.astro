@@ -1,5 +1,5 @@
 ---
-import { team, initials, gradientFor } from '../data/team.js';
+import { getTeam, initials, gradientFor } from '../lib/sanity/team';
 import Picture from './Picture.astro';
 
 const {
@@ -13,7 +13,10 @@ const {
 
 // Default lists exclude wellness-only members (Sally, Kat, Richard) — they only appear on the Wellness page.
 // `customMembers` lets the Wellness page pass in its own filtered list (the three wellness specialists).
-const baseTeam = team.filter((m) => !m.wellness);
+// Team roster from Sanity (memoised build-time fetch). Wellness
+// practitioners keep their own profile page but are excluded here.
+const team = await getTeam();
+const baseTeam = team.filter((m) => !m.wellnessOnly);
 const members = customMembers
 	? customMembers
 	: featured
@@ -32,9 +35,9 @@ const members = customMembers
 				<div class="team-slider">
 					{members.map((member) => (
 						<a href={`/team/${member.slug}/`} class="team-card team-card-slide">
-							{member.photo ? (
+							{member.photo?.url ? (
 								<div class="team-photo-wrap team-photo-wrap--img">
-									<Picture src={member.photo} alt={member.name} loading="lazy" decoding="async" width="400" height="500" />
+									<Picture src={member.photo.url} alt={member.photo.alt || member.name} loading="lazy" decoding="async" width="400" height="500" />
 								</div>
 							) : (
 								<div class="team-photo-wrap" style={`background: ${gradientFor(member.name)};`}>
@@ -43,7 +46,7 @@ const members = customMembers
 							)}
 							<div class="info">
 								<h3>{member.name}</h3>
-								<span class="role">{member.role}</span>
+								<span class="role">{member.jobTitle}</span>
 							</div>
 						</a>
 					))}
@@ -57,9 +60,9 @@ const members = customMembers
 			<div class="team-grid">
 				{members.map((member) => (
 					<a href={`/team/${member.slug}/`} class="team-card">
-						{member.photo ? (
+						{member.photo?.url ? (
 							<div class="team-photo-wrap team-photo-wrap--img">
-								<Picture src={member.photo} alt={member.name} loading="lazy" decoding="async" width="400" height="500" />
+								<Picture src={member.photo.url} alt={member.photo.alt || member.name} loading="lazy" decoding="async" width="400" height="500" />
 							</div>
 						) : (
 							<div class="team-photo-wrap" style={`background: ${gradientFor(member.name)};`}>
@@ -68,7 +71,7 @@ const members = customMembers
 						)}
 						<div class="info">
 							<h3>{member.name}</h3>
-							<span class="role">{member.role}</span>
+							<span class="role">{member.jobTitle}</span>
 						</div>
 					</a>
 				))}

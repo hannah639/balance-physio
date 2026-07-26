@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
@@ -16,7 +17,7 @@ const photos = [
 	{ src: '/womens-health/women-huddle.jpg', alt: 'Women supporting each other' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: 'What is a Mummy MOT?', a: 'A specialist postnatal assessment from 6 weeks onwards, including pelvic floor, abdominal, and postural checks.' },

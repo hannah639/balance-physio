@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
@@ -14,7 +15,7 @@ const photos = [
 	{ src: '/hydrotherapy/water-texture.jpg', alt: 'Warm hydrotherapy pool water' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: 'What should I bring to my hydrotherapy session?', a: 'You will need your swimming kit, a towel, and any toiletries you require for showering afterwards. It is also advisable to bring a bottle of water to stay hydrated, as the warm pool temperature can lead to fluid loss.' },

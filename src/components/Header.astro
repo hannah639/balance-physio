@@ -1,224 +1,119 @@
 ---
 import Picture from './Picture.astro';
 import { bgImageSet } from '../lib/bgImage.js';
+import { getGlobals } from '../lib/sanity/globals';
 
-const serviceColumns = [
-	[
-		{
-			label: 'MSK & Sports',
-			items: [
-				{ label: 'Physiotherapy', href: '/service/physiotherapy/' },
-				{ label: 'Sports Physiotherapy', href: '/service/sports-physiotherapy/' },
-				{ label: 'Osteopathy and Nutrition', href: '/service/osteopathy/' },
-				{ label: 'Sports Massage', href: '/service/sports-massage-clapham-soft-tissue-therapy/' },
-				{ label: 'Shockwave Therapy', href: '/service/shockwave-therapy/' },
-				{ label: 'Prehab Class', href: '/service/prehab-class/' },
-			],
-		},
-		{
-			label: 'Neurological',
-			items: [
-				{ label: 'Neurological Rehabilitation', href: '/service/specialist-neuro-physio-london/' },
-				{ label: 'Vojta Therapy', href: '/service/vojta-therapy/' },
-			],
-		},
-	],
-	[
-		{
-			label: 'Pelvic Health',
-			items: [
-				{ label: "Women's Health", href: '/service/womens-health/' },
-				{ label: 'Mummy MOT', href: '/service/mummy-mot/' },
-				{ label: "Men's Health", href: '/service/mens-health/' },
-			],
-		},
-		{
-			label: 'Foot & Lower Limb',
-			items: [
-				{ label: 'Podiatry', href: '/service/podiatry/' },
-			],
-		},
-		{
-			label: 'Rehab',
-			items: [
-				{ label: 'Hydrotherapy', href: '/service/hydrotherapy/' },
-				{ label: 'Pilates', href: '/service/pilates/' },
-			],
-		},
-	],
-	[
-		{
-			label: 'Performance & Strength',
-			sublabel: '(Fitness & Performance)',
-			items: [
-				{ label: 'Strength & Conditioning', href: '/service/strength-conditioning/' },
-				{ label: 'Lift (Weight Training) Club', href: '/service/lift-weight-training-club/' },
-				{ label: 'Bike Fitting & Running Analysis', href: '/service/bike-fitting-cycling-analysis/' },
-			],
-		},
-		{
-			label: 'Paediatric',
-			items: [
-				{ label: 'Youth Physiotherapy', href: '/service/paediatric-sports-physiotherapy/' },
-				{ label: 'Vojta Therapy', href: '/service/vojta-therapy/' },
-			],
-		},
-	],
-	[
-		{
-			label: 'Recovery & Wellness',
-			items: [
-				{ label: 'Wellness', href: '/service/psychological-wellness/' },
-				{ label: 'Anti-Gravity Treadmill', href: '/service/alterg-anti-gravity-treadmill-london/' },
-				{ label: 'Ergonomics', href: '/service/ergonomics/' },
-				{ label: 'TMJ & Jaw Pain', href: '/service/tmj-and-jaw-pain/' },
-			],
-		},
-		{
-			label: 'Clinical Support / Advanced Care',
-			items: [
-				{ label: 'Physiotherapy Prescribing', href: '/service/physiotherapy-prescribing/' },
-				{ label: 'Outcome Measures', href: '/service/outcome-measures/' },
-			],
-		},
-	],
-];
-// Flat list for mobile fallback
-const services = serviceColumns.flat().flatMap((g) => g.items);
+// Shared build-time fetch — see src/lib/sanity/globals.ts (memoised, so this
+// does not add a request per component).
+const g = await getGlobals();
 
-const conditions = [
-	{ label: 'Lower Back Pain', href: '/condition/lower-back-pain/' },
-	{ label: 'Neck Pain', href: '/condition/neck-pain/' },
-	{ label: 'Shoulder Pain', href: '/condition/shoulder-specialist-physiotherapy/' },
-	{ label: 'Elbow Pain', href: '/condition/elbow-pain/' },
-	{ label: 'Hip Pain', href: '/condition/hip-pain/' },
-	{ label: 'Knee Injuries', href: '/condition/acl-knee-specialist-london/' },
-	{ label: 'Foot Pain', href: '/condition/foot-pain/' },
-	{ label: 'Ankle Pain', href: '/condition/ankle-pain/' },
-	{ label: 'Cycling Injuries', href: '/condition/cycling-injuries/' },
-	{ label: 'Running Injuries', href: '/condition/running-injuries/' },
-	{ label: "Women's Pelvic Health", href: '/condition/womens-pelvic-health/' },
-	{ label: "Men's Pelvic Health", href: '/condition/mens-pelvic-health/' },
-	{ label: 'Verrucas', href: '/condition/verrucas/' },
-	{ label: 'Ingrown Toenails', href: '/condition/ingrown-toenails/' },
-	{ label: 'Multiple Sclerosis', href: '/condition/multiple-sclerosis/' },
-	{ label: 'Stroke', href: '/condition/stroke/' },
-	{ label: "Parkinson's", href: '/condition/parkinsons/' },
-	{ label: 'Balance & Dizziness', href: '/condition/balance-and-dizziness/' },
-	{ label: "Children's Neurological & Developmental", href: '/condition/childrens-neurological-developmental/' },
-];
+// Navigation comes from Sanity → Navigation (single source of truth for the
+// header, the mobile menu and the footer). Resolved at build time inside the
+// shared getGlobals() fetch, so there is no extra request and no client JS.
+const nav = g.nav;
+const desktopEntries = nav.header.filter((e) => e.showInHeader);
+const mobileEntries = nav.header.filter((e) => e.showInMobile);
 
-const about = [
-	{ label: 'About Us', href: '/about-us/' },
-	{ label: 'Meet The Team', href: '/meet-the-team/' },
-	{ label: 'Our Clinic', href: '/our-clinic/' },
-	{ label: 'Our Studios', href: '/our-studios/' },
-	{ label: 'Outcomes', href: '/outcomes/' },
-	{ label: 'Pricing', href: '/pricing/' },
-	{ label: 'What have we been up to?', href: '/news/' },
-	{ label: 'News & Events', href: '/news-events/' },
-	{ label: 'Work For Us', href: '/work-for-us/' },
-	{ label: 'Testimonials', href: '/testimonials/' },
-	{ label: 'Shop', href: '/shop/' },
-];
-
-const whoWeHelp = [
-	{ label: 'The Performance Athlete', href: '/who-we-help/the-performance-athlete/' },
-	{ label: 'The Club Athlete', href: '/who-we-help/the-club-athlete/' },
-	{ label: 'Are you planning an event?', href: '/who-we-help/are-you-planning-an-event/' },
-	{ label: 'Marathon Runners & Endurance Athletes', href: '/who-we-help/marathon-endurance/' },
-	{ label: 'Active People', href: '/who-we-help/active-people/' },
-	{ label: 'The Armchair Athlete', href: '/who-we-help/the-armchair-athlete/' },
-	{ label: 'Pre & Post-natal Women', href: '/who-we-help/pre-post-natal/' },
-	{ label: 'People with Neurological Conditions', href: '/who-we-help/neurological-conditions/' },
-	{ label: 'Children & Young People', href: '/who-we-help/children-young-people/' },
-	{ label: 'Post-Surgical Patients', href: '/who-we-help/post-surgical/' },
-];
-
-const locations = [
-	{ label: 'Main Clinic: Clapham North', href: '/clinic/clapham/' },
-	{ label: 'Clapham South for Hydrotherapy', href: '/clinic/clapham-south-hydrotherapy/' },
-];
+// Active state: mark the entry whose own link, or any of whose child links,
+// matches the current URL.
+const here = Astro.url.pathname;
+const norm = (p) => (p.endsWith('/') ? p : `${p}/`);
+const entryIsCurrent = (e) =>
+	(e.link && norm(e.link.href) === norm(here)) ||
+	e.groups.some((grp) => grp.items.some((i) => norm(i.href) === norm(here)));
 ---
 <header class="bp-header">
 	<div class="header-inner">
-		<a href="/" class="logo" aria-label="Balance Performance Physiotherapy home">
-			<Picture src="/logo.jpg" alt="Balance Performance Physiotherapy" decoding="async" width="500" height="176" />
+		<a href="/" class="logo" aria-label={`${g.siteName} home`}>
+			{/*
+			  Logo from Sanity Site Settings, falling back to the local /logo.jpg.
+			  Still routed through <Picture>: for the local fallback it emits the
+			  existing AVIF/WebP <source> set, and for a Sanity CDN URL it emits a
+			  plain <img> (no local variants exist for a remote file).
+			*/}
+			<Picture
+				src={g.logo.url}
+				alt={g.logo.alt}
+				decoding="async"
+				width={g.logo.width ?? 500}
+				height={g.logo.height ?? 176}
+			/>
 		</a>
 		<nav>
 			<ul>
-				<li class="has-dropdown">
-					<a href="/about-us/">About <span class="chev">▾</span></a>
-					<div class="dropdown">
-						{about.map((item) => (
-							item.external
-								? <a href={item.href} target="_blank" rel="noopener">{item.label}</a>
-								: <a href={item.href}>{item.label}</a>
-						))}
-					</div>
-				</li>
-				<li class="has-dropdown has-dropdown-services-mega">
-					<a href="/service/physiotherapy/">Services <span class="chev">▾</span></a>
-					<div class="dropdown dropdown-services-mega">
-						<div class="services-mega-inner">
-							{serviceColumns.map((col) => (
-								<div class="services-col">
-									{col.map((group) => (
-										<div class="services-group">
-											<div class="services-group-label">
-												{group.label}
-												{group.sublabel && <><br/><span class="services-group-sublabel">{group.sublabel}</span></>}
+				{desktopEntries.map((entry) => (
+					entry.groups.length === 0 ? (
+						<li>
+							<a
+								href={entry.link?.href}
+								target={entry.link?.newTab ? '_blank' : undefined}
+								rel={entry.link?.newTab ? 'noopener' : undefined}
+								aria-current={entryIsCurrent(entry) ? 'page' : undefined}
+							>{entry.label}</a>
+						</li>
+					) : entry.dropdownStyle === 'columns' ? (
+						<li class="has-dropdown has-dropdown-services-mega">
+							<a href={entry.link?.href ?? '#'} aria-current={entryIsCurrent(entry) ? 'page' : undefined}>{entry.label} <span class="chev">▾</span></a>
+							<div class="dropdown dropdown-services-mega">
+								<div class="services-mega-inner">
+									{[1, 2, 3, 4].map((colNo) => {
+										const cols = entry.groups.filter((grp) => (grp.column ?? 1) === colNo);
+										return cols.length ? (
+											<div class="services-col">
+												{cols.map((grp) => (
+													<div class="services-group">
+														<div class="services-group-label">
+															{grp.title}
+															{grp.sublabel && <><br/><span class="services-group-sublabel">{grp.sublabel}</span></>}
+														</div>
+														{grp.items.map((item) => (
+															<a href={item.href} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener' : undefined} aria-current={norm(item.href) === norm(here) ? 'page' : undefined}>{item.label}</a>
+														))}
+													</div>
+												))}
 											</div>
-											{group.items.map((item) => (
-												<a href={item.href}>{item.label}</a>
-											))}
-										</div>
-									))}
+										) : null;
+									})}
 								</div>
-							))}
-						</div>
-					</div>
-				</li>
-				<li class="has-dropdown has-dropdown-wide">
-					<a href="/condition/lower-back-pain/">Conditions <span class="chev">▾</span></a>
-					<div class="dropdown dropdown-wide">
-						{conditions.map((item) => <a href={item.href}>{item.label}</a>)}
-					</div>
-				</li>
-				<li class="has-dropdown has-dropdown-mega">
-					<a href="#" onclick="return false;">Who We Help <span class="chev">▾</span></a>
-					<div class="dropdown dropdown-mega">
-						<div class="mega-left">
-							<div class="mega-eyebrow">Who We Help</div>
-							<p class="mega-intro">Whether it's aches and pains, sports injuries, pre- and post-natal care, neurological conditions, or post-surgical rehab, we've got the skills and experience to support you.</p>
-							<div class="mega-links">
-								{whoWeHelp.map((item) => <a href={item.href}>{item.label}</a>)}
 							</div>
-						</div>
-						<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="mega-card" style={bgImageSet('/sports-physio/hero-running.jpg')}>
-							<span class="mega-card-button">Book Now</span>
-						</a>
-					</div>
-				</li>
-				<li><a href="/faqs/">FAQs</a></li>
-				<li class="has-dropdown has-dropdown-mega">
-					<a href="/clinic/clapham/">Our Locations <span class="chev">▾</span></a>
-					<div class="dropdown dropdown-mega">
-						<div class="mega-left">
-							<div class="mega-eyebrow">Our Locations</div>
-							<p class="mega-intro">Our main clinic is on Gauden Road in Clapham. Our hydrotherapy service is based in Audley Village.</p>
-							<div class="mega-links">
-								{locations.map((item) => <a href={item.href}>{item.label}</a>)}
+						</li>
+					) : entry.dropdownStyle === 'feature' ? (
+						<li class="has-dropdown has-dropdown-mega">
+							<a href={entry.link?.href ?? '#'} onclick={entry.link ? undefined : 'return false;'} aria-current={entryIsCurrent(entry) ? 'page' : undefined}>{entry.label} <span class="chev">▾</span></a>
+							<div class="dropdown dropdown-mega">
+								<div class="mega-left">
+									<div class="mega-eyebrow">{entry.introEyebrow ?? entry.label}</div>
+									{entry.introText && <p class="mega-intro">{entry.introText}</p>}
+									<div class="mega-links">
+										{entry.groups.flatMap((grp) => grp.items).map((item) => (
+											<a href={item.href} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener' : undefined} aria-current={norm(item.href) === norm(here) ? 'page' : undefined}>{item.label}</a>
+										))}
+									</div>
+								</div>
+								{entry.cardImagePath && (
+									entry.cardUsesBookingLink
+										? <a href={g.bookingUrl} target="_blank" rel="noopener" class="mega-card" style={bgImageSet(entry.cardImagePath)}>
+												<span class="mega-card-button">{g.bookingLabel}</span>
+											</a>
+										: <a href={entry.link?.href ?? entry.groups[0]?.items[0]?.href} class="mega-card" style={bgImageSet(entry.cardImagePath)} aria-label={`Visit our ${entry.label} page`}></a>
+								)}
 							</div>
-						</div>
-						<a href="/clinic/clapham/" class="mega-card" style={bgImageSet('/clapham/opening-hours-banners.jpg')} aria-label="Visit our Clapham clinic page"></a>
-					</div>
-				</li>
-				<li><a href="/contact-us/">Contact Us</a></li>
+						</li>
+					) : (
+						<li class={entry.dropdownStyle === 'wide' ? 'has-dropdown has-dropdown-wide' : 'has-dropdown'}>
+							<a href={entry.link?.href ?? '#'} aria-current={entryIsCurrent(entry) ? 'page' : undefined}>{entry.label} <span class="chev">▾</span></a>
+							<div class={entry.dropdownStyle === 'wide' ? 'dropdown dropdown-wide' : 'dropdown'}>
+								{entry.groups.flatMap((grp) => grp.items).map((item) => (
+									<a href={item.href} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener' : undefined} aria-current={norm(item.href) === norm(here) ? 'page' : undefined}>{item.label}</a>
+								))}
+							</div>
+						</li>
+					)
+				))}
 			</ul>
 		</nav>
 		<div class="header-cta">
-			<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-primary">Book Now</a>
+			<a href={g.bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a>
 			<button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
 				<span></span>
 				<span></span>
@@ -231,61 +126,41 @@ const locations = [
 <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
 	<div class="mobile-menu-inner">
 		<ul class="mobile-nav">
-			<li>
-				<details>
-					<summary>About</summary>
-					<ul class="mobile-sublist">
-						{about.map((item) => (
-							<li>
-								{item.external
-									? <a href={item.href} target="_blank" rel="noopener">{item.label}</a>
-									: <a href={item.href}>{item.label}</a>}
-							</li>
-						))}
-					</ul>
-				</details>
-			</li>
-			<li>
-				<details>
-					<summary>Services</summary>
-					<ul class="mobile-sublist">
-						{serviceColumns.flat().map((group) => (
-							<>
-								<li class="mobile-sublist-category">{group.label}{group.sublabel && <> {group.sublabel}</>}</li>
-								{group.items.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-							</>
-						))}
-					</ul>
-				</details>
-			</li>
-			<li>
-				<details>
-					<summary>Conditions</summary>
-					<ul class="mobile-sublist">
-						{conditions.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-					</ul>
-				</details>
-			</li>
-			<li>
-				<details>
-					<summary>Who We Help</summary>
-					<ul class="mobile-sublist">
-						{whoWeHelp.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-					</ul>
-				</details>
-			</li>
-			<li><a href="/faqs/" class="mobile-direct">FAQs</a></li>
-			<li>
-				<details>
-					<summary>Our Locations</summary>
-					<ul class="mobile-sublist">
-						{locations.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-					</ul>
-				</details>
-			</li>
-			<li><a href="/contact-us/" class="mobile-direct">Contact Us</a></li>
+			{mobileEntries.map((entry) => (
+				entry.groups.length === 0 ? (
+					<li>
+						<a
+							href={entry.link?.href}
+							class="mobile-direct"
+							target={entry.link?.newTab ? '_blank' : undefined}
+							rel={entry.link?.newTab ? 'noopener' : undefined}
+							aria-current={entryIsCurrent(entry) ? 'page' : undefined}
+						>{entry.label}</a>
+					</li>
+				) : (
+					<li>
+						<details>
+							<summary>{entry.label}</summary>
+							<ul class="mobile-sublist">
+								{entry.dropdownStyle === 'columns'
+									? entry.groups.map((grp) => (
+										<>
+											<li class="mobile-sublist-category">{grp.title}{grp.sublabel && <> {grp.sublabel}</>}</li>
+											{grp.items.map((item) => (
+												<li><a href={item.href} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener' : undefined} aria-current={norm(item.href) === norm(here) ? 'page' : undefined}>{item.label}</a></li>
+											))}
+										</>
+									))
+									: entry.groups.flatMap((grp) => grp.items).map((item) => (
+										<li><a href={item.href} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener' : undefined} aria-current={norm(item.href) === norm(here) ? 'page' : undefined}>{item.label}</a></li>
+									))}
+							</ul>
+						</details>
+					</li>
+				)
+			))}
 		</ul>
-		<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="mobile-menu-book">Book Now</a>
+		<a href={g.bookingUrl} target="_blank" rel="noopener" class="mobile-menu-book">Book Now</a>
 	</div>
 </div>
 

@@ -1,14 +1,29 @@
+---
+import { getGlobals } from '../lib/sanity/globals';
+
+// Shared build-time fetch (memoised in globals.ts — no extra request).
+const g = await getGlobals();
+const nav = g.nav;
+
+// Active-state helper, shared shape with the header.
+const here = Astro.url.pathname;
+const norm = (p) => (p.endsWith('/') ? p : `${p}/`);
+
+// The main-clinic map link keeps its hard-coded Google Maps place URL: there is
+// no CMS field for it, and localSeo.mapsUrl is not populated.
+const mainClinicMapUrl = 'https://www.google.com/maps/place/Balance+Physio/@51.465003,-0.130667,2381m/data=!3m1!1e3!4m6!3m5!1s0x487604505fa09de1:0x4826f10ca0a3e7b1!8m2!3d51.465003!4d-0.130667!16s%2Fg%2F1tfm63rd';
+---
 <footer class="bp-footer">
 	<div class="footer-main">
 		<div class="container">
 			<div class="footer-grid">
 				<div class="footer-contact">
 					<h4>Get in Touch</h4>
-					<a href="tel:02076272308" class="phone">020 7627 2308</a>
-					<a href="mailto:admin@balancephysio.com" class="email">admin@balancephysio.com</a>
+					<a href={g.phoneHref} class="phone">{g.phoneNumber}</a>
+					<a href={`mailto:${g.email}`} class="email">{g.email}</a>
 					<div class="address">
 						<strong>Clapham North: Main Clinic</strong><br>
-						<a href="https://www.google.com/maps/place/Balance+Physio/@51.465003,-0.130667,2381m/data=!3m1!1e3!4m6!3m5!1s0x487604505fa09de1:0x4826f10ca0a3e7b1!8m2!3d51.465003!4d-0.130667!16s%2Fg%2F1tfm63rd" target="_blank" rel="noopener">113 Gauden Rd, London SW4 6LE</a>
+						<a href={mainClinicMapUrl} target="_blank" rel="noopener">{g.address}</a>
 					</div>
 					<div class="address">
 						<strong>Clapham South for Hydrotherapy</strong><br>
@@ -16,8 +31,17 @@
 						3 Nightingale Lane, London SW4 9AH</a>
 					</div>
 					<p class="address-note">For all appointments, please contact our main clinic, Gauden Road. Audley Village is for hydrotherapy only and all appointments should be booked via Gauden Road.</p>
+					{/*
+					  Map embed comes from Sanity (sanitised in globals.ts: iframe only,
+					  no <script>, no inline handlers). Falls back to the original
+					  hard-coded embed if the field is empty or fails sanitisation.
+					  loading="lazy" is preserved either way — it keeps the map off the
+					  critical path for LCP.
+					*/}
 					<div class="footer-map">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2592.43136852671!2d-0.130667!3d51.465002999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604505fa09de1%3A0x4826f10ca0a3e7b1!2sBalance%20Physio!5e1!3m2!1sen!2suk!4v1776443487865!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+						{g.googleMapEmbed
+							? <Fragment set:html={g.googleMapEmbed} />
+							: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2592.43136852671!2d-0.130667!3d51.465002999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604505fa09de1%3A0x4826f10ca0a3e7b1!2sBalance%20Physio!5e1!3m2!1sen!2suk!4v1776443487865!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>}
 					</div>
 					<div class="social-links">
 						<a href="https://www.facebook.com/BalancePerformanceLondon" class="social-link" target="_blank" rel="noopener" aria-label="Balance Performance Physiotherapy on Facebook">
@@ -37,84 +61,31 @@
 						</a>
 					</div>
 				</div>
-				<div>
-					<h4>About</h4>
-					<ul>
-						<li><a href="/about-us/">About Us</a></li>
-						<li><a href="/meet-the-team/">Meet The Team</a></li>
-						<li><a href="/our-clinic/">Our Clinic</a></li>
-						<li><a href="/our-studios/">Our Studios</a></li>
-						<li><a href="/outcomes/">Outcomes</a></li>
-						<li><a href="/pricing/">Pricing</a></li>
-						<li><a href="/news/">What have we been up to?</a></li>
-						<li><a href="/news-events/">News & Events</a></li>
-						<li><a href="/work-for-us/">Work For Us</a></li>
-						<li><a href="/testimonials/">Testimonials</a></li>
-					</ul>
-				</div>
-				<div>
-					<h4>Services</h4>
-					<ul>
-						<li><a href="/service/physiotherapy/">Physiotherapy</a></li>
-						<li><a href="/service/sports-physiotherapy/">Sports Physiotherapy</a></li>
-						<li><a href="/service/osteopathy/">Osteopathy and Nutrition</a></li>
-						<li><a href="/service/sports-massage-clapham-soft-tissue-therapy/">Sports Massage</a></li>
-						<li><a href="/service/shockwave-therapy/">Shockwave Therapy</a></li>
-						<li><a href="/service/prehab-class/">Prehab Class</a></li>
-						<li><a href="/service/specialist-neuro-physio-london/">Neurological Rehabilitation</a></li>
-						<li><a href="/service/vojta-therapy/">Vojta Therapy</a></li>
-						<li><a href="/service/womens-health/">Women's Health</a></li>
-						<li><a href="/service/mens-health/">Men's Health</a></li>
-						<li><a href="/service/podiatry/">Podiatry</a></li>
-						<li><a href="/service/strength-conditioning/">Strength & Conditioning</a></li>
-						<li><a href="/service/bike-fitting-cycling-analysis/">Bike Fitting & Running Analysis</a></li>
-						<li><a href="/service/hydrotherapy/">Hydrotherapy</a></li>
-						<li><a href="/service/pilates/">Pilates</a></li>
-					</ul>
-				</div>
-				<div>
-					<h4>Conditions</h4>
-					<ul>
-						<li><a href="/condition/lower-back-pain/">Back Pain</a></li>
-						<li><a href="/condition/neck-pain/">Neck Pain</a></li>
-						<li><a href="/condition/acl-knee-specialist-london/">Knee & ACL</a></li>
-						<li><a href="/condition/hip-pain/">Hip Pain</a></li>
-						<li><a href="/condition/shoulder-specialist-physiotherapy/">Shoulder Pain</a></li>
-						<li><a href="/condition/elbow-pain/">Elbow Pain</a></li>
-						<li><a href="/condition/womens-pelvic-health/">Women's Pelvic Health</a></li>
-						<li><a href="/condition/mens-pelvic-health/">Men's Pelvic Health</a></li>
-						<li><a href="/condition/running-injuries/">Running Injuries</a></li>
-						<li><a href="/condition/cycling-injuries/">Cycling Injuries</a></li>
-						<li><a href="/condition/multiple-sclerosis/">Multiple Sclerosis</a></li>
-						<li><a href="/condition/stroke/">Stroke</a></li>
-						<li><a href="/condition/parkinsons/">Parkinson's</a></li>
-						<li><a href="/condition/balance-and-dizziness/">Balance & Dizziness</a></li>
-					</ul>
-				</div>
+				{nav.footerGroups.map((grp) => (
+					<div class="footer-col">
+						<h4>{grp.title}</h4>
+						<ul>
+							{grp.items.map((item) => (
+								<li><a
+									href={item.href}
+									target={item.newTab ? '_blank' : undefined}
+									rel={item.newTab ? 'noopener' : undefined}
+									aria-current={norm(item.href) === norm(here) ? 'page' : undefined}
+								>{item.label}</a></li>
+							))}
+						</ul>
+					</div>
+				))}
 			</div>
 			<div class="footer-hours">
 				<h4>Opening Hours</h4>
 				<div class="hours-grid">
-					<div class="hours-item">
-						<div class="day">Monday - Wednesday</div>
-						<div class="time">7:00am - 8:00pm</div>
-					</div>
-					<div class="hours-item">
-						<div class="day">Thursday</div>
-						<div class="time">8:00am - 7:00pm</div>
-					</div>
-					<div class="hours-item">
-						<div class="day">Friday</div>
-						<div class="time">7:00am - 6:00pm</div>
-					</div>
-					<div class="hours-item">
-						<div class="day">Saturday</div>
-						<div class="time">8:00am - 4:00pm</div>
-					</div>
-					<div class="hours-item">
-						<div class="day">Sunday</div>
-						<div class="time">Studio hire events only</div>
-					</div>
+					{g.openingHours.map((row) => (
+						<div class="hours-item">
+							<div class="day">{row.day}</div>
+							<div class="time">{row.hours}</div>
+						</div>
+					))}
 				</div>
 				<p class="hours-note">Strength &amp; conditioning training available earlier by appointment. Open on all Bank Holidays between March and September.</p>
 			</div>
@@ -142,8 +113,9 @@
 		<div class="footer-bottom-inner">
 			<span>Designed & Developed by <a href="#">Balance Physio</a></span>
 			<div class="footer-bottom-links">
-				<a href="/privacy-policy/">Privacy Policy</a>
-				<a href="/terms-conditions/">Terms & Conditions</a>
+				{nav.footerLegal.map((item) => (
+				<a href={item.href} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener' : undefined}>{item.label}</a>
+			))}
 			</div>
 			<span>&copy; 2026 Balance Performance Physiotherapy</span>
 		</div>

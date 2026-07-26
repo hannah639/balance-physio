@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
@@ -15,7 +16,7 @@ const photos = [
 	{ src: '/shockwave-therapy/sw-slider-7.jpg', alt: 'Shockwave assessment at Balance' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: 'Is shockwave therapy painful?', a: 'It can be uncomfortable, but the intensity is adjusted to remain tolerable.' },

@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import ImageText from '../components/ImageText.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import { getGlobals } from '../lib/sanity/globals';
+
+const g = await getGlobals();
 ---
 <Layout
 	title="Contact Us"
@@ -33,7 +36,7 @@ import BookingCTA from '../components/BookingCTA.astro';
 					<p>Our online booking system cannot process insurance bookings (Bupa, AXA, Bupa Global, AXA Global). Please contact us directly by phone, WhatsApp or email with your <strong>membership number</strong> and <strong>pre-authorisation code</strong> so we can book you in correctly.</p>
 				</div>
 				<p>For new patients, our admin team will send you a quick registration form by email. Once that's back with us, we'll book you in with the right clinician.</p>
-				<a href="https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services" target="_blank" rel="noopener" class="btn-book">Book Now</a>
+				<a href={g.bookingUrl} target="_blank" rel="noopener" class="btn-book">Book Now</a>
 			</div>
 
 			<form class="contact-form" action="https://api.web3forms.com/submit" method="POST">

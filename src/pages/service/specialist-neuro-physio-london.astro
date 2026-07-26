@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
@@ -13,7 +14,7 @@ const photos = [
 	{ src: '/neurological-rehabilitation/slider-5.jpg', alt: 'Resistance training in neurological rehab' },
 ];
 
-const bookingUrl = 'https://go.mindbodyonline.com/book/widgets/appointments/view/8068777f5e/services';
+const bookingUrl = (await getGlobals()).bookingUrl;
 
 const faqs = [
 	{ q: 'What is the difference between neurological physiotherapy and regular physiotherapy?', a: 'Neurological physiotherapy focuses specifically on conditions affecting the brain, spinal cord, and nerves, and how these impact movement, balance, and function.' },
