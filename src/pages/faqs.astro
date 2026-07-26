@@ -2,6 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('faqs');
 
 const faqs = [
 	{
@@ -142,15 +147,13 @@ const faqs = [
 	},
 ];
 ---
-<Layout
-	title="FAQs"
-	description="Frequently asked questions about appointments, opening times, payment, private medical insurance and BUPA or AXA billing at Balance Performance Physiotherapy in Clapham."
->
+<Layout title={doc?.seoTitle ?? "FAQs"} description={doc?.seoDescription ?? "Frequently asked questions about appointments, opening times, payment, private medical insurance and BUPA or AXA billing at Balance Performance Physiotherapy in Clapham."}>
 	<PageHero
-		title="Asked Questions"
-		highlight="Frequently"
-		subtitle="Can't find the answer to your question? Send us a message and we'll get back to you as soon as possible."
-		breadcrumb="FAQs"
+		title={doc?.heroHeading ?? "Asked Questions"}
+		highlight={doc?.heroHighlight ?? "Frequently"}
+		subtitle={doc?.heroSubtitle ?? "Can't find the answer to your question? Send us a message and we'll get back to you as soon as possible."}
+		breadcrumb={doc?.breadcrumb ?? "FAQs"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
 	<section class="faq-section">

@@ -3,16 +3,19 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import ImageText from '../components/ImageText.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('our-studios');
 ---
-<Layout
-	title="Our Studios"
-	description="Our two studios, a large Class & Movement Studio and a quieter Early Rehab Studio, are where the real rehab and training happens."
->
+<Layout title={doc?.seoTitle ?? "Our Studios"} description={doc?.seoDescription ?? "Our two studios, a large Class & Movement Studio and a quieter Early Rehab Studio, are where the real rehab and training happens."}>
 	<PageHero
-		title="Studios"
-		highlight="Our"
-		subtitle="Two dedicated spaces for rehab, movement, classes and training, the majority of your recovery happens here."
-		breadcrumb="Our Studios"
+		title={doc?.heroHeading ?? "Studios"}
+		highlight={doc?.heroHighlight ?? "Our"}
+		subtitle={doc?.heroSubtitle ?? "Two dedicated spaces for rehab, movement, classes and training, the majority of your recovery happens here."}
+		breadcrumb={doc?.breadcrumb ?? "Our Studios"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
 	<ImageText

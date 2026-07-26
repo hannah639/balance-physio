@@ -4,15 +4,18 @@ import PageHero from '../components/PageHero.astro';
 import ImageText from '../components/ImageText.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 import Testimonials from '../components/Testimonials.astro';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('about-us');
 ---
-<Layout
-	title="About Us"
-	description="Balance Performance Physiotherapy is London's largest rehabilitation centre with 27 professionals under one roof. Discover our approach to recovery and performance."
->
+<Layout title={doc?.seoTitle ?? "About Us"} description={doc?.seoDescription ?? "Balance Performance Physiotherapy is London's largest rehabilitation centre with 27 professionals under one roof. Discover our approach to recovery and performance."}>
 	<PageHero
-		title="About Us"
-		subtitle="London's largest rehabilitation centre, 27 professionals under one roof, united by one mission."
-		breadcrumb="About Us"
+		title={doc?.heroHeading ?? "About Us"}
+		subtitle={doc?.heroSubtitle ?? "London's largest rehabilitation centre, 27 professionals under one roof, united by one mission."}
+		breadcrumb={doc?.breadcrumb ?? "About Us"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
 	<ImageText

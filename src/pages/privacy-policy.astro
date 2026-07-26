@@ -1,15 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('privacy-policy');
 ---
-<Layout
-	title="Privacy Policy"
-	description="Privacy Policy and Use of Cookies for Balance Performance Physiotherapy."
->
+<Layout title={doc?.seoTitle ?? "Privacy Policy"} description={doc?.seoDescription ?? "Privacy Policy and Use of Cookies for Balance Performance Physiotherapy."}>
 	<PageHero
-		title="Policy"
-		highlight="Privacy"
-		breadcrumb="Privacy Policy"
+		title={doc?.heroHeading ?? "Policy"}
+		highlight={doc?.heroHighlight ?? "Privacy"}
+		breadcrumb={doc?.breadcrumb ?? "Privacy Policy"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 	<section class="rich-content">
 		<div class="container">

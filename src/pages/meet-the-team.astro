@@ -4,16 +4,19 @@ import PageHero from '../components/PageHero.astro';
 import Team from '../components/Team.astro';
 import Testimonials from '../components/Testimonials.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('meet-the-team');
 ---
-<Layout
-	title="Meet The Team"
-	description="Meet the 27 specialists at Balance Performance Physiotherapy. Our team of consultant physios, osteopaths, soft tissue therapists and sports scientists work together to get you better."
->
+<Layout title={doc?.seoTitle ?? "Meet The Team"} description={doc?.seoDescription ?? "Meet the 27 specialists at Balance Performance Physiotherapy. Our team of consultant physios, osteopaths, soft tissue therapists and sports scientists work together to get you better."}>
 	<PageHero
-		title="The Team"
-		highlight="Meet"
-		subtitle="27 specialists under one roof, matched to your needs, working together to get you better."
-		breadcrumb="Meet The Team"
+		title={doc?.heroHeading ?? "The Team"}
+		highlight={doc?.heroHighlight ?? "Meet"}
+		subtitle={doc?.heroSubtitle ?? "27 specialists under one roof, matched to your needs, working together to get you better."}
+		breadcrumb={doc?.breadcrumb ?? "Meet The Team"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 	<Team />
 	<Testimonials />

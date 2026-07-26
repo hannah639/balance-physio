@@ -5,6 +5,11 @@ import BookingCTA from '../components/BookingCTA.astro';
 import Picture from '../components/Picture.astro';
 import { events } from '../data/events.js';
 import { team, initials, gradientFor } from '../data/team.js';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('news-events');
 
 // Look up team members by slug so events can reference clinicians.
 const teamBySlug = Object.fromEntries(team.map((m) => [m.slug, m]));
@@ -30,14 +35,12 @@ function cliniciansFor(item) {
 	return item.clinicians.map((slug) => teamBySlug[slug]).filter(Boolean);
 }
 ---
-<Layout
-	title="News & Events | Balance Performance Physiotherapy"
-	description="Upcoming events at Balance Performance Physiotherapy in Clapham."
->
+<Layout title={doc?.seoTitle ?? "News & Events | Balance Performance Physiotherapy"} description={doc?.seoDescription ?? "Upcoming events at Balance Performance Physiotherapy in Clapham."}>
 	<PageHero
-		title="News & Events"
-		subtitle="What's coming up at Balance Performance Physiotherapy."
-		breadcrumb="News & Events"
+		title={doc?.heroHeading ?? "News & Events"}
+		subtitle={doc?.heroSubtitle ?? "What's coming up at Balance Performance Physiotherapy."}
+		breadcrumb={doc?.breadcrumb ?? "News & Events"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
 	<section class="news-page">

@@ -3,95 +3,24 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import ImageText from '../components/ImageText.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import { pages } from '../lib/sanity/pageContent';
 
-const roles = [
-	{
-		title: 'Soft Tissue Therapist',
-		meta: 'Part-Time, Self-Employed',
-		body: `
-			<p>Balance Performance is seeking an experienced Soft Tissue Therapist to join our leading multidisciplinary rehabilitation team in London. This part-time, self-employed position offers the opportunity to work alongside physiotherapists, osteopaths, strength &amp; conditioning coaches, and other healthcare professionals in a collaborative clinical environment.</p>
-			<p>The role is based primarily at our Gauden Road clinic and involves treating a diverse range of patients, from those recovering from injury to individuals looking to optimise performance and wellbeing.</p>
-			<p><strong>Requirements</strong></p>
-			<ul>
-				<li>Recognised qualification in Soft Tissue Therapy, Sports Massage Therapy, or equivalent</li>
-				<li>Minimum 3 years' clinical experience preferred</li>
-				<li>Strong musculoskeletal knowledge and hands-on treatment skills</li>
-				<li>Excellent communication and client management skills</li>
-				<li>Experience working within a multidisciplinary team is desirable</li>
-			</ul>
-			<p>The role requires flexibility to work weekday evenings and Saturdays.</p>
-			<p><strong>What We Offer</strong></p>
-			<ul>
-				<li>Supportive multidisciplinary team environment</li>
-				<li>Modern, well-equipped rehabilitation facilities</li>
-				<li>Diverse patient caseload</li>
-				<li>Opportunities for professional development and increased hours</li>
-			</ul>
-			<p>If you are passionate about delivering high-quality hands-on treatment and helping clients achieve their recovery and performance goals, we would love to hear from you.</p>
-			<p>To apply, please send your CV and cover letter to <a href="mailto:clinicmanager@balancephysio.com" class="inline-link">clinicmanager@balancephysio.com</a>.</p>
-		`,
-	},
-	{
-		title: 'Hydrotherapist',
-		meta: 'Musculoskeletal Rehabilitation · Part-Time, Self-Employed',
-		body: `
-			<p>Balance Performance is looking for an experienced Hydrotherapist to join our leading multidisciplinary rehabilitation team in London. This part-time, self-employed position offers the opportunity to work with a diverse musculoskeletal caseload, with potential to increase to full-time hours.</p>
-			<p><strong>Requirements</strong></p>
-			<ul>
-				<li>Minimum 5 years' post-qualification experience</li>
-				<li>Strong musculoskeletal assessment and rehabilitation skills</li>
-				<li>Experience working within a multidisciplinary sports or spinal medicine setting</li>
-				<li>Excellent clinical reasoning and manual therapy skills</li>
-				<li>HCPC registration</li>
-			</ul>
-			<p>The role requires availability for weekday evenings and early mornings. Our modern rehabilitation clinic near Clapham North serves over 1,800 clients each month, with hydrotherapy sessions delivered at our facility near Clapham South.</p>
-			<p><strong>What We Offer</strong></p>
-			<ul>
-				<li>Collaborative multidisciplinary team environment</li>
-				<li>Excellent rehabilitation and hydrotherapy facilities</li>
-				<li>Varied and rewarding caseload</li>
-				<li>Opportunities for professional growth and increased hours</li>
-			</ul>
-			<p>To apply, please send your CV and cover letter to <a href="mailto:clinicmanager@balancephysio.com" class="inline-link">clinicmanager@balancephysio.com</a>.</p>
-		`,
-	},
-	{
-		title: 'Pilates Instructor',
-		meta: 'Part-Time, Self-Employed · Saturdays Only',
-		body: `
-			<p>Balance Performance is seeking an experienced Pilates Instructor to join our leading multidisciplinary rehabilitation team in London. This part-time, self-employed position offers the opportunity to work alongside physiotherapists, osteopaths, strength &amp; conditioning coaches, and other healthcare professionals in a collaborative clinical environment.</p>
-			<p>The role is based primarily at our Gauden Road clinic and involves delivering both individual and small-group Pilates sessions to support rehabilitation, injury prevention, movement quality, and overall wellbeing.</p>
-			<p><strong>Requirements</strong></p>
-			<ul>
-				<li>Recognised Pilates qualification (Mat and/or Reformer)</li>
-				<li>Minimum 3 years' teaching experience preferred</li>
-				<li>Strong understanding of movement, posture, and musculoskeletal health</li>
-				<li>Excellent communication and client engagement skills</li>
-				<li>Experience working within a rehabilitation or multidisciplinary setting is desirable</li>
-			</ul>
-			<p>The role requires flexibility to work weekday evenings and Saturdays.</p>
-			<p><strong>What We Offer</strong></p>
-			<ul>
-				<li>Supportive multidisciplinary team environment</li>
-				<li>Modern, well-equipped rehabilitation facilities</li>
-				<li>Diverse client base ranging from rehabilitation to performance-focused clients</li>
-				<li>Opportunities for professional development and increased hours</li>
-			</ul>
-			<p>If you are passionate about movement, rehabilitation, and helping clients achieve their health and performance goals, we would love to hear from you.</p>
-			<p>To apply, please send your CV and cover letter to <a href="mailto:clinicmanager@balancephysio.com" class="inline-link">clinicmanager@balancephysio.com</a>.</p>
-		`,
-	},
-];
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+// This page's body is CMS-driven, so a missing document must fail the
+// build rather than render an empty page.
+const doc = await pages.required('work-for-us');
+
+// Vacancies come from Sanity → Pages → Work For Us → Open roles.
+const roles = doc.openRoles ?? [];
 ---
-<Layout
-	title="Work For Us"
-	description="Interested in joining Balance Performance Physiotherapy? We're currently recruiting a Soft Tissue Therapist, Hydrotherapist and Saturday Pilates Instructor."
->
+<Layout title={doc?.seoTitle ?? "Work For Us"} description={doc?.seoDescription ?? "Interested in joining Balance Performance Physiotherapy? We're currently recruiting a Soft Tissue Therapist, Hydrotherapist and Saturday Pilates Instructor."}>
 	<PageHero
-		title="For Us"
-		highlight="Work"
-		subtitle="Interested in working for Balance? We're always on the lookout for exceptional new additions to our fantastic team."
-		breadcrumb="Work For Us"
+		title={doc?.heroHeading ?? "For Us"}
+		highlight={doc?.heroHighlight ?? "Work"}
+		subtitle={doc?.heroSubtitle ?? "Interested in working for Balance? We're always on the lookout for exceptional new additions to our fantastic team."}
+		breadcrumb={doc?.breadcrumb ?? "Work For Us"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 		ctaText="Get in touch"
 		ctaHref="/contact-us"
 	/>
@@ -108,7 +37,15 @@ const roles = [
 							<span class="role-name">{role.title}</span>
 							<span class="role-meta">{role.meta}</span>
 						</summary>
-						<div class="role-body" set:html={role.body} />
+						{/* Rendered from Portable Text rather than set:html — no raw
+						    CMS markup reaches the page. */}
+						<div class="role-body">
+							{role.body.map((block) => (
+								block.kind === 'p'
+									? <p>{block.text}</p>
+									: <ul>{block.items.map((i) => <li>{i}</li>)}</ul>
+							))}
+						</div>
 					</details>
 				))}
 			</div>

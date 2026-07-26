@@ -26,6 +26,22 @@ export type PageSection = {
 	ctaLabel: string | null
 }
 
+export type OpenRole = {title: string; meta: string | null; body: BodyBlock[]}
+
+export type OutcomeStat = {number: string; label: string}
+
+export type OutcomePanel = {
+	tabLabel: string
+	panelId: string
+	heading: string | null
+	subheading: string | null
+	stats: OutcomeStat[]
+	body: BodyBlock[]
+	chart: Img | null
+	quotesLabel: string | null
+	quotes: string[]
+}
+
 export type PageDoc = {
 	slug: string
 	title: string
@@ -41,6 +57,10 @@ export type PageDoc = {
 	noIndex: boolean
 	sections: PageSection[]
 	relatedServices: {slug: string; title: string}[]
+	/** Work For Us vacancies — empty on every other page. */
+	openRoles: OpenRole[]
+	/** Outcomes tabbed panels — empty on every other page. */
+	outcomePanels: OutcomePanel[]
 }
 
 function str(v: unknown): string | null {
@@ -113,6 +133,26 @@ export function mapPageDoc(r: Record<string, any>): PageDoc | null {
 		relatedServices: (r.relatedServices ?? [])
 			.map((x: any) => ({slug: str(x?.slug) ?? '', title: str(x?.title) ?? ''}))
 			.filter((x: {slug: string}) => x.slug),
+
+		openRoles: (r.openRoles ?? [])
+			.map((x: any) => ({title: str(x?.title) ?? '', meta: str(x?.meta), body: toBodyBlocks(x?.body)}))
+			.filter((x: OpenRole) => x.title),
+
+		outcomePanels: (r.outcomePanels ?? [])
+			.map((x: any) => ({
+				tabLabel: str(x?.tabLabel) ?? '',
+				panelId: str(x?.panelId) ?? '',
+				heading: str(x?.heading),
+				subheading: str(x?.subheading),
+				stats: (x?.stats ?? [])
+					.map((st: any) => ({number: str(st?.number) ?? '', label: str(st?.label) ?? ''}))
+					.filter((st: OutcomeStat) => st.number && st.label),
+				body: toBodyBlocks(x?.body),
+				chart: img(x?.chartImage),
+				quotesLabel: str(x?.quotesLabel),
+				quotes: Array.isArray(x?.quotes) ? x.quotes.map((q: unknown) => str(q) ?? '').filter(Boolean) : [],
+			}))
+			.filter((x: OutcomePanel) => x.tabLabel && x.panelId),
 	}
 }
 
@@ -141,6 +181,24 @@ export function makeLoader(query: string, label: string) {
 		all: () => (cached ??= load()),
 		bySlug: async (slug: string) => (await (cached ??= load())).find((d) => d.slug === slug) ?? null,
 
+		/**
+		 * For a page whose whole body now comes from the CMS. Throws if the
+		 * document is missing, rather than rendering a blank page — a page that
+		 * exists but is empty is worse than a build that fails, because
+		 * Cloudflare would replace working content with nothing.
+		 */
+		required: async (slug: string): Promise<PageDoc> => {
+			const doc = (await (cached ??= load())).find((d) => d.slug === slug)
+			if (!doc) {
+				throw new Error(
+					`[sanity] ${label}: no document for "${slug}" — refusing to build. ` +
+						`Its page body comes from the CMS and would render empty. Check the ` +
+						`document exists, is published, and that SANITY_PROJECT_ID is set on the build host.`,
+				)
+			}
+			return doc
+		},
+
 		/** Use for getStaticPaths — throws rather than silently dropping routes. */
 		routes: async (): Promise<PageDoc[]> => {
 			const docs = await (cached ??= load())
@@ -156,7 +214,16 @@ export function makeLoader(query: string, label: string) {
 	}
 }
 
-import {WHO_WE_HELP_QUERY} from './queries'
+import {WHO_WE_HELP_QUERY, PAGES_QUERY} from './queries'
 
 /** Who We Help audience pages. */
 export const whoWeHelp = makeLoader(WHO_WE_HELP_QUERY, 'who-we-help')
+
+/**
+ * Standard content pages. Wired IN PLACE rather than through one dynamic
+ * template: these 14 pages are genuinely heterogeneous (a 43-question FAQ
+ * list, 35 paragraphs of legal text, the team grid, an enquiry form), so each
+ * keeps its own file and reads its hero + SEO — and its sections where the
+ * migration reached parity — from here.
+ */
+export const pages = makeLoader(PAGES_QUERY, 'pages')

@@ -293,3 +293,14 @@ export const WHO_WE_HELP_QUERY = `*[_type == "whoWeHelp" && coalesce(published, 
 	| order(coalesce(displayOrder, 999) asc){${PAGE_SHAPE},
 	"relatedServices": relatedServices[]->{"slug": slug.current, title}
 }`
+
+/** Standard content pages (/<slug>/). Same shape as Who We Help. */
+export const PAGES_QUERY = `*[_type == "page" && coalesce(published, true) == true]
+	| order(coalesce(displayOrder, 999) asc){${PAGE_SHAPE},
+	"openRoles": openRoles[]{title, meta, body},
+	"outcomePanels": outcomePanels[]{
+		tabLabel, panelId, heading, subheading, stats[]{number, label}, body,
+		quotesLabel, quotes,
+		chartImage${IMAGE}
+	}
+}`

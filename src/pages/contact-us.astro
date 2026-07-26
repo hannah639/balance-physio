@@ -4,18 +4,21 @@ import PageHero from '../components/PageHero.astro';
 import ImageText from '../components/ImageText.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 import { getGlobals } from '../lib/sanity/globals';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('contact-us');
 
 const g = await getGlobals();
 ---
-<Layout
-	title="Contact Us"
-	description="Get in touch with Balance Performance Physiotherapy in Clapham. Call 020 7627 2308 or email admin@balancephysio.com."
->
+<Layout title={doc?.seoTitle ?? "Contact Us"} description={doc?.seoDescription ?? "Get in touch with Balance Performance Physiotherapy in Clapham. Call 020 7627 2308 or email admin@balancephysio.com."}>
 	<PageHero
-		title="In Touch"
-		highlight="Get"
-		subtitle="Questions? Want to book? Happy to help, we'll get back to you as soon as we can."
-		breadcrumb="Contact Us"
+		title={doc?.heroHeading ?? "In Touch"}
+		highlight={doc?.heroHighlight ?? "Get"}
+		subtitle={doc?.heroSubtitle ?? "Questions? Want to book? Happy to help, we'll get back to you as soon as we can."}
+		breadcrumb={doc?.breadcrumb ?? "Contact Us"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
 	<section class="contact-intro">

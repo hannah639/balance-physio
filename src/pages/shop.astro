@@ -3,16 +3,19 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import ImageText from '../components/ImageText.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('shop');
 ---
-<Layout
-	title="Shop"
-	description="Visit our in-clinic shop in Clapham for CBD gummies, recovery rollers, gift vouchers and a curated range of products to support your treatment and training."
->
+<Layout title={doc?.seoTitle ?? "Shop"} description={doc?.seoDescription ?? "Visit our in-clinic shop in Clapham for CBD gummies, recovery rollers, gift vouchers and a curated range of products to support your treatment and training."}>
 	<PageHero
-		title="Shop"
-		highlight="Our"
-		subtitle="A curated in-store shop at our Clapham clinic, stocked with the products our team trusts and recommends."
-		breadcrumb="Shop"
+		title={doc?.heroHeading ?? "Shop"}
+		highlight={doc?.heroHighlight ?? "Our"}
+		subtitle={doc?.heroSubtitle ?? "A curated in-store shop at our Clapham clinic, stocked with the products our team trusts and recommends."}
+		breadcrumb={doc?.breadcrumb ?? "Shop"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 		hideCta
 	/>
 

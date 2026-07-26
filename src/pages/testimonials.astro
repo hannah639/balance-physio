@@ -4,6 +4,11 @@ import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 import Picture from '../components/Picture.astro';
 import { testimonials } from '../data/testimonials.js';
+import { pages } from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+const doc = await pages.bySlug('testimonials');
 
 // Any testimonial longer than this character count gets a "Read more" toggle.
 const READ_MORE_THRESHOLD = 450;
@@ -13,14 +18,12 @@ const READ_MORE_THRESHOLD = 450;
 // an empty card.
 const visibleTestimonials = testimonials.filter((t) => t.quote && t.quote.trim());
 ---
-<Layout
-	title="Testimonials"
-	description="Hear from our happy patients, real stories of recovery, performance and return to the things they love, from Balance Performance Physiotherapy in Clapham."
->
+<Layout title={doc?.seoTitle ?? "Testimonials"} description={doc?.seoDescription ?? "Hear from our happy patients, real stories of recovery, performance and return to the things they love, from Balance Performance Physiotherapy in Clapham."}>
 	<PageHero
-		title="Testimonials"
-		subtitle="Hear from our happy patients, real stories of recovery, resilience and return to performance."
-		breadcrumb="Testimonials"
+		title={doc?.heroHeading ?? "Testimonials"}
+		subtitle={doc?.heroSubtitle ?? "Hear from our happy patients, real stories of recovery, resilience and return to performance."}
+		breadcrumb={doc?.breadcrumb ?? "Testimonials"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
 	<section class="testimonials-page">

@@ -3,24 +3,25 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
 import Picture from '../components/Picture.astro';
+import { pages } from '../lib/sanity/pageContent';
 
-const tabs = [
-	{ id: 'general', label: 'General Outcomes' },
-	{ id: 'shoulder', label: 'Shoulder Outcomes' },
-	{ id: 'knee', label: 'Knee Outcomes' },
-	{ id: 'back', label: 'Back Outcomes' },
-	{ id: 'foot-ankle', label: 'Foot & Ankle Outcomes' },
-];
+// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
+// this file; see the completion notes for which pages are fully migrated.
+// This page's body is CMS-driven, so a missing document must fail the
+// build rather than render an empty page.
+const doc = await pages.required('outcomes');
+
+// Tabs and panels come from Sanity → Pages → Outcomes → Outcome panels.
+// Astro keeps the tab-switching behaviour and layout.
+const panels = doc.outcomePanels ?? [];
 ---
-<Layout
-	title="Outcomes"
-	description="Our Incredible Outcomes, patients typically discharged between 6 weeks and 3 months, with long-term results continuing beyond 12 months."
->
+<Layout title={doc?.seoTitle ?? "Outcomes"} description={doc?.seoDescription ?? "Our Incredible Outcomes, patients typically discharged between 6 weeks and 3 months, with long-term results continuing beyond 12 months."}>
 	<PageHero
-		title="Outcomes"
-		highlight="Our Incredible"
-		subtitle="Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond."
-		breadcrumb="Outcomes"
+		title={doc?.heroHeading ?? "Outcomes"}
+		highlight={doc?.heroHighlight ?? "Our Incredible"}
+		subtitle={doc?.heroSubtitle ?? "Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond."}
+		breadcrumb={doc?.breadcrumb ?? "Outcomes"}
+		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
 	<section class="outcomes-section">
@@ -28,121 +29,58 @@ const tabs = [
 			<p class="outcomes-intro">We track pain and function at baseline, 6 weeks, 3 months, 6 months and 12 months across our five key specialisms.</p>
 
 			<div class="outcomes-tabs" role="tablist">
-				{tabs.map((t, i) => (
+				{panels.map((t, i) => (
 					<button
 						type="button"
 						class={`outcomes-tab${i === 0 ? ' is-active' : ''}`}
 						role="tab"
 						aria-selected={i === 0 ? 'true' : 'false'}
-						aria-controls={`panel-${t.id}`}
-						id={`tab-${t.id}`}
-						data-target={t.id}
+						aria-controls={`panel-${t.panelId}`}
+						id={`tab-${t.panelId}`}
+						data-target={t.panelId}
 					>
-						{t.label}
+						{t.tabLabel}
 					</button>
 				))}
 			</div>
 
 			<div class="outcomes-panels">
-				<!-- GENERAL -->
-				<div class="outcomes-panel is-active" id="panel-general" role="tabpanel" aria-labelledby="tab-general">
-					<div class="outcomes-stats">
-						<div class="outcomes-stat">
-							<div class="num">9/10</div>
-							<div class="label">Patients improve in 3 months</div>
+				{panels.map((panel, i) => (
+					<div
+						class={`outcomes-panel${i === 0 ? ' is-active' : ''}`}
+						id={`panel-${panel.panelId}`}
+						role="tabpanel"
+						aria-labelledby={`tab-${panel.panelId}`}
+						hidden={i !== 0}
+					>
+						{panel.stats.length > 0 && (
+							<div class="outcomes-stats">
+								{panel.stats.map((stat) => (
+									<div class="outcomes-stat">
+										<div class="num">{stat.number}</div>
+										<div class="label">{stat.label}</div>
+									</div>
+								))}
+							</div>
+						)}
+						<div class="outcomes-body">
+							{panel.heading && <h3>{panel.heading}</h3>}
+							{panel.subheading && <h4>{panel.subheading}</h4>}
+							{panel.body.map((block) => (
+								block.kind === 'p'
+									? <p>{block.text}</p>
+									: <ul>{block.items.map((x) => <li>{x}</li>)}</ul>
+							))}
+							{panel.quotesLabel && <p class="outcomes-quotes-label"><em>{panel.quotesLabel}</em></p>}
+							{panel.quotes.map((q) => <blockquote>{q}</blockquote>)}
 						</div>
-						<div class="outcomes-stat">
-							<div class="num">35%</div>
-							<div class="label">Decrease in pain in 6 weeks</div>
-						</div>
-						<div class="outcomes-stat">
-							<div class="num">40%</div>
-							<div class="label">Increase in function in 6 weeks</div>
-						</div>
+						{panel.chart && (
+							<div class="outcomes-chart">
+								<Picture src={panel.chart.url} alt={panel.chart.alt} loading="lazy" decoding="async" width="800" height="600" />
+							</div>
+						)}
 					</div>
-					<div class="outcomes-body">
-						<h3>The Balance patient journey</h3>
-						<p>Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond.</p>
-						<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
-						<p>Use the tabs above to see how we measure progress across the Shoulder, Knee, Back and Foot &amp; Ankle.</p>
-					</div>
-					<div class="outcomes-journey">
-						<Picture src="/outcomes/patient-journey.webp" alt="Our Patient Progress Tracker Journey, from baseline to 12 months" loading="lazy" decoding="async" width="800" height="600" />
-					</div>
-				</div>
-
-				<!-- SHOULDER -->
-				<div class="outcomes-panel" id="panel-shoulder" role="tabpanel" aria-labelledby="tab-shoulder" hidden>
-					<h3>The Shoulder</h3>
-					<h4>How quickly can we make you better?</h4>
-					<div class="outcomes-chart">
-						<Picture src="/outcomes/shoulder.webp" alt="Shoulder patients feel much better, real results infographic" loading="lazy" decoding="async" width="800" height="600" />
-					</div>
-					<div class="outcomes-body">
-						<p>Our shoulder patients told us how bad their pain was before they started treatment (Baseline) and then at 6 weeks after starting, three, six and twelve months. Green is no or minimal pain.</p>
-						<p>Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond.</p>
-						<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
-						<p class="outcomes-quotes-label"><em>Some quotes from our shoulder patients:</em></p>
-						<blockquote>"The pain got much better in the initial two weeks after treatment."</blockquote>
-						<blockquote>"I think these are great physios my shoulder is definitely improved as a result of their interventions."</blockquote>
-						<blockquote>"My first treatment at Balance was for my shoulder and I would highly recommend to anyone."</blockquote>
-					</div>
-				</div>
-
-				<!-- KNEE -->
-				<div class="outcomes-panel" id="panel-knee" role="tabpanel" aria-labelledby="tab-knee" hidden>
-					<h3>The Knee</h3>
-					<h4>How quickly can we make you better?</h4>
-					<div class="outcomes-chart">
-						<Picture src="/outcomes/knee-new.jpg" alt="Knee patients feel much better, real results infographic" loading="lazy" decoding="async" width="800" height="600" />
-					</div>
-					<div class="outcomes-body">
-						<p>Our Knee patients told us how bad their pain was before they started treatment (Baseline) and then at 6 weeks after starting, three, six and twelve months. Green is no or minimal pain.</p>
-						<p>Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond.</p>
-						<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
-						<p class="outcomes-quotes-label"><em>Some quotes from our Knee patients:</em></p>
-						<blockquote>"Jo did a magnificent job on my knee – the best possible. Any problems now are, I believe, due to the severity of the problem and the surgery."</blockquote>
-						<blockquote>"Sam was excellent and my knee improved dramatically after a visit to him."</blockquote>
-						<blockquote>"Now it is as though I had not injured my knee."</blockquote>
-						<blockquote>"Following separate treatment for my neck and knee I am now fully able to run and little or no pain in my neck. Thank you to Balance once again for sorting me out."</blockquote>
-					</div>
-				</div>
-
-				<!-- BACK -->
-				<div class="outcomes-panel" id="panel-back" role="tabpanel" aria-labelledby="tab-back" hidden>
-					<h3>The Back</h3>
-					<h4>How quickly can we make you better?</h4>
-					<div class="outcomes-chart">
-						<Picture src="/outcomes/back-new.jpg" alt="Back pain patients feel much better, real results infographic" loading="lazy" decoding="async" width="800" height="600" />
-					</div>
-					<div class="outcomes-body">
-						<p>Our back pain patients told us how bad their pain was before they started treatment (Baseline) and then at 6 weeks after starting, three, six and twelve months. Green is no or minimal pain.</p>
-						<p>Our patients are typically discharged before 3 months, but continue to see long-term results from 12 months and beyond.</p>
-						<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
-						<p class="outcomes-quotes-label"><em>Some quotes from our Back patients:</em></p>
-						<blockquote>"I have had a few issues over the years going back to 2009 and Balance has always helped fantastically so always recommend them since then."</blockquote>
-						<blockquote>"Have followed medical advice and rehab exercises and now fully back to running."</blockquote>
-						<blockquote>"The treatment has worked and my back continues to improve with the right exercises."</blockquote>
-					</div>
-				</div>
-
-				<!-- FOOT & ANKLE -->
-				<div class="outcomes-panel" id="panel-foot-ankle" role="tabpanel" aria-labelledby="tab-foot-ankle" hidden>
-					<h3>The Foot and Ankle</h3>
-					<h4>How quickly can we make you better?</h4>
-					<div class="outcomes-chart">
-						<Picture src="/outcomes/foot-ankle-new.jpg" alt="Ankle, foot & lower leg patients feel much better, real results infographic" loading="lazy" decoding="async" width="800" height="600" />
-					</div>
-					<div class="outcomes-body">
-						<p>Our Foot and Ankle patients told us how bad their pain was before they started treatment (Baseline) and then at 6 weeks after starting, three, six and twelve months. Green is no or minimal pain.</p>
-						<p>Our patients are typically discharged between 6 weeks and 3 months, but continue to see long-term results from 12 months and beyond.</p>
-						<p><strong>Everyone keeps getting better even after they finish their treatment.</strong></p>
-						<p class="outcomes-quotes-label"><em>Some quotes from our Foot and Ankle patients:</em></p>
-						<blockquote>"Have recovered from back, knee and foot problems thanks to great advice and treatment. Now use the AlterG interspersed with outdoor running to keep the load on my knee (patellofemoral osteoarthritis) within manageable limits."</blockquote>
-						<blockquote>"I am back to full health and pain free. Back in the gym and have normal foot function."</blockquote>
-						<blockquote>"The treatments I received have reduced my pain to low level just above the ankle in the left leg. It lasts for perhaps 10-15 minutes on getting up, or rising to begin walking. This is a great improvement."</blockquote>
-					</div>
-				</div>
+				))}
 			</div>
 		</div>
 	</section>
