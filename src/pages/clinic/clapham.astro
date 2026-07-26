@@ -3,32 +3,34 @@ import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import Picture from '../../components/Picture.astro';
+import { getClinic } from '../../lib/sanity/clinics';
+
+// All copy, contact details, hours and facilities come from
+// Sanity → Clinic Locations → Clapham Clinic.
+const clinic = await getClinic('clapham');
 ---
-<Layout
-	title="Clapham Clinic"
-	description="Visit Balance Performance Physiotherapy at 113 Gauden Rd, London SW4 6LE, London's largest rehabilitation centre in the heart of Clapham."
->
+<Layout title={clinic?.seoTitle ?? 'Clapham Clinic'} description={clinic?.seoDescription ?? undefined}>
 	<PageHero
-		title="Clinic"
-		highlight="Clapham"
-		subtitle="113 Gauden Rd, London SW4 6LE, London's largest rehabilitation centre, a short walk from Clapham High Street."
-		breadcrumb="Clapham Clinic"
+		title={clinic?.heroHeading ?? 'Clinic'}
+		highlight={clinic?.heroHighlight ?? undefined}
+		subtitle={clinic?.heroSubtitle ?? undefined}
+		breadcrumb={clinic?.breadcrumb ?? 'Clapham Clinic'}
+		bgImage={clinic?.heroImageUrl ?? undefined}
 	/>
 
 	<section class="clapham-intro">
 		<div class="clapham-intro-inner">
 			<div class="clapham-intro-copy">
-				<div class="eyebrow"><span class="eyebrow-dot"></span>Location</div>
-				<h2>Right in the heart of <span class="highlight">Clapham</span></h2>
-				<p>You'll find us at <strong>113 Gauden Rd, London SW4 6LE</strong>, a short walk from Clapham Common, Clapham North and Clapham High Street.</p>
-				<p><strong>Please note:</strong> Hydrotherapy takes place at our Clapham South location, Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH.</p>
-				<ul class="check-list">
-					<li>Closest Tube: Clapham North (Northern line)</li>
-					<li>Closest Rail: Clapham High Street (Overground)</li>
-					<li>Buses: 50, 88, 155, 322, 345</li>
-					<li>Bike rack at reception</li>
-					<li>Wheelchair ramp at the front door (buzzer controlled)</li>
-				</ul>
+				{clinic?.location.eyebrow && <div class="eyebrow"><span class="eyebrow-dot"></span>{clinic.location.eyebrow}</div>}
+				<h2>{clinic?.location.heading} {clinic?.location.highlight && <span class="highlight">{clinic.location.highlight}</span>}</h2>
+				<p>You'll find us at <strong>{clinic?.location.address}</strong>, a short walk from Clapham Common, Clapham North and Clapham High Street.</p>
+				{clinic?.location.note && <p><strong>Please note:</strong> {clinic.location.note}</p>}
+				{clinic && clinic.location.directions.length > 0 && (
+					<ul class="check-list">
+						{clinic.location.directions.map((d) => <li>{d}</li>)}
+					</ul>
+				)}
 			</div>
 
 			<form class="clapham-form" action="https://api.web3forms.com/submit" method="POST">
@@ -59,46 +61,34 @@ import BookingCTA from '../../components/BookingCTA.astro';
 	</section>
 
 	<ImageText
-		eyebrow="Opening hours"
-		heading="Open from early"
-		highlight="until late"
+		eyebrow={clinic?.hours.eyebrow ?? undefined}
+		heading={clinic?.hours.heading ?? undefined}
+		highlight={clinic?.hours.highlight ?? undefined}
 		reverse
 		altBg
-		image="/clapham/opening-hours-banners.jpg"
-		imageAlt="Balance Performance Physiotherapy entrance with Open sign and Balance signage"
+		image={clinic?.hours.image?.url ?? '/clapham/opening-hours-banners.jpg'}
+		imageAlt={clinic?.hours.image?.alt ?? 'Balance Performance Physiotherapy entrance with Open sign and Balance signage'}
 	>
-		<ul>
-			<li>Monday, Tuesday, Wednesday: 7:00am to 8:00pm</li>
-			<li>Thursday: 8:00am to 7:00pm</li>
-			<li>Friday: 7:00am to 6:00pm</li>
-			<li>Saturday: 8:00am to 4:00pm</li>
-			<li>Sunday: Studio hire events only</li>
-		</ul>
-		<p>Strength and conditioning training is available earlier in the morning by appointment.</p>
-		<p>We are open on all Bank Holidays between March and September.</p>
-		<p>Book online, call us on <strong>020 7627 2308</strong> or email <a href="mailto:admin@balancephysio.com" class="inline-link">admin@balancephysio.com</a>.</p>
+		{clinic && clinic.hours.rows.length > 0 && (
+			<ul>
+				{clinic.hours.rows.map((r) => <li>{r.day}: {r.hours}</li>)}
+			</ul>
+		)}
+		{clinic?.hours.notes.map((n) => <p>{n}</p>)}
+		<p>Book online, call us on <strong>{clinic?.location.phoneNumber}</strong> or email <a href={`mailto:${clinic?.location.email}`} class="inline-link">{clinic?.location.email}</a>.</p>
 	</ImageText>
 
 	<ImageText
-		eyebrow="What's here"
-		heading="Everything under"
-		highlight="one roof"
-		collage={[
-			{ src: '/clapham/IMG_9460-scaled.jpg', alt: 'Early Rehab Studio with trampoline, bosu ball and rehab equipment at Balance Physio Clapham' },
-			{ src: '/clapham/IMG_9461-1-scaled.jpg', alt: 'Class & Movement Studio with rowing machine and slackline at Balance Physio Clapham' },
-			{ src: '/clapham/IMG_9469-scaled.jpg', alt: 'Strength and conditioning area with dumbbells and barbells at Balance Physio Clapham' },
-			{ src: '/clapham/IMG_9473-scaled.jpg', alt: 'Reception shop stocked with exercise, recovery and rehabilitation products at Balance Physio Clapham' },
-		]}
+		eyebrow={clinic?.whatsHere.eyebrow ?? undefined}
+		heading={clinic?.whatsHere.heading ?? undefined}
+		highlight={clinic?.whatsHere.highlight ?? undefined}
+		collage={clinic?.whatsHere.gallery.map((g) => ({ src: g.url, alt: g.alt })) ?? []}
 	>
-		<ul>
-			<li>9 treatment rooms (4 downstairs, 5 on the first floor)</li>
-			<li>Dedicated medical room for ultrasound &amp; injections</li>
-			<li>Class &amp; Movement Studio for end-stage rehab and training</li>
-			<li>Early Rehab Studio connected to four treatment rooms</li>
-			<li>Reception shop for protection, recovery &amp; performance</li>
-			<li>WorkSpace showroom for ergonomic products</li>
-			<li>Free Wi-Fi and comfortable waiting area</li>
-		</ul>
+		{clinic && clinic.whatsHere.items.length > 0 && (
+			<ul>
+				{clinic.whatsHere.items.map((i) => <li>{i}</li>)}
+			</ul>
+		)}
 	</ImageText>
 
 	<BookingCTA />

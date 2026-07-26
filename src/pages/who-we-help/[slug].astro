@@ -1,0 +1,56 @@
+---
+/**
+ * Who We Help audience pages — /who-we-help/<slug>/
+ *
+ * Replaces the ten near-identical static files with ONE template driven by
+ * Sanity → Who We Help. Slugs match the previous filenames exactly, so every
+ * live URL is unchanged.
+ *
+ * Unpublished documents simply stop generating a page — no broken route and no
+ * build failure.
+ */
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+import { whoWeHelp } from '../../lib/sanity/pageContent';
+
+export async function getStaticPaths() {
+	const docs = await whoWeHelp.routes();
+	return docs.map((doc) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+---
+<Layout title={doc.seoTitle ?? doc.title} description={doc.seoDescription ?? undefined}>
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		subtitle={doc.heroSubtitle ?? undefined}
+		breadcrumb={doc.breadcrumb ?? doc.title}
+		bgImage={doc.heroImageUrl ?? undefined}
+		ctaText={doc.heroCtaLabel ?? undefined}
+		hideCta={doc.hideHeroCta}
+	/>
+
+	{doc.sections.map((section) => (
+		<ImageText
+			eyebrow={section.eyebrow ?? undefined}
+			heading={section.heading ?? undefined}
+			highlight={section.headingHighlight ?? undefined}
+			reverse={section.imageOnRight}
+			altBg={section.altBackground}
+			image={section.image?.url ?? undefined}
+			imageAlt={section.image?.alt ?? undefined}
+			collage={section.gallery.length ? section.gallery.map((g) => ({ src: g.url, alt: g.alt })) : undefined}
+		>
+			{section.body.map((block) => (
+				block.kind === 'p'
+					? <p>{block.text}</p>
+					: <ul>{block.items.map((i) => <li>{i}</li>)}</ul>
+			))}
+		</ImageText>
+	))}
+
+	<BookingCTA />
+</Layout>

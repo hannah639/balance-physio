@@ -2,33 +2,37 @@
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import { getClinic } from '../../lib/sanity/clinics';
+
+// Content from Sanity → Clinic Locations → Clapham South for Hydrotherapy.
+const clinic = await getClinic('clapham-south-hydrotherapy');
 ---
-<Layout
-	title="Clapham South for Hydrotherapy"
-	description="Our hydrotherapy location at Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH."
->
+<Layout title={clinic?.seoTitle ?? 'Clapham South for Hydrotherapy'} description={clinic?.seoDescription ?? undefined}>
 	<PageHero
-		title="for Hydrotherapy"
-		highlight="Clapham South"
-		subtitle="Our hydrotherapy sessions take place at Audley Village, a short distance from our main Clapham North clinic."
-		breadcrumb="Clapham South for Hydrotherapy"
+		title={clinic?.heroHeading ?? 'for Hydrotherapy'}
+		highlight={clinic?.heroHighlight ?? undefined}
+		subtitle={clinic?.heroSubtitle ?? undefined}
+		breadcrumb={clinic?.breadcrumb ?? 'Clapham South for Hydrotherapy'}
+		bgImage={clinic?.heroImageUrl ?? undefined}
 	/>
 
 	<section class="location-intro">
 		<div class="location-intro-inner">
 			<div class="location-intro-copy">
-				<div class="eyebrow"><span class="eyebrow-dot"></span>Hydrotherapy location</div>
-				<h2>Audley Village, <span class="highlight">Nightingale Place</span></h2>
-				<p>Hydrotherapy at Balance Performance Physiotherapy takes place at our Clapham South location. Please come here, rather than our main clinic on Gauden Road, for any hydrotherapy appointments.</p>
-				<ul class="check-list">
-					<li><strong>Address:</strong> Audley Village, Nightingale Place, 3 Nightingale Lane, London SW4 9AH</li>
-					<li><strong>Closest Tube:</strong> Clapham South (Northern line)</li>
-					<li><strong>For appointments:</strong> 020 7627 2308 or admin@balancephysio.com</li>
-				</ul>
+				{clinic?.location.eyebrow && <div class="eyebrow"><span class="eyebrow-dot"></span>{clinic.location.eyebrow}</div>}
+				<h2>{clinic?.location.heading} {clinic?.location.highlight && <span class="highlight">{clinic.location.highlight}</span>}</h2>
+				<p>Hydrotherapy at Balance Performance Physiotherapy takes place at our Clapham South location. {clinic?.location.note}</p>
+				{clinic && clinic.location.directions.length > 0 && (
+					<ul class="check-list">
+						{clinic.location.directions.map((d) => <li>{d}</li>)}
+					</ul>
+				)}
 			</div>
 
 			<div class="location-map">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.1190346254107!2d-0.1486525!3d51.45289760000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605b630c3c9d3%3A0x9ad3c77ad81840c6!2sAudley%20Nightingale%20Place!5e1!3m2!1sen!2suk!4v1776940633643!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Audley Village, Nightingale Place, Clapham South"></iframe>
+				{clinic?.location.mapEmbed
+					? <Fragment set:html={clinic.location.mapEmbed} />
+					: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.1190346254107!2d-0.1486525!3d51.45289760000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605b630c3c9d3%3A0x9ad3c77ad81840c6!2sAudley%20Nightingale%20Place!5e1!3m2!1sen!2suk!4v1776940633643!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Audley Village, Nightingale Place, Clapham South"></iframe>}
 			</div>
 		</div>
 	</section>

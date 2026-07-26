@@ -267,3 +267,29 @@ export const TEAM_QUERY = `*[_type == "teamMember" && coalesce(published, true) 
 	phone,
 	seo{metaTitle, metaDescription, noIndex, ogImage${IMAGE}}
 }`
+
+/**
+ * Hero + content-section shape shared by `page` and `whoWeHelp` (and reusable
+ * for any future type built from the same blocks). Declared once so the two
+ * cannot drift apart.
+ */
+const PAGE_SHAPE = `
+	"slug": slug.current,
+	pageUrl,
+	title,
+	heroHighlight, heroHeading, heroSubtitle, breadcrumb, heroCtaLabel, hideHeroCta,
+	heroImage${IMAGE},
+	"sections": sections[coalesce(visible, true) == true]{
+		eyebrow, heading, headingHighlight, body,
+		image${IMAGE},
+		gallery[]${IMAGE},
+		imageOnRight, altBackground, ctaLabel
+	},
+	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
+`
+
+/** Who We Help audience pages (/who-we-help/<slug>/). */
+export const WHO_WE_HELP_QUERY = `*[_type == "whoWeHelp" && coalesce(published, true) == true]
+	| order(coalesce(displayOrder, 999) asc){${PAGE_SHAPE},
+	"relatedServices": relatedServices[]->{"slug": slug.current, title}
+}`
