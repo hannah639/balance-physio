@@ -8,7 +8,9 @@ import { pages } from '../lib/sanity/pageContent';
 
 // Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
 // this file; see the completion notes for which pages are fully migrated.
-const doc = await pages.bySlug('about-us');
+// Section content is CMS-driven, so a missing document must fail the build
+// rather than render an empty page.
+const doc = await pages.required('about-us');
 ---
 <Layout title={doc?.seoTitle ?? "About Us"} description={doc?.seoDescription ?? "Balance Performance Physiotherapy is London's largest rehabilitation centre with 27 professionals under one roof. Discover our approach to recovery and performance."}>
 	<PageHero
@@ -18,30 +20,24 @@ const doc = await pages.bySlug('about-us');
 		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
-	<ImageText
-		eyebrow="The Balance approach"
-		heading="We don't simply"
-		highlight="treat and rehabilitate"
-		image="/about/clinic-exterior.jpg"
-		imageAlt="Balance Performance Physiotherapy Clapham clinic exterior"
-	>
-		<p>The Balance approach removes your pain, but then teaches you to move, to improve and perform so that you become the best version of you. The majority of your treatment takes place outside the treatment room, in our studios, gym and movement spaces.</p>
-		<p>We make you better, fitter, restore your energy and drive for life. A lot of our clients see us weekly but may be in one of our movement studios or the gym daily completing their programme.</p>
-	</ImageText>
-
-	<ImageText
-		eyebrow="27 specialists, one roof"
-		heading="Two heads are better"
-		highlight="than one"
-		reverse
-		altBg
-		image="/about/clinic-shop.jpg"
-		imageAlt="Inside the Balance Performance Physiotherapy reception and shop"
-	>
-		<p>We began with the mantra that two heads are better than one, and we have 27 professionals under one roof waiting to impart their knowledge to improve your wellness.</p>
-		<p>We are London's largest rehabilitation centre. We make things clear and simple. We don't simply treat and rehabilitate: we want you to regain your strength and recover your energy for life. We empower you to take care of yourself.</p>
-		<p>We look after the armchair athlete with the same knowledge and skills as the professional athlete.</p>
-	</ImageText>
+	{doc.sections.map((section) => (
+		<ImageText
+			eyebrow={section.eyebrow ?? undefined}
+			heading={section.heading ?? undefined}
+			highlight={section.headingHighlight ?? undefined}
+			reverse={section.imageOnRight}
+			altBg={section.altBackground}
+			image={section.image?.url ?? undefined}
+			imageAlt={section.image?.alt ?? undefined}
+			collage={section.gallery.length ? section.gallery.map((g) => ({ src: g.url, alt: g.alt })) : undefined}
+		>
+			{section.body.map((block) => (
+				block.kind === 'p'
+					? <p>{block.text}</p>
+					: <ul>{block.items.map((i) => <li>{i}</li>)}</ul>
+			))}
+		</ImageText>
+	))}
 
 	<section class="stats-bar">
 		<div class="container">

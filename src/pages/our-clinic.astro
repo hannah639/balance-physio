@@ -7,7 +7,9 @@ import { pages } from '../lib/sanity/pageContent';
 
 // Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
 // this file; see the completion notes for which pages are fully migrated.
-const doc = await pages.bySlug('our-clinic');
+// Section content is CMS-driven, so a missing document must fail the build
+// rather than render an empty page.
+const doc = await pages.required('our-clinic');
 ---
 <Layout title={doc?.seoTitle ?? "Our Clinic"} description={doc?.seoDescription ?? "Explore Balance Performance Physiotherapy, 11 treatment rooms, two studios, reception shop and ergonomic showroom in Clapham, London."}>
 	<PageHero
@@ -18,36 +20,24 @@ const doc = await pages.bySlug('our-clinic');
 		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
-	<ImageText
-		eyebrow="Reception"
-		heading="A warm welcome at"
-		highlight="reception"
-		image="/our-clinic/reception.jpg"
-		imageAlt="Balance Performance Physiotherapy reception area"
-	>
-		<p>We have a large comfortable reception and waiting area for you if you don't want to go into the gym or studio to move and warm yourself before your session.</p>
-		<ul>
-			<li>Bike rack and buggy space</li>
-			<li>Wheelchair ramp at front door (buzzer controlled)</li>
-			<li>Dynamic reception chairs and a standing desk for emails</li>
-			<li>Free Wi-Fi</li>
-			<li>A shop stocked for protection, performance, recovery and rehab</li>
-		</ul>
-	</ImageText>
-
-	<ImageText
-		eyebrow="Treatment rooms"
-		heading="11 rooms,"
-		highlight="purpose-built"
-		reverse
-		altBg
-		image="/our-clinic/treatment-rooms.jpg"
-		imageAlt="Balance Physio treatment room"
-	>
-		<p>We have 11 treatment rooms, with a mix downstairs and on the first floor. Our massage services take place in the Early Rehab Studio quiet rooms and a dedicated medical room is available for ultrasound examinations.</p>
-		<p>Purpose built for privacy and professional consultation. These rooms provide excellent space for examination, manual therapy and treatment.</p>
-		<p>Our philosophy is not to spend too much time in treatment rooms, the real work happens in the studios and gym.</p>
-	</ImageText>
+	{doc.sections.map((section) => (
+		<ImageText
+			eyebrow={section.eyebrow ?? undefined}
+			heading={section.heading ?? undefined}
+			highlight={section.headingHighlight ?? undefined}
+			reverse={section.imageOnRight}
+			altBg={section.altBackground}
+			image={section.image?.url ?? undefined}
+			imageAlt={section.image?.alt ?? undefined}
+			collage={section.gallery.length ? section.gallery.map((g) => ({ src: g.url, alt: g.alt })) : undefined}
+		>
+			{section.body.map((block) => (
+				block.kind === 'p'
+					? <p>{block.text}</p>
+					: <ul>{block.items.map((i) => <li>{i}</li>)}</ul>
+			))}
+		</ImageText>
+	))}
 
 	<BookingCTA />
 </Layout>

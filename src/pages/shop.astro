@@ -7,7 +7,9 @@ import { pages } from '../lib/sanity/pageContent';
 
 // Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
 // this file; see the completion notes for which pages are fully migrated.
-const doc = await pages.bySlug('shop');
+// Section content is CMS-driven, so a missing document must fail the build
+// rather than render an empty page.
+const doc = await pages.required('shop');
 ---
 <Layout title={doc?.seoTitle ?? "Shop"} description={doc?.seoDescription ?? "Visit our in-clinic shop in Clapham for CBD gummies, recovery rollers, gift vouchers and a curated range of products to support your treatment and training."}>
 	<PageHero
@@ -19,38 +21,24 @@ const doc = await pages.bySlug('shop');
 		hideCta
 	/>
 
-	<ImageText
-		eyebrow="In-store"
-		heading="Recovery, performance and"
-		highlight="rehab essentials"
-		youtubeId="Ob8walH04XA"
-		autoplay
-		imageAlt="Video: Balance Physio shop tour"
-	>
-		<p>Support your recovery beyond the clinic. Our carefully selected range of rehabilitation products is designed to help you manage pain, improve mobility, and maintain progress at home. Speak to your physiotherapist for personalised recommendations.</p>
-		<p>Our reception shop is open whenever the clinic is. We stock a considered range of products to help you protect, perform, recover and rehabilitate.</p>
-		<p>Everything on the shelves has been chosen by our therapists for its quality and relevance to the work we do with our clients, so you can be confident you're picking up something we'd genuinely recommend.</p>
-		<ul>
-			<li>Foam rollers, peanut balls and trigger point tools</li>
-			<li>Resistance bands and rehab accessories</li>
-			<li>Recovery and mobility products</li>
-			<li>Athletic tape and supports</li>
-		</ul>
-	</ImageText>
-
-	<ImageText
-		eyebrow="Wellbeing"
-		heading="CBD products and"
-		highlight="gift vouchers"
-		reverse
-		altBg
-		image="/shop/cbd-capsules.jpg"
-		imageAlt="CBD Brothers Blue Edition capsules on display in the Balance Physio shop"
-	>
-		<p>Explore our range of premium CBD products, selected to support relaxation and everyday wellbeing. Speak to our team to find the option that's right for you.</p>
-		<p>Looking for a thoughtful gift? Our gift vouchers are redeemable across our services including physiotherapy, sports massage, strength &amp; conditioning and more. They make a meaningful gesture for someone you'd like to support on their health journey. Remember a gift voucher might be that perfect present for a post-race massage.</p>
-		<p>Pop in to browse during clinic hours, or ask reception about gift vouchers when you next visit.</p>
-	</ImageText>
+	{doc.sections.map((section) => (
+		<ImageText
+			eyebrow={section.eyebrow ?? undefined}
+			heading={section.heading ?? undefined}
+			highlight={section.headingHighlight ?? undefined}
+			reverse={section.imageOnRight}
+			altBg={section.altBackground}
+			image={section.image?.url ?? undefined}
+			imageAlt={section.image?.alt ?? undefined}
+			collage={section.gallery.length ? section.gallery.map((g) => ({ src: g.url, alt: g.alt })) : undefined}
+		>
+			{section.body.map((block) => (
+				block.kind === 'p'
+					? <p>{block.text}</p>
+					: <ul>{block.items.map((i) => <li>{i}</li>)}</ul>
+			))}
+		</ImageText>
+	))}
 
 	<BookingCTA />
 </Layout>

@@ -7,7 +7,9 @@ import { pages } from '../lib/sanity/pageContent';
 
 // Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
 // this file; see the completion notes for which pages are fully migrated.
-const doc = await pages.bySlug('our-studios');
+// Section content is CMS-driven, so a missing document must fail the build
+// rather than render an empty page.
+const doc = await pages.required('our-studios');
 ---
 <Layout title={doc?.seoTitle ?? "Our Studios"} description={doc?.seoDescription ?? "Our two studios, a large Class & Movement Studio and a quieter Early Rehab Studio, are where the real rehab and training happens."}>
 	<PageHero
@@ -18,38 +20,24 @@ const doc = await pages.bySlug('our-studios');
 		bgImage={doc?.heroImageUrl ?? undefined}
 	/>
 
-	<ImageText
-		eyebrow="Studio 1"
-		heading="Class &amp; Movement"
-		highlight="Studio"
-		image="/our-studios/body-1.jpg"
-		imageAlt="Class & Movement Studio, open training space"
-	>
-		<p>Our large open studio hosts end-stage rehab, speed and agility training, classes, movement sessions, lectures and workshops. Judo mats and exercise matting cover the floor, with equipment positioned around the perimeter.</p>
-		<ul>
-			<li>Bungees fixed to pillars and LifeLine USA train station</li>
-			<li>CrossCore 180 Rotational Bodyweight Training kit</li>
-			<li>Jungle Gym Suspension training and dips bars</li>
-			<li>Heavy boxing and Thai boxing bags</li>
-			<li>Olympic bar and plates, Iron Man sandbags</li>
-			<li>Extensive kettlebell range (Competition Steel and Cast Iron)</li>
-			<li>Medicine balls, heavy ropes, mobility and myofascial release tools</li>
-		</ul>
-		<p>Access is available to clients and those who have completed induction, with instruction available from our strength &amp; conditioning coaches.</p>
-	</ImageText>
-
-	<ImageText
-		eyebrow="Studio 2"
-		heading="Early Rehab"
-		highlight="Studio"
-		reverse
-		altBg
-		image="/our-studios/body-2.jpg"
-		imageAlt="Early Rehab Studio, balls and quiet training space"
-	>
-		<p>Our smaller first-floor studio is primarily for early rehab drills treating sports injuries, back pain and neck pain. It's quieter, music-free, and perfect for movement coaching, mobility and flexibility practice.</p>
-		<p>It's connected to four treatment rooms and includes a medical room for injections, ultrasound assessments, and visiting practitioners.</p>
-	</ImageText>
+	{doc.sections.map((section) => (
+		<ImageText
+			eyebrow={section.eyebrow ?? undefined}
+			heading={section.heading ?? undefined}
+			highlight={section.headingHighlight ?? undefined}
+			reverse={section.imageOnRight}
+			altBg={section.altBackground}
+			image={section.image?.url ?? undefined}
+			imageAlt={section.image?.alt ?? undefined}
+			collage={section.gallery.length ? section.gallery.map((g) => ({ src: g.url, alt: g.alt })) : undefined}
+		>
+			{section.body.map((block) => (
+				block.kind === 'p'
+					? <p>{block.text}</p>
+					: <ul>{block.items.map((i) => <li>{i}</li>)}</ul>
+			))}
+		</ImageText>
+	))}
 
 	<BookingCTA />
 </Layout>
