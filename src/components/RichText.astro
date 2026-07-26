@@ -1,0 +1,71 @@
+---
+/**
+ * Minimal Portable Text renderer.
+ *
+ * Built because the FAQ answers carry inline links (/contact-us/, tel:,
+ * WhatsApp, mailto:) and <strong> runs — flattening them to plain paragraphs,
+ * as the earlier body helper did, would strip every link from the page.
+ *
+ * Supports what blockContent actually declares: normal/h2/h3/h4/blockquote
+ * styles, bullet and numbered lists, strong/em/code decorators and link
+ * annotations. Nothing is injected with set:html, so no raw CMS HTML reaches
+ * the page.
+ */
+import RichTextSpans from './RichTextSpans.astro';
+
+export type Span = {_key?: string; _type?: string; text?: string; marks?: string[]};
+export type Block = {
+	_key?: string;
+	_type?: string;
+	style?: string;
+	listItem?: string;
+	level?: number;
+	children?: Span[];
+	markDefs?: {_key: string; _type: string; href?: string}[];
+};
+
+const { blocks = [], class: className } = Astro.props as { blocks?: Block[]; class?: string };
+
+/** Consecutive list items are grouped so they share one <ul>/<ol>. */
+type Group =
+	| {kind: 'blocks'; items: Block[]}
+	| {kind: 'list'; listItem: string; items: Block[]};
+
+const groups: Group[] = [];
+for (const block of blocks) {
+	if (!block || block._type !== 'block') continue;
+	const last = groups[groups.length - 1];
+	if (block.listItem) {
+		if (last && last.kind === 'list' && last.listItem === block.listItem) last.items.push(block);
+		else groups.push({kind: 'list', listItem: block.listItem, items: [block]});
+	} else {
+		if (last && last.kind === 'blocks') last.items.push(block);
+		else groups.push({kind: 'blocks', items: [block]});
+	}
+}
+---
+{groups.map((group) => (
+	group.kind === 'list' ? (
+		group.listItem === 'number' ? (
+			<ol class={className}>
+				{group.items.map((block) => (
+					<li><RichTextSpans children={block.children} markDefs={block.markDefs} /></li>
+				))}
+			</ol>
+		) : (
+			<ul class={className}>
+				{group.items.map((block) => (
+					<li><RichTextSpans children={block.children} markDefs={block.markDefs} /></li>
+				))}
+			</ul>
+		)
+	) : (
+		group.items.map((block) => (
+			block.style === 'h2' ? <h2><RichTextSpans children={block.children} markDefs={block.markDefs} /></h2>
+			: block.style === 'h3' ? <h3><RichTextSpans children={block.children} markDefs={block.markDefs} /></h3>
+			: block.style === 'h4' ? <h4><RichTextSpans children={block.children} markDefs={block.markDefs} /></h4>
+			: block.style === 'blockquote' ? <blockquote><RichTextSpans children={block.children} markDefs={block.markDefs} /></blockquote>
+			: <p><RichTextSpans children={block.children} markDefs={block.markDefs} /></p>
+		))
+	)
+))}

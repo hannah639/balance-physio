@@ -394,3 +394,17 @@ export type ResolvedNavigation = {
 	footerLegal: NavLink[]
 	copyrightText: string
 }
+
+// ── Portable Text ────────────────────────────────────────────────────────
+
+export type Span = {_key?: string; _type?: string; text?: string; marks?: string[]}
+
+export type Block = {
+	_key?: string
+	_type?: string
+	style?: string
+	listItem?: string
+	level?: number
+	children?: Span[]
+	markDefs?: {_key: string; _type: string; href?: string}[]
+}

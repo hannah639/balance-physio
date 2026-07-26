@@ -26,6 +26,8 @@ export const ROUTE_PREFIX: Record<string, string> = {
 export const FIXED_ROUTES: Record<string, string> = {
 	homepage: '/',
 	pricing: '/pricing/',
+	// General FAQs owns /faqs/ outright — there is no `page` document for it.
+	generalFaqs: '/faqs/',
 }
 
 /**

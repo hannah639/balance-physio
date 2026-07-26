@@ -304,3 +304,16 @@ export const PAGES_QUERY = `*[_type == "page" && coalesce(published, true) == tr
 		chartImage${IMAGE}
 	}
 }`
+
+/**
+ * General FAQs — the shared question list shown on /faqs/.
+ * Answers stay as raw Portable Text so links and bold survive to the renderer.
+ */
+export const GENERAL_FAQS_QUERY = `*[_type == "generalFaqs"][0]{
+	heroHighlight, heroHeading, heroSubtitle, breadcrumb,
+	heroImage${IMAGE},
+	sectionTitle,
+	introText,
+	"faqs": faqs[]{_key, question, answer},
+	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
+}`

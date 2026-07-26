@@ -1,0 +1,56 @@
+---
+/**
+ * Renders the inline content of one Portable Text block: strong/em/code
+ * decorators, link annotations, and the newlines that stand in for the
+ * source's <br> line breaks.
+ *
+ * Split into its own component so <RichText> stays readable — Astro
+ * frontmatter is TypeScript, not JSX, so this markup cannot live in a helper
+ * function.
+ */
+export type Span = {_key?: string; _type?: string; text?: string; marks?: string[]};
+export type MarkDef = {_key: string; _type: string; href?: string};
+
+const { children: spans = [], markDefs = [] } = Astro.props as {
+	children?: Span[];
+	markDefs?: MarkDef[];
+};
+
+/** Only http(s), mailto:, tel: and internal paths — never javascript:. */
+function safeHref(href?: string): string | null {
+	const h = (href ?? '').trim();
+	return /^(https?:\/\/|mailto:|tel:|\/|#)/i.test(h) ? h : null;
+}
+
+const pieces = spans.map((span) => {
+	const marks = span.marks ?? [];
+	const def = markDefs.find((d) => d._type === 'link' && marks.includes(d._key));
+	const href = def ? safeHref(def.href) : null;
+	return {
+		parts: (span.text ?? '').split('\n'),
+		href,
+		external: Boolean(href && /^https?:\/\//i.test(href)),
+		strong: marks.includes('strong'),
+		em: marks.includes('em'),
+		code: marks.includes('code'),
+	};
+});
+---
+{pieces.map((piece) => (
+	piece.href ? (
+		<a
+			href={piece.href}
+			class="inline-link"
+			target={piece.external ? '_blank' : undefined}
+			rel={piece.external ? 'noopener' : undefined}
+		>{piece.parts.map((part, i) => (i > 0 ? [<br />, part] : part))}</a>
+	) : piece.strong ? (
+		<strong>{piece.parts.map((part, i) => (i > 0 ? [<br />, part] : part))}</strong>
+	) : piece.em ? (
+		<em>{piece.parts.map((part, i) => (i > 0 ? [<br />, part] : part))}</em>
+	) : piece.code ? (
+		<code>{piece.parts.join(' ')}</code>
+	) : (
+		piece.parts.map((part, i) => (i > 0 ? [<br />, part] : part))
+	)
+))}

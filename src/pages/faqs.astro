@@ -2,172 +2,53 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
-import { pages } from '../lib/sanity/pageContent';
+import RichText from '../components/RichText.astro';
+import { getGeneralFaqsRequired, answerToText } from '../lib/sanity/faqs';
 
-// Hero and SEO come from Sanity -> Pages. Bespoke sections below stay in
-// this file; see the completion notes for which pages are fully migrated.
-const doc = await pages.bySlug('faqs');
+// This page is owned entirely by Sanity → General FAQs: hero, SEO and the
+// question list all come from that one document. There is no `page` document
+// for /faqs/, so an editor has a single place to look.
+const faqPage = await getGeneralFaqsRequired();
+const { faqs, sectionTitle, introText } = faqPage;
 
-const faqs = [
-	{
-		q: 'How do I arrange an appointment?',
-		a: `
-			<p>Our front-of-house and admin team will help you choose the most appropriate service if you are not sure yourself, and will arrange an appointment with the professional best matched to your needs.</p>
+// schema.org FAQPage — mirrors exactly the questions rendered below.
+const faqJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((item) => ({
+		'@type': 'Question',
+		name: item.question,
+		acceptedAnswer: { '@type': 'Answer', text: answerToText(item.answer) },
+	})),
+};
 
-			<p><strong>Book online</strong></p>
-			<p>Head to our <a href="/contact-us/" class="inline-link">contact page</a> and submit the form. When you get in touch, it helps us to know:</p>
-			<ul>
-				<li>What it is you need us to help you with</li>
-				<li>When you would like to attend</li>
-				<li>How you would like us to contact you, by phone or email</li>
-			</ul>
-			<p>Your message will come through to one of the reception team who will deal with it as soon as possible.</p>
-			<p>Please note if you are booking online or for an initial appointment, we will require payment at time of booking.</p>
-
-			<p><strong>Book by telephone</strong></p>
-			<p>Call <a href="tel:02076272308" class="inline-link">020 7627 2308</a>.</p>
-
-			<p><strong>Book by WhatsApp</strong></p>
-			<p>Message us on <a href="https://wa.me/447749932065" target="_blank" rel="noopener" class="inline-link">07749 932065</a>.</p>
-
-			<p><strong>Book by email</strong></p>
-			<p>Please email <a href="mailto:admin@balancephysio.com" class="inline-link">admin@balancephysio.com</a>.</p>
-
-			<p><strong>Booking with insurance (Bupa, AXA, Bupa Global, AXA Global)</strong></p>
-			<p>Our online booking system cannot process insurance bookings. To book using your insurance, please contact us directly by phone, WhatsApp or email with your <strong>membership number</strong> and <strong>pre-authorisation code</strong> to hand, and our admin team will book you in.</p>
-
-			<p><strong>Arranging appointments on behalf of children and young people</strong></p>
-			<ul>
-				<li>In the absence of a referral we would prefer one of our professionals to speak to parents regarding their child's condition.</li>
-				<li>We require a parent or guardian to attend all appointments unless otherwise agreed.</li>
-			</ul>
-		`,
-	},
-	{
-		q: 'What are Balance Physio\'s opening times?',
-		a: `
-			<ul>
-				<li>Monday, Tuesday, Wednesday: 7:00am to 8:00pm</li>
-				<li>Thursday: 8:00am to 7:00pm</li>
-				<li>Friday: 7:00am to 6:00pm</li>
-				<li>Saturday: 8:00am to 4:00pm</li>
-				<li>Sunday: Studio hire events only</li>
-			</ul>
-			<p>Strength and conditioning training is available earlier in the morning by appointment.</p>
-			<p>We are open on all Bank Holidays between March and September.</p>
-			<p>Call <a href="tel:02076272308" class="inline-link">020 7627 2308</a> to book an appointment or make further enquiries.</p>
-			<p>Our clients come from across London and the South East of England, but we largely attract the active people of Clapham, Wandsworth, Brixton, Stockwell and those working in the City and West End. We are 15 minutes from Green Park, Victoria and London Bridge underground stations. Clapham High Street rail station is 60 seconds away and is a fast link for clients from the Clapham Junction area and those working in Canary Wharf and Docklands.</p>
-		`,
-	},
-	{
-		q: 'What methods of payment do you accept?',
-		a: `
-			<p>Payment can be made by credit or debit card. You can also pay via:</p>
-			<ul>
-				<li>Our online diary system, MINDBODY ONLINE</li>
-				<li>Direct Bank Transfer. Ask us for our account details and the payment reference to enter (patient's full name or surname).</li>
-			</ul>
-			<p>Balance is authorised to take payments over the phone. We request you pay prior to any appointments booked online and all initial appointments are only confirmed when paid in advance.</p>
-
-			<p><strong>Payment notice</strong></p>
-			<p>All clients of Balance Performance Physiotherapy are expected to pay prior to or after the session. All cancellations made without 24 hours' prior notice will be charged at the full fee. This also applies to missed appointments or late arrivals.</p>
-			<p>This time period is extended to 48 hours for Vojta.</p>
-			<p>The management team is very happy to discuss any of our procedures with you.</p>
-		`,
-	},
-	{
-		q: 'Do you accept private medical insurance?',
-		a: `
-			<p>With the exception of BUPA and AXA Health, all of our clients who wish to invoke their private medical or health insurance pay us directly. We then issue a full invoice as an insurance receipt so you can claim the fees back.</p>
-			<p>Different insurance companies have varying levels of reimbursement. When the policy does not meet the full costs of treatment, it is the responsibility of the patient to make up the difference.</p>
-			<p>It is important to contact your insurer before treatment to clarify your policy and your cover.</p>
-
-			<p><strong>Balance is registered with all major insurance companies, including:</strong></p>
-			<ul>
-				<li>BUPA</li>
-				<li>Bupa Global</li>
-				<li>AXA Global</li>
-				<li>AXA Health</li>
-				<li>AVIVA</li>
-				<li>Vitality</li>
-				<li>WPA</li>
-				<li>Cigna</li>
-				<li>And many other less well-known insurance companies such as, for example, Healix Health.</li>
-			</ul>
-			<p>All of our physiotherapists are HCPC registered. If you wish to claim your fees back from your insurance company, you will pay after the appointment at reception, and the team can email you a full invoice to forward to your insurers.</p>
-		`,
-	},
-	{
-		q: 'I\'m with BUPA or AXA. Can you give me further information?',
-		a: `
-			<p><strong>All we require is:</strong></p>
-			<ul>
-				<li>Your membership number</li>
-				<li>Your pre-authorisation number or code</li>
-				<li>It is important that you familiarise yourself with your BUPA or AXA policy in relation to any excess payment you need to pay us when you start treatment, and your level of annual coverage. If you go over your annual coverage, BUPA or AXA will ask you to pay us directly.</li>
-			</ul>
-
-			<p><strong>Please note:</strong> In our contract with BUPA and AXA, it stipulates that members:</p>
-			<ul>
-				<li>Must be fully paid-up and valid members of BUPA and AXA with a current authorisation.</li>
-				<li>Must confirm their level of coverage and details of their excess payment, for which they are personally liable. The patient must agree in writing to pay these fees.</li>
-				<li>Our billing system will request your card details when booking appointments. If you have an excess to pay it will request payment, and if it is not received within 7 days it will take payment from your stored card. You will be notified prior to this payment being taken.</li>
-				<li>Have a valid pre-authorisation number and must commence physiotherapy within two calendar months of the date of the pre-authorisation.</li>
-				<li>It is the patient's responsibility to keep a note of their number of sessions if BUPA is granting physiotherapy by session number.</li>
-				<li>Have the opportunity to fill in a customer satisfaction questionnaire.</li>
-			</ul>
-			<p>Should you have any queries in relation to BUPA or AXA, please ask us and we will be happy to help. Call <a href="tel:02076272308" class="inline-link">020 7627 2308</a>.</p>
-		`,
-	},
-	{
-		q: 'What classes do you run?',
-		a: `
-			<p>We have a class programme to supplement your health, sports and fitness practices. All classes are taught by teachers focused on controlled, mindful, purposeful movement.</p>
-			<p>Our regular offerings include:</p>
-			<ul>
-				<li><a href="/service/lift-weight-training-club/" class="inline-link">LIFT: our weight training club</a></li>
-				<li><a href="/service/prehab-class/" class="inline-link">Prehab: tissue mobility and self-myofascial release</a></li>
-				<li><a href="/service/strength-conditioning/" class="inline-link">Strength and conditioning sessions</a></li>
-			</ul>
-			<p><strong>Coming soon:</strong> Balance Box — for patients suffering from Parkinson's.</p>
-			<p>Call <a href="tel:02076272308" class="inline-link">020 7627 2308</a> or email <a href="mailto:admin@balancephysio.com" class="inline-link">admin@balancephysio.com</a> for the current timetable.</p>
-		`,
-	},
-	{
-		q: 'Self-pay and insurance payment terms & conditions',
-		a: `
-			<p><strong>Payment due date</strong><br>For initial appointments we require payment in full at the time of booking.</p>
-			<p>Payment for all physiotherapy, podiatry and gym services is due at the time of treatment, or within 7 days of the date of service, unless previously agreed in writing.</p>
-			<p><strong>Insurance claims</strong><br>We submit claims to AXA and BUPA insurance providers on your behalf. If you are covered by any other insurance, you remain fully responsible for all charges incurred.</p>
-			<p><strong>Patient responsibility</strong><br>If your insurance provider denies coverage, only partially covers the treatment, or delays payment beyond 7 days, you are personally liable for the full outstanding balance. It is your responsibility to verify your coverage and benefits prior to treatment.</p>
-			<p><strong>Outstanding balances</strong><br>Any unpaid balances past 30 days may be subject to late fees or collection action. Continued non-payment may result in suspension of treatment services.</p>
-			<p><strong>Communication</strong><br>You agree to promptly inform us of any changes to your insurance coverage, authorisation codes or contact information.</p>
-			<p>By receiving services, you agree to these terms and accept responsibility for payment in accordance with the above.</p>
-		`,
-	},
-];
 ---
-<Layout title={doc?.seoTitle ?? "FAQs"} description={doc?.seoDescription ?? "Frequently asked questions about appointments, opening times, payment, private medical insurance and BUPA or AXA billing at Balance Performance Physiotherapy in Clapham."}>
+<Layout title={faqPage.seoTitle ?? faqPage.heroHeading} description={faqPage.seoDescription ?? undefined}>
 	<PageHero
-		title={doc?.heroHeading ?? "Asked Questions"}
-		highlight={doc?.heroHighlight ?? "Frequently"}
-		subtitle={doc?.heroSubtitle ?? "Can't find the answer to your question? Send us a message and we'll get back to you as soon as possible."}
-		breadcrumb={doc?.breadcrumb ?? "FAQs"}
-		bgImage={doc?.heroImageUrl ?? undefined}
+		title={faqPage.heroHeading}
+		highlight={faqPage.heroHighlight ?? undefined}
+		subtitle={faqPage.heroSubtitle ?? undefined}
+		breadcrumb={faqPage.breadcrumb ?? undefined}
+		bgImage={faqPage.heroImageUrl ?? undefined}
 	/>
 
 	<section class="faq-section">
 		<div class="container">
 			<div class="faq-list">
+				{sectionTitle && <h2 class="faq-section-title">{sectionTitle}</h2>}
+				{introText && <p class="faq-intro">{introText}</p>}
 				{faqs.map((item) => (
 					<details class="faq-item">
-						<summary>{item.q}</summary>
-						<div class="answer" set:html={item.a} />
+						<summary>{item.question}</summary>
+						{/* Rendered as real markup — no set:html, so no raw CMS HTML. */}
+						<div class="answer"><RichText blocks={item.answer} /></div>
 					</details>
 				))}
 			</div>
 		</div>
 	</section>
+
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
 	<BookingCTA />
 </Layout>
