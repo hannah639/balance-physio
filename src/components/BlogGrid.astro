@@ -1,0 +1,56 @@
+---
+/**
+ * The news grid and its pagination, shared by /news/ and /news/page/<n>/ so
+ * page one and the rest cannot drift apart.
+ *
+ * Page one lives at /news/ and later pages at /news/page/2/ — a deliberate
+ * split, because a catch-all under /news/ would also match post slugs.
+ */
+import BlogCard from './BlogCard.astro';
+import type {BlogCard as Card} from '../lib/sanity/blog';
+
+const {posts, page, totalPages} = Astro.props as {posts: Card[]; page: number; totalPages: number};
+
+const href = (n: number) => (n === 1 ? '/news/' : `/news/page/${n}/`);
+const pages = Array.from({length: totalPages}, (_, i) => i + 1);
+---
+<section class="blog-grid-section">
+	<div class="container">
+		{posts.length === 0 ? (
+			<p class="blog-empty">More news coming soon — watch this space.</p>
+		) : (
+			<div class="blog-grid">
+				{posts.map((post) => <BlogCard post={post} />)}
+			</div>
+		)}
+
+		{totalPages > 1 && (
+			<nav class="blog-pagination" aria-label="News pages">
+				{page > 1 && <a class="blog-page-link" href={href(page - 1)} rel="prev">&larr; Previous</a>}
+				{pages.map((n) => (
+					n === page
+						? <span class="blog-page-link is-current" aria-current="page">{n}</span>
+						: <a class="blog-page-link" href={href(n)}>{n}</a>
+				))}
+				{page < totalPages && <a class="blog-page-link" href={href(page + 1)} rel="next">Next &rarr;</a>}
+			</nav>
+		)}
+	</div>
+</section>
+
+<style>
+	.blog-grid-section { padding: 72px 0 88px; background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
+	.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: stretch; }
+	.blog-empty { text-align: center; font-size: 17px; color: var(--text-muted); padding: 40px 0; }
+	.blog-pagination { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 48px; }
+	.blog-page-link {
+		min-width: 42px; padding: 10px 16px; text-align: center;
+		border: 1px solid var(--border); border-radius: 10px;
+		background: var(--white); color: var(--text); font-size: 14px; font-weight: 600;
+		transition: background .2s, color .2s, border-color .2s;
+	}
+	.blog-page-link:hover { border-color: var(--accent); color: var(--accent); }
+	.blog-page-link.is-current { background: var(--primary); border-color: var(--primary); color: var(--white); }
+	@media (max-width: 900px) { .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+	@media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } .blog-grid-section { padding: 48px 0 64px; } }
+</style>

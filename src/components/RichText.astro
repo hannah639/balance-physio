@@ -22,6 +22,12 @@ export type Block = {
 	level?: number;
 	children?: Span[];
 	markDefs?: {_key: string; _type: string; href?: string}[];
+	/** Image blocks carry a resolved asset instead of children. */
+	url?: string;
+	alt?: string;
+	width?: number | null;
+	height?: number | null;
+	caption?: string;
 };
 
 const { blocks = [], class: className } = Astro.props as { blocks?: Block[]; class?: string };
@@ -29,11 +35,18 @@ const { blocks = [], class: className } = Astro.props as { blocks?: Block[]; cla
 /** Consecutive list items are grouped so they share one <ul>/<ol>. */
 type Group =
 	| {kind: 'blocks'; items: Block[]}
-	| {kind: 'list'; listItem: string; items: Block[]};
+	| {kind: 'list'; listItem: string; items: Block[]}
+	| {kind: 'image'; block: Block};
 
 const groups: Group[] = [];
 for (const block of blocks) {
-	if (!block || block._type !== 'block') continue;
+	if (!block) continue;
+	// blockContent allows images inside the body (used by blog posts).
+	if (block._type === 'image') {
+		if (block.url) groups.push({kind: 'image', block});
+		continue;
+	}
+	if (block._type !== 'block') continue;
 	const last = groups[groups.length - 1];
 	if (block.listItem) {
 		if (last && last.kind === 'list' && last.listItem === block.listItem) last.items.push(block);
@@ -45,7 +58,19 @@ for (const block of blocks) {
 }
 ---
 {groups.map((group) => (
-	group.kind === 'list' ? (
+	group.kind === 'image' ? (
+		<figure class="rich-image">
+			<img
+				src={group.block.url}
+				alt={group.block.alt ?? ''}
+				width={group.block.width ?? undefined}
+				height={group.block.height ?? undefined}
+				loading="lazy"
+				decoding="async"
+			/>
+			{group.block.caption && <figcaption>{group.block.caption}</figcaption>}
+		</figure>
+	) : group.kind === 'list' ? (
 		group.listItem === 'number' ? (
 			<ol class={className}>
 				{group.items.map((block) => (

@@ -1,0 +1,45 @@
+---
+/**
+ * News grid, pages two and up.
+ *
+ * Page one stays at /news/ — these live under /news/page/<n>/ rather than
+ * /news/<n>/ so they cannot collide with a post slug.
+ */
+import Layout from '../../../layouts/Layout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import BookingCTA from '../../../components/BookingCTA.astro';
+import BlogGrid from '../../../components/BlogGrid.astro';
+import {pages} from '../../../lib/sanity/pageContent';
+import {getBlogPosts} from '../../../lib/sanity/blog';
+import {PAGE_SIZE} from '../../../lib/sanity/blogPaging';
+
+export async function getStaticPaths() {
+	const all = await getBlogPosts();
+	const totalPages = Math.ceil(all.length / PAGE_SIZE);
+	// Page one is /news/, so only 2..n are generated here. With a single page
+	// of posts there is nothing to generate at all.
+	return Array.from({length: Math.max(0, totalPages - 1)}, (_, i) => ({
+		params: {page: String(i + 2)},
+	}));
+}
+
+const page = Number(Astro.params.page);
+const doc = await pages.bySlug('news');
+const all = await getBlogPosts();
+const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+const posts = all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+---
+<Layout
+	title={`${doc?.seoTitle ?? 'What have we been up to? | News & Events'} — page ${page}`}
+	description={doc?.seoDescription ?? 'News & Events from Balance Performance Physiotherapy in Clapham.'}
+>
+	<PageHero
+		title={doc?.heroHeading ?? 'What have we been up to?'}
+		breadcrumb={doc?.breadcrumb ?? 'What have we been up to?'}
+		bgImage={doc?.heroImageUrl ?? undefined}
+	/>
+
+	<BlogGrid posts={posts} page={page} totalPages={totalPages} />
+
+	<BookingCTA />
+</Layout>

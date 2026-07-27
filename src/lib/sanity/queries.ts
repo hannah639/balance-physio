@@ -397,3 +397,52 @@ export const HOMEPAGE_QUERY = `*[_type == "homepage"][0]{
 	bookingHeading, bookingText, bookingButtonLabel,
 	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
 }`
+
+/* ── Blog ────────────────────────────────────────────────────────────────── */
+
+/**
+ * Fields every blog listing needs. Kept to what a card renders — the body is
+ * deliberately excluded so the grid does not download seven full articles.
+ */
+const BLOG_CARD = `
+	"slug": slug.current,
+	title,
+	excerpt,
+	publishedAt,
+	displayDate,
+	mainImage${IMAGE},
+	"categories": categories[]->{"slug": slug.current, title}
+`
+
+/**
+ * Published posts, newest first. `published == false` and unpublished drafts
+ * are filtered here in GROQ, so an unpublished post cannot reach the grid, a
+ * page, the sitemap or another post's related list.
+ */
+export const BLOG_LIST_QUERY = `*[_type == "blog" && !(_id in path("drafts.**")) && coalesce(published, true) == true && defined(slug.current)]
+	| order(publishedAt desc){${BLOG_CARD}}`
+
+/** One post, with everything its page renders. */
+export const BLOG_BY_SLUG_QUERY = `*[_type == "blog" && !(_id in path("drafts.**")) && coalesce(published, true) == true && slug.current == $slug][0]{
+	${BLOG_CARD},
+	updatedAt,
+	// Image blocks inside the body are resolved here; without this the
+	// renderer only sees an asset reference and silently drops the picture.
+	body[]{
+		...,
+		_type == "image" => {
+			"url": asset->url,
+			"alt": coalesce(alt, ""),
+			"width": asset->metadata.dimensions.width,
+			"height": asset->metadata.dimensions.height,
+			caption
+		}
+	},
+	"authors": authors[]->{"slug": slug.current, name, jobTitle, image${IMAGE}},
+	"relatedPosts": relatedPosts[]->{${BLOG_CARD}},
+	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
+}`
+
+/** Categories that actually have a published post behind them. */
+export const BLOG_CATEGORIES_QUERY = `*[_type == "category" && count(*[_type == "blog" && coalesce(published, true) == true && references(^._id)]) > 0]
+	| order(title asc){"slug": slug.current, title}`

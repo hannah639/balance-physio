@@ -82,6 +82,15 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
 	const {team} = await import('../../data/team.js')
 	const teamRoutes = (team as {slug: string}[]).map((m) => `/team/${m.slug}/`)
 
-	const all = [...getStaticRoutes(), ...teamRoutes]
+	// Blog posts come from the same published-only list the grid uses, so an
+	// unpublished post leaves the sitemap at the same time it leaves the site.
+	const {getBlogPosts} = await import('./blog')
+	const {PAGE_SIZE} = await import('./blogPaging')
+	const posts = await getBlogPosts()
+	const postRoutes = posts.map((p) => p.url)
+	const pageCount = Math.ceil(posts.length / PAGE_SIZE)
+	const gridRoutes = Array.from({length: Math.max(0, pageCount - 1)}, (_, i) => `/news/page/${i + 2}/`)
+
+	const all = [...getStaticRoutes(), ...teamRoutes, ...postRoutes, ...gridRoutes]
 	return [...new Set(all)].sort().map((path) => ({loc: absoluteUrl(g.siteUrl, path)}))
 }
