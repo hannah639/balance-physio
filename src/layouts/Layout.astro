@@ -1,181 +1,26 @@
 ---
-import { siteSettings as settings } from '../data/site-settings.js';
-import { getGlobals } from '../lib/sanity/globals';
+/**
+ * Standard page layout: shared <head>, header, content slot, footer.
+ *
+ * The <head> lives in SiteHead.astro because the homepage cannot use this
+ * layout (it renders <Header> inside .bp-page) and previously kept a second,
+ * drifted copy of the head. One implementation, two callers.
+ */
+import SiteHead from '../components/SiteHead.astro';
+import {siteSettings as settings} from '../data/site-settings.js';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookiesBanner from '../components/CookiesBanner.astro';
 
-const { title, description } = Astro.props;
+const {title, description} = Astro.props;
 
-// Site-wide settings from Sanity. Resolved once per build (memoised in
-// globals.ts) and already merged with the hard-coded fallbacks, so every value
-// below is safe to use without optional chaining.
-const g = await getGlobals();
-
-const siteTitle = g.defaultMetaTitle;
-// If the page title is already a full SEO meta title — i.e. it contains a
-// pipe ('|'), or is descriptive enough that the consultant's wording stands
-// on its own (mentions Clapham/treatment/etc.) — use it verbatim. Otherwise
-// append the site title for branding on short generic page titles like
-// "About Us" / "Contact Us".
-function isFullSeoTitle(t: string | undefined) {
-	if (!t) return false;
-	if (t.includes('|')) return true;
-	// Heuristic: title contains location, "Treatment", "Therapy" or similar
-	// SEO signals → treat as a self-contained meta title.
-	return /\b(Clapham|London|Treatment|Therapy|Physiotherapy|Physio|Rehab)\b/i.test(t) && t.length > 24;
-}
-// SEO fallback hierarchy (documented in docs/sanity-integration.md):
-//   1. Page-specific value passed as a prop  (highest — never overwritten)
-//   2. Sanity global default (seoSettings)
-//   3. Hard-coded fallback in src/data/site-settings.js (lowest)
-// Page-specific titles/descriptions that were migrated from the old site keep
-// winning exactly as before — the CMS only fills the gaps.
-const pageTitle = title ? (isFullSeoTitle(title) ? title : `${title} | ${siteTitle}`) : siteTitle;
-const pageDescription = description || g.defaultMetaDescription || '';
-const siteUrl = g.siteUrl;
-const ogImageUrl = g.defaultOgImageUrl;
-const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 // GA/GTM stay in site-settings.js — there are no CMS fields for them yet.
 const gaId = settings.gaId || '';
 const gtmId = settings.gtmId || '';
-
-// Global "Discourage search engines" toggle in Sanity Site Settings. When on,
-// every page gets noindex,nofollow regardless of any per-page directive.
-const robotsContent = g.discourageSearchEngines ? 'noindex, nofollow' : null;
-
-// Verification tokens — only emitted when the editor has filled one in, so we
-// never render an empty <meta content="">.
-const verificationTags = [
-	{ name: 'google-site-verification', content: g.verification.google },
-	{ name: 'msvalidate.01', content: g.verification.bing },
-	{ name: 'baidu-site-verification', content: g.verification.baidu },
-	{ name: 'yandex-verification', content: g.verification.yandex },
-	{ name: 'p:domain_verify', content: g.verification.pinterest },
-	{ name: 'facebook-domain-verification', content: g.verification.facebook },
-	{ name: 'norton-safeweb-site-verification', content: g.verification.norton },
-].filter((t): t is { name: string; content: string } => Boolean(t.content));
-
-// JSON-LD is built from seoSettings.localSeo (the agreed owner of structured
-// data), falling back to site-settings.js field by field inside globals.ts.
-// Opening-hours specification stays on site-settings.js because localSeo's
-// hours are not yet populated and schema.org needs the machine-readable
-// {dayOfWeek, opens, closes} shape rather than the display strings in
-// siteSettings.openingHours.
-const biz = g.business;
-const jsonLd = biz.name ? {
-	'@context': 'https://schema.org',
-	'@type': biz.type || 'LocalBusiness',
-	name: biz.name,
-	...(pageDescription && { description: pageDescription }),
-	url: siteUrl,
-	...(ogImageUrl && { image: ogImageUrl }),
-	...(biz.phone && { telephone: biz.phone }),
-	...(biz.email && { email: biz.email }),
-	...(biz.priceRange && { priceRange: biz.priceRange }),
-	...((biz.streetAddress || biz.city) && {
-		address: {
-			'@type': 'PostalAddress',
-			...(biz.streetAddress && { streetAddress: biz.streetAddress }),
-			...(biz.city && { addressLocality: biz.city }),
-			...(biz.region && { addressRegion: biz.region }),
-			...(biz.postalCode && { postalCode: biz.postalCode }),
-			...(biz.country && { addressCountry: biz.country }),
-		},
-	}),
-	...(biz.latitude && biz.longitude && {
-		geo: {
-			'@type': 'GeoCoordinates',
-			latitude: biz.latitude,
-			longitude: biz.longitude,
-		},
-	}),
-	// Opening hours: Sanity localSeo when populated, else the original
-	// site-settings.js rows, so the schema.org block is never dropped.
-	...(biz.openingHours.length
-		? {
-			openingHoursSpecification: biz.openingHours.map((h) => ({
-				'@type': 'OpeningHoursSpecification',
-				dayOfWeek: h.days,
-				opens: h.opens,
-				closes: h.closes,
-			})),
-		}
-		: settings.openingHours?.length
-			? {
-				openingHoursSpecification: settings.openingHours.map((h) => ({
-					'@type': 'OpeningHoursSpecification',
-					dayOfWeek: h.dayOfWeek,
-					opens: h.opens,
-					closes: h.closes,
-				})),
-			}
-			: {}),
-	// Remaining Local SEO fields — emitted only when an editor has filled them
-	// in, so we never publish an empty or zero-valued schema.org property.
-	...(biz.logoUrl && {logo: biz.logoUrl}),
-	...(biz.areasServed.length && {areaServed: biz.areasServed}),
-	...(biz.services.length && {
-		hasOfferCatalog: {
-			'@type': 'OfferCatalog',
-			name: `${biz.name} services`,
-			itemListElement: biz.services.map((s) => ({
-				'@type': 'Offer',
-				itemOffered: {'@type': 'Service', name: s},
-			})),
-		},
-	}),
-	...(biz.aggregateRating && biz.reviewCount
-		? {
-			aggregateRating: {
-				'@type': 'AggregateRating',
-				ratingValue: biz.aggregateRating,
-				reviewCount: biz.reviewCount,
-			},
-		}
-		: {}),
-	...(g.socials.length
-		? { sameAs: g.socials.map((s) => s.url) }
-		: settings.sameAs?.length ? { sameAs: settings.sameAs } : {}),
-} : null;
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		{/* Favicons — from Sanity Site Settings, falling back to /public files. */}
-		{g.favicons.svg && <link rel="icon" type="image/svg+xml" href={g.favicons.svg} />}
-		{g.favicons.ico && <link rel="icon" sizes="any" href={g.favicons.ico} />}
-		{g.favicons.appleTouch && <link rel="apple-touch-icon" href={g.favicons.appleTouch} />}
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		{pageDescription && <meta name="description" content={pageDescription} />}
-		{/* Global "Discourage search engines" switch in Sanity Site Settings. */}
-		{robotsContent && <meta name="robots" content={robotsContent} />}
-		{/* Search-engine / webmaster verification, only when filled in. */}
-		{verificationTags.map((t) => <meta name={t.name} content={t.content} />)}
-		{g.verification.custom && <Fragment set:html={g.verification.custom} />}
-		<link rel="canonical" href={canonicalUrl} />
-		<meta property="og:title" content={pageTitle} />
-		{pageDescription && <meta property="og:description" content={pageDescription} />}
-		{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content={g.siteName} />
-		<meta name="twitter:card" content="summary_large_image" />
-		{g.twitterHandle && <meta name="twitter:site" content={`@${g.twitterHandle.replace(/^@/, '')}`} />}
-		<meta name="twitter:title" content={pageTitle} />
-		{pageDescription && <meta name="twitter:description" content={pageDescription} />}
-		{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-		{jsonLd && (
-			<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-		)}
-	</head>
+	<SiteHead title={title} description={description} />
 	<body>
 		{gtmId && (
 			<noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />

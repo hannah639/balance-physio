@@ -1,5 +1,15 @@
 ---
-import { siteSettings as settings } from '../data/site-settings.js';
+/**
+ * Homepage.
+ *
+ * It does not use Layout.astro because it renders <Header> INSIDE .bp-page,
+ * where the layout renders it outside. The <head> is shared through
+ * SiteHead.astro so the two cannot drift again — this page used to carry its
+ * own copy, which had lost the verification tags, og:site_name, twitter:site
+ * and the robots switch, and still read its SEO from site-settings.js.
+ */
+import {siteSettings as settings} from '../data/site-settings.js';
+import SiteHead from '../components/SiteHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookiesBanner from '../components/CookiesBanner.astro';
@@ -14,82 +24,18 @@ import Team from '../components/Team.astro';
 import QuoteBanner from '../components/QuoteBanner.astro';
 import Testimonials from '../components/Testimonials.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import {requireHomepage} from '../lib/sanity/homepage';
 
-const pageTitle = settings.title;
-const pageDescription = settings.description || '';
-const siteUrl = settings.siteUrl;
-const ogImageUrl = settings.ogImage ? `${siteUrl}${settings.ogImage}` : null;
-const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+const doc = await requireHomepage();
+
+// GA/GTM stay in site-settings.js — there are no CMS fields for them yet.
 const gaId = settings.gaId || '';
 const gtmId = settings.gtmId || '';
-
-// Build JSON-LD structured data for Google
-const jsonLd = settings.businessName ? {
-	'@context': 'https://schema.org',
-	'@type': settings.businessType || 'LocalBusiness',
-	name: settings.businessName,
-	...(pageDescription && { description: pageDescription }),
-	url: siteUrl,
-	...(ogImageUrl && { image: ogImageUrl }),
-	...(settings.phone && { telephone: settings.phone }),
-	...(settings.email && { email: settings.email }),
-	...(settings.priceRange && { priceRange: settings.priceRange }),
-	...((settings.streetAddress || settings.city) && {
-		address: {
-			'@type': 'PostalAddress',
-			...(settings.streetAddress && { streetAddress: settings.streetAddress }),
-			...(settings.city && { addressLocality: settings.city }),
-			...(settings.region && { addressRegion: settings.region }),
-			...(settings.postalCode && { postalCode: settings.postalCode }),
-			...(settings.country && { addressCountry: settings.country }),
-		},
-	}),
-	...(settings.latitude && settings.longitude && {
-		geo: {
-			'@type': 'GeoCoordinates',
-			latitude: settings.latitude,
-			longitude: settings.longitude,
-		},
-	}),
-	...(settings.openingHours?.length && {
-		openingHoursSpecification: settings.openingHours.map((h) => ({
-			'@type': 'OpeningHoursSpecification',
-			dayOfWeek: h.dayOfWeek,
-			opens: h.opens,
-			closes: h.closes,
-		})),
-	}),
-	...(settings.sameAs?.length && { sameAs: settings.sameAs }),
-} : null;
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		{pageDescription && <meta name="description" content={pageDescription} />}
-		<link rel="canonical" href={canonicalUrl} />
-		<meta property="og:title" content={pageTitle} />
-		{pageDescription && <meta property="og:description" content={pageDescription} />}
-		{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:type" content="website" />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={pageTitle} />
-		{pageDescription && <meta name="twitter:description" content={pageDescription} />}
-		{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-		{jsonLd && (
-			<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-		)}
-	</head>
+	<SiteHead title={doc.seoTitle ?? undefined} description={doc.seoDescription ?? undefined} />
 	<body>
 		{gtmId && (
 			<noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />
