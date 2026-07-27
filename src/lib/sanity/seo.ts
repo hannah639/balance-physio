@@ -79,8 +79,12 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
 	// Nothing should be listed when the site is set to discourage indexing.
 	if (g.discourageSearchEngines) return []
 
-	const {team} = await import('../../data/team.js')
-	const teamRoutes = (team as {slug: string}[]).map((m) => `/team/${m.slug}/`)
+	// Team routes must come from the SAME source that generates the pages —
+	// getTeam(), i.e. Sanity. Reading the old src/data/team.js here meant an
+	// unpublished member lost their page but kept their sitemap entry, which
+	// submits a 404 to search engines.
+	const {getTeam} = await import('./team')
+	const teamRoutes = (await getTeam()).map((m) => `/team/${m.slug}/`)
 
 	// Blog posts come from the same published-only list the grid uses, so an
 	// unpublished post leaves the sitemap at the same time it leaves the site.
