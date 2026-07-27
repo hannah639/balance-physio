@@ -329,3 +329,25 @@ export const SERVICES_QUERY = `*[_type == "service" && coalesce(published, true)
 	"photoGallery": photoGallery[]${IMAGE},
 	"faqs": faqs[]{_key, question, answer}
 }`
+
+/**
+ * Condition detail pages (/condition/<slug>/).
+ *
+ * Four fixed blocks — intro · symptoms · treatment · who we help — each with
+ * its own heading and highlighted words, so none of them stay hard-coded in
+ * ConditionPage.astro. Only the intro and "who" bands take an image.
+ */
+export const CONDITIONS_QUERY = `*[_type == "condition" && coalesce(published, true) == true]
+	| order(coalesce(displayOrder, 999) asc){
+	"slug": slug.current,
+	title,
+	heroHighlight, heroHeading, heroSubtitle, breadcrumb,
+	body,
+	introImage${IMAGE}, introImageAspect,
+	whoImage${IMAGE}, whoImageAspect,
+	symptomsHeading, symptomsHighlight, symptomsIntro, symptoms,
+	treatmentHeading, treatmentHighlight, treatmentIntro, treatmentList,
+	whoHeading, whoHighlight, whoIntro, whoList,
+	"faqs": faqs[]{_key, question, answer},
+	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
+}`

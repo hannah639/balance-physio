@@ -3,71 +3,56 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from './PageHero.astro';
 import ImageText from './ImageText.astro';
 import BookingCTA from './BookingCTA.astro';
+import RichText from './RichText.astro';
+import type { Condition } from '../lib/sanity/conditions';
 
-const {
-	title,
-	highlight,
-	heroSubtitle,
-	breadcrumb,
-	seoTitle,
-	seoDescription,
-	intro,
-	symptomsHeading = 'When to get it',
-	symptomsHighlight = 'checked',
-	symptomsIntro,
-	symptomsList,
-	treatmentHeading = 'How we',
-	treatmentHighlight = 'treat it',
-	treatmentIntro,
-	treatmentList,
-	whoHeading = 'Who we',
-	whoHighlight = 'help',
-	whoIntro,
-	whoList,
-	introImage,    // optional image URL for Section 1 (intro)
-	introImageAspect, // optional aspect-ratio override (e.g. '3/2')
-	whoImage,      // optional image URL for Section 3 (who-we-help)
-	whoImageAspect,   // optional aspect-ratio override
-	faqs = [],
-} = Astro.props;
+const { doc } = Astro.props as { doc: Condition };
+
+const faqs = doc.faqs;
 ---
-<Layout title={seoTitle} description={seoDescription}>
-	<PageHero title={title} highlight={highlight} subtitle={heroSubtitle} breadcrumb={breadcrumb} />
+<Layout title={doc.seoTitle ?? doc.title} description={doc.seoDescription ?? undefined}>
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		subtitle={doc.heroSubtitle ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
-	{intro && intro.length > 0 && (
+	{doc.body.length > 0 && (
 		<ImageText
 			eyebrow="Our approach"
 			heading="Expert clinical"
 			highlight="care"
 			altBg
 			placeholderLabel="Clinical assessment"
-			image={introImage}
-			imageAspect={introImageAspect}
+			image={doc.introImage?.url ?? undefined}
+			imageAlt={doc.introImage?.alt ?? undefined}
+			imageAspect={doc.introImageAspect ?? undefined}
 		>
-			{intro.map((p) => <p set:html={p} />)}
+			<RichText blocks={doc.body} />
 		</ImageText>
 	)}
 
-	{((symptomsList && symptomsList.length > 0) || (treatmentList && treatmentList.length > 0)) && (
+	{(doc.symptoms.length > 0 || doc.treatmentList.length > 0) && (
 		<section class="text-grid text-grid--light">
 			<div class="text-grid-inner">
-				{symptomsList && symptomsList.length > 0 && (
+				{doc.symptoms.length > 0 && (
 					<div class="image-text-content text-grid-cell">
 						<div class="eyebrow">Symptoms</div>
-						<h2>{symptomsHeading} <span class="highlight">{symptomsHighlight}</span></h2>
-						{symptomsIntro && <p>{symptomsIntro}</p>}
+						<h2>{doc.symptomsHeading} <span class="highlight">{doc.symptomsHighlight}</span></h2>
+						{doc.symptomsIntro && <p>{doc.symptomsIntro}</p>}
 						<ul>
-							{symptomsList.map((item) => <li>{item}</li>)}
+							{doc.symptoms.map((item) => <li>{item}</li>)}
 						</ul>
 					</div>
 				)}
-				{treatmentList && treatmentList.length > 0 && (
+				{doc.treatmentList.length > 0 && (
 					<div class="image-text-content text-grid-cell text-grid-cell--treatment">
 						<div class="eyebrow">Treatment</div>
-						<h2>{treatmentHeading} <span class="highlight">{treatmentHighlight}</span></h2>
-						{treatmentIntro && <p>{treatmentIntro}</p>}
+						<h2>{doc.treatmentHeading} <span class="highlight">{doc.treatmentHighlight}</span></h2>
+						{doc.treatmentIntro && <p>{doc.treatmentIntro}</p>}
 						<ul>
-							{treatmentList.map((item) => <li>{item}</li>)}
+							{doc.treatmentList.map((item) => <li>{item}</li>)}
 						</ul>
 					</div>
 				)}
@@ -75,20 +60,21 @@ const {
 		</section>
 	)}
 
-	{whoList && whoList.length > 0 && (
+	{doc.whoList.length > 0 && (
 		<ImageText
 			eyebrow="Who we help"
-			heading={whoHeading}
-			highlight={whoHighlight}
+			heading={doc.whoHeading ?? undefined}
+			highlight={doc.whoHighlight ?? undefined}
 			reverse
 			altBg
 			placeholderLabel="Our patients"
-			image={whoImage}
-			imageAspect={whoImageAspect}
+			image={doc.whoImage?.url ?? undefined}
+			imageAlt={doc.whoImage?.alt ?? undefined}
+			imageAspect={doc.whoImageAspect ?? undefined}
 		>
-			{whoIntro && <p>{whoIntro}</p>}
+			{doc.whoIntro && <p>{doc.whoIntro}</p>}
 			<ul>
-				{whoList.map((item) => <li>{item}</li>)}
+				{doc.whoList.map((item) => <li>{item}</li>)}
 			</ul>
 		</ImageText>
 	)}
@@ -102,8 +88,8 @@ const {
 				<div class="faq-list">
 					{faqs.map((item) => (
 						<details class="faq-item">
-							<summary>{item.q}</summary>
-							<div class="answer">{item.a}</div>
+							<summary>{item.question}</summary>
+							<div class="answer"><RichText blocks={item.answer} /></div>
 						</details>
 					))}
 				</div>

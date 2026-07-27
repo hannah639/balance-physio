@@ -1,51 +1,7 @@
 ---
 import ConditionPage from '../../components/ConditionPage.astro';
+import { requireCondition } from '../../lib/sanity/conditions';
+
+const doc = await requireCondition('lower-back-pain');
 ---
-<ConditionPage
-	title="Treatment in Clapham"
-	highlight="Back Pain"
-	heroSubtitle="Get pain free. Stay pain free. Put yourself in a safe pair of hands with our experienced spinal team."
-	breadcrumb="Back Pain"
-	seoTitle="Back Pain Treatment Clapham | Physiotherapy & Spinal Rehab London"
-	seoDescription="Back pain treatment in Clapham to reduce pain, restore movement, and prevent recurrence. Expert physiotherapy and spinal rehab for long-term results."
-	introImage="/condition/lower-back-pain/intro.jpg"
-	whoImage="/condition/lower-back-pain/who.jpg"
-	intro={[
-		"Lower back and neck pain can be very painful and debilitating. That is why you need to find someone you trust to help you through it and get you back on track. Our Spinal Team are all exceptionally experienced, so put yourself in a safe pair of hands.",
-		"Our spinal rehabilitation focuses on two components: understanding <strong>why</strong> your back pain has developed and getting rid of it, then sorting out the muscular inhibitions that the pain has caused.",
-	]}
-	symptomsIntro="It's worth coming in for an assessment if you're experiencing any of the following:"
-	symptomsList={[
-		"Ongoing lower back pain or stiffness",
-		"Pain spreading into the hips, glutes or legs (sciatica)",
-		"Difficulty bending, sitting or standing for long periods",
-		"Morning stiffness that takes time to ease",
-		"Tingling, numbness, cramping or weakness in the legs",
-	]}
-	treatmentHeading="How we treat"
-	treatmentHighlight="back pain"
-	treatmentIntro="Your treatment plan is built around your specific presentation and may include:"
-	treatmentList={[
-		"Physiotherapy to improve movement and strength",
-		"Manual therapy to reduce stiffness and pain",
-		"Rehab exercises to restore your body's natural protective musculature",
-		"Advice on posture, ergonomics, training and daily habits",
-	]}
-	whoHeading="From office workers to"
-	whoHighlight="athletes"
-	whoList={[
-		"Long-term back pain sufferers looking for a clear plan forward",
-		"Patients with slipped discs, sciatica and sacro-iliac dysfunction",
-		"Post-surgery rehabilitation",
-		"Office workers with postural aches and desk-related pain",
-		"Active individuals and athletes managing overload injuries",
-		"Seniors with stenotic, facet joint or osteoporotic back pain",
-	]}
-	faqs={[
-		{ q: "Should I rest or keep moving?", a: "In most cases, staying active helps recovery. We'll guide you on what's safe and what to avoid." },
-		{ q: "Do I need a scan before treatment?", a: "Usually not. We can assess your back thoroughly in clinic and refer for scans if we need to." },
-		{ q: "Can osteopathy help?", a: "Yes. particularly for stiffness, posture and mechanical back pain." },
-		{ q: "What is sciatica?", a: "It's irritation of a nerve from your lower back into the leg, often causing pain, tingling or numbness." },
-		{ q: "Will I get exercises to do at home?", a: "Absolutely. Everyone has their own individual programme. Your rehab is a key part of getting lasting results." },
-	]}
-/>
+<ConditionPage doc={doc} />
