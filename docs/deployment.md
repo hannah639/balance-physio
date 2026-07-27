@@ -28,7 +28,13 @@ Sanity Studio ─► Publish ──► Sanity webhook ──► Cloudflare deplo
 - Build command: `npm run build`
 - Build output: `dist/`
 - Branch: `main`
-- Deploy hook: `https://api.cloudflare.com/client/v4/workers/builds/deploy_hooks/0665ea1f-a26b-41b3-add1-92ebcbdd840c` — this URL triggers a build when POSTed to. Used by the Sanity webhook.
+- Deploy hook: **not recorded here.** The URL is an unauthenticated secret — anyone
+  who can POST to it can trigger a production build — so it does not belong in a
+  file that everyone with repo access can read.
+
+  Find it in Cloudflare → Workers & Pages → `balance-physio` → Settings → Builds →
+  Deploy hooks. Treat it like a password: if it has been shared or committed, delete
+  the hook and create a new one, then update the Sanity webhook with the new URL.
 
 ## Sanity webhook config
 

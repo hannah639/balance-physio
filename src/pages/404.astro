@@ -1,17 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import {pages} from '../lib/sanity/pageContent';
+
+// Heading and SEO come from Sanity. The "popular pages" list stays here: it
+// is navigation, already managed in the Navigation document.
+const doc = await pages.bySlug('404');
 ---
 <Layout
-	title="Page not found"
-	description="The page you're looking for doesn't exist. Get in touch or browse our services."
+	title={doc?.seoTitle ?? "Page not found"}
+	description={doc?.seoDescription ?? "The page you're looking for doesn't exist. Get in touch or browse our services."}
 >
 	<section class="not-found-hero">
 		<div class="container">
 			<div class="not-found-inner">
 				<div class="not-found-code">404</div>
-				<h1>We can't find that page</h1>
-				<p>The page you were looking for has either moved or doesn't exist. Don't worry — we can help you get to the right place.</p>
+				<h1>{doc?.heroHeading ?? "We can't find that page"}</h1>
+				<p>{doc?.heroSubtitle ?? "The page you were looking for has either moved or doesn't exist. Don't worry — we can help you get to the right place."}</p>
 				<div class="not-found-actions">
 					<a href="/" class="btn-book">Back to homepage</a>
 					<a href="/contact-us/" class="btn-outline-dark">Contact us</a>

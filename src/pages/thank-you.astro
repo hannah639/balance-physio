@@ -2,16 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import {pages} from '../lib/sanity/pageContent';
+
+// Hero and SEO come from Sanity. The link list below stays in the template:
+// it is navigation, and duplicating it into a page document would create a
+// second source of navigation truth.
+const doc = await pages.bySlug('thank-you');
 ---
 <Layout
-	title="Thank you"
-	description="Thanks for getting in touch with Balance Performance Physiotherapy."
+	title={doc?.seoTitle ?? "Thank you"}
+	description={doc?.seoDescription ?? "Thanks for getting in touch with Balance Performance Physiotherapy."}
 >
 	<PageHero
-		title="you"
-		highlight="Thank"
-		subtitle="Thank you for getting in touch, we'll get back to you as soon as possible!"
-		breadcrumb="Thank you"
+		title={doc?.heroHeading ?? "you"}
+		highlight={doc?.heroHighlight ?? "Thank"}
+		subtitle={doc?.heroSubtitle ?? "Thank you for getting in touch, we'll get back to you as soon as possible!"}
+		breadcrumb={doc?.breadcrumb ?? "Thank you"}
 		hideCta
 	/>
 
