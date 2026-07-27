@@ -1,7 +1,9 @@
 ---
 import { getGlobals } from '../lib/sanity/globals';
+import { requireHomepage } from '../lib/sanity/homepage';
 
 const g = await getGlobals();
+const home = await requireHomepage();
 ---
 <section class="video-hero">
 	<video
@@ -17,9 +19,9 @@ const g = await getGlobals();
 	</video>
 	<div class="video-hero-overlay"></div>
 	<div class="video-hero-content">
-		<h1 class="hero-badge hero-h1-badge"><span class="dot"></span>Rehabilitation Clinic in Clapham</h1>
-		<p class="hero-tagline">Helping You Recover, Restore Function, and Perform at Your Best</p>
-		<p>Performance, Rehabilitation &amp; Physiotherapy Clinic in Clapham</p>
+		<h1 class="hero-badge hero-h1-badge"><span class="dot"></span>{home.heroEyebrow}</h1>
+		<p class="hero-tagline">{home.heroTagline}</p>
+		<p>{home.heroSubtext}</p>
 		<a href={g.bookingUrl} target="_blank" rel="noopener" class="btn-book">Book an appointment</a>
 	</div>
 	<div class="video-hero-scroll">&#8964;</div>

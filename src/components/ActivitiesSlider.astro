@@ -1,20 +1,20 @@
 ---
 import Picture from './Picture.astro';
+import { requireHomepage } from '../lib/sanity/homepage';
+
+const home = await requireHomepage();
 ---
 <section class="activities">
 	<div class="container">
 		<div class="section-header">
-			<div class="hero-badge" style="background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.1); color: var(--text-muted);"><span class="dot" style="background: var(--accent);"></span> A different approach</div>
-			<h2>70% of what we do takes place outside of a treatment room</h2>
-			<p>Expect to visit our studio, our gym, our pool - our aim is to not just get you better but help you stay better and get back to the activities you love.</p>
+			<div class="hero-badge" style="background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.1); color: var(--text-muted);"><span class="dot" style="background: var(--accent);"></span> {home.activitiesEyebrow}</div>
+			<h2>{home.activitiesHeading}</h2>
+			<p>{home.activitiesIntro}</p>
 		</div>
 		<div class="activities-slider" id="activitiesSlider">
-			<div class="activities-slide"><Picture src="/slider-marathon.jpg" alt="Marathon" loading="lazy" decoding="async" width="600" height="400" /></div>
-			<div class="activities-slide"><Picture src="/slider-rowing.jpeg" alt="Rowing" loading="lazy" decoding="async" width="600" height="400" /></div>
-			<div class="activities-slide"><Picture src="/slider-steps.webp" alt="Agility training" loading="lazy" decoding="async" width="600" height="400" /></div>
-			<div class="activities-slide"><Picture src="/slider-running.webp" alt="Running lab" loading="lazy" decoding="async" width="600" height="400" /></div>
-			<div class="activities-slide"><Picture src="/slider-bike.webp" alt="Bike fitting" loading="lazy" decoding="async" width="600" height="400" /></div>
-			<div class="activities-slide"><Picture src="/slider-golf.jpg" alt="Golf" loading="lazy" decoding="async" width="600" height="400" /></div>
+			{home.activitiesSlides.map((slide) => (
+				<div class="activities-slide"><Picture src={slide.url} alt={slide.alt} loading="lazy" decoding="async" width="600" height="400" /></div>
+			))}
 		</div>
 	</div>
 </section>

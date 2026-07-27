@@ -1,15 +1,22 @@
 ---
 import Picture from './Picture.astro';
+import { requireHomepage } from '../lib/sanity/homepage';
+
+const home = await requireHomepage();
 ---
 <section class="image-quote-section">
 	<div class="image-banner">
-		<Picture src="/swimmer.jpg" alt="Swimmer in pool" loading="lazy" decoding="async" width="1400" height="1050" />
+		{home.facilitiesImage && (
+			<Picture src={home.facilitiesImage.url} alt={home.facilitiesImage.alt} loading="lazy" decoding="async" width="1400" height="1050" />
+		)}
 		<div class="image-banner-overlay">
 			<div class="image-banner-content">
-				<div class="hero-badge"><span class="dot"></span>We can make you better</div>
-				<h2>Unrivalled facilities</h2>
-				<p>We are London's largest rehabilitation centre. With over 6,500 sq ft of space, a gym, studios, hydrotherapy pool, anti gravity treadmill and more, our facilities are unrivalled. Whether you're a professional or an armchair athlete, our experts will make you better, fitter and restore your energy for life.</p>
-				<a href="/our-clinic/" class="btn-outline-white">Our facilities</a>
+				<div class="hero-badge"><span class="dot"></span>{home.facilitiesEyebrow}</div>
+				<h2>{home.facilitiesHeading}</h2>
+				<p>{home.facilitiesText}</p>
+				{home.facilitiesCtaLabel && home.facilitiesCtaUrl && (
+					<a href={home.facilitiesCtaUrl} class="btn-outline-white">{home.facilitiesCtaLabel}</a>
+				)}
 			</div>
 		</div>
 	</div>

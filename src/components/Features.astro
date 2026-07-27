@@ -1,33 +1,10 @@
 ---
 import { bgImageSet } from '../lib/bgImage.js';
+import { requireHomepage } from '../lib/sanity/homepage';
 
-const services = [
-	{ title: 'Physiotherapy', href: '/service/physiotherapy/', bg: '/archery.jpg' },
-	{ title: 'Sports Physiotherapy', href: '/service/sports-physiotherapy/', bg: '/hockey.jpg' },
-	{ title: 'Youth Physiotherapy', href: '/service/paediatric-sports-physiotherapy/', bg: '/paediatric-sports-physiotherapy/race-winner.jpg' },
-	{ title: 'Osteopathy and Nutrition', href: '/service/osteopathy/', bg: '/osteopathy.jpg' },
-	{ title: 'Sports Massage', href: '/service/sports-massage-clapham-soft-tissue-therapy/', bg: '/massage.jpg' },
-	{ title: 'Shockwave Therapy', href: '/service/shockwave-therapy/', bg: '/shockwave-therapy/body-1.jpg' },
-	{ title: 'Prehab Class', href: '/service/prehab-class/', bg: '/prehab-class/athletes-celebrating.jpg' },
-	{ title: 'Neurological Rehabilitation', href: '/service/specialist-neuro-physio-london/', bg: '/neuro-rehab.jpg' },
-	{ title: 'Vojta Therapy', href: '/service/vojta-therapy/', bg: '/vojta.jpg' },
-	{ title: "Women's Health", href: '/service/womens-health/', bg: '/womens-health.jpg' },
-	{ title: 'Mummy MOT', href: '/service/mummy-mot/', bg: '/womens-health/jo-pelvic-model.jpg' },
-	{ title: "Men's Health", href: '/service/mens-health/', bg: '/mens-health.jpg' },
-	{ title: 'Podiatry', href: '/service/podiatry/', bg: '/podiatry.jpg' },
-	{ title: 'Strength & Conditioning', href: '/service/strength-conditioning/', bg: '/strength-conditioning.jpg' },
-	{ title: 'LIFT: Weight Training Club', href: '/service/lift-weight-training-club/', bg: '/lift.jpg' },
-	{ title: 'Bike Fitting', href: '/service/bike-fitting-cycling-analysis/', bg: '/cycling.jpg' },
-	{ title: 'Running Analysis', href: '/service/bike-fitting-cycling-analysis/', bg: '/running.jpg' },
-	{ title: 'Hydrotherapy', href: '/service/hydrotherapy/', bg: '/hydrotherapy.jpg' },
-	{ title: 'Psychological Wellness', href: '/service/psychological-wellness/', bg: '/psychological-wellness.jpg' },
-	{ title: 'Anti-Gravity Treadmill', href: '/service/alterg-anti-gravity-treadmill-london/', bg: '/antigravity.webp' },
-	{ title: 'Ergonomics', href: '/service/ergonomics/', bg: '/ergonomics.jpg' },
-	{ title: 'TMJ & Jaw Pain', href: '/service/tmj-and-jaw-pain/', bg: '/tmj.jpg' },
-	{ title: 'Physiotherapy Prescribing', href: '/service/physiotherapy-prescribing/', bg: '/prescribing.jpg' },
-	{ title: 'Pilates', href: '/service/pilates/', bg: '/pilates/intro.jpg' },
-];
+const home = await requireHomepage();
 
+/** Fallback tint for a card with no background image, stable per title. */
 function gradientFor(title) {
 	var hash = 0;
 	for (var i = 0; i < title.length; i++) hash = (hash << 5) - hash + title.charCodeAt(i);
@@ -39,22 +16,22 @@ function gradientFor(title) {
 <section class="features">
 	<div class="container">
 		<div class="section-header">
-			<div class="hero-badge"><span class="dot"></span> Our Services</div>
-			<h2><span class="highlight">What we</span> offer.</h2>
-			<p>Relieving pain, restoring function, exploring movement, enhancing health & performance</p>
+			<div class="hero-badge"><span class="dot"></span> {home.servicesEyebrow}</div>
+			<h2><span class="highlight">{home.servicesHeadingHighlight}</span> {home.servicesHeading}</h2>
+			<p>{home.servicesIntro}</p>
 		</div>
 		<div class="feature-list">
-			{services.map((s) => (
+			{home.servicesCards.map((s) => (
 				<a
 					href={s.href}
 					class="feature-card"
-					style={s.bg ? `` : `background: ${gradientFor(s.title)};`}
+					style={s.image ? `` : `background: ${gradientFor(s.label)};`}
 				>
-					{s.bg && <div class="feature-card-bg" style={`${bgImageSet(s.bg)}${s.bgPosition ? ` background-position: ${s.bgPosition};` : ''}`} />}
+					{s.image && <div class="feature-card-bg" style={bgImageSet(s.image.url)} />}
 					<div class="feature-card-overlay"></div>
 					<div class="feature-card-content">
 						<div class="service-label">Service</div>
-						<h3>{s.title}</h3>
+						<h3>{s.label}</h3>
 					</div>
 				</a>
 			))}

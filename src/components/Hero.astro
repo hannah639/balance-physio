@@ -1,24 +1,25 @@
+---
+import { requireHomepage } from '../lib/sanity/homepage';
+
+const home = await requireHomepage();
+---
 <section class="hero">
 	<div class="container hero-content">
-		<div class="hero-badge"><span class="dot"></span> We're Different</div>
-		<h2 class="hero-title"><span class="highlight">We can</span> make you better.</h2>
-		<p>We don't simply treat and rehabilitate: we help you to regain your strength and recover your energy for life.</p>
+		<div class="hero-badge"><span class="dot"></span> {home.aboutEyebrow}</div>
+		<h2 class="hero-title"><span class="highlight">{home.aboutHeadingHighlight}</span> {home.aboutHeading}</h2>
+		<p>{home.aboutLead}</p>
 		<div class="hero-stats">
-			<div class="hero-stat">
-				<div class="number">9/10</div>
-				<div class="label">patients improved in 3 months</div>
-			</div>
-			<div class="hero-stat">
-				<div class="number">35%</div>
-				<div class="label">decrease in pain in 6 weeks</div>
-			</div>
-			<div class="hero-stat">
-				<div class="number">40%</div>
-				<div class="label">increase in function in 6 weeks</div>
-			</div>
+			{home.aboutStats.map((stat) => (
+				<div class="hero-stat">
+					<div class="number">{stat.number}</div>
+					<div class="label">{stat.label}</div>
+				</div>
+			))}
 		</div>
-		<p>The Balance approach removes your pain, but then teaches you to move, to improve and perform so that you become the best version of you.</p>
+		<p>{home.aboutBody}</p>
 		<br>
-		<a href="/about-us/" class="btn-primary-lg">Learn More</a>
+		{home.aboutCtaLabel && home.aboutCtaUrl && (
+			<a href={home.aboutCtaUrl} class="btn-primary-lg">{home.aboutCtaLabel}</a>
+		)}
 	</div>
 </section>

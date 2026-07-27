@@ -1,48 +1,32 @@
+---
+import { requireHomepage } from '../lib/sanity/homepage';
+
+const home = await requireHomepage();
+---
 <section class="problem">
 	<div class="container">
 		<div class="section-header">
-			<h2><span class="highlight">We can make you better.</span><br>The Balance Physio Approach</h2>
-			<p>We do things differently to most clinics. Hands-on treatment is only one part of the process. By getting you into the gym, studio and movement spaces too, we help you recover more effectively, build resilience and return stronger, more confident and better equipped for the long term.</p>
+			<h2><span class="highlight">{home.approachHeadingHighlight}</span><br>{home.approachHeading}</h2>
+			<p>{home.approachIntro}</p>
 		</div>
 		<div class="problem-grid">
-			<div class="problem-card">
-				<div class="icon">&#9888;&#xFE0E;</div>
-				<div class="step-row">
-					<span class="step-label">Step <span class="step-num">01</span></span>
-					<span class="step-tag">Settle symptoms</span>
-				</div>
-				<h3>Give you relief from your pain</h3>
-				<ul class="bullet-list">
-					<li>Hands-on treatment</li>
-					<li>Clear diagnosis</li>
-				</ul>
-			</div>
-			<div class="problem-arrow">&#10140;</div>
-			<div class="problem-card featured">
-				<div class="icon">&#9881;&#xFE0E;</div>
-				<div class="step-row">
-					<span class="step-label">Step <span class="step-num">02</span></span>
-					<span class="step-tag">Build capacity</span>
-				</div>
-				<h3>Guide effective recovery, rehabilitation and resilience</h3>
-				<ul class="bullet-list">
-					<li>Rehab & strength work</li>
-					<li>Guided movement</li>
-				</ul>
-			</div>
-			<div class="problem-arrow">&#10140;</div>
-			<div class="problem-card">
-				<div class="icon">&#9734;&#xFE0E;</div>
-				<div class="step-row">
-					<span class="step-label">Step <span class="step-num">03</span></span>
-					<span class="step-tag">Stay well</span>
-				</div>
-				<h3>Provide empowerment for long lasting recovery</h3>
-				<ul class="bullet-list">
-					<li>Long-term resilience</li>
-					<li>Trust your body again</li>
-				</ul>
-			</div>
+			{home.approachSteps.map((step, i) => (
+				<>
+					{/* Arrow between cards, not before the first one. */}
+					{i > 0 && <div class="problem-arrow">&#10140;</div>}
+					<div class={`problem-card${step.featured ? ' featured' : ''}`}>
+						{step.icon && <div class="icon">{step.icon}</div>}
+						<div class="step-row">
+							<span class="step-label">Step <span class="step-num">{String(i + 1).padStart(2, '0')}</span></span>
+							<span class="step-tag">{step.tag}</span>
+						</div>
+						<h3>{step.heading}</h3>
+						<ul class="bullet-list">
+							{step.bullets.map((b) => <li>{b}</li>)}
+						</ul>
+					</div>
+				</>
+			))}
 		</div>
 	</div>
 </section>

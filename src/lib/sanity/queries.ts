@@ -351,3 +351,49 @@ export const CONDITIONS_QUERY = `*[_type == "condition" && coalesce(published, t
 	"faqs": faqs[]{_key, question, answer},
 	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
 }`
+
+/**
+ * Homepage singleton.
+ *
+ * The service cards and condition pills are CURATED lists, not listings of the
+ * Service/Condition post types — the order is editorial and a few entries point
+ * somewhere other than their own page. Each entry resolves its target inline so
+ * the frontend receives `_type` + `slug` and never a stored URL, with `url` as
+ * the escape hatch for the handful that need it.
+ */
+export const HOMEPAGE_QUERY = `*[_type == "homepage"][0]{
+	heroEyebrow, heroTagline, heroSubtext, heroVideoPath, heroPoster${IMAGE},
+
+	aboutEyebrow, aboutHeadingHighlight, aboutHeading, aboutLead, aboutBody,
+	aboutStats[]{_key, number, label},
+	aboutCtaLabel, aboutCtaUrl,
+
+	activitiesEyebrow, activitiesHeading, activitiesIntro,
+	activitiesSlides[]${IMAGE},
+
+	approachHeadingHighlight, approachHeading, approachIntro,
+	approachSteps[]{_key, tag, heading, bullets, icon, featured},
+
+	servicesVisible, servicesEyebrow, servicesHeadingHighlight, servicesHeading, servicesIntro,
+	"servicesCards": servicesCards[]{
+		_key, title, url,
+		"target": service->{_type, "slug": slug.current},
+		background${IMAGE}
+	},
+
+	conditionsVisible, conditionsEyebrow, conditionsHeading, conditionsIntro,
+	"conditionsLinks": conditionsLinks[]{
+		_key, label, url,
+		"target": target->{_type, "slug": slug.current}
+	},
+
+	teamVisible, teamEyebrow, teamHeading, teamIntro,
+
+	facilitiesEyebrow, facilitiesHeading, facilitiesText,
+	facilitiesImage${IMAGE}, facilitiesCtaLabel, facilitiesCtaUrl,
+
+	quoteImage${IMAGE}, quoteText, quoteAttribution,
+
+	bookingHeading, bookingText, bookingButtonLabel,
+	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
+}`
