@@ -5,32 +5,47 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Picture from '../../components/Picture.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
+
+const doc = await services.required('vojta-therapy');
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'What is Vojta Therapy?', a: 'It is a neurological rehabilitation method that uses reflex locomotion to activate automatic movement patterns within the body.' },
-	{ q: 'Is it only for children?', a: 'No. While commonly used in infants and children, it is also effective for adults with neurological conditions.' },
-	{ q: 'How is it different from other neurological therapies?', a: 'Vojta Therapy focuses on activating involuntary, reflex-driven movement patterns rather than relying solely on voluntary movement and task-based training.' },
-	{ q: 'Will my child cry during treatment?', a: 'Some children may cry during sessions due to the effort involved. This is not typically due to pain, but rather the unfamiliar nature of the movement.' },
-	{ q: 'How many sessions are needed?', a: 'This varies depending on the individual. A structured plan will be provided after the initial assessment.' },
-	{ q: 'Do I need a referral?', a: 'No, you can book directly with us.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Vojta Therapy Clapham | Neurological Movement & Rehab Therapy"
-	description="Vojta Therapy in Clapham to improve movement, posture, and neurological function. Specialist rehab for children and adults with neurological conditions."
+	title={doc.seoTitle ?? "Vojta Therapy Clapham | Neurological Movement & Rehab Therapy"}
+	description={doc.seoDescription ?? "Vojta Therapy in Clapham to improve movement, posture, and neurological function. Specialist rehab for children and adults with neurological conditions."}
 >
-	<PageHero title="in South West London" highlight="Vojta Therapy" breadcrumb="Vojta Therapy" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Activating innate" highlight="movement patterns" image="/vojta-therapy/movement-patterns.jpg" imageAlt="Vojta Therapy session at Balance">
-		<p>Movement problems linked to the nervous system can affect how the body develops, adapts, and functions day to day.</p>
-		<p>Vojta Therapy is a specialised neurological treatment that works by activating innate movement patterns within the central nervous system. Rather than relying on voluntary effort alone, it stimulates automatic responses that underpin posture, coordination, and mobility.</p>
-		<p>At Balance, we take a structured and evidence-led approach to neurological rehabilitation. From your first session, we assess how movement is organised and controlled, then build a plan that supports both immediate function and long-term development.</p>
-		<p>Whether for a child with developmental concerns or an adult recovering from neurological injury, the focus is the same: improving how the body moves at a fundamental level.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
 	<section class="text-grid">
@@ -97,13 +112,27 @@ const faqs = [
 		</div>
 	</section>
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="specialist" image="/vojta-therapy/jose-portrait.jpg" imageAlt="Dr Jose Sanz Mengibar">
-		<p>Our Vojta Therapy service is led by <strong>Dr Jose Sanz Mengibar</strong>, Consultant Neurological Physiotherapist and certified Vojta Therapist.</p>
-		<p>With over 20 years of clinical and research experience and a PhD in the field, Dr Jose has a deep understanding of neurological movement disorders. His approach focuses on identifying the specific inputs required to trigger effective motor responses, delivering highly individualised care for both children and adults.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Jose &rarr;</a></p>
-		<p><strong>Integrated care.</strong> Where appropriate, we work closely with the wider Balance team. This may include joint sessions with physiotherapists and other specialists, ensuring your treatment carries through into everyday movement and function.</p>
-		<p><a href="/meet-the-team/" class="section-link">Meet The Team &rarr;</a></p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="text-grid text-grid--light">
 		<div class="text-grid-inner">
@@ -136,7 +165,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

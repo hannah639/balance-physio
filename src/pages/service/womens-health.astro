@@ -5,117 +5,184 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/womens-health/slider-new-1.jpg', alt: "Women's health session" },
-	{ src: '/womens-health/slider-new-2.jpg', alt: "Women's health rehabilitation" },
-	{ src: '/womens-health/slider-clinic-2017.jpg', alt: "Women's health clinic" },
-	{ src: '/womens-health/slider-img7976.webp', alt: 'Pelvic health assessment' },
-	{ src: '/womens-health/slider-img8036.webp', alt: 'Pelvic floor rehab' },
-	{ src: '/womens-health/slider-mg2336.webp', alt: 'Clinical session' },
-	{ src: '/womens-health/slider-physiotherapy.webp', alt: 'Physiotherapy session' },
-	{ src: '/womens-health/women-huddle.jpg', alt: 'Women supporting each other' },
-];
+const doc = await services.required('womens-health');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'What is a Mummy MOT?', a: 'A specialist postnatal assessment from 6 weeks onwards, including pelvic floor, abdominal, and postural checks.' },
-	{ q: 'Do I need to be pregnant to see you?', a: 'No. We treat women of all ages for a wide range of pelvic health concerns.' },
-	{ q: 'Is an internal examination required?', a: 'No. It is optional, and we will always discuss this with you first.' },
-	{ q: 'Can physiotherapy help with pain during sex?', a: 'Yes. Many causes are related to muscle function or scar tissue, which can be treated.' },
-	{ q: 'When should I seek help for pelvic girdle pain?', a: 'As soon as symptoms begin. Early treatment can significantly reduce discomfort and maintain activity levels.' },
-	{ q: 'Can I bring my baby?', a: 'Yes, you are welcome to bring your baby to your appointment.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Women's Health Physiotherapy Clapham | Pelvic Health & Recovery"
-	description="Women's health physiotherapy in Clapham for pelvic health, pregnancy, and postnatal recovery. Restore strength, control, and confidence with expert care."
+	title={doc.seoTitle ?? "Women's Health Physiotherapy Clapham | Pelvic Health & Recovery"}
+	description={doc.seoDescription ?? "Women's health physiotherapy in Clapham for pelvic health, pregnancy, and postnatal recovery. Restore strength, control, and confidence with expert care."}
 >
-	<PageHero title="in Clapham" highlight="Women's Health Physiotherapy" breadcrumb="Women's Health Physiotherapy" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Structured, clinical" highlight="pelvic health care" image="/womens-health/multi-gen-women.jpg" imageAlt="Multi-generational group of women laughing together">
-		<p>One in three women will experience pelvic health symptoms over their lifetime.</p>
-		<p>Pelvic health physiotherapy addresses the changes that occur across different stages of life, from adolescence through pregnancy, postnatal recovery, menopause and beyond.</p>
-		<p>At Balance, we take a holistic approach to pelvic health assessment and treatment, recognising the often sensitive nature of these symptoms, affecting daily function and quality of life. Following an assessment your individual treatment plan is devised to help you regain control, confidence and resilience to get you back to feeling more like you.</p>
-		<p>Whether you are managing symptoms, recovering from pregnancy or surgery, or looking to stay active without discomfort, we provide a focused and supportive pathway forward.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="women's health physiotherapy" image="/womens-health/pregnant-woman.jpg" imageAlt="Pregnancy support">
-		<p>Pelvic health concerns are common, but they are not something you need to put up with.</p>
-		<p>You will benefit from booking an assessment if you experience:</p>
-		<ul>
-			<li>Pelvic girdle pain, lower back pain, or discomfort during pregnancy</li>
-			<li>Bladder or bowel issues, including leaking or urgency</li>
-			<li>Postnatal changes such as abdominal separation or pelvic floor weakness</li>
-			<li>Symptoms of pelvic organ prolapse (heaviness or pressure)</li>
-			<li>Pain during intimacy or scar-related discomfort</li>
-			<li>Pelvic pain, endometriosis, bladder pain syndrome</li>
-			<li>Menopause management of pelvic health symptoms</li>
-			<li>Managing symptoms following gynaecological surgery</li>
-		</ul>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/womens-health/jo-pelvic-model.jpg" imageAlt="Jo Fordyce explaining pelvic anatomy with an anatomical model">
-		<p>Following an individual assessment, with time to explain your concerns and a physical examination which can include a vaginal examination (with your consent), Jo will devise with you a tailored treatment plan aiming to treat and manage your goals and symptoms.</p>
-		<p>Your treatment may include:</p>
-		<ul>
-			<li>Pelvic floor muscle assessment and rehabilitation</li>
-			<li>Bladder and bowel management</li>
-			<li>Advice regarding general exercise including Pilates</li>
-			<li>Adjuncts to treatment, biofeedback</li>
-			<li>Advice and education around self-care and lifestyle</li>
-		</ul>
-		<p>We keep everything practical, clear, and tailored to your stage of life and your goals.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/womens-health/how-we-measure.jpg" imageAlt="Women's health outcomes assessment">
-		<p>We track your progress from your first session to ensure your treatment is effective and focused.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Symptom tracking (e.g. leakage frequency, pain levels)</li>
-			<li>Pelvic floor strength and control assessment</li>
-			<li>Functional goals (e.g. return to running, lifting, or daily tasks)</li>
-			<li>Abdominal function (e.g. diastasis recti assessment)</li>
-			<li>Movement quality and confidence</li>
-		</ul>
-		<p>This gives you clear feedback on what's improving and helps guide the next steps in your rehabilitation.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/womens-health/jo-treatment.jpg" imageAlt="Jo Fordyce treating a patient">
-		<p>We support women across all life stages:</p>
-		<ul>
-			<li><strong>Pregnancy:</strong> Managing pain and staying active</li>
-			<li><strong>Postnatal recovery:</strong> From 6 weeks onwards, including <a href="/service/mummy-mot/" class="inline-link">Mummy MOT</a></li>
-			<li><strong>Active women:</strong> Managing symptoms during sport and exercise</li>
-			<li><strong>Perimenopause and menopause:</strong> Addressing pelvic floor and musculoskeletal changes</li>
-			<li><strong>Post-surgical recovery:</strong> Following gynaecological procedures</li>
-		</ul>
-		<p>Our aim is always the same: helping you move well, feel strong, and stay in control of your body.</p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our specialist" highlight="team" image="/womens-health/women-huddle.jpg" imageAlt="Team">
-		<p>Our women's health service combines specialist pelvic health physiotherapy with expert musculoskeletal care. They work with a team approach to optimise patient care.</p>
-		<p><strong>Jo Fordyce</strong> is our Consultant Pelvic Health Physiotherapist, specialising in pelvic health. With over 30 years of experience, she supports women through pregnancy, postnatal recovery, menopause, and a wide range of pelvic health concerns.</p>
-		<p><a href="/team/jo-fordyce/" class="section-link">Read More About Jo &rarr;</a></p>
-		<p><strong>Caroline Curtis</strong> is a Consultant Spinal Physiotherapist with extensive experience in musculoskeletal care. She provides expert assessment and treatment for spinal and movement-related conditions, supporting women with pain and dysfunction during and beyond pregnancy.</p>
-		<p><a href="/team/caroline-curtis/" class="section-link">Read More About Caroline &rarr;</a></p>
-		<p><strong>Deri Wilson</strong>'s aim is to apply remedial techniques in a relaxing way where possible, without sacrificing therapeutic depth. She combines myofascial work, trigger point therapy, and deep tissue massage for chronic pain relief, muscle recovery, and stress management. Deri is a member of the Wellness and Women's Health teams, working with pregnant women, new mothers, and women in perimenopause and post-menopause.</p>
-		<p><a href="/team/deri-wilson/" class="section-link">Read More About Deri &rarr;</a></p>
-		<p><strong>Alex Deif</strong> is an S&amp;C Coach with postnatal training.</p>
-		<p><a href="/team/alex-deif/" class="section-link">Read More About Alex &rarr;</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/womens-health/gynaecology.webp" imageAlt="Consultation">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing#womens-health" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -124,7 +191,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

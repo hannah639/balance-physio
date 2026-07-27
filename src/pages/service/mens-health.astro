@@ -5,106 +5,184 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/mens-health/slider-endurance.jpg', alt: 'Endurance training' },
-	{ src: '/mens-health/slider-gym-exercises.jpg', alt: 'Gym exercises' },
-	{ src: '/mens-health/slider-stretching.jpg', alt: 'Mobility training' },
-	{ src: '/mens-health/slider-weight-training.jpg', alt: 'Weight training' },
-	{ src: '/mens-health/slider-monkey-bars.jpg', alt: 'Calisthenics' },
-	{ src: '/mens-health/beach.jpg', alt: 'Active lifestyle' },
-];
+const doc = await services.required('mens-health');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'Is this only for prostate-related issues?', a: 'No. We treat a wide range of pelvic health conditions, including pain, bladder, and bowel symptoms.' },
-	{ q: 'What happens in the first session?', a: 'A detailed discussion followed by assessment of movement, breathing, and pelvic floor function where appropriate.' },
-	{ q: 'Is internal assessment required?', a: 'No. It is optional and only performed with your consent.' },
-	{ q: 'Can physiotherapy help with cycling-related pain?', a: 'Yes. We address both mechanical load and pelvic floor tension to reduce symptoms.' },
-	{ q: 'How many sessions will I need?', a: 'This varies, but most people improve over a short course of structured rehabilitation.' },
-	{ q: 'Do I need a referral?', a: 'No. You can book directly, though some insurers may require one.' },
-	{ q: 'Is it confidential?', a: 'Yes. All consultations are private and handled with discretion.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Men's Health Physiotherapy Clapham | Pelvic Health & Recovery"
-	description="Men's health physiotherapy in Clapham for pelvic pain, bladder, and post-surgical recovery. Restore function, control, and confidence with expert care."
+	title={doc.seoTitle ?? "Men's Health Physiotherapy Clapham | Pelvic Health & Recovery"}
+	description={doc.seoDescription ?? "Men's health physiotherapy in Clapham for pelvic pain, bladder, and post-surgical recovery. Restore function, control, and confidence with expert care."}
 >
-	<PageHero title="in Clapham" highlight="Men's Health Physiotherapy" breadcrumb="Men's Health Physiotherapy" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Structured, clinical" highlight="pelvic health care" image="/mens-health/pulse-tracking.jpg" imageAlt="Clinical assessment">
-		<p>Men's health physiotherapy focuses on conditions affecting the pelvic floor, bladder, bowel, and sexual function.</p>
-		<p>At Balance, we take a structured and clinical approach to assessment and treatment. We identify the underlying drivers of your symptoms and build a clear plan to restore function, reduce pain, and improve confidence.</p>
-		<p>These issues are often under-reported, but they are both common and highly treatable with the right approach.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="men's health physiotherapy" image="/mens-health/slider-DSCF0046.webp" imageAlt="Men's health consultation">
-		<p>You may benefit from an assessment if you experience:</p>
-		<ul>
-			<li>Persistent pelvic pain (perineum, testicles, lower abdomen)</li>
-			<li>Urinary symptoms such as leaking, urgency, or difficulty starting flow</li>
-			<li>Post-prostate surgery symptoms (e.g. dribbling or incontinence)</li>
-			<li>Bowel dysfunction, including poor control or chronic constipation</li>
-			<li>Pain related to cycling or prolonged sitting</li>
-			<li>Sexual dysfunction linked to pelvic floor function</li>
-		</ul>
-		<p>If symptoms are ongoing or affecting your day-to-day life, it is worth addressing them directly.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/mens-health/pullups.jpg" imageAlt="Strength rehabilitation">
-		<p>We assess how your symptoms relate to movement, muscle function, and nervous system sensitivity.</p>
-		<p>Your treatment may include:</p>
-		<ul>
-			<li>Pelvic floor assessment (external and, where appropriate, internal)</li>
-			<li>Targeted strengthening or down-training of the pelvic floor</li>
-			<li>Hands-on therapy to reduce tension and improve tissue function</li>
-			<li>Breathing and relaxation strategies to reduce overactivity</li>
-			<li>Postural and load management advice</li>
-			<li>Gradual return to exercise and activity</li>
-		</ul>
-		<p>Everything is explained clearly so you understand both the problem and the solution.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/mens-health/slider-image1.webp" imageAlt="Assessment progress">
-		<p>We track your progress throughout treatment to ensure meaningful improvement.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Symptom tracking (pain levels, urinary or bowel symptoms)</li>
-			<li>Pelvic floor function (strength, control, ability to relax)</li>
-			<li>Functional outcomes (e.g. sitting tolerance, return to cycling or sport)</li>
-			<li>Movement quality and confidence</li>
-			<li>Reduction in symptom flare-ups</li>
-		</ul>
-		<p>This allows us to adjust your treatment and keep you moving forward.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/mens-health/paddleboard.jpg" imageAlt="Active lifestyle">
-		<p>We work with men across a range of presentations:</p>
-		<ul>
-			<li><strong>Post-surgical patients:</strong> Recovery following prostate or bladder procedures</li>
-			<li><strong>Cyclists and active individuals:</strong> Managing pelvic pain and pressure-related symptoms</li>
-			<li><strong>Sedentary workers:</strong> Addressing pelvic tension linked to prolonged sitting</li>
-			<li><strong>Chronic pelvic pain presentations:</strong> Where symptoms have persisted despite previous treatment</li>
-		</ul>
-		<p>Our focus is always on restoring normal function and reducing reliance on ongoing treatment.</p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our men's health" highlight="physiotherapist" image="/mens-health/jo-fordyce.jpg" imageAlt="Jo Fordyce, men's pelvic health physiotherapist">
-		<p><strong>Jo Fordyce</strong> leads our men's pelvic health service. With over 25 years of experience, she helps men manage pelvic health concerns, improve symptoms, and return to normal activity with confidence.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Jo &rarr;</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/mens-health/slider-monkey-bars.jpg" imageAlt="Balance Physio">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing#mens-health" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -113,7 +191,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

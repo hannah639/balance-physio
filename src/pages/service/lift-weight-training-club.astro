@@ -5,113 +5,184 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/lift/01.jpg', alt: 'Lift Club session' },
-	{ src: '/lift/02.jpg', alt: 'Coached lifting' },
-	{ src: '/lift/03.jpg', alt: 'Strength programme' },
-	{ src: '/lift/body-barbell.jpg', alt: 'Barbell training' },
-	{ src: '/lift/body-clean.jpg', alt: 'Clean lift technique' },
-	{ src: '/lift/body-kettlebells.jpg', alt: 'Kettlebell work' },
-];
+const doc = await services.required('lift-weight-training-club');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'Do I need experience to join?', a: 'No. The club is beginner-friendly and coached throughout.' },
-	{ q: 'Will I get individual attention in a group setting?', a: 'Yes. Group sizes are kept small to allow for coaching and feedback.' },
-	{ q: "Can I join if I've had back pain?", a: "Yes. Sessions are delivered within a clinical setting and can be adapted as needed. Alex is also an apprentice physiotherapist, so you're in good hands." },
-	{ q: 'What is a progressive programme?', a: 'A structured plan where exercises and loads are gradually increased over time to build strength safely.' },
-	{ q: 'Can I train during pregnancy?', a: 'Yes. Exercises can be adapted appropriately. Best to call and chat to us first.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Lift (Weight Training) Club in Clapham"
-	description="Physiotherapy-led weight training club in Clapham: learn barbell fundamentals in a coached, small-group, progressive programme suitable for beginners onwards."
+	title={doc.seoTitle ?? "Lift (Weight Training) Club in Clapham"}
+	description={doc.seoDescription ?? "Physiotherapy-led weight training club in Clapham: learn barbell fundamentals in a coached, small-group, progressive programme suitable for beginners onwards."}
 >
-	<PageHero title="in Clapham" highlight="Lift (Weight Training) Club" breadcrumb="Lift Club" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Build strength, confidence," highlight="and resilience" image="/lift/class-kettlebells.jpg" imageAlt="Class members lined up alongside a row of kettlebells">
-		<p>Build strength, confidence, and resilience through structured coaching.</p>
-		<p>Our Weight Training Club provides a supportive, coached environment to learn and develop strength safely. It is designed to bridge the gap between rehabilitation and independent training, helping you build the foundations for long-term health and performance.</p>
-		<p>Whether you are completely new to lifting or looking to refine your technique, sessions are structured, progressive, and tailored within a small group setting.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Who it's for" heading="When to" highlight="consider joining" image="/lift/kettlebell-plates.jpg" imageAlt="Kettlebell with coloured weight plates in the gym">
-		<p>You may benefit from the Weight Training Club if you:</p>
-		<ul>
-			<li>Want to learn how to lift safely and effectively</li>
-			<li>Feel unsure about technique (e.g. squat, hinge, press)</li>
-			<li>Have stopped progressing with independent training</li>
-			<li>Have seen the research into the health benefits of lifting</li>
-			<li>Are returning to strength training after injury</li>
-			<li>Want a structured and consistent approach to training</li>
-		</ul>
-		<p>Strength training is a key component of maintaining muscle mass, bone health, and overall physical resilience.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Sessions" heading="How the" highlight="club works" image="/lift/barbell-floor.jpg" imageAlt="Loaded barbell on a gym floor with kettlebells lined up along the wall">
-		<p>Sessions follow a structured programme designed to build strength progressively.</p>
-		<p>You will:</p>
-		<ul>
-			<li>Learn the fundamental movement patterns: push, pull, squat, and hinge</li>
-			<li>Train using barbells and other resistance equipment</li>
-			<li>Receive coaching on technique and positioning</li>
-			<li>Progress load and complexity over time</li>
-			<li>Train in a small group with individual guidance</li>
-			<li>Have Fun!</li>
-		</ul>
-		<p>Programmes typically run in progressive blocks, allowing you to build strength in a measurable and sustainable way.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/lift/body-dumbbells.jpg" imageAlt="Dumbbell work">
-		<p>We track your development to ensure consistent improvement.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Strength progression across key lifts</li>
-			<li>Improvements in movement quality and control</li>
-			<li>Increased tolerance to load and training volume</li>
-			<li>Reduction in pain or post-training irritation</li>
-			<li>Confidence and independence in training</li>
-		</ul>
-		<p>This ensures you are not just exercising, but progressing.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our members" heading="Who we" highlight="help" image="/lift/body-kettlebells.jpg" imageAlt="Kettlebell training">
-		<p>The club is designed to be inclusive and accessible:</p>
-		<ul>
-			<li><strong>Beginners:</strong> Learning lifting technique from the ground up</li>
-			<li><strong>Postnatal and prenatal clients:</strong> Training safely with appropriate modifications</li>
-			<li><strong>Individuals with previous injuries:</strong> Returning to strength in a controlled environment</li>
-			<li><strong>Our Veterans:</strong> Maintaining and increasing muscle mass, bone density, and function</li>
-			<li><strong>Regular gym users:</strong> Seeking structure and coaching to progress further</li>
-		</ul>
-		<p>No prior experience is required.</p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Your coach" heading="Your" highlight="coach" image="/team/alex-deif.jpg" imageAlt="Alex Deif, Weight Training Club coach">
-		<p>The Weight Training Club is led by <strong>Alex Deif</strong>, a Level 4 qualified personal trainer with over a decade of experience.</p>
-		<p>Alex specialises in:</p>
-		<ul>
-			<li>Lower back pain management</li>
-			<li>Pre and postnatal training</li>
-			<li>Strength and conditioning across multiple sports</li>
-			<li>Power lifting</li>
-		</ul>
-		<p>His coaching focuses on clear instruction, adaptable programming, and helping you build confidence in your training.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Alex &rarr;</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/lift/gym-dumbbells-scene.jpg" imageAlt="Dumbbells set out on the gym floor during a session">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing#strength-conditioning" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -120,7 +191,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

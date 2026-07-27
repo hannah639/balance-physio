@@ -5,99 +5,163 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
+
+const doc = await services.required('physiotherapy-prescribing');
 
 /* Prescribing folder only has 4 images; cycle + use /physio/body-* as needed. */
-const photos = [
-	{ src: '/physiotherapy-prescribing/reception.jpg', alt: 'Balance Physio reception' },
-	{ src: '/physiotherapy-prescribing/treatment-rooms.jpg', alt: 'Treatment rooms' },
-	{ src: '/physiotherapy-prescribing/front-entrance.jpg', alt: 'Clinic entrance' },
-	{ src: '/physiotherapy-prescribing/screenshot.webp', alt: 'Digital prescribing' },
-	{ src: '/physio/body-1.jpg', alt: 'Clinical consultation' },
-	{ src: '/physio/body-4.jpg', alt: 'Rehabilitation session' },
-];
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'What is an independent prescriber?', a: 'A clinician trained to assess, diagnose, and prescribe medication within their area of expertise.' },
-	{ q: 'Do I still need to see my GP?', a: 'Not always for musculoskeletal issues, though we recommend keeping your GP informed.' },
-	{ q: 'Is medication always necessary?', a: 'No. It is used only when it will support your rehabilitation.' },
-	{ q: 'Can this help with severe back or neck pain?', a: 'Yes. Reducing pain can allow earlier movement and treatment.' },
-	{ q: 'Will I stay on medication long-term?', a: 'The aim is to reduce and stop medication as your condition improves.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Physiotherapy Prescribing in Clapham"
-	description="Independent physiotherapy prescribing in Clapham: targeted medication to reduce pain and support rehabilitation, integrated with your physiotherapy care."
+	title={doc.seoTitle ?? "Physiotherapy Prescribing in Clapham"}
+	description={doc.seoDescription ?? "Independent physiotherapy prescribing in Clapham: targeted medication to reduce pain and support rehabilitation, integrated with your physiotherapy care."}
 >
-	<PageHero title="in Clapham" highlight="Physiotherapy Prescribing" breadcrumb="Physiotherapy Prescribing" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Medication can be an important part of" highlight="rehabilitation" image="/physiotherapy-prescribing/medication-consultation.jpg" imageAlt="Physiotherapy prescribing consultation">
-		<p>Medication can be an important part of rehabilitation, when used appropriately.</p>
-		<p>At Balance, independent prescribing allows us to reduce pain and inflammation so that physiotherapy and movement-based treatment can be effective. The aim is not to rely on medication, but to create a window where we can reduce the pain so that you can move, exercise, and recover.</p>
-		<p>This service is integrated within your physiotherapy care, ensuring a joined-up and efficient approach.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When prescribing" highlight="may be appropriate" image="/physiotherapy-prescribing/treatment-rooms.jpg" imageAlt="Treatment room">
-		<p>You may benefit from physiotherapy-led prescribing if you:</p>
-		<ul>
-			<li>Have pain levels that prevent movement or exercise</li>
-			<li>Are experiencing acute back or neck pain</li>
-			<li>Have significant post-operative pain limiting rehabilitation</li>
-			<li>Experience nerve-related symptoms (e.g. burning, tingling, shooting pain)</li>
-			<li>Are not responding to over-the-counter medication</li>
-			<li>Need support managing or reviewing current medication</li>
-		</ul>
-		<p>In these cases, appropriate medication can help you engage with treatment more effectively.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/physiotherapy-prescribing/medication-discussion.jpg" imageAlt="Discussing prescribing as part of treatment">
-		<p>Prescribing is used as part of a wider rehabilitation plan.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Clinical assessment of your condition</li>
-			<li>Review of current medications and response</li>
-			<li>Prescribing where appropriate within scope of practice</li>
-			<li>Clear guidance on dosage, duration, and expected effect</li>
-			<li>Integration with physiotherapy and exercise-based treatment</li>
-		</ul>
-		<p>We prioritise using the minimum effective support, with a clear plan to reduce reliance on medication as your condition improves.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/physiotherapy-prescribing/screenshot.webp" imageAlt="Digital notes">
-		<p>Medication is used to support measurable improvements in your rehabilitation.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Reduction in pain to allow movement and exercise</li>
-			<li>Improved tolerance to physiotherapy sessions</li>
-			<li>Increased range of movement and function</li>
-			<li>Reduced reliance on medication over time</li>
-			<li>Progression towards normal activity levels</li>
-		</ul>
-		<p>Prescribing is reviewed regularly to ensure it continues to support your recovery.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/physiotherapy-prescribing/prescription-exchange.jpg" imageAlt="Clinician handing over a prescription">
-		<p>This service is particularly relevant for:</p>
-		<ul>
-			<li><strong>Acute spinal pain:</strong> Back and neck conditions limiting movement and function</li>
-			<li><strong>Post-operative patients:</strong> Supporting early-stage rehabilitation</li>
-			<li><strong>Individuals with severe pain:</strong> Where symptoms prevent engagement with treatment</li>
-			<li><strong>Patients with nerve pain:</strong> Requiring specific medication strategies</li>
-			<li><strong>Time-sensitive cases:</strong> Where rapid access to prescribing supports faster recovery</li>
-		</ul>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/physiotherapy-prescribing/front-entrance.jpg" imageAlt="Balance Physio entrance">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing#physiotherapy-prescribing" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -106,7 +170,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

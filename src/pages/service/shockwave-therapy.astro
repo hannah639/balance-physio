@@ -5,109 +5,206 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/shockwave-therapy/sw-slider-1.jpg', alt: 'Shockwave therapy session' },
-	{ src: '/shockwave-therapy/sw-slider-2.jpg', alt: 'Shockwave treatment' },
-	{ src: '/shockwave-therapy/sw-slider-3.jpg', alt: 'Shockwave application' },
-	{ src: '/shockwave-therapy/sw-slider-4.jpg', alt: 'Shockwave therapy' },
-	{ src: '/shockwave-therapy/sw-slider-5.jpg', alt: 'Shockwave treatment in progress' },
-	{ src: '/shockwave-therapy/sw-slider-6.jpg', alt: 'Targeted shockwave treatment' },
-	{ src: '/shockwave-therapy/sw-slider-7.jpg', alt: 'Shockwave assessment at Balance' },
-];
+const doc = await services.required('shockwave-therapy');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'Is shockwave therapy painful?', a: 'It can be uncomfortable, but the intensity is adjusted to remain tolerable.' },
-	{ q: 'How many sessions will I need?', a: 'Most people benefit from a short course of 3–5 sessions.' },
-	{ q: 'Are there any side effects?', a: 'Mild soreness, redness, or bruising can occur temporarily after treatment.' },
-	{ q: 'Can I exercise afterwards?', a: 'We usually recommend reducing heavy loading for 48 hours, then progressing as advised.' },
-	{ q: 'How is this different from an injection?', a: 'Shockwave is a pro-inflammatory modality, whereas an injection is usually a steroid-based injection which is anti-inflammatory.' },
-	{ q: 'Do I need a referral?', a: 'Yes, unless you are seeing (or would like to see) Steve our podiatrist, as he can confirm diagnosis with ultrasound that there is no tendon tear. Shockwave would make a tendon tear worse.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Shockwave Therapy Clapham | Tendon Pain & Recovery Treatment"
-	description="Shockwave therapy in Clapham for persistent tendon pain and injury recovery. Restart healing and return to activity with expert treatment."
+	title={doc.seoTitle ?? "Shockwave Therapy Clapham | Tendon Pain & Recovery Treatment"}
+	description={doc.seoDescription ?? "Shockwave therapy in Clapham for persistent tendon pain and injury recovery. Restart healing and return to activity with expert treatment."}
 >
-	<PageHero title="in Clapham" highlight="Shockwave Therapy" breadcrumb="Shockwave Therapy" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="When pain lingers, it usually means" highlight="something hasn't fully healed" image="/shockwave-therapy/body-1.jpg" imageAlt="Shockwave therapy in progress">
-		<p>Shockwave therapy is designed for exactly that: persistent tendon and soft tissue problems that haven't responded to rest, exercise, or standard treatment.</p>
-		<p>At Balance, we use shockwave as part of a wider, structured rehabilitation plan. The goal isn't just to reduce pain, but to restart the healing process and so you can move forward.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="The treatment" heading="What is" highlight="shockwave therapy?" image="/shockwave-therapy/body-2.jpg" imageAlt="Shockwave equipment close-up">
-		<p>Shockwave therapy uses controlled acoustic pulses delivered directly into the affected tissue.</p>
-		<p>This stimulates a response in the body that helps:</p>
-		<ul>
-			<li>Improve blood flow to the area</li>
-			<li>Reduce pain sensitivity</li>
-			<li>Encourage tissue repair</li>
-		</ul>
-		<p>It's a non-invasive treatment that can be particularly effective when progress has stalled.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Symptoms" heading="When shockwave" highlight="can help" image="/shockwave-therapy/body-3.jpg" imageAlt="Shockwave treatment for tendon pain">
-		<p>Shockwave therapy is commonly used for chronic tendon conditions, including:</p>
-		<ul>
-			<li>Plantar fasciitis (heel pain, especially first steps in the morning)</li>
-			<li>Achilles tendinopathy</li>
-			<li>Patellar tendon pain (below the knee)</li>
-			<li>Tennis or golfer's elbow</li>
-			<li>Shoulder tendon pain or calcification</li>
-			<li>Lateral hip pain (greater trochanteric pain)</li>
-		</ul>
-		<p>If you've tried other approaches without lasting improvement, this may be the next step.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Treatment" heading="How we" highlight="use it" image="/shockwave-therapy/how-we-use-treatment.jpg" imageAlt="Shockwave treatment being applied to a foot at Balance Physio">
-		<p>Shockwave isn't a standalone fix.</p>
-		<p>We integrate it into our broader rehabilitation plan, combining it with the right loading, movement work, and progression back to activity.</p>
-		<p>Treatment is targeted and controlled. Each session typically lasts around 20 minutes, and the intensity can be adjusted to suit you.</p>
-		<p>The aim is to create the right conditions for healing, not just mask symptoms.</p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/shockwave-therapy/body-5.jpg" imageAlt="Tracking shockwave therapy outcomes">
-		<p>We track more than pain levels.</p>
-		<p>We look at how your tendon tolerates load, how your movement improves, and what you're able to return to over time.</p>
-		<p>This allows us to:</p>
-		<ul>
-			<li>Progress your rehab safely</li>
-			<li>Reduce the risk of recurrence</li>
-			<li>Build long-term resilience in the tissue</li>
-		</ul>
-		<p>You'll have a clear sense of where you are, and what's improving.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our patients" heading="Who we" highlight="help" image="/shockwave-therapy/who-we-help-treatment.jpg" imageAlt="Shockwave treatment being applied to a calf">
-		<p>Shockwave therapy is particularly useful for:</p>
-		<ul>
-			<li>Runners and athletes with persistent tendon injuries</li>
-			<li>People dealing with long-standing heel or elbow pain</li>
-			<li>Individuals who haven't responded to previous treatment</li>
-			<li>Those looking to avoid injections or surgery where possible</li>
-		</ul>
-		<p>It's often the turning point when recovery has plateaued.</p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="What to expect" heading="During your" highlight="session" image="/shockwave-therapy/screen-shot-2019.webp" imageAlt="Shockwave session">
-		<p>Treatment involves applying a handheld device that delivers shocks to the affected area.</p>
-		<p>You may feel a deep, rhythmic tapping sensation during the session. This can be uncomfortable at times, but is generally well tolerated and can be adjusted as needed.</p>
-		<p>Most people require a short course of treatment, typically spaced over a few weeks.</p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/shockwave-therapy/body-last.jpg" imageAlt="Shockwave at Balance">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa and AXA Health.</p>
-		<p><a href="/pricing#additional-physio" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[7] && (
+	<ImageText
+		eyebrow={doc.sections[7].eyebrow ?? undefined}
+		heading={doc.sections[7].heading ?? undefined}
+		highlight={doc.sections[7].headingHighlight ?? undefined}
+		reverse={doc.sections[7].imageOnRight}
+		altBg={doc.sections[7].altBackground}
+		image={doc.sections[7].image?.url ?? undefined}
+		imageAlt={doc.sections[7].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[7].blocks} />
+		{doc.sections[7].ctaLabel && (
+			<p><a
+				href={doc.sections[7].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[7].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[7].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[7].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -116,7 +213,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

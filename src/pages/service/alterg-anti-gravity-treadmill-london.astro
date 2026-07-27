@@ -5,128 +5,208 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/anti-gravity-treadmill/slider-bw-treadmill.jpg', alt: 'AlterG anti-gravity treadmill at Balance Physio' },
-	{ src: '/anti-gravity-treadmill/slider-IMG-4866.jpg', alt: 'AlterG session at Balance Physio' },
-	{ src: '/anti-gravity-treadmill/slider-alter-g-trainer-running-london.webp', alt: 'Runner training on the AlterG' },
-	{ src: '/anti-gravity-treadmill/slider-gtrainer.webp', alt: 'AlterG G-Trainer in use' },
-	{ src: '/anti-gravity-treadmill/slider-p200.webp', alt: 'AlterG P200 model' },
-	{ src: '/anti-gravity-treadmill/slider-session.webp', alt: 'AlterG guided rehab session' },
-	{ src: '/anti-gravity-treadmill/via-woman-walk.webp', alt: 'Walking on the AlterG' },
-];
+const doc = await services.required('alterg-anti-gravity-treadmill-london');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'Do I need a referral?', a: 'No, you can book directly online (please book an induction if it is your first visit).' },
-	{ q: 'What should I wear?', a: 'Please carry your running shoes, do not arrive in them. Your running shoes must be clean and free from dust, mud and debris. Dirt from running shoes has broken the machine on several occasions. You need to wear tight shorts as we give you a pair of AlterG shorts to wear on top.' },
-	{ q: 'Can I use it for running training?', a: "Yes. It's commonly used to maintain and increase training volume and speed while reducing impact." },
-	{ q: 'Is it suitable after surgery?', a: "Yes, it's often used as part of a structured return to weight-bearing activity." },
-	{ q: 'How often should I use it?', a: 'This depends on your goals. We can guide you based on your situation.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="AlterG Anti-Gravity Treadmill Clapham | Rehab & Performance Running"
-	description="AlterG Anti-Gravity Treadmill in Clapham to reduce joint load, maintain fitness, and support injury recovery. Run and walk pain-free with expert guidance."
+	title={doc.seoTitle ?? "AlterG Anti-Gravity Treadmill Clapham | Rehab & Performance Running"}
+	description={doc.seoDescription ?? "AlterG Anti-Gravity Treadmill in Clapham to reduce joint load, maintain fitness, and support injury recovery. Run and walk pain-free with expert guidance."}
 >
-	<PageHero title="in London" highlight="AlterG Anti-Gravity Treadmill" breadcrumb="AlterG Anti-Gravity Treadmill" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
+	{doc.sections[0] && (
 	<ImageText
-		eyebrow="Our approach"
-		heading="Rehab doesn't have to"
-		highlight="mean stopping"
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
 		youtubeId="LeHksjmPi3k"
 		autoplay
-		imageAlt="Video: AlterG anti-gravity treadmill at Balance Performance Physiotherapy"
 	>
-		<p>The AlterG Anti-Gravity Treadmill allows you to walk or run with reduced body weight, so you can stay on track whilst your body recovers.</p>
-		<p>By reducing your mass by 2-3% you will train at a much faster speed, allowing you to develop a training effect on your cardiovascular system that you cannot get at normal gravity.</p>
-		<p>By gently unloading your joints, it lets you move with less pain, better control, and more confidence, even in the early stages of rehabilitation.</p>
-		<p>Originally developed using NASA technology, it's now widely used in high-level sport and clinical settings. At Balance, it forms a key part of how we help people return to movement safely and progressively.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="The technology" heading="What is the" highlight="AlterG?" image="/anti-gravity-treadmill/alterg-what-is.jpg" imageAlt="Runner training on the AlterG anti-gravity treadmill" imagePosition="center top">
-		<p>The AlterG uses air pressure to reduce your body weight while you walk or run.</p>
-		<p>This means we can control the load through your joints in small increments, from normal weight bearing down to as little as 20%.</p>
-		<p>In practice, that allows you to:</p>
-		<ul>
-			<li>Allows you to continue to train despite injury. Gets you back on the field of play earlier</li>
-			<li>Move without pain when full weight-bearing isn't possible</li>
-			<li>Helps you achieve your weight reducing goals</li>
-			<li>Maintain fitness during injury or recovery</li>
-			<li>Rebuild strength and confidence gradually</li>
-			<li>Improve walking or running mechanics in a controlled environment</li>
-		</ul>
-		<p>It's not just about reducing load, it's about restoring movement.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+		imagePosition="center top"
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Who it helps" heading="When the AlterG" highlight="can help" image="/anti-gravity-treadmill/viax-man-run-front.webp" imageAlt="Rehab running on the AlterG">
-		<p>The AlterG is useful across both rehabilitation and performance settings.</p>
-		<p>You will benefit if you're dealing with:</p>
-		<ul>
-			<li>Sports injuries or returning to running</li>
-			<li>Fractures and breaks - Just come out of a boot or off crutches</li>
-			<li>Musculoskeletal injuries (e.g. knee, hip, ankle)</li>
-			<li>Back pain affecting walking or running</li>
-			<li>Post-surgery rehab (e.g. ACL, joint replacement)</li>
-			<li>Neurological conditions affecting gait or balance</li>
-			<li>Reduced mobility or confidence with walking</li>
-			<li>Weight reduction program</li>
-		</ul>
-		<p>The AlterG allows you to move earlier, with less pain, progress safely and securely back to full weight-bearing activity.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Sessions" heading="How we" highlight="use it" image="/anti-gravity-treadmill/slider-session.webp" imageAlt="Guided AlterG session">
-		<p>All patients have an induction, discussing their goals and reasons behind using the machine.</p>
-		<p>Sessions are guided to make sure the load, speed, and progression are right for you, whether you're rebuilding after injury or working towards performance goals.</p>
-		<p>During rehabilitation, we use it to reduce load, restore movement patterns, and build confidence.</p>
-		<p>For performance, we use it to increase running volume, improve cardiovascular endurance, speed and bio-mechanics.</p>
-		<p>For our current patients it's integrated into a wider physiotherapy or strength programme.</p>
-		<p>We can also use live visual feedback to assess how you move, helping refine your walking or running pattern as you progress.</p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/anti-gravity-treadmill/viax-man-run-rear.webp" imageAlt="Tracking running progress on the AlterG">
-		<p>Every session builds towards a clear goal.</p>
-		<p>We adjust your bodyweight percentage support, speed, and duration over time, tracking how your body responds and what you're able to tolerate.</p>
-		<p>This allows us to progress you safely back to full weight-bearing activity having reached your goal.</p>
-		<p>For you, that means:</p>
-		<ul>
-			<li>A structured return to running or walking</li>
-			<li>Reduced risk of setbacks</li>
-			<li>Clear milestones as you recover</li>
-		</ul>
-		<p><a href="/outcomes/" class="section-link">Read more about our results and outcome measures &rarr;</a></p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our patients" heading="Who we" highlight="help" image="/anti-gravity-treadmill/via-woman-walk.webp" imageAlt="Rehab walking on the AlterG">
-		<p>The AlterG supports a wide range of people, including:</p>
-		<ul>
-			<li>Runners and athletes maintaining fitness during injury</li>
-			<li>People training for advanced cardiovascular fitness</li>
-			<li>Post-surgical patients rebuilding strength and mobility</li>
-			<li>Individuals returning to exercise after time away</li>
-			<li>People managing joint pain, weight loss and long-term conditions</li>
-			<li>Our veterans who keep active with less load on their joints</li>
-		</ul>
-		<p>You don't need to be an athlete to benefit - just someone who wants to move better.</p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Access" heading="Using the AlterG" highlight="at Balance" image="/anti-gravity-treadmill/gtrainer3.webp" imageAlt="AlterG treadmill at Balance Physio">
-		<p>You don't need to be an existing patient to use the AlterG.</p>
-		<p>You can book sessions independently, or as part of a wider rehab programme with one of our clinicians.</p>
-		<p>Before your first session, we'll guide you through an induction to make sure everything is set up correctly.</p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/anti-gravity-treadmill/pricing-session.jpg" imageAlt="AlterG session at Balance Physio" imagePosition="center top">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing#anti-gravity-treadmill" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[7] && (
+	<ImageText
+		eyebrow={doc.sections[7].eyebrow ?? undefined}
+		heading={doc.sections[7].heading ?? undefined}
+		highlight={doc.sections[7].headingHighlight ?? undefined}
+		reverse={doc.sections[7].imageOnRight}
+		altBg={doc.sections[7].altBackground}
+		image={doc.sections[7].image?.url ?? undefined}
+		imageAlt={doc.sections[7].image?.alt ?? ''}
+		imagePosition="center top"
+	>
+		<RichText blocks={doc.sections[7].blocks} />
+		{doc.sections[7].ctaLabel && (
+			<p><a
+				href={doc.sections[7].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[7].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[7].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[7].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -135,7 +215,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

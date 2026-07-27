@@ -6,41 +6,51 @@ import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Picture from '../../components/Picture.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/podiatry/slider-foot-and-ankle.webp', alt: 'Foot and ankle assessment' },
-	{ src: '/podiatry/slider-pexels-feet.webp', alt: 'Podiatry assessment' },
-	{ src: '/podiatry/slider-pexels-running.jpg', alt: 'Runner in motion' },
-	{ src: '/podiatry/slider-podiatry-balance.webp', alt: 'Podiatry at Balance' },
-	{ src: '/podiatry/slider-podiatry-feet.webp', alt: 'Podiatry treatment' },
-	{ src: '/podiatry/slider-balance-balls.webp', alt: 'Balance training' },
-];
+const doc = await services.required('podiatry');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: "What's the difference between a podiatrist and a chiropodist?", a: 'The terms are often used interchangeably, but podiatry reflects a more modern, biomechanical approach to foot and lower limb health.' },
-	{ q: 'Do I need orthotics?', a: "Not always. We only prescribe them where they're clinically appropriate." },
-	{ q: 'Can you help with running injuries?', a: 'Yes, we assess how you move and load, not just the site of pain.' },
-	{ q: 'Is ultrasound included?', a: 'Only where needed. It can be added to your assessment if it helps clarify your diagnosis.' },
-	{ q: 'Can you assess children?', a: 'Yes, we offer paediatric assessments for development and gait concerns.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Podiatry & Chiropody Clapham | Foot & Ankle Pain Treatment"
-	description="Podiatry in Clapham for foot and ankle pain, gait issues, and injury. Improve movement and reduce pain with expert podiatry and chiropody care."
+	title={doc.seoTitle ?? "Podiatry & Chiropody Clapham | Foot & Ankle Pain Treatment"}
+	description={doc.seoDescription ?? "Podiatry in Clapham for foot and ankle pain, gait issues, and injury. Improve movement and reduce pain with expert podiatry and chiropody care."}
 >
-	<PageHero title="in Clapham" highlight="Podiatry and Chiropody" breadcrumb="Podiatry and Chiropody" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="If your feet aren't working well," highlight="nothing above them will either" image="/podiatry/men-runners-legs.jpg" imageAlt="Runners in motion">
-		<p>Foot and ankle problems don't stay local. They affect how you move, how you load your joints, and often show up as pain elsewhere, in the knees, hips, or lower back.</p>
-		<p>Our podiatry and chiropody service focuses on understanding that link. We look at how your body interacts with the ground, and how that influences everything above it.</p>
-		<p>The aim is simple: resolve pain, restore movement, and make sure the problem doesn't come back.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
 	<section class="image-toggle-section">
@@ -134,42 +144,93 @@ const faqs = [
 		</div>
 	</section>
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/podiatry/women-jogging-feet.jpg" imageAlt="Jogger's feet in motion">
-		<p>Progress isn't just about pain, it's about function.</p>
-		<p>We track how your symptoms respond to load, how your movement changes, and what you're able to return to over time.</p>
-		<p>This allows us to:</p>
-		<ul>
-			<li>Adjust your plan as you improve</li>
-			<li>Progress you safely back to activity</li>
-			<li>Reduce the risk of recurring problems</li>
-		</ul>
-		<p>You'll know where you are, and what comes next.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/podiatry/diverse-group-feet.jpg" imageAlt="Overhead view of diverse group in trainers">
-		<p>Our podiatry service supports a wide range of people, including:</p>
-		<ul>
-			<li>Runners and athletes managing injury or performance</li>
-			<li>Individuals with persistent foot or lower limb pain</li>
-			<li>Post-surgical patients rebuilding strength and mobility</li>
-			<li>Children with developmental or gait concerns</li>
-			<li>People returning to activity after time away</li>
-		</ul>
-		<p>Whether your goal is to walk comfortably or perform at a higher level, the process is the same: better movement, better outcomes.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our" highlight="Podiatrist" image="/podiatry/ballet-feet.jpg" imageAlt="Ballet dancer's feet in practice">
-		<p>Steven Connor is an advanced podiatrist specialising in foot, ankle and lower limb conditions. He has experience across both the NHS and private practice, with a strong focus on sports injuries and rehabilitation, including work with elite and international athletes.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Steven &rarr;</a></p>
-		<p><strong>Integrated care.</strong> Where appropriate, we work closely with the wider Balance team. This may include joint sessions with physiotherapists, strength and conditioning coaches, or running specialists, ensuring your rehabilitation carries through into how you actually move and train.</p>
-		<p><a href="/meet-the-team/" class="section-link">Meet The Team &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/podiatry/family-bare-feet.jpg" imageAlt="Family of bare feet on stairs">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa.</p>
-		<p><a href="/pricing#podiatry" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -178,7 +239,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

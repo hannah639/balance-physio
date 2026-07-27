@@ -480,6 +480,14 @@ const jsonLd = biz.name ? {
 	.bp-page .faq-item summary::after { content: '+'; font-size: 28px; color: var(--accent); font-weight: 400; transition: transform .2s; }
 	.bp-page .faq-item[open] summary::after { transform: rotate(45deg); }
 	.bp-page .faq-item .answer { padding-top: 16px; font-size: 16px; line-height: 1.8; color: var(--text-muted); }
+	/* Answers come from the CMS as Portable Text, so each one renders inside a
+	   <p>. Zeroing the last child's margin keeps a single-paragraph answer
+	   visually identical to the bare text it replaced. Mirrors .toggle-item. */
+	.bp-page .faq-item .answer p { margin: 0 0 14px; }
+	.bp-page .faq-item .answer p:last-child { margin-bottom: 0; }
+	.bp-page .faq-item .answer ul,
+	.bp-page .faq-item .answer ol { margin: 0 0 14px; padding-left: 22px; }
+	.bp-page .faq-item .answer li { margin-bottom: 6px; }
 	/* Service-page FAQ variant: tinted gradient bg so it separates from a white section above. */
 	.bp-page .faq-section.faq-section--alt { background: linear-gradient(135deg, #f8f9fa 0%, #e8eef2 40%, #dce8ed 70%, #f0f4f6 100%); }
 	/* Small inline CTA link used inside ImageText blocks on service pages ("Read More →", "Meet The Team →" etc). */

@@ -5,161 +5,184 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const physioPhotos = [
-	{ src: '/physio/slider-skeleton.jpg', alt: 'Anatomical skeleton in a clinic treatment room' },
-	{ src: '/physio/slider-gym.jpg', alt: 'Balance Physio rehabilitation gym and studio space' },
-	{ src: '/physio/slider-reception.jpg', alt: 'Balance Physio Clapham reception and shop area' },
-	{ src: '/physio/slider-al-riley.jpg', alt: 'Al Riley running the London Marathon' },
-	{ src: '/physio/slider-claire-bennett.jpg', alt: 'Claire Bennett, GB fencer' },
-	{ src: '/physio/slider-tom-holland.jpg', alt: 'Tom Holland playing cricket' },
-	{ src: '/physio/slider-extra-1.jpg', alt: 'Physiotherapy session at Balance' },
-	{ src: '/physio/slider-extra-2.jpg', alt: 'Hands-on physiotherapy treatment' },
-	{ src: '/physio/slider-extra-3.jpg', alt: 'Physio assessment and rehabilitation' },
-];
+const doc = await services.required('physiotherapy');
+
+const physioPhotos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'Do I need a GP referral?', a: 'No. You can book directly with us.' },
-	{ q: 'What should I wear?', a: 'Comfortable clothing that allows us to assess the area being treated.' },
-	{ q: 'How many sessions will I need?', a: "This depends on your condition. After your first session, we'll give you a clear plan." },
-	{ q: 'Can I use my private health insurance?', a: 'We recommend everyone checks with their own medical insurance provider with regards to their cover.' },
-	{ q: "What's the difference between a physiotherapist and a consultant physiotherapist?", a: 'Consultant physiotherapists have advanced training and extensive experience managing complex cases in their specialist area.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Physiotherapy - Balance Performance Physiotherapy"
-	description="At Balance, physiotherapy is about more than symptom relief. It's about understanding how your body moves, why things have gone wrong, and what needs to change to get you back to full capacity."
+	title={doc.seoTitle ?? "Physiotherapy - Balance Performance Physiotherapy"}
+	description={doc.seoDescription ?? "At Balance, physiotherapy is about more than symptom relief. It's about understanding how your body moves, why things have gone wrong, and what needs to change to get you back to full capacity."}
 >
 	<PageHero
-		title="in Clapham"
-		highlight="Physiotherapy"
-		breadcrumb="Physiotherapy"
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
 	/>
 
 	<PhotoMarquee images={physioPhotos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
+	{doc.sections[0] && (
 	<ImageText
-		eyebrow="Our approach"
-		heading="Evidence led"
-		highlight="care"
-		image="/physio/running-motion.jpg"
-		imageAlt="Group of runners in motion on a city street"
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
 	>
-		<p>Pain, injury, or loss of function can change how you move, and how you live. At Balance, physiotherapy is about more than symptom relief. It's about understanding how your body moves, why things have gone wrong, and what needs to change to get you back to full capacity.</p>
-		<p>We take a clinical, evidence-led approach to every case. From your first session, we assess how you move, not just where it hurts, then build a plan around your goals, your lifestyle, and your starting point. Whether you're recovering from injury, managing a long-term condition, or aiming to perform at a higher level, we meet you where you are and guide you forward.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
+	{doc.sections[1] && (
 	<ImageText
-		reverse
-		altBg
-		eyebrow="Symptoms"
-		heading="When to consider"
-		highlight="physiotherapy"
-		image="/physio/body-2.jpg"
-		imageAlt="Assessment session with a physiotherapist"
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
 	>
-		<p>You don't need to wait for things to get worse. Physiotherapy can help if you're dealing with:</p>
-		<ul>
-			<li>Ongoing back or neck pain, including sciatica</li>
-			<li>Sports injuries</li>
-			<li>Training setbacks - not meeting your running or cycling goals</li>
-			<li>Joint pain or stiffness in the shoulder, knee, or hip</li>
-			<li>Difficulty moving after surgery or injury</li>
-			<li>Balance, coordination, or neurological issues</li>
-			<li>Headaches linked to tension or posture</li>
-			<li>Pelvic health or developmental concerns</li>
-			<li>Dizziness -Vestibular Issues</li>
-		</ul>
-		<p>If something doesn't feel right, it's worth seeking our advice.</p>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
+	{doc.sections[2] && (
 	<ImageText
-		eyebrow="Treatment"
-		heading="How we"
-		highlight="work"
-		image="/physio/body-3.jpg"
-		imageAlt="Hands-on physio therapy session"
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
 	>
-		<p>Everything we do is built around one principle: helping you move better.</p>
-		<p>Your treatment may include:</p>
-		<ul>
-			<li>Hands-on therapy to restore movement</li>
-			<li>Targeted exercise to rebuild strength and control</li>
-			<li>Progressive loading to prepare you for real-world demands</li>
-			<li>Clear education so you understand your condition and recovery</li>
-		</ul>
-		<p>We don't rely on passive treatment alone. You'll leave each session knowing what you're working towards, and how to get there.</p>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
+	{doc.sections[3] && (
 	<ImageText
-		reverse
-		altBg
-		eyebrow="Outcomes"
-		heading="How we measure"
-		highlight="your progress"
-		image="/physio/body-4.jpg"
-		imageAlt="Assessing movement and tracking progress"
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
 	>
-		<p>We don't guess.</p>
-		<p>From your first session, we establish a clear baseline of how you move, function, and feel. As you progress, we regularly reassess, looking at strength, mobility, pain, and what you can actually do day-to-day.</p>
-		<p>This keeps your treatment focused and accountable.</p>
-		<p>For you, that means:</p>
-		<ul>
-			<li>Clear evidence that you're improving</li>
-			<li>A plan that adapts as you progress</li>
-			<li>Confidence in your return to sport, work, or daily life</li>
-		</ul>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
+	{doc.sections[4] && (
 	<ImageText
-		eyebrow="Our patients"
-		heading="Who we"
-		highlight="help"
-		image="/physio/body-5.jpg"
-		imageAlt="People of varied backgrounds in a gym setting"
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
 	>
-		<p>We work with people across a wide range of needs and experience levels.</p>
-		<ul>
-			<li>Individuals dealing with everyday pain or stiffness</li>
-			<li>People like me and top athletes managing injury or performance</li>
-			<li>Post-surgical patients rebuilding strength and function</li>
-			<li>Children and young people with developmental or sports-related concerns</li>
-			<li>Adults managing complex or long-term conditions</li>
-		</ul>
-		<p>Whatever your starting point, the goal is the same: better movement, better function, better outcomes.</p>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
+	{doc.sections[5] && (
 	<ImageText
-		reverse
-		altBg
-		eyebrow="Our team"
-		heading="Our clinical"
-		highlight="team"
-		image="/physio/clinical-team.jpg"
-		imageAlt="Welcome chalkboard sign at Balance Performance Physiotherapy"
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
 	>
-		<p>Our physiotherapy team is made up of highly experienced clinicians with specialist areas of expertise.</p>
-		<p>You'll be matched with the right practitioner for your needs, whether that's a complex spinal condition, a sports injury, or a long-term neurological issue.</p>
-		<p>We work collaboratively, drawing on the depth of experience across the team to ensure your care is both precise and considered.</p>
-		<p><a href="/meet-the-team/" class="section-link">Meet The Team &rarr;</a></p>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
+	{doc.sections[6] && (
 	<ImageText
-		eyebrow="Fees"
-		heading="Pricing and"
-		highlight="insurance"
-		image="/physio/body-7.jpg"
-		imageAlt="Accessible care at Balance Physio"
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
 	>
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We're also recognised by all major insurance providers, including Bupa and AXA PPP Health.</p>
-		<p><a href="/pricing#consultant-physiotherapy" class="section-link">Pricing Information &rarr;</a></p>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -170,7 +193,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

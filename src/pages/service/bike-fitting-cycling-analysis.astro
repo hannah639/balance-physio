@@ -5,123 +5,186 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/bike-fitting-running-analysis/slider-retul-fit-image1.webp', alt: 'Retül bike fitting' },
-	{ src: '/bike-fitting-running-analysis/slider-cyclist-zabriskie.webp', alt: 'Professional cyclist' },
-	{ src: '/bike-fitting-running-analysis/slider-lanzacrew3.jpg', alt: 'Cycling training camp' },
-	{ src: '/bike-fitting-running-analysis/slider-newbikefit.webp', alt: 'New bike fit session' },
-	{ src: '/bike-fitting-running-analysis/slider-physiofit.webp', alt: 'Physio-led bike fit' },
-	{ src: '/bike-fitting-running-analysis/slider-running-analysis.jpg', alt: 'Running gait analysis' },
-	{ src: '/bike-fitting-running-analysis/slider-bike-1.jpg', alt: 'Bike fitting session' },
-	{ src: '/bike-fitting-running-analysis/slider-bike-2.jpg', alt: 'Cycling biomechanics' },
-	{ src: '/bike-fitting-running-analysis/slider-bike-3.jpg', alt: 'Cyclist on the road' },
-	{ src: '/bike-fitting-running-analysis/slider-bike-4.jpg', alt: 'Bike fit and analysis' },
-];
+const doc = await services.required('bike-fitting-cycling-analysis');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'What should I bring to a bike fitting session?', a: 'Your bike, cycling shoes, and wear your regular cycling kit.' },
-	{ q: 'Do I need to be experienced to benefit?', a: 'No. Many beginners benefit from learning correct technique early.' },
-	{ q: 'Can you help me choose a new bike?', a: 'Yes, we can advise on sizing and setup before purchase.' },
-	{ q: 'How long does a session take?', a: 'Sessions are typically 60 minutes.' },
-	{ q: 'Is this the same as physiotherapy?', a: 'No. This is focused on movement and performance. If you have an active injury, we may recommend a physiotherapy assessment first.' },
-	{ q: 'What is video gait analysis?', a: 'It involves recording your running from multiple angles and reviewing it frame-by-frame to assess movement patterns.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Bike Fitting & Running Analysis Clapham | Performance & Injury Prevention"
-	description="Bike fitting and running analysis in Clapham to improve performance, reduce injury risk, and optimise movement. Clinical assessment with expert guidance."
+	title={doc.seoTitle ?? "Bike Fitting & Running Analysis Clapham | Performance & Injury Prevention"}
+	description={doc.seoDescription ?? "Bike fitting and running analysis in Clapham to improve performance, reduce injury risk, and optimise movement. Clinical assessment with expert guidance."}
 >
-	<PageHero title="in Clapham" highlight="Clinical Bike Fitting & Running Analysis" breadcrumb="Bike Fitting & Running Analysis" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Better movement, fewer setbacks for" highlight="runners, cyclists and triathletes" youtubeId="vvorir-ZBT0" autoplay imageAlt="Video: running analysis and bike fitting at Balance Performance Physiotherapy">
-		<p>Cycling and running are repetitive, high-load activities where small inefficiencies in movement can lead to pain, injury, or limited performance.</p>
-		<p>At Balance, bike fitting and running analysis focus on how your body interacts with movement and equipment. It's about understanding where load is going, how movement is being controlled, and what needs to change to improve efficiency.</p>
-		<p>We combine clinical assessment with video analysis to build a clear picture of your movement. From there, we make targeted adjustments (to technique, position, and strength), so you can move more effectively and tolerate training better.</p>
-		<p>Whether you're riding, running, or returning from injury, the aim is the same: better movement, better performance, fewer setbacks.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		youtubeId="vvorir-ZBT0"
+		autoplay
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider bike fitting" highlight="or running analysis" image="/bike-fitting-running-analysis/runner-profile.jpg" imageAspect="3/2" imageAlt="Runner mid-stride on a running track">
-		<p>You don't need to wait for pain to become limiting.</p>
-		<p>You may benefit from an assessment if you're experiencing:</p>
-		<ul>
-			<li>Pain while cycling in the neck, back, hips, or knees</li>
-			<li>Recurrent running injuries such as shin splints, plantar fasciitis, or knee pain</li>
-			<li>Numbness or tingling in the hands or feet when riding</li>
-			<li>Asymmetry in how you move or fatigue between sides</li>
-			<li>Difficulty improving speed, endurance, or comfort despite training</li>
-			<li>Returning to cycling or running after injury or surgery</li>
-		</ul>
-		<p>If something feels off, it usually is.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+		imageAspect="3/2"
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Assessment" heading="How we" highlight="work" image="/bike-fitting-running-analysis/bike-chain.jpg" imageAlt="Close-up of a bicycle drivetrain">
-		<p>Our approach is based on analysing movement under load.</p>
-		<p>Your session may include:</p>
-		<ul>
-			<li>Video analysis of running gait or cycling position</li>
-			<li>Assessment of strength, mobility, and control</li>
-			<li>Identification of biomechanical inefficiencies or asymmetries</li>
-			<li>Adjustments to bike setup, including cleat position and reach</li>
-			<li>Practical coaching to improve running technique</li>
-			<li>Targeted exercises to support long-term change</li>
-		</ul>
-		<p>We focus on changes that are realistic, measurable, and relevant to your training.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/bike-fitting-running-analysis/three-friends-jogging.jpg" imageAlt="Group of friends running together in a park">
-		<p>We look at how your movement changes over time, not just how it looks in one session.</p>
-		<p>From your initial assessment, we establish:</p>
-		<ul>
-			<li>Movement patterns and alignment</li>
-			<li>Load distribution through joints and tissues</li>
-			<li>Areas of restriction or weakness</li>
-			<li>Current tolerance to training</li>
-		</ul>
-		<p>As you progress, we reassess and refine.</p>
-		<p>This means:</p>
-		<ul>
-			<li>You can see improvements in efficiency and control</li>
-			<li>Your plan evolves as your capacity increases</li>
-			<li>You reduce the likelihood of recurring injury</li>
-		</ul>
-		<p>The goal is improved economy, better load tolerance, and more consistent training.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/bike-fitting-running-analysis/mountain-biker.jpg" imageAlt="Mountain biker riding a trail">
-		<p>We work with a wide range of cyclists and runners across South West London:</p>
-		<ul>
-			<li>Recreational runners building consistency and technique</li>
-			<li>Distance runners preparing for events or managing injury</li>
-			<li>Commuting cyclists looking for comfort and efficiency</li>
-			<li>Competitive cyclists and triathletes refining performance</li>
-			<li>Individuals returning to running or cycling after injury</li>
-		</ul>
-		<p>Whatever your level, improving movement makes a difference.</p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our" highlight="specialists" image="/bike-fitting-running-analysis/bike-fun-gravel.jpg" imageAlt="Cyclists riding a gravel trail">
-		<p>Our bike fitting and running analysis sessions are led by experienced clinicians and coaches, delivered in partnership with <strong>Speedlab</strong>, specialists in endurance performance and biomechanics.</p>
-		<p><a href="https://speedlab.uk/" target="_blank" rel="noopener" class="section-link">Learn More About Speedlab &rarr;</a></p>
-		<p><strong>Pat Leahy</strong> is a Bike Fitting Specialist and Cycle Coach with over 25 years of experience, a background in sports science, and a history as an Ironman athlete.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Pat &rarr;</a></p>
-		<p><strong>Nichola Roberts</strong> is a Specialist Cycling Physiotherapist, combining clinical injury management with cycling-specific biomechanics.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Nichola &rarr;</a></p>
-		<p>Together, they provide a detailed understanding of how the body performs under load and how to optimise it.</p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/bike-fitting-running-analysis/cyclist-portrait.jpg" imageAspect="3/2" imageAlt="Smiling cyclist in cycling kit outdoors">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing#additional-physio" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+		imageAspect="3/2"
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -130,7 +193,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

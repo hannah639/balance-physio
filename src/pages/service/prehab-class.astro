@@ -5,98 +5,163 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/prehab-class/slider-IMG_1670.jpg', alt: 'Prehab class in session' },
-	{ src: '/prehab-class/slider-IMG_3921.jpg', alt: 'Mobility work' },
-	{ src: '/prehab-class/slider-IMG_9461.webp', alt: 'Guided movement' },
-	{ src: '/prehab-class/slider-sportsinjury-physio.jpg', alt: 'Physio-led preparation' },
-	{ src: '/prehab-class/slider-steph.webp', alt: 'Coaching in action' },
-	{ src: '/prehab-class/athletes-celebrating.jpg', alt: 'Athletes staying consistent' },
-];
+const doc = await services.required('prehab-class');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'What is prehab?', a: 'Prehabilitation focuses on reducing injury risk by improving strength, mobility, and movement control before problems develop.' },
-	{ q: 'Do I need to be highly trained?', a: 'No. The class is suitable for anyone who is active or looking to become more active.' },
-	{ q: "Can I attend if I'm currently injured?", a: 'If you have an acute injury, we recommend an initial physiotherapy assessment first.' },
-	{ q: 'What should I wear?', a: 'Comfortable clothing that allows you to move freely.' },
-	{ q: 'How is this different from a fitness class?', a: 'The class is led by a physiotherapist and focuses on movement quality and injury risk, rather than intensity alone.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Prehab Class in Clapham"
-	description="Physiotherapist-led prehab class in Clapham: structured mobility, strength and control work to prepare your body for training, sport or surgery."
+	title={doc.seoTitle ?? "Prehab Class in Clapham"}
+	description={doc.seoDescription ?? "Physiotherapist-led prehab class in Clapham: structured mobility, strength and control work to prepare your body for training, sport or surgery."}
 >
-	<PageHero title="in Clapham" highlight="Prehab Class" breadcrumb="Prehab Class" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Prepare your body for the demands of" highlight="training and sport" image="/prehab-class/yoga-pilates-equipment.jpg" imageAlt="Studio equipment">
-		<p>Our Prehab Class is a physiotherapist-led session focused on reducing injury risk and improving movement quality. Rather than reacting to problems once they occur, this class helps you build the strength, mobility, and control needed to tolerate load and perform consistently. Prehab means preparation and it prepares you for your next stage.</p>
-		<p>It doesn't matter if you've never exercised before.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Who it's for" heading="When to" highlight="consider prehab" image="/prehab-class/body-2.jpg" imageAspect="4/3" imageAlt="Resistance band exercise for lower body strength and prehab">
-		<p>You may benefit from the Prehab Class if you:</p>
-		<ul>
-			<li>Experience recurring niggles during or after exercise</li>
-			<li>Have been asked by your surgical team to get as fit as possible before a procedure</li>
-			<li>Feel restricted or "tight" in certain movements</li>
-			<li>Have a history of injury and want to reduce recurrence</li>
-			<li>Feel your performance is limited by movement quality</li>
-			<li>Are preparing for a specific sport or event</li>
-		</ul>
-		<p>Prehab is about addressing small issues before they become larger problems.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+		imageAspect="4/3"
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Sessions" heading="How the" highlight="class works" image="/prehab-class/slider-IMG_3921.jpg" imageAlt="Class in progress">
-		<p>Sessions are structured and led by a physiotherapist, focusing on key areas of injury prevention.</p>
-		<p>You will work on:</p>
-		<ul>
-			<li>Mobility and joint range of movement</li>
-			<li>Strength in commonly undertrained areas</li>
-			<li>Movement control and coordination</li>
-			<li>Stability through the trunk and lower limb</li>
-			<li>Sport-specific preparation where relevant</li>
-		</ul>
-		<p>Exercises are selected to improve how your body moves under load, helping you train and perform more effectively.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/prehab-class/slider-sportsinjury-physio.jpg" imageAlt="Progress check">
-		<p>We focus on changes that support long-term resilience and performance.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Improved movement quality and control</li>
-			<li>Increased mobility in restricted areas</li>
-			<li>Better symmetry between sides</li>
-			<li>Reduced frequency of pain or niggles</li>
-			<li>Improved tolerance to training load</li>
-		</ul>
-		<p>You feel energised, fitter and better able to go about your daily activities.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our members" heading="Who we" highlight="help" image="/prehab-class/elderly-legs-mats.jpg" imageAlt="Inclusive class">
-		<p>The Prehab Class is suitable for:</p>
-		<ul>
-			<li><strong>Gym users:</strong> Supporting strength training with mobility and control</li>
-			<li><strong>Patients</strong> recovering from injury or from operations</li>
-			<li><strong>Patients</strong> preparing for an operative procedure</li>
-			<li><strong>Runners and field athletes:</strong> Improving lower limb mechanics and load tolerance</li>
-			<li><strong>Active individuals:</strong> Looking to move better and reduce injury risk</li>
-			<li><strong>Office-based professionals:</strong> Counteracting stiffness before or after training</li>
-		</ul>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/prehab-class/athletes-celebrating.jpg" imageAlt="Athletes">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise. This class is simply great value for money.</p>
-		<p><a href="/pricing#strength-conditioning" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -105,7 +170,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

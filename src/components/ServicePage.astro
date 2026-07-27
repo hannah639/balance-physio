@@ -4,6 +4,15 @@ import PageHero from './PageHero.astro';
 import ImageText from './ImageText.astro';
 import PhotoMarquee from './PhotoMarquee.astro';
 import BookingCTA from './BookingCTA.astro';
+import RichText from './RichText.astro';
+import type { PageSection } from '../lib/sanity/pageContent';
+
+/**
+ * Shown by ImageText only when a section has no image. Positional, matching
+ * the four blocks this component has always rendered; anything beyond reuses
+ * the last label.
+ */
+const PLACEHOLDER_LABELS = ['Treatment in progress', 'Assessment', 'Treatment session', 'Our patients'];
 
 const {
 	title,
@@ -37,12 +46,16 @@ const {
 	whoImage,       // optional image URL
 	whoImageAspect,
 	whoOutro,       // optional closing paragraph rendered below the list
+	sections = [],   // CMS content sections; when present they replace the intro/when/how/who props
 	faqs = [],
 	marqueeImages, // optional array of {src, alt}, defaults to placeholder set
 	marqueeSpeed = 45,
 	hideMarquee = false, // pages that are text-only can set this true to drop the photo strip
 	textGrid = false,    // render the 4 body sections as a 2x2 text-only grid instead of ImageText blocks
 } = Astro.props;
+
+/** Astro.props is untyped here, so name the shape the render loop relies on. */
+const cmsSections: PageSection[] = sections;
 
 // Default placeholder image set used when a page doesn't supply its own photos
 const defaultPlaceholders = [
@@ -115,6 +128,43 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 				)}
 			</div>
 		</section>
+	</>) : cmsSections.length > 0 ? (<>
+		{/* CMS-driven path. The eyebrows and the intro heading used to be
+		    hard-coded here; they now live on each section so editors can change
+		    them. Index 0 keeps the .service-intro wrapper and the optional
+		    YouTube lightbox, matching the original markup exactly. */}
+		{cmsSections.map((section, i) => (
+			i === 0 ? (
+				<div class="service-intro">
+					<ImageText
+						eyebrow={section.eyebrow ?? undefined}
+						heading={section.heading ?? undefined}
+						highlight={section.headingHighlight ?? undefined}
+						placeholderLabel={PLACEHOLDER_LABELS[0]}
+						youtubeId={introYoutubeId}
+						image={section.image?.url ?? undefined}
+						imageAlt={section.image?.alt ?? undefined}
+						imageAspect={section.imageAspect ?? undefined}
+					>
+						<RichText blocks={section.blocks} />
+					</ImageText>
+				</div>
+			) : (
+				<ImageText
+					eyebrow={section.eyebrow ?? undefined}
+					heading={section.heading ?? undefined}
+					highlight={section.headingHighlight ?? undefined}
+					reverse={section.imageOnRight}
+					altBg={section.altBackground}
+					placeholderLabel={PLACEHOLDER_LABELS[i] ?? PLACEHOLDER_LABELS[PLACEHOLDER_LABELS.length - 1]}
+					image={section.image?.url ?? undefined}
+					imageAlt={section.image?.alt ?? undefined}
+					imageAspect={section.imageAspect ?? undefined}
+				>
+					<RichText blocks={section.blocks} />
+				</ImageText>
+			)
+		))}
 	</>) : (<>
 	{intro && intro.length > 0 && (
 		<div class="service-intro">
@@ -200,7 +250,7 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 					{faqs.map((item) => (
 						<details class="faq-item">
 							<summary>{item.q}</summary>
-							<div class="answer">{item.a}</div>
+							<div class="answer"><RichText blocks={item.a} /></div>
 						</details>
 					))}
 				</div>

@@ -14,16 +14,35 @@ export type Img = {url: string; alt: string; width: number | null; height: numbe
 /** A paragraph, or a group of bullet points, in document order. */
 export type BodyBlock = {kind: 'p'; text: string} | {kind: 'ul'; items: string[]}
 
+/** One raw Portable Text block, as <RichText> consumes it. */
+export type RichBlock = {
+	_key?: string
+	_type?: string
+	style?: string
+	listItem?: string
+	children?: {_key?: string; _type?: string; text?: string; marks?: string[]}[]
+	markDefs?: {_key: string; _type: string; href?: string}[]
+}
+
 export type PageSection = {
 	eyebrow: string | null
 	heading: string | null
 	headingHighlight: string | null
 	body: BodyBlock[]
+	/**
+	 * The same body as raw Portable Text, for sections rendered through
+	 * <RichText>. `body` above flattens to plain paragraphs and bullet lists,
+	 * which is all the earlier pages need — but service sections carry 71
+	 * inline links, and flattening would drop every one of them.
+	 */
+	blocks: RichBlock[]
 	image: Img | null
 	gallery: Img[]
 	imageOnRight: boolean
 	altBackground: boolean
 	ctaLabel: string | null
+	/** Blank means the standard booking link; set only for other destinations. */
+	ctaUrl: string | null
 }
 
 export type OpenRole = {title: string; meta: string | null; body: BodyBlock[]}
@@ -61,6 +80,12 @@ export type PageDoc = {
 	openRoles: OpenRole[]
 	/** Outcomes tabbed panels — empty on every other page. */
 	outcomePanels: OutcomePanel[]
+	/** Service photo band — empty on non-service documents. */
+	photoGallery: Img[]
+	/** Page-specific FAQs (services and conditions). */
+	faqs: {key: string; question: string; answer: RichBlock[]}[]
+	category: string | null
+	summary: string | null
 }
 
 function str(v: unknown): string | null {
@@ -105,11 +130,13 @@ function section(s: Record<string, unknown>): PageSection {
 		heading: str(s.heading),
 		headingHighlight: str(s.headingHighlight),
 		body: toBodyBlocks(s.body),
+		blocks: Array.isArray(s.body) ? (s.body as RichBlock[]) : [],
 		image: img(s.image),
 		gallery: Array.isArray(s.gallery) ? s.gallery.map(img).filter((x): x is Img => x !== null) : [],
 		imageOnRight: s.imageOnRight === true,
 		altBackground: s.altBackground === true,
 		ctaLabel: str(s.ctaLabel),
+		ctaUrl: str(s.ctaUrl),
 	}
 }
 
@@ -153,6 +180,19 @@ export function mapPageDoc(r: Record<string, any>): PageDoc | null {
 				quotes: Array.isArray(x?.quotes) ? x.quotes.map((q: unknown) => str(q) ?? '').filter(Boolean) : [],
 			}))
 			.filter((x: OutcomePanel) => x.tabLabel && x.panelId),
+
+		photoGallery: Array.isArray(r.photoGallery)
+			? r.photoGallery.map(img).filter((x: Img | null): x is Img => x !== null)
+			: [],
+		faqs: (r.faqs ?? [])
+			.map((f: any, i: number) => ({
+				key: str(f?._key) ?? `faq${i}`,
+				question: str(f?.question) ?? '',
+				answer: Array.isArray(f?.answer) ? (f.answer as RichBlock[]) : [],
+			}))
+			.filter((f: {question: string; answer: RichBlock[]}) => f.question && f.answer.length),
+		category: str(r.category),
+		summary: str(r.summary),
 	}
 }
 
@@ -214,7 +254,7 @@ export function makeLoader(query: string, label: string) {
 	}
 }
 
-import {WHO_WE_HELP_QUERY, PAGES_QUERY} from './queries'
+import {WHO_WE_HELP_QUERY, PAGES_QUERY, SERVICES_QUERY} from './queries'
 
 /** Who We Help audience pages. */
 export const whoWeHelp = makeLoader(WHO_WE_HELP_QUERY, 'who-we-help')
@@ -227,3 +267,6 @@ export const whoWeHelp = makeLoader(WHO_WE_HELP_QUERY, 'who-we-help')
  * migration reached parity — from here.
  */
 export const pages = makeLoader(PAGES_QUERY, 'pages')
+
+/** Service pages. */
+export const services = makeLoader(SERVICES_QUERY, 'service')

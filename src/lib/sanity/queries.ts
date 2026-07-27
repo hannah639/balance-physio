@@ -283,7 +283,7 @@ const PAGE_SHAPE = `
 		eyebrow, heading, headingHighlight, body,
 		image${IMAGE},
 		gallery[]${IMAGE},
-		imageOnRight, altBackground, ctaLabel
+		imageOnRight, altBackground, ctaLabel, ctaUrl
 	},
 	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
 `
@@ -316,4 +316,16 @@ export const GENERAL_FAQS_QUERY = `*[_type == "generalFaqs"][0]{
 	introText,
 	"faqs": faqs[]{_key, question, answer},
 	seo{metaTitle, metaDescription, canonicalUrl, noIndex, ogTitle, ogDescription, ogImage${IMAGE}}
+}`
+
+/**
+ * Service pages (/service/<slug>/). Same hero + content-section shape as Pages,
+ * plus the photo band and the page's own FAQs.
+ */
+export const SERVICES_QUERY = `*[_type == "service" && coalesce(published, true) == true]
+	| order(coalesce(displayOrder, 999) asc){${PAGE_SHAPE},
+	category,
+	summary,
+	"photoGallery": photoGallery[]${IMAGE},
+	"faqs": faqs[]{_key, question, answer}
 }`

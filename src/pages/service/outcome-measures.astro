@@ -3,100 +3,98 @@ import Layout from '../../layouts/Layout.astro';
 import { getGlobals } from '../../lib/sanity/globals';
 import PageHero from '../../components/PageHero.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
+
+const doc = await services.required('outcome-measures');
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'What is an outcome measure?', a: 'A standardised test or questionnaire used to assess your current level of function and track change over time.' },
-	{ q: 'Why is this important?', a: 'It provides objective evidence of progress, helping guide treatment and maintain clarity.' },
-	{ q: 'Will I need to complete questionnaires?', a: 'Sometimes. These take less than two minutes and provide useful insights into how your condition affects you.' },
-	{ q: 'What kind of physical tests are used?', a: 'This depends on your condition, but may include strength, movement, or functional testing.' },
-	{ q: 'Can I see my results?', a: "Yes. It's your data." },
-	{ q: 'Is this required by insurance companies?', a: 'In some cases, yes. Objective measures can help support ongoing treatment approval.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Outcome Measures in Physiotherapy"
-	description="How Balance Performance Physiotherapy uses validated outcome measures (via Cemplicity) to track recovery objectively and guide rehabilitation decisions."
+	title={doc.seoTitle ?? "Outcome Measures in Physiotherapy"}
+	description={doc.seoDescription ?? "How Balance Performance Physiotherapy uses validated outcome measures (via Cemplicity) to track recovery objectively and guide rehabilitation decisions."}
 >
-	<PageHero title="in Physiotherapy" highlight="Outcome Measures" breadcrumb="Outcome Measures" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<section class="text-grid text-grid--light text-grid--solo">
 		<div class="text-grid-inner">
 			<div class="image-text-content text-grid-cell">
-				<div class="eyebrow">Our approach</div>
-				<h2>Effective rehabilitation should be <span class="highlight">measured, not guessed</span></h2>
-				<p>At Balance, we use outcome measures to track your progress objectively. This allows us to understand where you are starting from, monitor change over time, and ensure your treatment is leading to meaningful improvements.</p>
-				<p>Outcome measures form a core part of how we plan, review, and progress your rehabilitation. They are used to guide decisions alongside, not replace, clinical judgement.</p>
-				<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
-			</div>
-		</div>
+				{doc.sections[0]?.eyebrow && <div class="eyebrow">{doc.sections[0].eyebrow}</div>}
+				<h2>{doc.sections[0]?.heading}{doc.sections[0]?.headingHighlight && <> <span class="highlight">{doc.sections[0].headingHighlight}</span></>}</h2>
+				<RichText blocks={doc.sections[0]?.blocks ?? []} />
+				{doc.sections[0]?.ctaLabel && (
+					<p><a href={doc.sections[0].ctaUrl ?? bookingUrl} class="btn-primary"
+						target={doc.sections[0].ctaUrl ? undefined : "_blank"}
+						rel={doc.sections[0].ctaUrl ? undefined : "noopener"}
+					>{doc.sections[0].ctaLabel}</a></p>
+				)}
+			</div></div>
 	</section>
 
 	<section class="text-grid">
 		<div class="text-grid-inner">
 			<div class="image-text-content text-grid-cell text-grid-cell--treatment">
-				<div class="eyebrow">Why measure</div>
-				<h2>When outcome measures are <span class="highlight">important</span></h2>
-				<p>Everyone benefits from a structured, data-led approach:</p>
-				<ul>
-					<li>So you can clearly see the improvement over time</li>
-					<li>Accurately chart the responsiveness of interventions</li>
-					<li>Have a safety net straight back to your physiotherapist if symptoms re-emerge</li>
-					<li>Require objective data for insurance or return-to-work/sport</li>
-					<li>Our past outcomes tell us how you are likely to improve with us</li>
-				</ul>
-			</div>
-
-			<div class="image-text-content text-grid-cell text-grid-cell--treatment">
-				<div class="eyebrow">Method</div>
-				<h2>How we <span class="highlight">use them</span></h2>
-				<p>We use a combination of patient-reported, internationally validated measures to build a complete picture of your progress. This may include:</p>
-				<ul>
-					<li>Questionnaires assessing pain, function, and quality of life</li>
-					<li>Task-specific measures relevant to your goals</li>
-					<li>Questions about lifestyle and your options, so we understand what you want to achieve before we've met you</li>
-				</ul>
-				<p>Your baseline is established before meeting us, and results are reviewed at six weeks, three, six and twelve months post intervention.</p>
-			</div>
-
-			<div class="image-text-content text-grid-cell text-grid-cell--treatment">
-				<div class="eyebrow">Outcomes</div>
-				<h2>How we measure <span class="highlight">your progress</span></h2>
-				<p>Progress is assessed using an external company, Cemplicity, with reliable, valid and repeatable measures. This allows us to track:</p>
-				<ul>
-					<li>Changes in pain and symptom behaviour</li>
-					<li>Reductions in disability</li>
-					<li>Increased range of movement</li>
-					<li>Functional gains in daily life or sport</li>
-					<li>Progress towards specific goals or milestones</li>
-				</ul>
-			</div>
-
-			<div class="image-text-content text-grid-cell text-grid-cell--treatment">
-				<div class="eyebrow">Our patients</div>
-				<h2>Who we <span class="highlight">help</span></h2>
-				<p>Outcome measures are used across all areas of physiotherapy, including:</p>
-				<ul>
-					<li><strong>Post-surgical rehabilitation:</strong> Monitoring recovery and readiness to progress</li>
-					<li><strong>Sports injuries:</strong> Supporting return-to-play decisions</li>
-					<li><strong>Chronic conditions:</strong> Tracking long-term changes in function</li>
-					<li><strong>Neurological rehabilitation:</strong> Assessing balance, gait, and independence</li>
-					<li><strong>General physiotherapy:</strong> Providing clarity and direction for all patients</li>
-				</ul>
-			</div>
-		</div>
+				{doc.sections[1]?.eyebrow && <div class="eyebrow">{doc.sections[1].eyebrow}</div>}
+				<h2>{doc.sections[1]?.heading}{doc.sections[1]?.headingHighlight && <> <span class="highlight">{doc.sections[1].headingHighlight}</span></>}</h2>
+				<RichText blocks={doc.sections[1]?.blocks ?? []} />
+				{doc.sections[1]?.ctaLabel && (
+					<p><a href={doc.sections[1].ctaUrl ?? bookingUrl} class="btn-primary"
+						target={doc.sections[1].ctaUrl ? undefined : "_blank"}
+						rel={doc.sections[1].ctaUrl ? undefined : "noopener"}
+					>{doc.sections[1].ctaLabel}</a></p>
+				)}
+			</div><div class="image-text-content text-grid-cell text-grid-cell--treatment">
+				{doc.sections[2]?.eyebrow && <div class="eyebrow">{doc.sections[2].eyebrow}</div>}
+				<h2>{doc.sections[2]?.heading}{doc.sections[2]?.headingHighlight && <> <span class="highlight">{doc.sections[2].headingHighlight}</span></>}</h2>
+				<RichText blocks={doc.sections[2]?.blocks ?? []} />
+				{doc.sections[2]?.ctaLabel && (
+					<p><a href={doc.sections[2].ctaUrl ?? bookingUrl} class="btn-primary"
+						target={doc.sections[2].ctaUrl ? undefined : "_blank"}
+						rel={doc.sections[2].ctaUrl ? undefined : "noopener"}
+					>{doc.sections[2].ctaLabel}</a></p>
+				)}
+			</div><div class="image-text-content text-grid-cell text-grid-cell--treatment">
+				{doc.sections[3]?.eyebrow && <div class="eyebrow">{doc.sections[3].eyebrow}</div>}
+				<h2>{doc.sections[3]?.heading}{doc.sections[3]?.headingHighlight && <> <span class="highlight">{doc.sections[3].headingHighlight}</span></>}</h2>
+				<RichText blocks={doc.sections[3]?.blocks ?? []} />
+				{doc.sections[3]?.ctaLabel && (
+					<p><a href={doc.sections[3].ctaUrl ?? bookingUrl} class="btn-primary"
+						target={doc.sections[3].ctaUrl ? undefined : "_blank"}
+						rel={doc.sections[3].ctaUrl ? undefined : "noopener"}
+					>{doc.sections[3].ctaLabel}</a></p>
+				)}
+			</div><div class="image-text-content text-grid-cell text-grid-cell--treatment">
+				{doc.sections[4]?.eyebrow && <div class="eyebrow">{doc.sections[4].eyebrow}</div>}
+				<h2>{doc.sections[4]?.heading}{doc.sections[4]?.headingHighlight && <> <span class="highlight">{doc.sections[4].headingHighlight}</span></>}</h2>
+				<RichText blocks={doc.sections[4]?.blocks ?? []} />
+				{doc.sections[4]?.ctaLabel && (
+					<p><a href={doc.sections[4].ctaUrl ?? bookingUrl} class="btn-primary"
+						target={doc.sections[4].ctaUrl ? undefined : "_blank"}
+						rel={doc.sections[4].ctaUrl ? undefined : "noopener"}
+					>{doc.sections[4].ctaLabel}</a></p>
+				)}
+			</div></div>
 	</section>
 
 	<section class="text-grid text-grid--light text-grid--solo">
 		<div class="text-grid-inner">
 			<div class="image-text-content text-grid-cell">
-				<div class="eyebrow">Fees</div>
-				<h2>Pricing and <span class="highlight">insurance</span></h2>
-				<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-				<p><a href="/pricing/" class="section-link">Pricing Information &rarr;</a></p>
-			</div>
-		</div>
+				{doc.sections[5]?.eyebrow && <div class="eyebrow">{doc.sections[5].eyebrow}</div>}
+				<h2>{doc.sections[5]?.heading}{doc.sections[5]?.headingHighlight && <> <span class="highlight">{doc.sections[5].headingHighlight}</span></>}</h2>
+				<RichText blocks={doc.sections[5]?.blocks ?? []} />
+				{doc.sections[5]?.ctaLabel && (
+					<p><a href={doc.sections[5].ctaUrl ?? bookingUrl} class="btn-primary"
+						target={doc.sections[5].ctaUrl ? undefined : "_blank"}
+						rel={doc.sections[5].ctaUrl ? undefined : "noopener"}
+					>{doc.sections[5].ctaLabel}</a></p>
+				)}
+			</div></div>
 	</section>
 
 	<section class="faq-section faq-section--alt">
@@ -106,7 +104,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

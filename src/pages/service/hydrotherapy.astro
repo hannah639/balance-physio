@@ -5,27 +5,16 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/hydrotherapy/athlete-in-pool.jpg', alt: 'Athlete training in a hydrotherapy pool' },
-	{ src: '/hydrotherapy/elderly-water-therapy.jpg', alt: 'Aquatic therapy for older adults' },
-	{ src: '/hydrotherapy/goggles-towel.jpg', alt: 'Swim kit ready for hydrotherapy' },
-	{ src: '/hydrotherapy/hydro-equipment.jpg', alt: 'Hydrotherapy equipment' },
-	{ src: '/hydrotherapy/swim-coach-boy.jpg', alt: 'Guided session in the pool' },
-	{ src: '/hydrotherapy/water-texture.jpg', alt: 'Warm hydrotherapy pool water' },
-];
+const doc = await services.required('hydrotherapy');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'What should I bring to my hydrotherapy session?', a: 'You will need your swimming kit, a towel, and any toiletries you require for showering afterwards. It is also advisable to bring a bottle of water to stay hydrated, as the warm pool temperature can lead to fluid loss.' },
-	{ q: 'Do I need to be a swimmer to have hydrotherapy?', a: 'No. Most exercises are performed in a standing or supported position where your feet remain on the floor. Your physiotherapist will be with you or nearby to ensure you feel completely safe and supported.' },
-	{ q: 'How long does a session last?', a: 'A typical session of hydrotherapy lasts 30 to 45 minutes, but you should set aside around 60 to 75 minutes in total to allow for changing and showering.' },
-	{ q: 'Is there assistance for getting changed?', a: 'Our physiotherapists provide clinical treatment in the water. If you require significant physical assistance for dressing or undressing, we recommend bringing a carer or family member to help you in the changing rooms.' },
-	{ q: 'Can hydrotherapy help with back pain?', a: 'Yes. The buoyancy of the water takes the pressure off the spinal discs and joints, while the warmth helps to decrease muscle guarding and spasms, allowing for movements that might be impossible on land.' },
-	{ q: 'Who is not suitable for hydrotherapy?', a: 'Individuals with open wounds, active skin infections, severe heart or lung conditions, or those who have recently had a stomach upset are generally not suitable for the pool until these issues have resolved.' },
-	{ q: 'Payment for Hydrotherapy', a: 'For your Hydrotherapy session, payment in full will be taken 24 hours in advance (unless you are paying via insurance). Our reception team will be in touch the day before your appointment to take payment.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 
 const glossary = [
 	{ term: 'Buoyancy', definition: 'The upward force exerted by a fluid that opposes the weight of an immersed object.' },
@@ -35,94 +24,193 @@ const glossary = [
 ];
 ---
 <Layout
-	title="Hydrotherapy Clapham | Aquatic Physiotherapy & Rehab Therapy"
-	description="Hydrotherapy in Clapham to support rehabilitation, reduce pain, and improve movement. Water-based physiotherapy for recovery and long-term function."
+	title={doc.seoTitle ?? "Hydrotherapy Clapham | Aquatic Physiotherapy & Rehab Therapy"}
+	description={doc.seoDescription ?? "Hydrotherapy in Clapham to support rehabilitation, reduce pain, and improve movement. Water-based physiotherapy for recovery and long-term function."}
 >
-	<PageHero title="in Clapham South" highlight="Hydrotherapy" breadcrumb="Hydrotherapy" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Rehabilitation in" highlight="water" youtubeId="kJ9Ny2lFDzk" autoplay imageAlt="Video: hydrotherapy at Balance Performance Physiotherapy">
-		<p>Hydrotherapy is a form of physiotherapy delivered in water, facilitating movement and resistance exercises whilst reducing load on joints and tissues.</p>
-		<p>At Balance, hydrotherapy is used as part of a structured rehabilitation plan. The properties of water (buoyancy, resistance, and warmth) allow you to move more freely, build strength, and regain confidence where land-based exercise may be limited.</p>
-		<p>Sessions are always guided by a physiotherapist and tailored to your specific condition and stage of recovery.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		youtubeId="kJ9Ny2lFDzk"
+		autoplay
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="hydrotherapy" image="/hydrotherapy/when-to-consider.jpg" imageAlt="When to consider hydrotherapy">
-		<p>You may benefit from hydrotherapy if you experience:</p>
-		<ul>
-			<li>Joint pain or stiffness limiting movement on land</li>
-			<li>Post-surgical restrictions (e.g. knee, hip, or spinal surgery)</li>
-			<li>Difficulty weight-bearing due to pain or weakness</li>
-			<li>Reduced mobility following injury or illness</li>
-			<li>Multiple areas of weakness and limitation</li>
-			<li>Balance or coordination difficulties</li>
-		</ul>
-		<p>Hydrotherapy is particularly useful when weight-bearing exercise is difficult or has to be reduced.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/hydrotherapy/how-we-work.jpg" imageAlt="How hydrotherapy works">
-		<p>We use water-based exercise to progressively restore movement, strength, and function.</p>
-		<p>Your session may include:</p>
-		<ul>
-			<li>Guided mobility and range of movement exercises</li>
-			<li>Strength work using water resistance</li>
-			<li>Balance and control exercises in a supported environment</li>
-			<li>Gait re-education and functional movement practice</li>
-		</ul>
-		<p>Sessions are progressed in line with your tolerance, ensuring you are challenged without triggering flare-ups.</p>
-		<p>Where appropriate, hydrotherapy is combined with land-based rehabilitation to support a full return to activity.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/hydrotherapy/progress-measurement.jpg" imageAlt="Measuring hydrotherapy progress">
-		<p>We monitor progress throughout your rehabilitation to ensure meaningful improvement.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Pain levels during and after movement</li>
-			<li>Range of movement and joint function</li>
-			<li>Strength and control in affected areas</li>
-			<li>Functional ability (e.g. walking, stairs, daily tasks)</li>
-			<li>Confidence in movement</li>
-		</ul>
-		<p>These measures guide progression from water-based therapy back to full land-based activity.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/hydrotherapy/goggles-towel.jpg" imageAlt="Ready for the pool">
-		<p>We work with a range of patients, including:</p>
-		<ul>
-			<li><strong>Post-operative patients:</strong> Recovering from joint replacement or orthopaedic surgery</li>
-			<li><strong>Individuals with chronic pain:</strong> Requiring a lower-load environment to begin movement</li>
-			<li><strong>Our Seniors:</strong> Improving strength, balance, and confidence</li>
-			<li><strong>Neurological patients:</strong> Working on coordination and mobility in a safe setting</li>
-			<li><strong>Active individuals:</strong> Maintaining conditioning during injury recovery</li>
-		</ul>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our hydrotherapy" highlight="team" image="/hydrotherapy/hydro-team-photo.jpg" imageAlt="The Balance hydrotherapy team in pool kit">
-		<p>Hydrotherapy is delivered by experienced physiotherapists trained in aquatic rehabilitation.</p>
-		<p>You will be guided throughout each session, with clear instruction and progression based on your individual needs.</p>
-		<p><a href="/meet-the-team/" class="section-link">Meet The Team &rarr;</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Location" heading="Getting to" highlight="Hydrotherapy" mapEmbedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.1190346254107!2d-0.1486525!3d51.45289760000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605b630c3c9d3%3A0x9ad3c77ad81840c6!2sAudley%20Nightingale%20Place!5e1!3m2!1sen!2suk!4v1776940633643!5m2!1sen!2suk" imageAlt="Audley Village, Nightingale Place, Clapham South">
-		<p>Balance Performance Physiotherapy conducts hydrotherapy sessions in <strong>Clapham South</strong> at <strong>Audley Village, Nightingale Place, 3 Nightingale Lane, SW4 9AH</strong>. This location is separate from our primary Gauden Road site and offers a premium, accessible environment for aquatic rehabilitation.</p>
-		<p>The facility is conveniently located near <strong>Clapham South Tube Station</strong>, making it easily accessible for residents across the SW4 and SW12 postcodes. For those travelling by car, parking is available at Audley by prior arrangement with our FOH team, ensuring your visit for hydrotherapy is as convenient and stress-free as possible.</p>
-		<p>Patients should arrive at least 15 minutes before their hydrotherapy appointment. This allows enough time to get changed and be fully prepared for the start of their session.</p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		mapEmbedUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.1190346254107!2d-0.1486525!3d51.45289760000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605b630c3c9d3%3A0x9ad3c77ad81840c6!2sAudley%20Nightingale%20Place!5e1!3m2!1sen!2suk!4v1776940633643!5m2!1sen!2suk"
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/hydrotherapy/hydro-equipment.jpg" imageAlt="Hydrotherapy at Balance">
-		<p>We provide a transparent fee structure for our specialist aquatic therapy sessions.</p>
-		<ul>
-			<li><strong>Hydrotherapy Initial Assessment:</strong> Please call 020 7627 2308 for current rates.</li>
-			<li><strong>Follow-up Aquatic Sessions:</strong> Tailored durations based on your clinical requirement.</li>
-		</ul>
-		<p>Hydrotherapy is recognised by <strong>many major insurance providers</strong>. However, as policies vary regarding "Aquatic Therapy" or "Hydrotherapy," we strongly recommend that you contact your provider to confirm coverage and obtain authorisation before booking your first session at Nightingale Place.</p>
-		<p><a href="/pricing#hydrotherapy" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[7] && (
+	<ImageText
+		eyebrow={doc.sections[7].eyebrow ?? undefined}
+		heading={doc.sections[7].heading ?? undefined}
+		highlight={doc.sections[7].headingHighlight ?? undefined}
+		reverse={doc.sections[7].imageOnRight}
+		altBg={doc.sections[7].altBackground}
+		image={doc.sections[7].image?.url ?? undefined}
+		imageAlt={doc.sections[7].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[7].blocks} />
+		{doc.sections[7].ctaLabel && (
+			<p><a
+				href={doc.sections[7].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[7].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[7].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[7].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -131,7 +219,7 @@ const glossary = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 				<details class="faq-item">

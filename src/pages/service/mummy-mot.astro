@@ -5,37 +5,73 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Picture from '../../components/Picture.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
+
+const doc = await services.required('mummy-mot');
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 ---
 <Layout
-	title="Mummy MOT in Clapham | Postnatal Check-up - Balance Performance Physiotherapy"
-	description="The Mummy MOT is a specialist postnatal assessment from 6 weeks after birth. Pelvic floor, abdominal and postural check with expert women's health physiotherapy in Clapham."
+	title={doc.seoTitle ?? "Mummy MOT in Clapham | Postnatal Check-up - Balance Performance Physiotherapy"}
+	description={doc.seoDescription ?? "The Mummy MOT is a specialist postnatal assessment from 6 weeks after birth. Pelvic floor, abdominal and postural check with expert women's health physiotherapy in Clapham."}
 >
-	<PageHero title="in Clapham" highlight="Mummy MOT" breadcrumb="Mummy MOT" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<div class="service-intro">
-	<ImageText eyebrow="Postnatal recovery" heading="The" highlight="Mummy MOT" image="/mummy-mot/jo-pelvic-model.jpg" imageAlt="Jo Fordyce explaining pelvic anatomy with an anatomical model">
-		<p>A Mummy MOT is a specialist postnatal assessment designed to support recovery and wellbeing, and it can be beneficial anytime from 6 weeks to several years after giving birth. It includes:</p>
-		<ul>
-			<li>Screening for bladder, bowel and sexual dysfunction post birth</li>
-			<li>Assessment for diastasis recti (tummy gap separation)</li>
-			<li>Pelvic floor muscle internal assessment</li>
-			<li>Postural re-education, advice on return to general exercise</li>
-			<li>Scar review from caesarean section or perineal tears</li>
-			<li>Individual exercise and treatment plan</li>
-		</ul>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{/* The Mummy MOT programme logo — a fixed brand mark, so it stays in the
+		    template rather than becoming an editable section image. */}
 		<div class="mummy-mot-logo-wrap">
 			<Picture src="/mummy-mot/mummy-mot-logo.jpg" alt="The Mummy MOT" width="400" height="182" loading="lazy" />
 		</div>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/womens-health/gynaecology.webp" imageAlt="Consultation">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing#womens-health" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<BookingCTA />
 </Layout>

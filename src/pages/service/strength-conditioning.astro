@@ -6,111 +6,184 @@ import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Picture from '../../components/Picture.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/strength-conditioning/slider-IMG_0451.jpeg', alt: 'Coached strength session' },
-	{ src: '/strength-conditioning/slider-IMG_0457.jpeg', alt: 'Progressive loading' },
-	{ src: '/strength-conditioning/slider-sam-and-alex-1.webp', alt: 'S&C coaching' },
-	{ src: '/strength-conditioning/slider-multiracial-athletes.jpg', alt: 'Group training' },
-	{ src: '/strength-conditioning/slider-woman-barbell.jpg', alt: 'Barbell training' },
-	{ src: '/strength-conditioning/kettle-bell.jpg', alt: 'Kettlebell work' },
-];
+const doc = await services.required('strength-conditioning');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'Do I need to be fit to start?', a: 'No. Training is tailored to your current level.' },
-	{ q: 'Is this the same as going to the gym?', a: 'No. Sessions are coached, structured, and focused on long-term progression rather than short-term intensity.' },
-	{ q: "Can I train if I've had an injury?", a: 'Yes. We regularly work with individuals returning from injury, often alongside physiotherapy.' },
-	{ q: 'What kind of training will I do?', a: 'A mix of resistance training, movement and bodyweight work, and conditioning exercises tailored to your goals.' },
-	{ q: 'How many sessions will I need?', a: 'This depends on your goals. Some people attend short-term, others train long-term.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Strength & Conditioning Clapham | Performance & Rehab Training"
-	description="Strength and conditioning in Clapham to build strength, improve performance, and support recovery. Personalised training for long-term health and resilience."
+	title={doc.seoTitle ?? "Strength & Conditioning Clapham | Performance & Rehab Training"}
+	description={doc.seoDescription ?? "Strength and conditioning in Clapham to build strength, improve performance, and support recovery. Personalised training for long-term health and resilience."}
 >
-	<PageHero title="in Clapham" highlight="Strength & Conditioning" breadcrumb="Strength & Conditioning" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Strength and conditioning" highlight="is for every age and everyone" youtubeId="iVHv-B6Ywds" autoplay imageAlt="Video: strength and conditioning at Balance Performance Physiotherapy">
-		<p>At Balance, we provide structured, personalised strength training to improve health, performance, and long-term resilience. Whether your goal is to feel better day-to-day or to prepare for a specific challenge, your programme is built around what you need.</p>
-		<p>This may be improving quality of life, returning to activity after injury, training for an event, or developing strength through different stages of life.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		youtubeId="iVHv-B6Ywds"
+		autoplay
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Why train" heading="When to consider" highlight="strength & conditioning" image="/strength-conditioning/when-to-consider-new.jpg" imageAlt="Coach guiding a barbell session at Balance Physio">
-		<p>You may benefit from structured strength training if you:</p>
-		<ul>
-			<li>Feel weaker or less capable than you would like in daily life</li>
-			<li>Are not progressing despite regular training</li>
-			<li>Want to return to exercise safely after injury or illness</li>
-			<li>Experience recurring niggles or minor injuries</li>
-			<li>Are preparing for a specific goal (e.g. marathon, trekking, performance)</li>
-			<li>Want to build strength through life stages such as menopause or ageing</li>
-		</ul>
-		<p>Strength training is not optional for long-term health, it is a <strong>fundamental requirement</strong>.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/strength-conditioning/close-up-weightlift.jpg" imageAlt="Lifting technique">
-		<p>All programmes are bespoke and based on your starting point, goals, and movement capacity. We won't strengthen anyone who can't move properly.</p>
-		<p>We focus on:</p>
-		<ul>
-			<li>Movement quality and control</li>
-			<li>Strength development through progressive loading</li>
-			<li>Technique in key lifts (e.g. squat, deadlift, press)</li>
-			<li>Building work capacity and resilience</li>
-			<li>Integrating holistic concepts (e.g. nutrition, breathing) into your lifestyle</li>
-		</ul>
-		<p><strong>If movement limitations are present, these are addressed first.</strong> Where needed, we work alongside physiotherapy to guarantee great results.</p>
-		<p>Strength, movement and health are all fundamental aspects of the same system.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/strength-conditioning/slider-IMG_9469.webp" imageAlt="Tracking progress">
-		<p>We track meaningful changes to ensure your training is effective.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Strength improvements across key movements</li>
-			<li>Movement quality and control</li>
-			<li>Load tolerance and training capacity</li>
-			<li>Reduction in pain or injury recurrence</li>
-			<li>Functional improvements in daily life or sport</li>
-			<li>Confidence in lifting and movement</li>
-		</ul>
-		<p>Your programme is adjusted based on these outcomes.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/strength-conditioning/who-we-help-new.jpg" imageAlt="Coach supporting a barbell squat at Balance Physio">
-		<p>We work with a wide range of individuals, including:</p>
-		<ul>
-			<li><strong>Our local population:</strong> Improving strength, energy, and quality of life</li>
-			<li><strong>Veterans:</strong> Maintaining independence, bone health, and resilience</li>
-			<li><strong>Athletes and active individuals:</strong> Preparing for events or returning from injury</li>
-			<li><strong>People in recovery:</strong> Transitioning from rehabilitation to full training</li>
-			<li><strong>Busy professionals:</strong> Building physical resilience alongside work demands</li>
-		</ul>
-		<p>From younger clients developing movement skills to seniors maintaining strength, strength and conditioning can be enjoyed by all.</p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our strength &" highlight="conditioning team" image="/strength-conditioning/slider-sam-and-alex-2.webp" imageAlt="S&C coaches">
-		<p>Our team combines expertise in physiotherapy and strength coaching.</p>
-		<p><strong>Jonathan Lewis:</strong> Movement specialist with over 30 years' experience, focusing on improving efficiency and removing barriers to performance.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Jonathan &rarr;</a></p>
-		<p><strong>Jo Sullivan:</strong> Integrates physiotherapy and strength training for safe and progressive development.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Jo &rarr;</a></p>
-		<p><strong>Alex Deif:</strong> Level 4 personal trainer specialising in dynamic resistance and conditioning.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Alex &rarr;</a></p>
-		<p>You will be coached closely to ensure safe, effective progression.</p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/strength-conditioning/pricing-new.jpg" imageAlt="Coach guiding strength training at Balance Physio">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise.</p>
-		<p><a href="/pricing#strength-conditioning" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="sc-promos">
 		<div class="container">
@@ -152,7 +225,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

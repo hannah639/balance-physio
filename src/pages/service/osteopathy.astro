@@ -5,125 +5,184 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/osteopathy/balance-osteopathy.webp', alt: 'Osteopathy at Balance Physio' },
-	{ src: '/osteopathy/adjusting-spine.jpg', alt: 'Spinal adjustment' },
-	{ src: '/osteopathy/shoulder-massage.jpg', alt: 'Shoulder treatment' },
-	{ src: '/osteopathy/skeleton.jpg', alt: 'Anatomy skeleton reference' },
-	{ src: '/osteopathy/spine-diagnosis.jpg', alt: 'Spine assessment' },
-	{ src: '/osteopathy/thai-massage.jpg', alt: 'Soft tissue technique' },
-];
+const doc = await services.required('osteopathy');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'Do I need a GP referral?', a: 'No. You can book directly with us.' },
-	{ q: 'What is the benefit of combining osteopathy and nutrition?', a: 'It allows us to support both how your body moves and how it recovers. This can improve outcomes, particularly in longer-term or recurring conditions.' },
-	{ q: 'Is osteopathy safe during pregnancy?', a: 'Yes. Treatment is adapted to ensure it is safe and appropriate at every stage.' },
-	{ q: 'Will my back be "cracked"?', a: 'Not necessarily. We use a range of techniques, and treatment is always tailored to your needs.' },
-	{ q: 'What should I wear?', a: 'Comfortable clothing that allows us to assess movement.' },
-	{ q: 'How many sessions will I need?', a: 'This depends on your condition. We will give you a clear plan after your first session.' },
-	{ q: 'Can I use private health insurance?', a: 'Yes. We work with providers including Bupa and AXA Health, but we recommend checking your cover in advance.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Expert Osteopathy & Nutrition in Clapham"
-	description="Osteopathy in Clapham combining hands-on treatment and nutrition support. Reduce pain, improve movement, and recover with expert care in London."
+	title={doc.seoTitle ?? "Expert Osteopathy & Nutrition in Clapham"}
+	description={doc.seoDescription ?? "Osteopathy in Clapham combining hands-on treatment and nutrition support. Reduce pain, improve movement, and recover with expert care in London."}
 >
-	<PageHero title="in Clapham" highlight="Osteopathy and Nutrition" breadcrumb="Osteopathy and Nutrition" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="A clinical, hands-on," highlight="evidence-led approach" image="/osteopathy/adjusting-spine.jpg" imageAlt="Osteopath adjusting patient's spine during a treatment session">
-		<p>Pain, stiffness, or restriction in movement often comes from how the body is functioning as a whole, not just one area.</p>
-		<p>At Balance, osteopathy and nutrition work together to support how your body moves, recovers, and adapts. It's not just about treating symptoms. It's about understanding how your joints, muscles, nervous system, and overall health interact, and what needs to change to restore efficient, pain-free movement.</p>
-		<p>We take a clinical, hands-on and evidence-led approach. From your first session, we assess how your body moves and responds, alongside any wider factors that may be influencing your recovery, including lifestyle and nutrition. Your treatment plan is then built around your symptoms, your goals, and your starting point.</p>
-		<p>Whether you're dealing with persistent pain, recovering from injury, or looking to improve your overall health and resilience, we help you move forward with clarity and control.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider osteopathy" highlight="and nutrition support" image="/osteopathy/spine-education.jpg" imageAlt="Clinician explaining spinal anatomy to a patient">
-		<p>Osteopathy and nutritional therapy can support a wide range of musculoskeletal and health-related concerns.</p>
-		<p>You may benefit if you're experiencing:</p>
-		<ul>
-			<li>Ongoing back or neck pain linked to posture or daily activity</li>
-			<li>Joint stiffness or reduced mobility</li>
-			<li>Pain related to work or repetitive strain</li>
-			<li>Discomfort during pregnancy, including pelvic or lower back pain</li>
-			<li>Lingering symptoms following injury or trauma, including whiplash</li>
-			<li>Stiffness associated with arthritis or general wear and tear</li>
-			<li>Lymphoedema or swelling that is affecting movement or comfort</li>
-			<li>Low energy levels or slower recovery from training or injury</li>
-			<li>A sense that your overall health is affecting how your body feels and performs</li>
-		</ul>
-		<p>If your body is not recovering or functioning as you would expect, it is worth looking at both physical and lifestyle factors.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Treatment" heading="How we" highlight="work" image="/osteopathy/thai-massage.jpg" imageAlt="Soft tissue treatment to the shoulder">
-		<p>Our approach is built around improving how your body functions as a complete system.</p>
-		<p>Your treatment may include:</p>
-		<ul>
-			<li>Hands-on manual therapy to improve joint and tissue movement</li>
-			<li>Soft tissue work to reduce tension and improve circulation</li>
-			<li>Movement assessment to identify restrictions or compensations</li>
-			<li>Breathing and postural work where relevant</li>
-			<li>Nutritional guidance to support recovery, energy, and overall health</li>
-			<li>Practical advice to help you make sustainable changes outside the clinic</li>
-		</ul>
-		<p>By combining osteopathy with nutritional therapy where appropriate, we can support not just how you move, but how your body adapts, heals, and performs over time.</p>
-		<p>Treatment is always tailored to you. We use a range of techniques depending on your presentation, your comfort, and what will be most effective.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/osteopathy/shoulder-massage.jpg" imageAlt="Hands-on shoulder treatment">
-		<p>We track change in a way that is meaningful and relevant to your daily life.</p>
-		<p>From your first session, we establish a baseline of:</p>
-		<ul>
-			<li>Movement quality</li>
-			<li>Joint mobility</li>
-			<li>Pain levels</li>
-			<li>Functional ability, what you can actually do day to day</li>
-			<li>Relevant lifestyle factors that may influence recovery</li>
-		</ul>
-		<p>As treatment progresses, we reassess regularly.</p>
-		<p>This means:</p>
-		<ul>
-			<li>You can see what is improving</li>
-			<li>Your treatment adapts as your body and habits change</li>
-			<li>We stay focused on outcomes, not just sessions</li>
-		</ul>
-		<p>The aim is simple: improved movement, reduced pain, and better long-term function and health.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/osteopathy/nutrition-fresh.jpg" imageAlt="Fresh fruit and vegetables prepared for cooking">
-		<p>We work with a wide range of individuals across Clapham and South West London:</p>
-		<ul>
-			<li>People managing everyday back, neck, or joint pain</li>
-			<li>Office-based professionals dealing with postural strain</li>
-			<li>Pregnant individuals needing safe, effective support</li>
-			<li>Active individuals and athletes managing injury or restriction</li>
-			<li>Those with longer-term conditions such as arthritis</li>
-			<li>Individuals looking to improve recovery, energy, and overall health</li>
-		</ul>
-		<p>Whatever your starting point, the goal is to restore movement, reduce limitations, and support your body more effectively.</p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our expert osteopath" highlight="and nutritionist" image="/osteopathy/nutrition-bowls.jpg" imageAlt="Nutritious wholefoods laid out on a kitchen table">
-		<p>Our osteopathy and nutrition service is led by Eli Ferracci, an experienced Osteopath and Nutritional Therapist with over 15 years of clinical experience.</p>
-		<p>Eli combines hands-on treatment with a broader understanding of movement, lifestyle, and nutrition. Her approach focuses on identifying the underlying cause of dysfunction, not just where symptoms are felt, and supporting you in building a more resilient and adaptable body.</p>
-		<p>Where appropriate, nutritional therapy is integrated into your care to support recovery, manage inflammation, and improve overall wellbeing alongside physical treatment.</p>
-		<p><a href="/meet-the-team/" class="section-link">Read More About Eli &rarr;</a></p>
-		<p><strong>Integrated care.</strong> Where appropriate, we work closely with the wider Balance team. This may include joint sessions with physiotherapists, strength and conditioning coaches, or running specialists, ensuring your treatment carries through into how you move, train, and recover.</p>
-		<p><a href="/meet-the-team/" class="section-link">Meet The Team &rarr;</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/osteopathy/balance-osteopathy.webp" imageAlt="Osteopathy at Balance">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We are also recognised by all major insurance providers, including Bupa and AXA Health.</p>
-		<p><a href="/pricing#osteopathy" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -132,7 +191,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>

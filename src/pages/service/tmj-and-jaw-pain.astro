@@ -1,81 +1,17 @@
 ---
 import ServicePage from '../../components/ServicePage.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const sliderImages = [
-	{ src: '/tmj-and-jaw-pain/treatment-jaw-work.jpg', alt: 'TMJ jaw treatment session at Balance Physio' },
-	{ src: '/tmj-and-jaw-pain/treatment-close-up.jpg', alt: 'Close-up of jaw treatment at Balance Physio' },
-	{ src: '/tmj-and-jaw-pain/jaw-pain.jpg', alt: 'Jaw pain affecting daily life' },
-	{ src: '/tmj-and-jaw-pain/friends-meal.jpg', alt: 'Friends enjoying a meal together' },
-	{ src: '/tmj-and-jaw-pain/orthodontist-skull.jpg', alt: 'Clinician explaining using a skull model' },
-	{ src: '/tmj-and-jaw-pain/couple-laughing.jpg', alt: 'Couple laughing together' },
-	{ src: '/tmj-and-jaw-pain/jaw-closeup.jpg', alt: 'Close-up of the jaw' },
-	{ src: '/tmj-and-jaw-pain/woman-smiling.jpg', alt: 'Woman smiling freely' },
-	{ src: '/tmj-and-jaw-pain/dental-skeleton.jpg', alt: 'Jaw anatomy on a skeleton model' },
-	{ src: '/tmj-and-jaw-pain/eating-sushi.jpg', alt: 'Eating comfortably without jaw discomfort' },
-	{ src: '/tmj-and-jaw-pain/skull-in-clinic.jpg', alt: 'Skull model in the consultation room' },
-	{ src: '/tmj-and-jaw-pain/man-laughing-phone.jpg', alt: 'Man laughing on the phone' },
-];
+const doc = await services.required('tmj-and-jaw-pain');
 ---
 <ServicePage
-	title="in Clapham"
-	highlight="TMJ & Jaw Pain"
-	heroSubtitle="Jaw pain, clicking, or tension can affect how you eat, speak, and sleep, and it's often linked to the neck, muscles and nervous system working together."
-	breadcrumb="TMJ & Jaw Pain"
-	seoTitle="TMJ & Jaw Pain Treatment Clapham | Jaw Physiotherapy London"
-	seoDescription="TMJ and jaw pain treatment in Clapham to reduce pain, improve movement, and restore function. Expert physiotherapy for jaw, neck, and related symptoms."
-	marqueeImages={sliderImages}
-	intro={[
-		"Jaw pain, clicking, or tension can affect how you eat, speak, and even sleep. It is often linked not just to the jaw itself, but to how the neck, muscles, and nervous system are working together.",
-		"Our approach addresses the jaw and surrounding structures together, using hands-on treatment, targeted exercise, and education to reduce symptoms and restore comfortable movement.",
-	]}
-	introImage="/tmj-and-jaw-pain/jon-treating-patient.jpg"
-	introImageAspect="3/4"
-	whenHeading="When to consider"
-	whenHighlight="TMJ physiotherapy"
-	whenIntro="Symptoms that warrant assessment include:"
-	whenList={[
-		"Jaw pain when chewing, talking, or opening the mouth",
-		"Clicking, popping, or locking in the jaw",
-		"Difficulty opening the mouth fully or comfortably",
-		"Headaches linked to the jaw or base of skull",
-		"Facial tension or tightness around the jaw muscles",
-		"Ear-related symptoms such as fullness or ringing",
-		"Neck pain associated with jaw discomfort",
-	]}
-	whenImage="/tmj-and-jaw-pain/jon-treating-patient-2.jpg"
-	whenImageAspect="3/4"
-	howHeading="How we"
-	howHighlight="treat"
-	howIntro="Sessions may include:"
-	howList={[
-		"Hands-on therapy to reduce muscle tension and improve joint movement",
-		"Soft tissue work and trigger point techniques",
-		"Targeted exercises for the jaw and neck to restore control",
-		"Movement retraining for jaw opening, closing, and loading",
-		"Education around habits like clenching, grinding, or posture",
-		"Progressive rehabilitation to build long-term resilience",
-	]}
-	howImage="/tmj-and-jaw-pain/jon-treating-patient-3.jpg"
-	howImageAspect="3/4"
-	howOutro='Meet our expert <a href="/team/jonathan-zulueta/" class="inline-link">Jon Zulueta</a>.'
-	whoHeading="Who we"
-	whoHighlight="help"
-	whoList={[
-		"People with jaw pain affecting eating, speaking, or sleep",
-		"Individuals with recurring headaches linked to jaw or neck",
-		"Those experiencing clicking, locking, or restricted jaw movement",
-		"People dealing with stress-related jaw tension or clenching",
-		"Individuals with combined neck and jaw symptoms",
-		"Anyone seeking structured TMJ issue resolution",
-	]}
-	whoImage="/tmj-and-jaw-pain/jaw-treatment-1.jpg"
-	whoImageAspect="3/4"
-	faqs={[
-		{ q: "What is TMJ or TMD?", a: "It refers to conditions affecting the jaw joint and surrounding muscles, often causing pain, clicking, or restricted movement." },
-		{ q: "Can physiotherapy help jaw pain?", a: "Yes. Physiotherapy can improve how the jaw and neck move, reduce muscle tension, and address contributing factors." },
-		{ q: "Why is my neck involved in jaw pain?", a: "The jaw and upper neck are closely linked. Reduced movement or control in the neck can affect how the jaw functions." },
-		{ q: "Do I need a scan?", a: "In most cases, no. A detailed clinical assessment is usually enough to guide treatment." },
-		{ q: "Will my jaw clicking go away?", a: "Clicking can improve with treatment, especially if it is linked to movement patterns or muscle tension." },
-		{ q: "Will I get exercises to do at home?", a: "Yes. You will be given specific exercises and strategies to support your recovery between sessions." },
-	]}
-/>
+	title={doc.heroHeading}
+	highlight={doc.heroHighlight ?? undefined}
+	heroSubtitle={doc.heroSubtitle ?? undefined}
+	breadcrumb={doc.breadcrumb ?? undefined}
+	seoTitle={doc.seoTitle ?? "TMJ & Jaw Pain Treatment Clapham | Jaw Physiotherapy London"}
+	seoDescription={doc.seoDescription ?? "TMJ and jaw pain treatment in Clapham to reduce pain, improve movement, and restore function. Expert physiotherapy for jaw, neck, and related symptoms."}
+	marqueeImages={doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }))}
+	sections={doc.sections}
+	faqs={doc.faqs.map((f) => ({ q: f.question, a: f.answer }))}
+>

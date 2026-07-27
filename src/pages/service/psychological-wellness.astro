@@ -6,28 +6,17 @@ import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Team from '../../components/Team.astro';
 import { team } from '../../data/team.js';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/psychological-wellness/slider-new-1.jpg', alt: 'Wellness session' },
-	{ src: '/psychological-wellness/slider-new-2.jpg', alt: 'Wellness practice' },
-	{ src: '/psychological-wellness/slider-woman-breathing-outdoors.jpg', alt: 'Breathing and self-regulation' },
-	{ src: '/psychological-wellness/slider-mature-jogging.jpg', alt: 'Active wellbeing' },
-	{ src: '/psychological-wellness/slider-soccer-team-celebrating.jpg', alt: 'Team resilience' },
-	{ src: '/psychological-wellness/slider-women-fists-raised.jpg', alt: 'Confidence and strength' },
-	{ src: '/psychological-wellness/slider-disability-high-five.jpg', alt: 'Support and connection' },
-	{ src: '/psychological-wellness/slider-wheelchair-racing.jpg', alt: 'Resilience in sport' },
-];
+const doc = await services.required('psychological-wellness');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 // Wellness team slider — only the three wellness specialists.
 const wellnessTeam = team.filter((m) => m.wellness);
 
-const faqs = [
-	{ q: 'Is this the same as traditional therapy?', a: 'No. This service focuses on the interaction between psychological factors and physical health, particularly in relation to pain, injury, and performance.' },
-	{ q: 'Do I need an injury to attend?', a: 'No. Sessions are also suitable for everyone looking for stress management and performance support.' },
-	{ q: 'Can this help with chronic pain?', a: 'Yes. Psychological strategies can influence how pain is experienced and managed.' },
-	{ q: 'How many sessions will I need?', a: 'This varies. Some people benefit from short-term input, others from ongoing support.' },
-	{ q: 'Is breathwork included?', a: 'Where appropriate, breathing techniques may be used as part of managing the nervous system.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 
 const references = [
 	"Reiki Is Better Than Placebo and Has Broad Potential as a Complementary Health Therapy. David E McManus. J Evid Based Complementary Altern Med. 2017 Sep 5;22(4):1051–1057. doi: 10.1177/2156587217728644.",
@@ -57,37 +46,64 @@ const references = [
 ];
 ---
 <Layout
-	title="Wellness in Clapham"
-	description="The Balance Wellness Team — sports psychology, hypnotherapy and holistic somatic therapy in Clapham, integrated with physiotherapy and rehabilitation."
+	title={doc.seoTitle ?? "Wellness in Clapham"}
+	description={doc.seoDescription ?? "The Balance Wellness Team — sports psychology, hypnotherapy and holistic somatic therapy in Clapham, integrated with physiotherapy and rehabilitation."}
 >
-	<PageHero title="in Clapham" highlight="Wellness" breadcrumb="Wellness" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="The" highlight="Wellness Team" image="/psychological-wellness/body-1.jpg" imageAlt="Psychological wellness session" imageAspect="3/2">
-		<p>Wellness can be defined as <em>'an active process through which people become aware of, and make choices toward, a more successful existence'</em> (Ref 1).</p>
-		<p>As a clinic we have integrated a Wellness team into the client offerings. The overall aim of this team is to improve the holistic health of our patients.</p>
-		<p><em>'Holistic health is a system of wellness that considers the whole person — body, mind, and spirit — and aims to restore balance and well-being through the combination of physical, mental, and emotional care'</em> (Ref 12).</p>
-		<p>Together, they represent a complete picture of health where each area supports and influences the others.</p>
-		<p>We know there is an increase in incidence of psychological distress in those that have suffered trauma (Refs 9 and 13).</p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+		imageAspect="3/2"
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Approach" heading="How we work and" highlight="who we are" image="/psychological-wellness/body-2.jpg" imageAlt="Wellness team approach" imageAspect="3/2">
-		<p>Our approach is based on the biopsychosocial model, integrating physical and psychological factors.</p>
-		<p>Sessions may include:</p>
-		<ul>
-			<li>Understanding the relationship between pain, stress, and the nervous system</li>
-			<li>Exploring your thoughts and feelings about your situation</li>
-			<li>Strategies to manage stress and regulate your physiological response</li>
-			<li>Breathing techniques and self-awareness</li>
-			<li>Building confidence in movement and activity</li>
-			<li>Supporting return to training, sport, or daily function</li>
-		</ul>
-		<p>Where relevant, this work is integrated with physiotherapy and strength coaching.</p>
-		<p>The Wellness team includes <strong>Richard</strong> — Psychotherapist and Hypnotherapist (visualisation), <strong>Sally</strong> — Sports Psychologist, and <strong>Kat</strong> — Holistic Therapist. They offer a breadth of skill sets within the team, and offer the patient choice.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+		imageAspect="3/2"
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<Team
 		members={wellnessTeam}
@@ -96,45 +112,95 @@ const references = [
 		subheading="Three specialists, three approaches — sports psychology, clinical hypnotherapy, and holistic somatic therapy."
 	/>
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/psychological-wellness/body-3.jpg" imageAlt="Tracking psychological wellness outcomes">
-		<p>We focus on meaningful changes that support both mental and physical outcomes.</p>
-		<p>This may include:</p>
-		<ul>
-			<li>Reduction in pain-related fear or avoidance</li>
-			<li>Improved confidence in movement and activity</li>
-			<li>Better stress management and emotional control</li>
-			<li>Increased engagement with rehabilitation or training</li>
-			<li>Improved consistency in sleep, recovery, and daily function</li>
-		</ul>
-		<p>Progress is reviewed and used to guide your ongoing plan.</p>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/psychological-wellness/body-4.jpg" imageAlt="People we help with psychological wellness" imageAspect="3/2">
-		<p>We support a range of individuals, including:</p>
-		<ul>
-			<li><strong>Injury and rehabilitation patients:</strong> Managing the psychological impact of recovery</li>
-			<li><strong>People with persistent pain:</strong> Improving coping strategies and function</li>
-			<li><strong>Athletes and active individuals:</strong> Addressing performance anxiety or return-to-play concerns</li>
-			<li><strong>Professionals:</strong> Managing stress and its physical effects</li>
-			<li><strong>Our local population:</strong> Improving resilience and overall wellbeing</li>
-		</ul>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+		imageAspect="3/2"
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our" highlight="approach" image="/psychological-wellness/soccer-high-five.jpg" imageAlt="Team connection" imageAspect="3/2">
-		<p>Wellness at Balance is delivered within a clinical environment.</p>
-		<p>We work as part of a wider team, ensuring your psychological support aligns with your physical rehabilitation and training. This allows for a consistent and joined-up approach to your health.</p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+		imageAspect="3/2"
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Get in touch" heading="How to" highlight="book" image="/psychological-wellness/slider-women-fists-raised.jpg" imageAlt="Strength and confidence">
-		<p>To learn more or book an appointment, please get in touch with the Balance team — or contact one of our wellness practitioners directly:</p>
-		<ul class="practitioner-contacts">
-			<li><strong>Sally McGinn</strong> — <a href="mailto:sally@mindodyssey.co.uk">sally@mindodyssey.co.uk</a></li>
-			<li><strong>Richard Lepper</strong> — <a href="mailto:richard@themiltonpractice.co.uk">richard@themiltonpractice.co.uk</a></li>
-			<li><strong>Kat Johnson</strong> — <a href="mailto:embodiedreleasewithkat@gmail.com">embodiedreleasewithkat@gmail.com</a></li>
-		</ul>
-		<p><a href="/contact-us/" class="btn-primary">Contact Us</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -143,7 +209,7 @@ const references = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 				<details class="faq-item">

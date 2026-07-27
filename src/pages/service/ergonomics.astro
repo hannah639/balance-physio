@@ -5,114 +5,206 @@ import PageHero from '../../components/PageHero.astro';
 import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
+import RichText from '../../components/RichText.astro';
+import { services } from '../../lib/sanity/pageContent';
 
-const photos = [
-	{ src: '/ergonomics/slider-balance-interior.jpg', alt: 'Balance Physio clinic interior' },
-	{ src: '/ergonomics/slider-ergonomics-studio.webp', alt: 'Ergonomics studio' },
-	{ src: '/ergonomics/slider-IMG_2045.webp', alt: 'Workspace review' },
-	{ src: '/ergonomics/slider-file-29-11-2015.jpeg', alt: 'Ergonomics session' },
-	{ src: '/ergonomics/office-desk.jpg', alt: 'Office desk setup' },
-	{ src: '/ergonomics/typing-hands.jpg', alt: 'Keyboard and mouse position' },
-];
+const doc = await services.required('ergonomics');
+
+const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
 const bookingUrl = (await getGlobals()).bookingUrl;
 
-const faqs = [
-	{ q: 'Do I need to come into the clinic for an ergonomic assessment?', a: 'No. We offer both in-person and virtual assessments, including reviewing your setup via video.' },
-	{ q: 'Do I need to buy expensive equipment?', a: 'Not always. Many issues can be improved with simple adjustments. If equipment is needed, we will guide you on what is worth investing in.' },
-	{ q: 'Can ergonomics help with back and neck pain?', a: 'Yes. Poor setup and movement habits are common contributors to these symptoms.' },
-	{ q: 'Will I get exercises to do?', a: 'Yes. We provide simple, targeted exercises to address the movement patterns contributing to your pain.' },
-	{ q: 'Can you help with home working setups?', a: 'Yes. We regularly assess and optimise home environments, even with limited space or equipment.' },
-	{ q: 'How quickly will I see improvement?', a: 'Many people notice changes quickly once adjustments are made, especially when combined with the right exercises.' },
-];
+const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 ---
 <Layout
-	title="Ergonomics in Clapham"
-	description="Ergonomic workspace assessments in Clapham: clinical guidance for home, office and hybrid workers to reduce pain and improve comfort, with in-person or virtual options."
+	title={doc.seoTitle ?? "Ergonomics in Clapham"}
+	description={doc.seoDescription ?? "Ergonomic workspace assessments in Clapham: clinical guidance for home, office and hybrid workers to reduce pain and improve comfort, with in-person or virtual options."}
 >
-	<PageHero title="in Clapham" highlight="Ergonomics" breadcrumb="Ergonomics" />
+	<PageHero
+		title={doc.heroHeading}
+		highlight={doc.heroHighlight ?? undefined}
+		breadcrumb={doc.breadcrumb ?? undefined}
+	/>
 
 	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
 
 	<div class="service-intro">
-	<ImageText eyebrow="Our approach" heading="Pain at your desk is not something" highlight="you have to accept" image="/ergonomics/workspace-setup.jpg" imageAlt="Ergonomic workspace setup">
-		<p>Back pain, neck tension, shoulder blade niggles and shoulder discomfort are often driven by how your workspace is set up and how you move within it.</p>
-		<p>At Balance, ergonomics is about more than finding the best chair for you. It's about understanding how your body interacts with your working environment, why your symptoms are developing, and what needs to change to reduce strain.</p>
-		<p>With over twenty-five years of experience, we have worked with London's foremost ergonomic companies, individuals across home and office settings to create practical, sustainable solutions. Whether you work from home, in a corporate environment, use agile working or hot desk, we'll help you get the most out of your setup and create a workspace that supports your body, rather than works against it.</p>
-		<p><a href={bookingUrl} target="_blank" rel="noopener" class="btn-primary">Book Now</a></p>
+	{doc.sections[0] && (
+	<ImageText
+		eyebrow={doc.sections[0].eyebrow ?? undefined}
+		heading={doc.sections[0].heading ?? undefined}
+		highlight={doc.sections[0].headingHighlight ?? undefined}
+		reverse={doc.sections[0].imageOnRight}
+		altBg={doc.sections[0].altBackground}
+		image={doc.sections[0].image?.url ?? undefined}
+		imageAlt={doc.sections[0].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[0].blocks} />
+		{doc.sections[0].ctaLabel && (
+			<p><a
+				href={doc.sections[0].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[0].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[0].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[0].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 	</div>
 
-	<ImageText reverse altBg eyebrow="Symptoms" heading="When to consider" highlight="ergonomics support" image="/ergonomics/office-desk.jpg" imageAlt="Desk setup">
-		<p>You do not need to wait until pain becomes persistent.</p>
-		<p>Ergonomic assessment can help if you are dealing with:</p>
-		<ul>
-			<li>Back pain during or after work</li>
-			<li>Neck stiffness or tension linked to screen use</li>
-			<li>Shoulder discomfort from prolonged sitting or poor setup</li>
-			<li>Headaches associated with desk posture</li>
-			<li>Discomfort when working from home or using laptops</li>
-			<li>Fatigue or reduced productivity due to physical strain</li>
-		</ul>
-		<p>If your workspace does not feel right, or your symptoms keep returning, it is worth getting it assessed.</p>
+	{doc.sections[1] && (
+	<ImageText
+		eyebrow={doc.sections[1].eyebrow ?? undefined}
+		heading={doc.sections[1].heading ?? undefined}
+		highlight={doc.sections[1].headingHighlight ?? undefined}
+		reverse={doc.sections[1].imageOnRight}
+		altBg={doc.sections[1].altBackground}
+		image={doc.sections[1].image?.url ?? undefined}
+		imageAlt={doc.sections[1].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[1].blocks} />
+		{doc.sections[1].ctaLabel && (
+			<p><a
+				href={doc.sections[1].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[1].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[1].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[1].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Assessment" heading="How we" highlight="work" image="/ergonomics/typing-hands.jpg" imageAlt="Hands at keyboard">
-		<p>Everything we do is built around one principle: helping you move better within your environment.</p>
-		<p>Your assessment may include:</p>
-		<ul>
-			<li>Video analysis of your workspace to identify what is driving your symptoms</li>
-			<li>Clear explanation of why your pain has developed</li>
-			<li>Immediate adjustments to your setup to reduce strain</li>
-			<li>Advice on chairs, desks, keyboards, monitor height, and supports</li>
-			<li>Simple changes you can implement straight away at home or work</li>
-			<li>Targeted exercises to address movement habits contributing to pain</li>
-		</ul>
-		<p>We offer both in-person and virtual assessments. This can include reviewing your workspace through video or images, allowing us to provide practical solutions wherever you are working.</p>
-		<p>The goal is not just comfort, but long-term change in how you sit, move, and work.</p>
+	{doc.sections[2] && (
+	<ImageText
+		eyebrow={doc.sections[2].eyebrow ?? undefined}
+		heading={doc.sections[2].heading ?? undefined}
+		highlight={doc.sections[2].headingHighlight ?? undefined}
+		reverse={doc.sections[2].imageOnRight}
+		altBg={doc.sections[2].altBackground}
+		image={doc.sections[2].image?.url ?? undefined}
+		imageAlt={doc.sections[2].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[2].blocks} />
+		{doc.sections[2].ctaLabel && (
+			<p><a
+				href={doc.sections[2].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[2].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[2].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[2].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Outcomes" heading="How we measure" highlight="your progress" image="/ergonomics/slider-ergonomics-studio.webp" imageAlt="Ergonomics studio">
-		<p>We don't guess.</p>
-		<p>From your first session, we look at how your workspace is set up, how you move throughout your day, and how your symptoms respond to different positions and tasks. As you implement changes, we reassess how your pain, movement, and tolerance to work improve.</p>
-		<p>This keeps your plan focused and effective.</p>
-		<p>For you, that means:</p>
-		<ul>
-			<li>Clear evidence that your symptoms are improving</li>
-			<li>A setup that evolves as your needs and workload change</li>
-			<li>Confidence working without ongoing discomfort</li>
-		</ul>
-		<p><a href="/outcomes/" class="section-link">Read More About Outcome Measures &rarr;</a></p>
+	{doc.sections[3] && (
+	<ImageText
+		eyebrow={doc.sections[3].eyebrow ?? undefined}
+		heading={doc.sections[3].heading ?? undefined}
+		highlight={doc.sections[3].headingHighlight ?? undefined}
+		reverse={doc.sections[3].imageOnRight}
+		altBg={doc.sections[3].altBackground}
+		image={doc.sections[3].image?.url ?? undefined}
+		imageAlt={doc.sections[3].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[3].blocks} />
+		{doc.sections[3].ctaLabel && (
+			<p><a
+				href={doc.sections[3].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[3].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[3].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[3].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Our patients" heading="Who we" highlight="help" image="/ergonomics/childrens-study-room.jpg" imageAlt="Home study space">
-		<p>We work with a wide range of individuals across Clapham and South West London.</p>
-		<ul>
-			<li>Office-based professionals working long hours at a desk</li>
-			<li>People working from home wanting to create an optimal setup</li>
-			<li>Hybrid workers moving between multiple environments</li>
-			<li>Individuals with recurring back, neck, or shoulder pain</li>
-			<li>Parents balancing work and home setups</li>
-			<li>Anyone looking to improve comfort, productivity, and long-term health</li>
-		</ul>
-		<p>Whatever your working environment, the aim is the same: reduce pain, improve movement, and make your setup work for you.</p>
+	{doc.sections[4] && (
+	<ImageText
+		eyebrow={doc.sections[4].eyebrow ?? undefined}
+		heading={doc.sections[4].heading ?? undefined}
+		highlight={doc.sections[4].headingHighlight ?? undefined}
+		reverse={doc.sections[4].imageOnRight}
+		altBg={doc.sections[4].altBackground}
+		image={doc.sections[4].image?.url ?? undefined}
+		imageAlt={doc.sections[4].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[4].blocks} />
+		{doc.sections[4].ctaLabel && (
+			<p><a
+				href={doc.sections[4].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[4].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[4].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[4].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="Our team" heading="Our clinical" highlight="team" image="/ergonomics/slider-balance-interior.jpg" imageAlt="Balance clinic">
-		<p>Our ergonomics service is delivered by experienced physiotherapists with a strong understanding of movement, posture, and workplace demands along with a depth of knowledge on the most useful desks, chairs, screens, mice and keyboards.</p>
-		<p>You will be guided by a clinician who can assess both your body and your environment, ensuring that any changes are practical, realistic, and tailored to your day-to-day life.</p>
-		<p>We combine clinical expertise with real-world application, so the advice you receive is not just theoretical, but something you can implement immediately.</p>
-		<p><a href="/meet-the-team/" class="section-link">Meet The Team &rarr;</a></p>
+	{doc.sections[5] && (
+	<ImageText
+		eyebrow={doc.sections[5].eyebrow ?? undefined}
+		heading={doc.sections[5].heading ?? undefined}
+		highlight={doc.sections[5].headingHighlight ?? undefined}
+		reverse={doc.sections[5].imageOnRight}
+		altBg={doc.sections[5].altBackground}
+		image={doc.sections[5].image?.url ?? undefined}
+		imageAlt={doc.sections[5].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[5].blocks} />
+		{doc.sections[5].ctaLabel && (
+			<p><a
+				href={doc.sections[5].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[5].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[5].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[5].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText eyebrow="Fees" heading="Pricing and" highlight="insurance" image="/ergonomics/slider-IMG_2045.webp" imageAlt="Workspace review">
-		<p>We offer a transparent fee structure that reflects our level of clinical expertise. We are also recognised by major insurance providers, including Bupa and AXA PPP Health.</p>
-		<p><a href="/pricing#additional-physio" class="section-link">Pricing Information &rarr;</a></p>
+	{doc.sections[6] && (
+	<ImageText
+		eyebrow={doc.sections[6].eyebrow ?? undefined}
+		heading={doc.sections[6].heading ?? undefined}
+		highlight={doc.sections[6].headingHighlight ?? undefined}
+		reverse={doc.sections[6].imageOnRight}
+		altBg={doc.sections[6].altBackground}
+		image={doc.sections[6].image?.url ?? undefined}
+		imageAlt={doc.sections[6].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[6].blocks} />
+		{doc.sections[6].ctaLabel && (
+			<p><a
+				href={doc.sections[6].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[6].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[6].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[6].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
-	<ImageText reverse altBg eyebrow="WorkSpace" heading="A showroom for" highlight="smarter work" image="/ergonomics/showroom.jpg" imageAlt="Keyboard and ergonomic desk setup">
-		<p>We have sourced a wealth of products that will refine every difficult working situation, seating and desk solutions, keyboards, mice, laptop stands, monitor arms and bespoke office furniture. Come and try before you buy.</p>
+	{doc.sections[7] && (
+	<ImageText
+		eyebrow={doc.sections[7].eyebrow ?? undefined}
+		heading={doc.sections[7].heading ?? undefined}
+		highlight={doc.sections[7].headingHighlight ?? undefined}
+		reverse={doc.sections[7].imageOnRight}
+		altBg={doc.sections[7].altBackground}
+		image={doc.sections[7].image?.url ?? undefined}
+		imageAlt={doc.sections[7].image?.alt ?? ''}
+	>
+		<RichText blocks={doc.sections[7].blocks} />
+		{doc.sections[7].ctaLabel && (
+			<p><a
+				href={doc.sections[7].ctaUrl ?? bookingUrl}
+				class="btn-primary"
+				target={doc.sections[7].ctaUrl ? undefined : '_blank'}
+				rel={doc.sections[7].ctaUrl ? undefined : 'noopener'}
+			>{doc.sections[7].ctaLabel}</a></p>
+		)}
 	</ImageText>
+	)}
 
 	<section class="faq-section faq-section--alt">
 		<div class="container">
@@ -121,7 +213,7 @@ const faqs = [
 				{faqs.map((item) => (
 					<details class="faq-item">
 						<summary>{item.q}</summary>
-						<div class="answer">{item.a}</div>
+						<div class="answer"><RichText blocks={item.a} /></div>
 					</details>
 				))}
 			</div>
