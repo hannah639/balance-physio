@@ -24,7 +24,7 @@ Sanity Studio ─► Publish ──► Sanity webhook ──► Cloudflare deplo
 ## Cloudflare setup
 
 - Account: `Hannah@hmdg.co.uk`
-- Project: `balance-physio` (in Workers & Pages)
+- Project: `balancephysio` (in Workers & Pages)
 - Build command: `npm run build`
 - Build output: `dist/`
 - Branch: `main`
@@ -32,7 +32,7 @@ Sanity Studio ─► Publish ──► Sanity webhook ──► Cloudflare deplo
   who can POST to it can trigger a production build — so it does not belong in a
   file that everyone with repo access can read.
 
-  Find it in Cloudflare → Workers & Pages → `balance-physio` → Settings → Builds →
+  Find it in Cloudflare → Workers & Pages → `balancephysio` → Settings → Builds →
   Deploy hooks. Treat it like a password: if it has been shared or committed, delete
   the hook and create a new one, then update the Sanity webhook with the new URL.
 
@@ -84,7 +84,7 @@ export const sanityClient = createClient({
 ## Local dev
 
 ```bash
-cd balance-physio
+cd balancephysio
 npm install
 npm run dev
 # → open http://localhost:4321
@@ -103,7 +103,7 @@ npm run dev
 
 ## Checking a deploy
 
-1. Go to [Cloudflare dashboard](https://dash.cloudflare.com) → Workers & Pages → balance-physio → Deployments
+1. Go to [Cloudflare dashboard](https://dash.cloudflare.com) → Workers & Pages → balancephysio → Deployments
 2. Look for the latest deployment — green tick = success
 3. Click into it to see build logs if something failed
 

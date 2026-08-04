@@ -1,5 +1,18 @@
 export const testimonials = [
     {
+        name: 'DB',
+        image: '/testimonials/db-balance-rehab.jpg',
+        quote: `I've been attending Balance Performance Physiotherapy twice a week since January last year, and I've been consistently impressed by the exceptional standard of care. The team's collaborative approach to my complex health needs has made a real difference, with excellent communication between therapists to ensure my treatment is always joined up and tailored to me.
+
+Jose is the best physiotherapist I've ever had. His expertise, professionalism and genuine care have had an immeasurable impact on my recovery.
+
+During Jose's recent leave, I transferred my care to Patrick, and I couldn't have been more impressed. Patrick is professional, knowledgeable and reassuring, and I felt completely confident in his care from the start. He is already an excellent physiotherapist and would be a fantastic long-term addition to the team.
+
+I would also like to recognise the reception staff, who are always friendly, welcoming and helpful, making every visit a positive experience.
+
+I highly recommend Balance Performance Physiotherapy to anyone looking for expert, compassionate and truly patient-centred care.`,
+    },
+    {
         name: 'AB',
         image: '/testimonials/ab-marathon.jpg',
         role: 'The London Marathon 2026 Testimonial',

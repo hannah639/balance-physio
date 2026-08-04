@@ -373,7 +373,7 @@ npm run preview  # build + wrangler dev
 | `SANITY_API_VERSION` | `2025-02-19` | Required |
 | `SANITY_API_READ_TOKEN` | — | **Not used by the build.** Reserved for future draft/preview work. |
 
-The first three must also exist in Cloudflare → Workers & Pages → `balance-physio` → Settings → Environment variables. Without them the build produces a site with no content.
+The first three must also exist in Cloudflare → Workers & Pages → `balancephysio` → Settings → Environment variables. Without them the build produces a site with no content.
 
 > `npm run build` copies `.env` into `dist/server/.dev.vars` for local `wrangler dev`. That file contains the token. `dist/` is gitignored and the token never reaches `dist/client/`, but never commit or upload `dist/` wholesale.
 

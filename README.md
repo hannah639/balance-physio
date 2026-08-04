@@ -7,8 +7,8 @@ Built with [Astro](https://astro.build) + [Cloudflare Workers](https://developer
 ## Quick start
 
 ```bash
-git clone https://github.com/hannah639/balance-physio.git
-cd balance-physio
+git clone https://github.com/hannah639/balance-physio.git balancephysio
+cd balancephysio
 npm install
 npm run dev
 ```
@@ -39,4 +39,4 @@ The `docs/` folder contains additional reference material — architecture notes
 
 ## Deployment
 
-Every push to `main` auto-deploys to Cloudflare. The build runs `npm run build` and pushes to the `balance-physio` worker — typically live within ~90 seconds.
+Every push to `main` auto-deploys to Cloudflare. The build runs `npm run build` and pushes to the `balancephysio` worker — typically live within ~90 seconds.

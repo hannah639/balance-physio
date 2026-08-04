@@ -2,11 +2,11 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "balance-physio",
+      "name": "balancephysio",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 4321,
-      "cwd": "/Users/hannahhumphries/Downloads/balance-physio"
+      "cwd": "c:\\Users\\D-cent\\OneDrive\\Desktop\\ASTRO PROJECT\\balancephysio\\balancephysio"
     }
   ]
 }
