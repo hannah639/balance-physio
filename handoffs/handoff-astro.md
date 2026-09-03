@@ -351,7 +351,7 @@ Mostly **deliberate build-time fallbacks**, not dead code. Check the importer be
 | `pricing.js` | Fallback for `getPricing()`. Keep. |
 | `navigation-fallback.ts` | Fallback for `resolveNavigation()`. Without it a credential-less build renders 2 header links instead of 78. Keep. |
 | `testimonials.js` | Live source for `/testimonials/`. Not migrated, by instruction. |
-| `events.js` | Live source for `/news-events/` (1 event). Not migrated, by instruction. |
+| `events.js` | Live source for `/news-events/` (2 events). Not migrated, by instruction. Carries its own field reference and a JSDoc `Event` typedef at the top of the file — read that before adding an event. |
 
 ---
 
@@ -438,6 +438,7 @@ The deploy hook URL is **not recorded in this repo** — it is an unauthenticate
 | Cloudflare managed robots.txt | Injects a second `User-agent: *` block ahead of the Sanity-controlled one. Dashboard setting. |
 | `/testimonials/`, `/news-events/` | Still on `src/data/` files, by instruction. |
 | Blog post "Royal Society of Medicine event" | Date is **assumed** (1 June 2026); source had none. |
+| `/news-events/` advertises one event twice | The September "Date TBC" entry and the October "Meet The Team" entry are the same Wellness & Performance event on two dates. Needs an owner decision — see `handoff-astro-2026-09-03.md`. |
 
 ---
 

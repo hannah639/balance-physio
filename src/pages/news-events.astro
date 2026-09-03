@@ -55,8 +55,11 @@ function cliniciansFor(item) {
 						return (
 						<article class={`news-card${bottom ? ' news-card--bottom' : (i % 2 === 1 ? ' news-card--reverse' : '')}`} id={item.slug}>
 							{item.image && !bottom && (
-								<div class={`news-photo${item.imageFit === 'contain' ? ' news-photo--contain' : ''}`} style={item.imagePosition ? `--news-photo-position: ${item.imagePosition};` : undefined}>
-									<Picture src={item.image} alt={item.imageAlt || ''} loading="lazy" decoding="async" width="800" height="600" />
+								<div class={`news-photo${item.imageFit === 'contain' ? ' news-photo--contain' : ''}`} style={[
+									item.imagePosition && `--news-photo-position: ${item.imagePosition};`,
+									item.imageBackdrop && `--news-photo-bg: ${item.imageBackdrop};`,
+								].filter(Boolean).join(' ') || undefined}>
+									<Picture src={item.image} alt={item.imageAlt || ''} loading="lazy" decoding="async" width={item.imageWidth ?? 800} height={item.imageHeight ?? 600} />
 								</div>
 							)}
 							<div class="news-body">
@@ -156,9 +159,10 @@ function cliniciansFor(item) {
 		display: block;
 	}
 	/* Whole-image display for text-heavy graphics (e.g. event posters) that
-	   must not be cropped. Letterboxes against a dark backdrop that blends
-	   with the poster's own background. */
-	.news-photo--contain { background: #0d2438; }
+	   must not be cropped. Letterboxes against a backdrop chosen to blend with
+	   the poster's own background — set per event via `imageBackdrop`, which
+	   feeds --news-photo-bg. Defaults to the dark navy the first poster needs. */
+	.news-photo--contain { background: var(--news-photo-bg, #0d2438); }
 	.news-photo--contain img { object-fit: contain; object-position: center; }
 
 	.news-body { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
@@ -255,6 +259,15 @@ function cliniciansFor(item) {
 		.news-card--reverse .news-photo { order: 0; }
 		.news-card--reverse .news-body { order: 1; }
 		.news-photo { min-height: 0; aspect-ratio: 4/3; }
+		/* Posters keep their own proportions once stacked. A 4/3 box would
+		   shrink a portrait poster to an unreadable size and letterbox the
+		   rest of the column; flowing at natural height fills the card width
+		   instead. Excludes the bottom layout, which owns its 16/9 box. */
+		.news-photo--contain:not(.news-photo--bottom) { aspect-ratio: auto; }
+		.news-photo--contain:not(.news-photo--bottom) img {
+			position: static;
+			height: auto;
+		}
 		.news-body { padding: 32px 24px; }
 		.news-body h2 { font-size: 24px; }
 		.news-body p { font-size: 15px; }
