@@ -65,4 +65,28 @@ export const events = [
 			"Because healing isn't just physical. All are welcome, and you can attend in person or virtually. To register your interest, please email admin@balancephysio.com.",
 		],
 	},
+	{
+		slug: 'st-pauls-opera-la-traviata-2026',
+		date: '2–4 July 2026',
+		category: 'Sponsorship',
+		headline: 'St Paul’s Opera Summer Opera Festival 2026',
+		image: '/news/stpauls-opera-la-traviata-2026.jpg',
+		imageAlt:
+			'St Paul’s Opera poster — Opera in the Heart of Clapham. Verdi’s La Traviata, Love and Death. Directed by Edwina Strobl, musical direction Adrian Salinero. 2nd–4th July 2026 at St Paul’s Church, Clapham, SW4 0DZ. Tickets £39.',
+		imageWidth: 435,
+		imageHeight: 664,
+		imageFit: 'contain',
+		// The poster's own magenta paper colour, so the letterbox reads as part of it.
+		imageBackdrop: '#c74988',
+		body: [
+			'As part of Balance’s 25-year celebration, we were delighted to sponsor St Paul’s Opera’s 2026 summer production of Verdi’s La Traviata.',
+			'It was a wonderful opportunity to support such an incredible production and the amazing singers who brought this timeless opera to life.',
+			'Balance is looking forward to continuing our close relationship with St Paul’s Opera and supporting their talented performers and team in the future.',
+		],
+		cta: {
+			label: 'Read the sponsorship report',
+			href: '/news/spo-x-balance-2026-report.pdf',
+			external: true,
+		},
+	},
 ];
