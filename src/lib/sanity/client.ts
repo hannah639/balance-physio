@@ -10,7 +10,7 @@
  * bundle.
  */
 import {createClient} from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
+import {createImageUrlBuilder} from '@sanity/image-url'
 
 const projectId = import.meta.env.SANITY_PROJECT_ID
 const dataset = import.meta.env.SANITY_DATASET ?? 'production'
@@ -51,7 +51,7 @@ export const sanityClient = isSanityConfigured
 		})
 	: null
 
-const builder = sanityClient ? imageUrlBuilder(sanityClient) : null
+const builder = sanityClient ? createImageUrlBuilder(sanityClient) : null
 
 /**
  * Build a Sanity CDN image URL. Returns null when Sanity isn't configured or

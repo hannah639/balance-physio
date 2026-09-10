@@ -266,7 +266,7 @@ The 24 service and 19 condition pages are **static files**, one per document, no
 
 | Module | Exports | Notes |
 | --- | --- | --- |
-| `client.ts` | `sanityClient`, `isSanityConfigured` | **Token-less by design.** Referencing `SANITY_API_READ_TOKEN` would inline it into the server bundle. The dataset is public. |
+| `client.ts` | `sanityClient`, `isSanityConfigured`, `urlFor` | **Token-less by design.** Referencing `SANITY_API_READ_TOKEN` would inline it into the server bundle. The dataset is public. Imports `@sanity/image-url` through its **named** `createImageUrlBuilder` export — the package's default export is deprecated as of 2.1.1 and warned on every dev start and build until 2026-09-10. |
 | `queries.ts` | All GROQ | Single home for every query. Explicit projections — no `...` spreads. |
 | `globals.ts` | `getGlobals()` | siteSettings + seoSettings + navigation + bookingLinks in ONE query. Never throws; falls back to `data/site-settings.js`. |
 | `pageContent.ts` | `pages`, `services`, `whoWeHelp`, `toBodyBlocks`, types | `makeLoader()` gives each `.all` / `.bySlug` / `.required` / `.routes`. |
