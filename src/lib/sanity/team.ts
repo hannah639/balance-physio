@@ -18,7 +18,13 @@ export type TeamMember = {
 	/** Bio as plain paragraphs — the design renders simple <p> blocks. */
 	bio: string[]
 	photo: {url: string; alt: string; width: number | null; height: number | null} | null
-	qualifications: string | null
+	/**
+	 * Post-nominals and standing, one entry per line — e.g. "Ph.D, MCSP, SRP",
+	 * "30+ Years of Experience". An ARRAY in the CMS, which is why this is a
+	 * string[]: it was typed `string | null` until 2026-09-10, so `str()` saw an
+	 * array, returned null, and the field rendered empty for everyone.
+	 */
+	qualifications: string[]
 	specialistAreas: string[]
 	email: string | null
 	phone: string | null
@@ -48,6 +54,16 @@ function blocksToParagraphs(blocks: unknown): string[] {
 		.filter(Boolean)
 }
 
+/** Trim a list of strings, dropping blanks. Tolerates a single string. */
+function strList(v: unknown): string[] {
+	if (typeof v === 'string') {
+		const t = v.trim()
+		return t.length ? [t] : []
+	}
+	if (!Array.isArray(v)) return []
+	return v.map((x) => (typeof x === 'string' ? x.trim() : '')).filter(Boolean)
+}
+
 let cached: Promise<TeamMember[]> | null = null
 
 function fromFallback(): TeamMember[] {
@@ -57,7 +73,7 @@ function fromFallback(): TeamMember[] {
 		jobTitle: m.role ?? '',
 		bio: m.bio ?? [],
 		photo: m.photo ? {url: m.photo, alt: `${m.name}, ${m.role ?? 'team member'}`, width: 600, height: 800} : null,
-		qualifications: null,
+		qualifications: [],
 		specialistAreas: [],
 		email: null,
 		phone: null,
@@ -84,8 +100,8 @@ async function load(): Promise<TeamMember[]> {
 					jobTitle: str(r.jobTitle) ?? '',
 					bio: blocksToParagraphs(r.bio),
 					photo: img?.url ? {url: img.url, alt: str(img.alt) || `${name}, ${str(r.jobTitle) ?? 'team member'}`, width: img.width ?? null, height: img.height ?? null} : null,
-					qualifications: str(r.qualifications),
-					specialistAreas: Array.isArray(r.specialistAreas) ? (r.specialistAreas as string[]).filter(Boolean) : [],
+					qualifications: strList(r.qualifications),
+					specialistAreas: strList(r.specialistAreas),
 					email: str(r.email),
 					phone: str(r.phone),
 					wellnessOnly: r.wellnessOnly === true,

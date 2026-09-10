@@ -4,6 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Picture from '../../components/Picture.astro';
 import { getTeam, initials, gradientFor } from '../../lib/sanity/team';
+import { resolveSpecialisms } from '../../lib/sanity/specialisms';
 
 export async function getStaticPaths() {
 	// One route per published team member in Sanity. Unpublished members simply
@@ -17,6 +18,10 @@ export async function getStaticPaths() {
 
 const { member } = Astro.props;
 const avatarGradient = gradientFor(member.name);
+// Specialisms are free text in the CMS; resolveSpecialisms() links each one to
+// the condition or service page that covers it, and leaves it as plain text
+// when no page does. See src/lib/sanity/specialisms.ts.
+const specialisms = resolveSpecialisms(member.specialistAreas);
 ---
 <Layout
 	title={member.seoTitle ?? member.name}
@@ -44,6 +49,21 @@ const avatarGradient = gradientFor(member.name);
 					<div class="eyebrow"><span class="eyebrow-dot"></span>About {member.name.split(' ')[0]}</div>
 					<h2>{member.name}</h2>
 					<p class="bio-role">{member.jobTitle}</p>
+					{member.qualifications.length > 0 && (
+						<ul class="bio-creds">
+							{member.qualifications.map((q) => <li>{q}</li>)}
+						</ul>
+					)}
+					{specialisms.length > 0 && (
+						<div class="bio-specialisms">
+							<h3 class="bio-specialisms-title">Specialisms</h3>
+							<ul class="bio-specialisms-list">
+								{specialisms.map((s) => (
+									<li>{s.href ? <a href={s.href}>{s.label}</a> : <span>{s.label}</span>}</li>
+								))}
+							</ul>
+						</div>
+					)}
 					{member.bio ? (
 						member.bio.map((p) => <p>{p}</p>)
 					) : (
@@ -65,7 +85,18 @@ const avatarGradient = gradientFor(member.name);
 	.bio-section { padding: 80px 0; background: #ffffff; }
 	.bio-grid { display: grid; grid-template-columns: 320px 1fr; gap: 64px; align-items: start; max-width: 1000px; margin: 0 auto; }
 	.bio-photo { width: 320px; height: 400px; border-radius: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(0,0,0,0.12); overflow: hidden; }
-	.bio-photo--img { padding: 0; }
+	/* Sticky photo column. The bio text is normally far taller than the 400px
+	   portrait, so the photo holds its place while the prose scrolls past it,
+	   then releases at the bottom of the section.
+	   - top: 100px matches .image-text-media and .image-toggle-media in
+	     Layout.astro, and clears the fixed header.
+	   - align-self: start is what gives sticky somewhere to travel; a
+	     stretched grid item fills its row and cannot move. .bio-grid already
+	     sets align-items: start, this states it on the item that depends on it.
+	   - It stays inside .bio-section because a sticky grid item is bounded by
+	     its grid area, whose height is the bio column next to it.
+	   No ancestor sets overflow, which would disable this with no error. */
+	.bio-photo--img { padding: 0; position: sticky; top: 100px; align-self: start; }
 	.bio-photo--img img {
 		width: 100%;
 		height: 100%;
@@ -79,6 +110,26 @@ const avatarGradient = gradientFor(member.name);
 	.bio-body h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 8px; }
 	.bio-role { font-size: 14px; color: #e87722; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
 	.bio-body p { font-size: 17px; line-height: 1.8; color: #555555; margin-bottom: 18px; }
+
+	/* Credentials — the CMS holds one entry per line ("Ph.D, MCSP, SRP",
+	   "30+ Years of Experience"), so this is a list, not a paragraph. */
+	.bio-creds { list-style: none; margin: -8px 0 24px; }
+	.bio-creds li { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.5; }
+	.bio-creds li + li { margin-top: 2px; }
+	.bio-creds li:first-child { letter-spacing: 0.3px; }
+
+	/* Specialisms — pills, each linking to the page that covers it. */
+	.bio-specialisms { margin: 0 0 28px; padding: 20px 22px; background: var(--primary-bg); border: 1px solid var(--border); border-radius: var(--radius); }
+	.bio-specialisms-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); margin-bottom: 14px; }
+	.bio-specialisms-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+	.bio-specialisms-list li { display: flex; }
+	.bio-specialisms-list a,
+	.bio-specialisms-list span { display: inline-block; padding: 8px 16px; border-radius: 50px; font-size: 15px; font-weight: 600; line-height: 1.3; background: var(--white); border: 1px solid var(--border); }
+	.bio-specialisms-list a { color: var(--primary); text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+	.bio-specialisms-list a:hover,
+	.bio-specialisms-list a:focus-visible { background: var(--accent); border-color: var(--accent); color: var(--white); }
+	/* No page covers this specialism — plain text, deliberately not a link. */
+	.bio-specialisms-list span { color: var(--text-muted); }
 	.bio-body .inline-link { color: #3EBEDF; font-weight: 600; }
 	.bio-body .inline-link:hover { text-decoration: underline; }
 	@media (max-width: 900px) {
@@ -88,7 +139,12 @@ const avatarGradient = gradientFor(member.name);
 		   aren't cropped off at the top or bottom by the desktop fixed
 		   height of 280px. */
 		.bio-photo { width: 100%; max-width: 320px; height: auto; aspect-ratio: 3/4; margin: 0 auto; }
+		/* One column below 900px: the photo sits above the text, so there is
+		   nothing to scroll past and sticking it would only detach it from the
+		   bio it belongs to. Same treatment as .image-text-media. */
+		.bio-photo--img { position: static; top: auto; }
 		.bio-initials { font-size: 72px; }
 		.bio-body h2 { font-size: 28px; }
+		.bio-specialisms { padding: 18px; }
 	}
 </style>

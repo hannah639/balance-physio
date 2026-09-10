@@ -110,6 +110,25 @@ Typography: **Inter** (400–800) from Google Fonts, preconnected in the head. B
 
 > When targeting a scoped class from a parent, use `:global()`. Astro will not rewrite a selector it cannot see in the template.
 
+### Sticky media columns
+
+Three places pin a media column while its text column scrolls: `.image-text-media`
+and `.image-toggle-media` (both global, in `Layout.astro`) and `.bio-photo--img`
+on the team profile page. All three use the same recipe, and a new one should
+too:
+
+```css
+position: sticky;
+top: 100px;        /* clears the fixed header — the shared offset */
+align-self: start; /* without it the item stretches and cannot travel */
+```
+
+Each is switched off at `max-width: 900px` with `position: static; top: auto`,
+because the grid is one column there and the media sits above its own text.
+
+> Sticky is silently disabled by `overflow` on **any** ancestor. Nothing on
+> `.bp-page` or `.container` sets it today. Check before adding one.
+
 ### Global class families
 
 `btn-primary` · `btn-primary-lg` · `btn-book` · `btn-outline-white` · `btn-outline-dark` · `container` · `section-header` · `eyebrow` · `hero-badge` · `highlight` · `page-hero` · `image-text-content` · `text-grid` / `text-grid-cell` · `faq-section` / `faq-item` / `faq-list` · `feature-card` · `clinic-tag` · `problem-card` · `rich-content` · `inline-link` · `section-link`
@@ -231,7 +250,7 @@ Stick to these four. A fifth arbitrary breakpoint makes the system harder to rea
 | `/service/vojta-therapy/` | `service/vojta-therapy.astro` | Layout | `getGlobals`, `globals`, `pageContent`, `services` |
 | `/service/womens-health/` | `service/womens-health.astro` | Layout | `getGlobals`, `globals`, `pageContent`, `services` |
 | `/shop/` | `shop.astro` | Layout | `pageContent`, `pages` |
-| `/team/[slug]/` | `team/[slug].astro` | Layout | `getTeam`, `team` |
+| `/team/[slug]/` | `team/[slug].astro` | Layout | `getTeam`, `team`, `specialisms` |
 | `/terms-conditions/` | `terms-conditions.astro` | Layout | `pageContent`, `pages` |
 | `/testimonials/` | `testimonials.astro` | Layout | `pageContent`, `pages` |
 | `/thank-you/` | `thank-you.astro` | Layout | `pageContent`, `pages` |
@@ -279,6 +298,7 @@ The 24 service and 19 condition pages are **static files**, one per document, no
 | `pricing.ts` | `getPricing` | Falls back to `data/pricing.js`. |
 | `navigation.ts` | `resolveNavigation` | Falls back to `data/navigation-fallback.ts`. |
 | `routes.ts` | `resolveHref`, `ROUTE_PREFIX`, `FIXED_ROUTES` | **The only place that knows the URL structure.** Takes a whole document, not `(type, slug)`. |
+| `specialisms.ts` | `resolveSpecialism`, `resolveSpecialisms` | Links a team member's free-text `specialistAreas` label to the condition or service page covering it. Label → slug, slug → href via `resolveHref`. Slugs are checked against the **route files** (`import.meta.glob`), not the CMS, so a label cannot link to a 404. Resolution order: a 9-entry alias table for genuine title/slug rewordings, then the literal slug, then the slug with the connecting `and` removed — the site has both `/condition/balance-and-dizziness/` and `/service/strength-conditioning/`. Covers **26 of the roster’s 27 labels** (2026-09-10); the 27th, `Breathwork`, has no page and renders as plain text, which is the designed fallback. An alias pointing at a missing route **fails the build**; an unmatched label does not. |
 | `seo.ts` | `getSitemapEntries`, `absoluteUrl` | Sitemap sources must match the sources that generate pages. |
 | `blogPaging.ts` | `PAGE_SIZE` | Declared once so grid and routes agree. |
 | `types.ts` | Shared types |  |
@@ -293,6 +313,12 @@ The 24 service and 19 condition pages are **static files**, one per document, no
 3. loader      src/lib/sanity/<module>.ts       ← forget this and the field renders blank
 4. component   src/components/… or src/pages/…
 ```
+
+A fourth trap sits alongside those: a field can be queried and mapped and still
+be empty because the loader mistypes it. `teamMember.qualifications` is an ARRAY
+in Sanity but `team.ts` read it with `str()`, which returns null for anything
+that is not a string — so it was null for every member from migration until
+2026-09-10. TypeScript could not catch it: the value arrives as `unknown`.
 
 **Steps 2 and 3 are the ones people miss.** A field can exist in the schema *and* the document and still render blank because nothing selected or mapped it. There is no error — the value is simply `undefined`. This happened three times during the migration.
 
@@ -363,6 +389,23 @@ npm run dev      # http://localhost:4321
 npm run build    # static build into dist/
 npm run preview  # build + wrangler dev
 ```
+
+> ### A running dev server does not see CMS edits
+>
+> Every loader memoises its Sanity promise for the life of the process (§7), so
+> `npm run dev` holds the snapshot it fetched at startup. Publishing in the
+> Studio changes nothing on `localhost` — and neither does saving a file, since
+> Vite only re-evaluates modules it sees change. **Restart the dev server after
+> editing content.**
+>
+> This matters because the symptom is identical to a field that was never wired:
+> the page renders, the build is clean, and the new value is simply absent. It
+> was reported as exactly that on 2026-09-10 — see
+> `handoff-astro-2026-09-10.md`, Session 5.
+>
+> When restarting, confirm the port. If the old process still holds 4321 the new
+> server comes up on 4322 while the stale one keeps answering, which looks like
+> the bug surviving the restart.
 
 ### Environment variables (`.env`)
 
