@@ -5,7 +5,7 @@ import ImageText from '../../components/ImageText.astro';
 import PhotoMarquee from '../../components/PhotoMarquee.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Team from '../../components/Team.astro';
-import { team } from '../../data/team.js';
+import { getTeam } from '../../lib/sanity/team';
 import RichText from '../../components/RichText.astro';
 import { services } from '../../lib/sanity/pageContent';
 
@@ -13,8 +13,27 @@ const doc = await services.required('psychological-wellness');
 
 const photos = doc.photoGallery.map((p) => ({ src: p.url, alt: p.alt }));
 
-// Wellness team slider — only the three wellness specialists.
-const wellnessTeam = team.filter((m) => m.wellness);
+// Wellness team tiles — only the three wellness specialists.
+//
+// This must come from getTeam(), not src/data/team.js. Team.astro reads the
+// SANITY shape — `member.photo.url` and `member.jobTitle` — while the legacy
+// file stores `photo` as a plain string and calls the field `role`. Passing
+// the legacy objects therefore matched neither: every tile fell through to the
+// gradient-initials placeholder and rendered an empty role, with no error.
+//
+// getTeam() is memoised and Team.astro calls it too, so this is one shared
+// request, not two. It also still works with Sanity unreachable: the fallback
+// in team.ts maps `wellness` to `wellnessOnly` and wraps the photo path in
+// the object shape Team.astro expects.
+const wellnessTeam = (await getTeam()).filter((m) => m.wellnessOnly);
+
+if (wellnessTeam.length === 0) {
+	throw new Error(
+		'[wellness] No team members are flagged wellnessOnly — refusing to build. ' +
+			'The "Meet The Wellness Team" section would render an empty grid. Check the ' +
+			'three wellness practitioners are published in Sanity with wellnessOnly set.',
+	);
+}
 
 const faqs = doc.faqs.map((f) => ({ q: f.question, a: f.answer }));
 
@@ -108,6 +127,7 @@ const references = [
 	<Team
 		members={wellnessTeam}
 		centered
+		hideRole
 		heading="Meet The Wellness Team"
 		subheading="Three specialists, three approaches — sports psychology, clinical hypnotherapy, and holistic somatic therapy."
 	/>

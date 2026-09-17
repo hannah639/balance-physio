@@ -11,7 +11,7 @@ The companion document for the CMS is `handoffs/handoff-sanity.md` in the **bala
 | Framework | Astro 6.1.7, static output |
 | Adapter | `@astrojs/cloudflare` 13.2.1 |
 | Local | http://localhost:4321 |
-| Site | **67** route files → **114** built pages |
+| Site | **67** route files → **115** built pages (was 114 until `patrick-oleary` was published on 2026-09-17; the total moves with the CMS, since team, who-we-help and news pages are generated) |
 | Dependencies | 5 total (see §2) |
 
 ---
@@ -240,7 +240,7 @@ Stick to these four. A fifth arbitrary breakpoint makes the system harder to rea
 | `/service/pilates/` | `service/pilates.astro` | ServicePage | `pageContent`, `services` |
 | `/service/podiatry/` | `service/podiatry.astro` | Layout | `getGlobals`, `globals`, `pageContent`, `services` |
 | `/service/prehab-class/` | `service/prehab-class.astro` | Layout | `getGlobals`, `globals`, `pageContent`, `services` |
-| `/service/psychological-wellness/` | `service/psychological-wellness.astro` | Layout | `pageContent`, `services` |
+| `/service/psychological-wellness/` | `service/psychological-wellness.astro` | Layout | `pageContent`, `services`, `getTeam` |
 | `/service/shockwave-therapy/` | `service/shockwave-therapy.astro` | Layout | `getGlobals`, `globals`, `pageContent`, `services` |
 | `/service/specialist-neuro-physio-london/` | `service/specialist-neuro-physio-london.astro` | Layout | `getGlobals`, `globals`, `pageContent`, `services` |
 | `/service/sports-massage-clapham-soft-tissue-therapy/` | `service/sports-massage-clapham-soft-tissue-therapy.astro` | Layout | `getGlobals`, `globals`, `pageContent`, `services` |
@@ -373,7 +373,7 @@ Mostly **deliberate build-time fallbacks**, not dead code. Check the importer be
 | File | Status |
 | --- | --- |
 | `site-settings.js` | Fallback for `getGlobals()`; **only** source of the GA/GTM IDs. Keep. |
-| `team.js` | Fallback for `getTeam()`. Keep. |
+| `team.js` | Fallback for `getTeam()`. Keep. **Import it directly only as a last resort:** `Team.astro` reads the Sanity shape (`photo.url`, `jobTitle`) while this file uses `photo` as a string and `role`, so passing its objects to a component silently renders placeholders. That was live on `/service/psychological-wellness/` until 2026-09-17. `news-events.astro` is now the only page importing it directly, and it does its own rendering rather than handing the objects to `Team.astro`. |
 | `pricing.js` | Fallback for `getPricing()`. Keep. |
 | `navigation-fallback.ts` | Fallback for `resolveNavigation()`. Without it a credential-less build renders 2 header links instead of 78. Keep. |
 | `testimonials.js` | Live source for `/testimonials/`. Not migrated, by instruction. |

@@ -7,8 +7,11 @@ const {
 	sliderRow = false,
 	centered = false,
 	heading = 'Meet Our Team',
-	subheading = 'We have 27 professionals under one roof waiting to help you move, recover and perform.',
+	subheading = 'We have 28 professionals under one roof waiting to help you move, recover and perform.',
 	members: customMembers = null,
+	// Drop the job-title line under each name. Used by the Wellness page, whose
+	// three tiles carry their specialism in the section copy above them.
+	hideRole = false,
 } = Astro.props;
 
 // Default lists exclude wellness-only members (Sally, Kat, Richard) — they only appear on the Wellness page.
@@ -46,7 +49,7 @@ const members = customMembers
 							)}
 							<div class="info">
 								<h3>{member.name}</h3>
-								<span class="role">{member.jobTitle}</span>
+								{!hideRole && <span class="role">{member.jobTitle}</span>}
 							</div>
 						</a>
 					))}
@@ -71,7 +74,7 @@ const members = customMembers
 						)}
 						<div class="info">
 							<h3>{member.name}</h3>
-							<span class="role">{member.jobTitle}</span>
+							{!hideRole && <span class="role">{member.jobTitle}</span>}
 						</div>
 					</a>
 				))}
