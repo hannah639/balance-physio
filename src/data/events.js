@@ -66,6 +66,21 @@ export const events = [
 		],
 	},
 	{
+		slug: 'mulligan-manual-therapy-concept-2026',
+		category: 'Training',
+		headline: 'Mulligan Manual Therapy Concept',
+		image: '/news/mulligan-manual-therapy-concept-2026.jpg',
+		imageAlt:
+			'Two Balance Performance Physiotherapy clinicians in navy club polo shirts, arms around each other’s shoulders and smiling at the camera after a Mulligan Concept training session, in front of a framed blue poster.',
+		imageWidth: 480,
+		imageHeight: 502,
+		body: [
+			'Sam Stringer, Portia Morey, Jarryd Ferreira and Patrick O’Leary attended our last 2 Mulligans Manual Therapy Concept sessions.',
+			'We believe better care starts with continuous learning. Every year, Balance hosts official Mulligan Concept postgraduate training, bringing expert manual therapy instruction to our own physiotherapists as well as practitioners across the surrounding area.',
+			'This commitment to advanced education directly benefits your recovery. The Mulligan Concept uses gentle, hands-on techniques synchronized with your own movements to unlock stiff, painful joints in real time. Whether you are dealing with spinal discomfort, shoulder stiffness, or a stubborn sports injury, our team’s regularly updated skills mean you receive precise, painless treatments designed to restore your movement immediately and get you back to daily life with confidence.',
+		],
+	},
+	{
 		slug: 'st-pauls-opera-la-traviata-2026',
 		date: '2–4 July 2026',
 		category: 'Sponsorship',

@@ -377,7 +377,7 @@ Mostly **deliberate build-time fallbacks**, not dead code. Check the importer be
 | `pricing.js` | Fallback for `getPricing()`. Keep. |
 | `navigation-fallback.ts` | Fallback for `resolveNavigation()`. Without it a credential-less build renders 2 header links instead of 78. Keep. |
 | `testimonials.js` | Live source for `/testimonials/`. Not migrated, by instruction. |
-| `events.js` | Live source for `/news-events/` (2 events). Not migrated, by instruction. Carries its own field reference and a JSDoc `Event` typedef at the top of the file — read that before adding an event. |
+| `events.js` | Live source for `/news-events/` (3 events). Not migrated, by instruction. Carries its own field reference and a JSDoc `Event` typedef at the top of the file — read that before adding an event. |
 
 ---
 
