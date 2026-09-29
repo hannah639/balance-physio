@@ -1,0 +1,302 @@
+---
+/**
+ * Personal Training — /service/personal-training/
+ *
+ * NOTE ON THE CONTENT SOURCE. Every other service page reads its copy from
+ * Sanity via `services.required('<slug>')`. There is no `personal-training`
+ * service document in the CMS, so the copy below is held in this file instead,
+ * exactly as supplied in "PT Content - Balance Performance Physiotherapy".
+ *
+ * That is a deliberate deviation from handoff-astro.md §1, not an oversight: a
+ * document can only be created in the Studio, and this repo has no Sanity write
+ * access. To migrate later, create a `service` document with slug
+ * `personal-training`, move the copy into it, and rewrite this file to match
+ * `strength-conditioning.astro`. Until then, a copy change means a code change.
+ *
+ * The photographs are the Sanity assets already used by
+ * /service/strength-conditioning/, referenced by their CDN URLs and deliberately
+ * re-ordered so the two pages do not read as the same page twice. Nothing is
+ * duplicated on disk. Their alt text is inherited from the CMS unchanged.
+ */
+import Layout from '../../layouts/Layout.astro';
+import { getGlobals } from '../../lib/sanity/globals';
+import PageHero from '../../components/PageHero.astro';
+import ImageText from '../../components/ImageText.astro';
+import PhotoMarquee from '../../components/PhotoMarquee.astro';
+import BookingCTA from '../../components/BookingCTA.astro';
+
+const bookingUrl = (await getGlobals()).bookingUrl;
+
+const CDN = 'https://cdn.sanity.io/images/3po4zrtd/production/';
+
+// The six marquee photographs, in a different order from the S&C page.
+const photos = [
+	{ src: CDN + '382180d57c1c328929818f387ea1d635eefb4f2f-1400x934.avif', alt: 'Barbell training' },
+	{ src: CDN + 'cf8619989165ecb5945078f59941390974f1ea2c-1400x798.avif', alt: 'Progressive loading' },
+	{ src: CDN + 'd26b7ce8d6f5d9a59f22e3bcd0bb9654252dbcb6-1400x934.avif', alt: 'Kettlebell work' },
+	{ src: CDN + 'e58c5a4192fbdfc0dabf717b03badcb00c9ba9d5-1358x1400.avif', alt: 'Coached strength session' },
+	{ src: CDN + '8ef90f23f2101bf545dfb1884a4d2207417b6c9e-1400x933.avif', alt: 'Group training' },
+	{ src: CDN + '4c5bee079decb4c59a9b155881b522f866dbfb44-1187x1400.avif', alt: 'S&C coaching' },
+];
+
+// Section images — also the S&C set, in a different order and different roles.
+const img = {
+	coaching: CDN + 'c67c549ba08190a44cdbd24738971785c842a9b6-1168x1400.avif',
+	suits: CDN + '5defda9259398de560e43c9331beeb98c5dc2496-1287x1400.avif',
+	sessions: CDN + '9c117c5b688d980d3aa2b40ad0d651a7b3013850-1188x1400.avif',
+	progress: CDN + '20788387eb778d488ae2879939c9366719921d2a-1400x1051.avif',
+	clients: CDN + '790ffc1eafd536c8c9647ba80836bebccf313c18-1400x933.avif',
+	trainers: CDN + 'df52b6a7ed3143419edae34e3aa240893d75cc60-1317x1400.avif',
+};
+
+const faqs = [
+	{
+		q: 'Do I need to be a member to train here?',
+		a: 'No. Personal training is booked session by session or as a block, with no membership required.',
+	},
+	{
+		q: 'How long is a session?',
+		a: 'Sessions are available in 45 and 60 minute formats. Your trainer can advise which suits your goals and your schedule.',
+	},
+	{
+		q: 'I have never lifted weights before. Is that a problem?',
+		a: 'Not at all. A good number of our clients start with no resistance training background, and sessions begin at a level that makes sense for you.',
+	},
+	{
+		q: 'Can I do this alongside physiotherapy at Balance?',
+		a: 'Yes, and it often works well. Your trainer and physiotherapist are in the same building and can keep your training and your treatment pointing in the same direction.',
+	},
+	{
+		q: 'How often should I train?',
+		a: 'That depends on your goals and your week. Some clients train once a week with a plan to follow in between, others come more often. We will agree on something realistic rather than something aspirational.',
+	},
+	{
+		q: 'Where do sessions take place?',
+		a: 'In our studios at our Clapham North clinic on Gauden Road.',
+	},
+];
+---
+<Layout
+	title="Personal Training in Clapham | Balance Performance Physiotherapy"
+	description="One to one personal training in Clapham with Level 4 qualified trainers, working alongside our physiotherapy team. Sessions built around your goals."
+>
+	<PageHero
+		title="in Clapham"
+		highlight="Personal Training"
+		breadcrumb="Personal Training"
+	/>
+
+	<PhotoMarquee images={photos} heightPx={140} speedSeconds={45} />
+
+	<ImageText
+		eyebrow="Personal training"
+		heading="One to one coaching, built"
+		highlight="around you"
+		image={img.coaching}
+		imageAlt="Coach supporting a barbell squat at Balance Physio"
+		imageAspect="1168 / 1400"
+	>
+		<p>Your sessions are led by <a href="/team/alex-deif/" class="inline-link">Alex Deif</a> and <a href="/team/jonathan-lewis/" class="inline-link">Jonathan Lewis</a>, our personal trainers. There is no fixed programme to slot into. Training begins from where you are now, whether that is returning to exercise after a long gap, building general fitness, feeling stronger for everyday life, or working towards something specific you have in the diary.</p>
+		<p>Because we sit alongside a full clinical team, your trainer can spot anything that would be better assessed properly and point you towards <a href="/service/physiotherapy/" class="inline-link">physiotherapy</a> without you having to start again elsewhere.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Is it for you?"
+		heading="When personal training might"
+		highlight="suit you"
+		reverse
+		altBg
+		image={img.suits}
+		imageAlt="Coach guiding strength training at Balance Physio"
+		imageAspect="1287 / 1400"
+	>
+		<p>Personal training works well if you recognise any of the following:</p>
+		<ul>
+			<li>You want the accountability of a booked session with someone expecting you</li>
+			<li>You are not sure where to start in a gym, or you have lost confidence in training</li>
+			<li>You have a goal with a date attached to it</li>
+			<li>You are pregnant or recently had a baby and want to keep training sensibly</li>
+			<li>You have had back trouble before and want to exercise without stirring it up</li>
+			<li>You are fitting training around a demanding job and need it to be efficient</li>
+			<li>You have finished a course of treatment and want to keep the progress going</li>
+		</ul>
+	</ImageText>
+
+	<ImageText
+		eyebrow="What to expect"
+		heading="How your sessions"
+		highlight="work"
+		image={img.sessions}
+		imageAlt="Coach guiding a barbell session at Balance Physio"
+		imageAspect="1188 / 1400"
+	>
+		<p>Your first session is part conversation, part assessment. We talk through your goals, your training history, anything that has caused you problems in the past, and what your week realistically allows. From there your trainer builds a plan and adjusts it as you go.</p>
+		<p>Sessions typically cover:</p>
+		<ul>
+			<li>Movement and technique, so exercises do what they are meant to do</li>
+			<li>Resistance training appropriate to your current level</li>
+			<li>Conditioning and general fitness work</li>
+			<li>Practical guidance you can apply between sessions</li>
+			<li>Regular review, so the plan keeps pace with you</li>
+		</ul>
+		<p>If what you actually want is structured barbell work and progression through key lifts, <a href="/service/strength-conditioning/" class="inline-link">strength and conditioning</a> may be the better fit, and our <a href="/service/lift-weight-training-club/" class="inline-link">Weight training club</a> is a group option. Alex or Jon will be happy to talk you through which one suits your goals before you commit.</p>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Measuring it"
+		heading="How we track your"
+		highlight="progress"
+		reverse
+		altBg
+		image={img.progress}
+		imageAlt="Tracking progress"
+		imageAspect="1400 / 1051"
+	>
+		<p>Training should be measurable, so you can see whether it is working. Depending on your goals, we may look at:</p>
+		<ul>
+			<li>Strength and repetition changes across key exercises</li>
+			<li>Movement quality and control</li>
+			<li>How well you tolerate an increase in training</li>
+			<li>Everyday tasks that felt harder before</li>
+			<li>Consistency and how training fits into your week</li>
+			<li>Your own confidence in what your body can handle</li>
+		</ul>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Our clients"
+		heading="Who we"
+		highlight="work with"
+		image={img.clients}
+		imageAlt="Lifting technique"
+		imageAspect="1400 / 933"
+	>
+		<p>Our personal training clients are a broad mix, including:</p>
+		<ul>
+			<li>People coming back to exercise after months or years away from it</li>
+			<li>Parents training around childcare, short on time</li>
+			<li>Desk-based professionals who want to undo some of the sitting</li>
+			<li>Runners, cyclists and club sport players adding strength work</li>
+			<li>People who have finished treatment and want to keep building</li>
+			<li>Older clients focused on staying strong, steady and independent</li>
+		</ul>
+	</ImageText>
+
+	<ImageText
+		eyebrow="Meet them"
+		heading="Your"
+		highlight="trainers"
+		reverse
+		altBg
+		image={img.trainers}
+		imageAlt="S&C coaches"
+		imageAspect="1317 / 1400"
+	>
+		<h3 class="pt-trainer-name">Alex Deif, Level 4 Qualified Personal Trainer</h3>
+		<p>Alex has coached across rugby, skiing and personal training, and specialises in lower back pain management, pre and postnatal training, and sports specific work. He is known for adapting sessions to the person in front of him rather than handing out a template. <a href="/team/alex-deif/" class="inline-link">Read more about Alex</a>.</p>
+		<h3 class="pt-trainer-name">Jonathan Lewis, Physiotherapist, Soft Tissue &amp; S&amp;C Coach</h3>
+		<p>Jonathan co-founded Balance in 2001 and has worked in health and fitness since 1993. He specialises in breathing, movement, physical conditioning and massage, helping people build strength, resilience and everyday wellbeing. His approach gives clients practical tools and habits to support their own health. <a href="/team/jonathan-lewis/" class="inline-link">Read more about Jonathan</a>.</p>
+	</ImageText>
+
+	<section class="pt-promos">
+		<div class="container">
+			<div class="pt-offers-banner">
+				<div class="pt-offers-content">
+					<div class="hero-badge"><span class="dot"></span> Our offers</div>
+					<h2>New to personal training?</h2>
+					<p class="pt-offers-intro">There are two ways to get started with Alex:</p>
+					<ul class="pt-offers-list">
+						<li>
+							<span class="pt-offer-tag">Free</span>
+							<span>A <strong>free 45 minute taster session</strong> for personal training, <em>or</em> your <strong>first weight training class free</strong></span>
+						</li>
+						<li>
+							<span class="pt-offer-tag pt-offer-tag--value">10 → 12</span>
+							<span>Pay for <strong>10 sessions and receive 12</strong>, available in 45 and 60 minute formats. We also have a <strong>pay for 6 and receive 7</strong> option</span>
+						</li>
+					</ul>
+					<p class="pt-offers-note">The two free options are either/or, so you are welcome to one of them rather than both. Neither offer can be booked online, so please get in touch and we will set you up.</p>
+					<div class="pt-offers-actions">
+						<a href="/contact-us/" class="btn-book">Contact us</a>
+						<a href="tel:02076272308" class="btn-outline-white">020 7627 2308</a>
+					</div>
+				</div>
+				<div class="pt-pricing">
+					<h3>Pricing</h3>
+					<p>We offer a transparent fee structure. Sessions are available in 45 and 60 minute formats, and current rates are listed on our <a href="/pricing/" class="inline-link">pricing page</a>. 30 minute sessions can be available at the PTs’ discretion.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="faq-section faq-section--alt">
+		<div class="container">
+			<div class="section-header"><h2>Frequently Asked Questions</h2></div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details class="faq-item">
+						<summary>{item.q}</summary>
+						<div class="answer"><p>{item.a}</p></div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<BookingCTA />
+</Layout>
+
+<style>
+	.pt-trainer-name { font-size: 19px; font-weight: 700; color: var(--primary); margin: 0 0 8px; }
+	.pt-trainer-name + p { margin-bottom: 22px; }
+
+	.pt-promos { padding: 80px 0; background: var(--white); }
+	.pt-offers-banner {
+		display: grid;
+		grid-template-columns: 1.4fr 1fr;
+		gap: 48px;
+		background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+		border-radius: var(--radius);
+		padding: 48px;
+		color: var(--white);
+	}
+	.pt-offers-content h2 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; }
+	.pt-offers-intro { font-size: 17px; line-height: 1.7; margin-bottom: 20px; opacity: 0.92; }
+	.pt-offers-list { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+	.pt-offers-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 16px; line-height: 1.65; }
+	.pt-offer-tag {
+		flex-shrink: 0;
+		background: var(--cta);
+		color: var(--white);
+		font-size: 13px;
+		font-weight: 700;
+		letter-spacing: 0.5px;
+		padding: 5px 12px;
+		border-radius: 50px;
+		white-space: nowrap;
+	}
+	.pt-offer-tag--value { background: var(--accent); }
+	.pt-offers-note { font-size: 15px; line-height: 1.65; opacity: 0.85; margin-bottom: 24px; }
+	.pt-offers-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+	.pt-pricing {
+		background: rgba(255,255,255,0.08);
+		border: 1px solid rgba(255,255,255,0.18);
+		border-radius: var(--radius);
+		padding: 28px;
+		align-self: start;
+	}
+	.pt-pricing h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+	.pt-pricing p { font-size: 16px; line-height: 1.7; opacity: 0.92; }
+	.pt-pricing .inline-link { color: var(--white); text-decoration: underline; font-weight: 600; }
+
+	@media (max-width: 900px) {
+		.pt-promos { padding: 60px 0; }
+		.pt-offers-banner { grid-template-columns: 1fr; gap: 28px; padding: 32px; }
+		.pt-offers-content h2 { font-size: 25px; }
+	}
+	@media (max-width: 600px) {
+		.pt-offers-banner { padding: 24px; }
+		.pt-offers-list li { flex-direction: column; gap: 8px; }
+	}
+</style>

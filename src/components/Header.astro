@@ -21,6 +21,28 @@ const norm = (p) => (p.endsWith('/') ? p : `${p}/`);
 const entryIsCurrent = (e) =>
 	(e.link && norm(e.link.href) === norm(here)) ||
 	e.groups.some((grp) => grp.items.some((i) => norm(i.href) === norm(here)));
+
+/**
+ * Menu items added in CODE, keyed by the menu item they appear directly below.
+ *
+ * This is a deliberate exception to "navigation comes from Sanity", and it
+ * exists for one reason: a nav item stores a REFERENCE to a document, and
+ * /service/personal-training/ has no `service` document — its copy lives in
+ * src/pages/service/personal-training.astro because this repo cannot create
+ * Studio content. There is nothing for a nav entry to point at.
+ *
+ * **Delete this the moment a `personal-training` service document exists.**
+ * Add the item to Sanity → Navigation → Services → "Performance & Strength"
+ * instead, and the menu goes back to having exactly one source of truth.
+ *
+ * Only the desktop services mega-menu reads this; the mobile drawer and the
+ * footer are untouched, so the link is absent there (see the handoff).
+ */
+const MENU_ADDITIONS = {
+	'/service/strength-conditioning/': [
+		{ label: 'Personal Training', href: '/service/personal-training/' },
+	],
+};
 ---
 <header class="bp-header">
 	<div class="header-inner">
@@ -67,7 +89,12 @@ const entryIsCurrent = (e) =>
 															{grp.sublabel && <><br/><span class="services-group-sublabel">{grp.sublabel}</span></>}
 														</div>
 														{grp.items.map((item) => (
-															<a href={item.href} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener' : undefined} aria-current={norm(item.href) === norm(here) ? 'page' : undefined}>{item.label}</a>
+															<>
+																<a href={item.href} target={item.newTab ? '_blank' : undefined} rel={item.newTab ? 'noopener' : undefined} aria-current={norm(item.href) === norm(here) ? 'page' : undefined}>{item.label}</a>
+																{(MENU_ADDITIONS[norm(item.href)] ?? []).map((extra) => (
+																	<a href={extra.href} aria-current={norm(extra.href) === norm(here) ? 'page' : undefined}>{extra.label}</a>
+																))}
+															</>
 														))}
 													</div>
 												))}

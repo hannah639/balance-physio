@@ -31,7 +31,7 @@ const members = customMembers
 	<div class="container">
 		<div class="section-header">
 			<h2>{heading}</h2>
-			<p>{subheading}</p>
+			{subheading && <p>{subheading}</p>}
 		</div>
 		{sliderRow ? (
 			<div class="team-slider-wrap">
@@ -54,10 +54,12 @@ const members = customMembers
 						</a>
 					))}
 				</div>
-				<div class="team-slider-nav">
-					<button class="team-slider-btn" data-dir="-1" aria-label="Previous">&larr;</button>
-					<button class="team-slider-btn" data-dir="1" aria-label="Next">&rarr;</button>
-				</div>
+				{members.length > 1 && (
+					<div class="team-slider-nav">
+						<button class="team-slider-btn" data-dir="-1" aria-label="Previous">&larr;</button>
+						<button class="team-slider-btn" data-dir="1" aria-label="Next">&rarr;</button>
+					</div>
+				)}
 			</div>
 		) : (
 			<div class="team-grid">

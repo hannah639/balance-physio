@@ -4,6 +4,7 @@ import PageHero from './PageHero.astro';
 import ImageText from './ImageText.astro';
 import PhotoMarquee from './PhotoMarquee.astro';
 import BookingCTA from './BookingCTA.astro';
+import PageExperts from './PageExperts.astro';
 import RichText from './RichText.astro';
 import type { PageSection } from '../lib/sanity/pageContent';
 
@@ -17,6 +18,7 @@ const PLACEHOLDER_LABELS = ['Treatment in progress', 'Assessment', 'Treatment se
 const {
 	title,
 	highlight,
+	expertsRoute,
 	heroSubtitle,
 	breadcrumb,
 	seoTitle,
@@ -257,6 +259,8 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			</div>
 		</section>
 	)}
+
+	<PageExperts route={expertsRoute} />
 
 	<BookingCTA />
 </Layout>

@@ -5,6 +5,7 @@ import { services } from '../../lib/sanity/pageContent';
 const doc = await services.required('pilates');
 ---
 <ServicePage
+	expertsRoute="/service/pilates/"
 	title={doc.heroHeading}
 	highlight={doc.heroHighlight ?? undefined}
 	heroSubtitle={doc.heroSubtitle ?? undefined}

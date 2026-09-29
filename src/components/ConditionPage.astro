@@ -4,6 +4,7 @@ import PageHero from './PageHero.astro';
 import ImageText from './ImageText.astro';
 import BookingCTA from './BookingCTA.astro';
 import RichText from './RichText.astro';
+import PageExperts from './PageExperts.astro';
 import type { Condition } from '../lib/sanity/conditions';
 
 const { doc } = Astro.props as { doc: Condition };
@@ -78,6 +79,8 @@ const faqs = doc.faqs;
 			</ul>
 		</ImageText>
 	)}
+
+	<PageExperts route={`/condition/${doc.slug}/`} />
 
 	{faqs.length > 0 && (
 		<section class="faq-section">

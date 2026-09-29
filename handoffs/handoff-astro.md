@@ -169,6 +169,7 @@ Stick to these four. A fifth arbitrary breakpoint makes the system harder to rea
 | `Team` | Team carousel, listing row and profile blocks. | `getTeam()` | Yes |
 | `BookingCTA` | Site-wide booking banner. | `getGlobals().bookingUrl` | Yes |
 | `Picture` | Responsive `<picture>` with AVIF/WebP negotiation and explicit width/height. | props | Yes — use for every image |
+| `PageExperts` | "Our experts specialising in …" internal-linking block. Takes a route path, looks it up in `src/data/page-experts.js`, renders nothing when there is no entry. A thin wrapper around **`<Team sliderRow>`** — the same photo-card carousel as the homepage, reused rather than restyled. Names, titles and photos come from `getTeam()`; the data file stores only slugs. Sits **above** the FAQs on condition pages, below them on the 6 service pages. | `page-experts.js` + `getTeam()` | Yes — 25 pages |
 | `PhotoMarquee` | Scrolling photo band on service pages. | props | Yes |
 | `VideoHero` | Homepage video hero. | `requireHomepage()` | Homepage only |
 | `Hero` | Homepage "We're Different" band with stats. | `requireHomepage()` | Homepage only |
@@ -377,6 +378,7 @@ Mostly **deliberate build-time fallbacks**, not dead code. Check the importer be
 | `pricing.js` | Fallback for `getPricing()`. Keep. |
 | `navigation-fallback.ts` | Fallback for `resolveNavigation()`. Without it a credential-less build renders 2 header links instead of 78. Keep. |
 | `testimonials.js` | Live source for `/testimonials/`. Not migrated, by instruction. |
+| `page-experts.js` | Live source for the "Our experts" blocks on 19 condition and 6 service pages, transcribed from a client document on 2026-09-30. Stores route → heading + team **slugs** only; names and titles come from Sanity, so the two cannot drift. Not migrated — there is no Sanity field for it. |
 | `events.js` | Live source for `/news-events/` (3 events). Not migrated, by instruction. Carries its own field reference and a JSDoc `Event` typedef at the top of the file — read that before adding an event. |
 
 ---
@@ -484,6 +486,8 @@ The deploy hook URL is **not recorded in this repo** — it is an unauthenticate
 | `public/news/wellness-event-2026.*` orphaned | The September event was removed on 2026-09-04, leaving three unreferenced image variants (517 KB). Safe to delete once confirmed — see `handoff-astro-2026-09-04.md`. |
 | First PDF in `public/` is uncached | `public/news/spo-x-balance-2026-report.pdf` (1.5 MB, added 2026-09-08) is the site's only PDF. `public/_headers` has no `/*.pdf` rule, so it gets Cloudflare's default caching rather than the year-long `immutable` the images use. Deliberate — the file may be revised, and `immutable` would strand visitors on a stale copy. Add a rule with a shorter `max-age` if PDFs become common. |
 | St Paul's Opera poster is low-resolution | The supplied source was 435 × 664 px. The desktop card's photo column is roughly 460 CSS px wide, so it is adequate at 1× and soft on a 2× display. A larger original would fix it; nothing in code can. |
+| `/service/personal-training/` is not in the CMS | Added 2026-09-30. No `personal-training` service document exists, so the copy lives in the page file and a copy change needs a deploy. The file carries its own migration note. |
+| Personal Training menu item is injected in code | `MENU_ADDITIONS` in `Header.astro`. A nav item stores a document reference and there is no document to reference. **Desktop services mega-menu only — absent from the mobile drawer and footer.** Delete the table once the Sanity document exists. |
 
 ---
 

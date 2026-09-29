@@ -1,0 +1,57 @@
+---
+/**
+ * "Our experts specialising in …" — the internal-linking block that appears on
+ * condition and service pages.
+ *
+ * Takes a ROUTE path and looks it up in src/data/page-experts.js. A page with
+ * no entry renders nothing at all, so this can be dropped into a shared
+ * template (ConditionPage.astro covers all 19 condition pages) without having
+ * to guard at every call site.
+ *
+ * RENDERING. This is a thin wrapper around <Team sliderRow>, the same component
+ * and the same markup as the homepage "Meet Our Team" carousel — photo card,
+ * name, job title, horizontal scroller with prev/next. Reusing it rather than
+ * restyling a list means the two stay identical for free, including the slider
+ * script, the hover treatment and every breakpoint.
+ *
+ * Names, job titles and photographs come from Sanity via getTeam(); the data
+ * file stores only slugs, so an editor renaming someone or replacing their
+ * photo in the Studio updates all 25 blocks with no code change.
+ *
+ * An unknown or unpublished slug is dropped rather than rendered as a dead
+ * link, matching cliniciansFor() on the news page and the nav's own behaviour.
+ */
+import { getTeam } from '../lib/sanity/team';
+import { pageExperts } from '../data/page-experts.js';
+import Team from './Team.astro';
+
+const { route } = Astro.props as { route: string };
+
+const block = pageExperts[route] ?? null;
+
+const team = block ? await getTeam() : [];
+const bySlug = new Map(team.map((m) => [m.slug, m]));
+
+// Order follows the data file, which follows the source document.
+const members = block
+	? block.members.map((slug) => bySlug.get(slug)).filter(Boolean)
+	: [];
+---
+{members.length > 0 && (
+	<div class="page-experts">
+		{/*
+		  subheading="" suppresses the <p> under the heading — Team.astro renders
+		  it only when non-empty. These blocks are a heading and the people; the
+		  document supplies no supporting line and inventing one per page would
+		  be 25 pieces of copy nobody asked for.
+		*/}
+		<Team members={members} sliderRow heading={block.heading} subheading="" />
+	</div>
+)}
+
+<style>
+	/* The block sits between two white sections on most pages, so it takes the
+	   tinted background to separate itself — Team.astro brings no background of
+	   its own. */
+	.page-experts :global(.team) { background: var(--primary-bg); }
+</style>
