@@ -427,3 +427,70 @@ A hand-written list inside `ImageText` should carry **no list CSS at all**. The
 design system already covers it, and anything added competes rather than
 overrides. Worth checking the global rules before styling a list on any future
 hardcoded page.
+
+---
+
+# 2026-09-30 — fourth change (same branch)
+
+Three follow-ups, all requested by the owner.
+
+## 1. Service pages now match the condition pages
+
+The block moved above the FAQs on the six service pages too, closing the
+inconsistency flagged in part 2. Four of them own their FAQ section directly;
+`tmj-and-jaw-pain` and `pilates` were handled once through `ServicePage.astro`.
+
+**25 / 25 pages** now render experts → FAQs → booking banner, up from 19 / 25.
+
+## 2. Small sets centre instead of hugging the left edge
+
+A `team-slider--centered` class is applied when a block holds **fewer than five**
+members.
+
+The threshold is not arbitrary. Cards are `flex: 0 0 240px` with a 20px gap
+inside a 1152px content area, so **four cards (4 x 240 + 3 x 20 = 1020px) fit
+without scrolling** and five (1280px) do not. Below five there is nothing to
+scroll, so the row centres; from five up it stays a left-aligned scroller.
+
+The centred variant also **wraps rather than scrolls**:
+
+```css
+.team-slider--centered { overflow-x: visible; flex-wrap: wrap; justify-content: center; }
+```
+
+That matters at narrower widths. Four 240px cards overflow a 900px viewport, and
+`justify-content: center` on an *overflowing* flex row pushes the first card off
+the left edge where it cannot be scrolled back into view — a well-known trap.
+Wrapping avoids it: the cards drop to a second centred row instead.
+
+## 3. Arrows only from five cards up
+
+The nav threshold moved from `members.length > 1` to `members.length >= 5`, so it
+now matches the point at which the track can actually scroll.
+
+| Blocks | Treatment |
+| --- | --- |
+| **17** with fewer than 5 members | centred, wrapping, no arrows |
+| **8** with 5 or more | left-aligned scroller with arrows |
+
+Block sizes run 1, 1, 1, 1, 1, 1, 2 x10, 4, 6, 6, 8, 8, 9, 9, 9, 10.
+
+## Verification
+
+| Check | Result |
+| --- | --- |
+| `npm run build` | Succeeded, no errors. Page count **117**, unchanged. |
+| Order | **25 / 25** render the block above the FAQs. Checked by offset in the built HTML. |
+| Centring | **17** blocks carry `team-slider--centered` — exactly the 17 with fewer than 5 members, no more and no fewer. |
+| Arrows | **8** blocks render `team-slider-btn` — exactly the 8 with 5 or more. |
+| Links | **95** clinician links intact. |
+| Homepage untouched | 32 cards, arrows present, and **no** centred class (32 >= 5). |
+| **Browser / visual QA** | **NOT DONE.** The wrapping behaviour below 900px is reasoned from the box maths, not observed. |
+
+## Known issues after this part
+
+1. **The wrap has not been seen.** A 4-member block at ~900px should become two
+   centred rows; that is arithmetic, not observation.
+2. Issues from earlier today still stand: the Pilates block shows two initials
+   tiles rather than photographs, the Personal Training page is not in the CMS,
+   and its menu item is desktop-only.

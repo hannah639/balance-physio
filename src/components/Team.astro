@@ -35,7 +35,7 @@ const members = customMembers
 		</div>
 		{sliderRow ? (
 			<div class="team-slider-wrap">
-				<div class="team-slider">
+				<div class={`team-slider${members.length < 5 ? ' team-slider--centered' : ''}`}>
 					{members.map((member) => (
 						<a href={`/team/${member.slug}/`} class="team-card team-card-slide">
 							{member.photo?.url ? (
@@ -54,7 +54,7 @@ const members = customMembers
 						</a>
 					))}
 				</div>
-				{members.length > 1 && (
+				{members.length >= 5 && (
 					<div class="team-slider-nav">
 						<button class="team-slider-btn" data-dir="-1" aria-label="Previous">&larr;</button>
 						<button class="team-slider-btn" data-dir="1" aria-label="Next">&rarr;</button>
@@ -161,6 +161,12 @@ const members = customMembers
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: thin;
 	}
+	/* Fewer than five cards fit the 1152px container without scrolling
+	   (4 x 240px + gaps = 1020px), so they centre instead of hugging the left
+	   edge and the arrows are pointless. They WRAP rather than scroll: centring
+	   a flex row that overflows puts the first card off-screen and out of
+	   reach, which is what would happen at narrower widths. */
+	.team-slider--centered { overflow-x: visible; flex-wrap: wrap; justify-content: center; }
 	.team-slider::-webkit-scrollbar { height: 4px; }
 	.team-slider::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 4px; }
 	.team-slider::-webkit-scrollbar-thumb { background: #e87722; border-radius: 4px; }

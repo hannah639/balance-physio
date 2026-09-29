@@ -243,6 +243,8 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 	<slot name="before-faq" />
 
 	{faqs.length > 0 && (
+	<PageExperts route={expertsRoute} />
+
 		<section class="faq-section">
 			<div class="container">
 				<div class="section-header">
@@ -259,8 +261,6 @@ const photos = marqueeImages && marqueeImages.length > 0 ? marqueeImages : defau
 			</div>
 		</section>
 	)}
-
-	<PageExperts route={expertsRoute} />
 
 	<BookingCTA />
 </Layout>
