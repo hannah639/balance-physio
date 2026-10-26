@@ -385,6 +385,10 @@ Mostly **deliberate build-time fallbacks**, not dead code. Check the importer be
 
 ## 12. Build, environment and deployment
 
+### GA4 and Content Security Policy
+
+The site currently sends consented GA4 requests without an enforcing HTTP or HTML-meta CSP. A live Accept All and reload check on 2026-10-26 returned HTTP 204 from `analytics.google.com/g/collect` with no browser console error. If a CSP is introduced later, every enforced `connect-src` must include both `https://analytics.google.com` and `https://*.analytics.google.com`; the wildcard does not cover the apex. Run `npm run test:ga4-csp` before deployment. That test also guards the existing consent-gated GTM/gtag loader. A new full CSP requires a separate audit of this site's maps, Trustindex, YouTube, forms, fonts, and Sanity image output.
+
 ```bash
 npm install
 npm run dev      # http://localhost:4321

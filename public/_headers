@@ -7,6 +7,9 @@
 # HTML: don't cache long. Sanity content changes need to appear within the
 # usual ~90s build window, not after a CDN expiry. `must-revalidate`
 # forces clients to check freshness on every visit.
+# If an enforcing CSP is added later, allow both https://analytics.google.com
+# and https://*.analytics.google.com in connect-src in every policy. Run
+# `npm run test:ga4-csp` before deployment.
 
 /*.jpg
   Cache-Control: public, max-age=31536000, immutable
