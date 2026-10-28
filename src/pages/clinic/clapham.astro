@@ -5,9 +5,28 @@ import ImageText from '../../components/ImageText.astro';
 import BookingCTA from '../../components/BookingCTA.astro';
 import Picture from '../../components/Picture.astro';
 import { getClinic } from '../../lib/sanity/clinics';
+import { siteSettings as settings } from '../../data/site-settings.js';
 
 // All copy, contact details, hours and facilities come from
 // Sanity → Clinic Locations → Clapham Clinic.
+
+/**
+ * Where web3forms sends the visitor after a successful submission.
+ *
+ * Derived from settings.siteUrl so it cannot drift from the live domain again,
+ * and so the two forms on the site (here and /clinic/clapham/) cannot disagree.
+ *
+ * It used to be a hard-coded https://balance-physio.hannah-9e0.workers.dev/thank-you.
+ * That sent enquirers to a DIFFERENT DOMAIN, which (a) looked broken, and
+ * (b) silently destroyed Google Ads attribution for the "Contact Form
+ * Submission" conversion: the click id and ad cookies live on balancephysio.com
+ * and do not exist on workers.dev, so a thank-you-page trigger there had nothing
+ * to attribute against. Fixed 2026-10-28.
+ *
+ * The trailing slash matters — trailingSlash: 'always', so the old path also
+ * cost a 307 on the way.
+ */
+const formRedirect = `${settings.siteUrl}/thank-you/`;
 const clinic = await getClinic('clapham');
 ---
 <Layout title={clinic?.seoTitle ?? 'Clapham Clinic'} description={clinic?.seoDescription ?? undefined}>
@@ -41,7 +60,7 @@ const clinic = await getClinic('clapham');
 				<input type="hidden" name="access_key" value="bf24d0f8-ce07-4f89-a9a7-c8a122440f3f" />
 				<input type="hidden" name="subject" value="New enquiry from Balance Physio website (Clapham clinic page)" />
 				<input type="hidden" name="from_name" value="Balance Physio website" />
-				<input type="hidden" name="redirect" value="https://balance-physio.hannah-9e0.workers.dev/thank-you" />
+				<input type="hidden" name="redirect" value={formRedirect} />
 				<!-- Honeypot — bots fill it, real users don't see it. Web3Forms ignores submissions where this is set. -->
 				<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
 

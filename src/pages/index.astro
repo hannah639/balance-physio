@@ -31,6 +31,13 @@ const doc = await requireHomepage();
 // GA/GTM stay in site-settings.js — there are no CMS fields for them yet.
 const gaId = settings.gaId || '';
 const gtmId = settings.gtmId || '';
+
+// The homepage builds its own <html> rather than using Layout.astro, so it has
+// to repeat Layout's analytics wiring. Keep this in step with
+// src/layouts/Layout.astro — the Google Ads tag was missed here on the first
+// pass and the homepage shipped without it.
+const rawAdsId = (import.meta.env.PUBLIC_ADS_CONVERSION_ID ?? '').trim();
+const adsId = rawAdsId ? (rawAdsId.startsWith('AW-') ? rawAdsId : `AW-${rawAdsId}`) : '';
 ---
 
 <html lang="en">
@@ -55,7 +62,7 @@ const gtmId = settings.gtmId || '';
 			<BookingCTA />
 			<Footer />
 		</div>
-		<CookiesBanner gaId={gaId} gtmId={gtmId} />
+		<CookiesBanner gaId={gaId} gtmId={gtmId} adsId={adsId} />
 
 		<!-- Trustindex Google reviews badge (small floating widget). Renders
 		     site-wide via the loader script — Trustindex positions it itself. -->

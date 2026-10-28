@@ -417,8 +417,19 @@ npm run preview  # build + wrangler dev
 | `SANITY_DATASET` | `production` | Required |
 | `SANITY_API_VERSION` | `2025-02-19` | Required |
 | `SANITY_API_READ_TOKEN` | — | **Not used by the build.** Reserved for future draft/preview work. |
+| `PUBLIC_ADS_CONVERSION_ID` | `17788943816` | Google Ads conversion ID. **`PUBLIC_` on purpose** — Vite inlines it into the browser bundle, which is where a conversion tag runs. Normalised to the `AW-` form in code, so either spelling works. Read at BUILD time, so it must also be set in Cloudflare or the tag is silently absent. Fires only after cookie consent. |
 
 The first three must also exist in Cloudflare → Workers & Pages → `balancephysio` → Settings → Environment variables. Without them the build produces a site with no content.
+
+> ### `index.astro` does not use `Layout.astro`
+>
+> The homepage builds its **own `<html>`** (§6), so it carries its own copy of
+> the analytics wiring. **Anything added to `Layout.astro`'s GA/GTM/Ads block
+> must be added to `src/pages/index.astro` as well**, or it ships on 116 of 117
+> pages and misses the busiest one.
+>
+> This happened on 2026-10-27 with the Google Ads tag and was caught only by
+> counting pages in `dist/` rather than spot-checking one. Count, do not sample.
 
 > `npm run build` copies `.env` into `dist/server/.dev.vars` for local `wrangler dev`. That file contains the token. `dist/` is gitignored and the token never reaches `dist/client/`, but never commit or upload `dist/` wholesale.
 

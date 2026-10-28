@@ -17,6 +17,24 @@ const {title, description} = Astro.props;
 // GA/GTM stay in site-settings.js — there are no CMS fields for them yet.
 const gaId = settings.gaId || '';
 const gtmId = settings.gtmId || '';
+
+/**
+ * Google Ads conversion ID.
+ *
+ * Unlike GA and GTM this comes from the environment, not site-settings.js,
+ * because it was supplied as `PUBLIC_ADS_CONVERSION_ID`. The PUBLIC_ prefix is
+ * correct and deliberate: Vite inlines it into the browser bundle, which is
+ * exactly what a conversion ID needs — it is a public identifier, not a secret
+ * like SANITY_API_READ_TOKEN (see src/lib/sanity/client.ts).
+ *
+ * **It must also be set on the Cloudflare build**, or the tag is simply absent
+ * in production with no error — the value is read at BUILD time, not runtime.
+ *
+ * Accepts either "17788943816" or "AW-17788943816" and normalises to the
+ * AW- form gtag expects, so it does not matter which way it is entered.
+ */
+const rawAdsId = (import.meta.env.PUBLIC_ADS_CONVERSION_ID ?? '').trim();
+const adsId = rawAdsId ? (rawAdsId.startsWith('AW-') ? rawAdsId : `AW-${rawAdsId}`) : '';
 ---
 
 <html lang="en">
@@ -32,7 +50,7 @@ const gtmId = settings.gtmId || '';
 			<slot />
 			<Footer />
 		</div>
-		<CookiesBanner gaId={gaId} gtmId={gtmId} />
+		<CookiesBanner gaId={gaId} gtmId={gtmId} adsId={adsId} />
 
 		<!-- Trustindex Google reviews badge (small floating widget). Renders
 		     site-wide via the loader script — Trustindex positions it itself. -->

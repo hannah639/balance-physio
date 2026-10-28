@@ -2,8 +2,9 @@
 // CookiesBanner.astro
 // Lightweight cookie consent banner. On first visit, asks user to accept or
 // reject analytics cookies. Choice persists in localStorage for 12 months.
-// Analytics scripts (GA/GTM) are only loaded after explicit consent.
-const { gaId = '', gtmId = '' } = Astro.props;
+// Analytics scripts (GA/GTM) and the Google Ads conversion tag are only
+// loaded after explicit consent — an ads tag is not an essential cookie.
+const { gaId = '', gtmId = '', adsId = '' } = Astro.props;
 ---
 <div id="cookies-banner" class="cookies-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
 	<div class="cookies-banner-inner">
@@ -18,7 +19,7 @@ const { gaId = '', gtmId = '' } = Astro.props;
 	</div>
 </div>
 
-<script is:inline define:vars={{ gaId, gtmId }}>
+<script is:inline define:vars={{ gaId, gtmId, adsId }}>
 	(function () {
 		var STORAGE_KEY = 'bp-cookie-consent';
 		var EXPIRY_DAYS = 365;
@@ -38,15 +39,20 @@ const { gaId = '', gtmId = '' } = Astro.props;
 					f.parentNode.insertBefore(j, f);
 				})(window, document, 'script', 'dataLayer', gtmId);
 			}
-			if (gaId) {
+			// One gtag.js load serves BOTH Google Analytics and Google Ads: the
+			// library is fetched once using whichever id is present, then each
+			// product gets its own config() call. Loading the script twice would
+			// double-count pageviews.
+			if (gaId || adsId) {
 				var s = document.createElement('script');
 				s.async = true;
-				s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+				s.src = 'https://www.googletagmanager.com/gtag/js?id=' + (gaId || adsId);
 				document.head.appendChild(s);
 				window.dataLayer = window.dataLayer || [];
 				function gtag() { dataLayer.push(arguments); }
 				gtag('js', new Date());
-				gtag('config', gaId);
+				if (gaId) gtag('config', gaId);
+				if (adsId) gtag('config', adsId);
 				window.gtag = gtag;
 			}
 		}
